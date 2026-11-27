@@ -1,5 +1,17 @@
 [
   {
+    "version": "0.7.0",
+    "date": "2026-11-27",
+    "changes": [
+      "Nouveau : le tracker de sommeil, comme dans un bullet journal. Une ligne par jour, une barre pour chaque nuit ou sieste, et tes rêves au bout de la ligne.",
+      "Les rêves sont liés à leur nuit, et chaque nuit montre ses rêves. Un rêve noté le matin se lie tout seul à la nuit qui vient de finir.",
+      "Sommeil : qualité du sommeil et énergie au réveil.",
+      "Formulaire du rêve plus court : humeur (0 à 5, avec un emoji au choix) et émotions au même endroit, lucidité et clarté ensemble, météo et moment en petit, genre, type et ambiance en étiquettes à la fin.",
+      "Sur téléphone : Carte, Journal, Sommeil et Statistiques en bas, et un bouton + au milieu pour ajouter une note rapide, un rêve ou un sommeil.",
+      "Barres de défilement aux couleurs de l’app."
+    ]
+  },
+  {
     "version": "0.6.5",
     "date": "2026-11-27",
     "changes": [

@@ -71,6 +71,9 @@ Code : `src/data/types.ts`, `src/data/records.ts`, `src/data/store.ts`.
   `asleepTime`, `wakeTime`, `upTime` (« HH:MM »), `interruptions` [{id, from, to}]. Calculs dans
   src/data/sleep.ts (passage de minuit, siestes 9 h-19 h, rangement au jour du réveil).
   **Ne jamais changer les `id` des listes** (WEATHERS, EMOTIONS…) : ce sont eux qui sont enregistrés.
+- v4 : `dreams` + `moodEmoji` (emoji choisi ; `mood` va désormais de 0 à 5, grille MOOD_GRID), `genres`
+  (étiquettes), `sleepId` (lien vers le sommeil ; le lien inverse se calcule). `sleeps` + `quality`, `energy`
+  (1-5). Liaison auto : un nouveau rêve se lie à la seule nuit (hors sieste) qui finit à sa date.
 
 ## Architecture
 
@@ -156,6 +159,18 @@ site/                     page de présentation (GitHub Pages) + politique de co
   ajouter (+ réveil), lire / pause / arrêter un son, modifier, devant / derrière, ouvrir / partager, télécharger,
   Google (connexion, synchro, déconnexion), exporter / importer, rechercher / journal des mises à jour,
   mot-clé, case cochée, sparkles du bandeau de mise à jour.
+
+## Navigation (v0.7.0)
+
+- 4 endroits : Carte, Journal (rêves seulement), Sommeil (tracker façon bullet journal, src/ui/SleepTracker.tsx :
+  une ligne par jour de midi à midi, barres calculées par `trackerSegments` dans src/data/sleep.ts),
+  Statistiques (page prête, vide : `StatsScreen`).
+- Téléphone : barre du bas Carte · Journal · [+] · Sommeil · Statistiques ; le + ouvre `AddMenu`
+  (note rapide, rêve, sommeil). PC : onglets en haut + boutons Sommeil / Note rapide / Nouveau rêve.
+- Formulaire du rêve : **pas de phrases d'aide** (demande de la personne), sections compactes, ordre : récit,
+  médias, lieux, personnes, humeur et émotions, lucidité et clarté, météo et moment (petits emojis, météos
+  WEATHER_CHOICES), étiquettes, genre/type/ambiance (étiquettes), couleurs (à la fin).
+- Tout ce qui est « étiquette » : WordPicker (Entrée, propositions pendant la frappe, plusieurs choix).
 
 ## Formulaires
 
@@ -259,6 +274,7 @@ Expo change à chaque version. Avant d'utiliser une API Expo/React Native, véri
   les anciens identifiants comme « peur » s'affichent avec leur libellé) ; clarté sous la lucidité.
 - [x] v0.6.4 : journal des mises à jour dans les Réglages (3 dernières versions, les autres à la demande).
 - [x] v0.6.5 : app = 3 dernières versions seulement ; historique complet sur la page « Toutes les nouveautés ».
+- [x] v0.7.0 : tracker de sommeil, lien rêves ↔ sommeil, qualité/énergie, formulaire compact, 4 onglets + menu +.
 - [ ] Synchro des fichiers médias (notes vocales, images…) dans le Drive.
 - [ ] Statistiques (simples et croisées). Transcription voix → texte (facultative).
 - [ ] Synchro Google Drive (appDataFolder) : PC (.exe → client OAuth « Application de bureau », redirection

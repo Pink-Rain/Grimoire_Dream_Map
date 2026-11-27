@@ -65,9 +65,6 @@ export function PeopleSection(props: { value: string[]; onChange: (ids: string[]
           ))}
         </View>
       )}
-      <Txt faint size={14}>
-        Réelle ou imaginaire : choisis en l’ajoutant.
-      </Txt>
     </View>
   );
 }

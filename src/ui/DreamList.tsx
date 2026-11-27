@@ -7,7 +7,7 @@ import { normalizeDream, type Dream, type Sleep } from '../data/types';
 import { AppIcon, type AppIconName } from './AppIcon';
 import { Field, Title, Txt, type PressState } from './components';
 import { formatLongDate, formatShortDate } from './dates';
-import { colors, fonts, MOOD_LEVELS, optionFor, TIMES_OF_DAY, WEATHERS } from './theme';
+import { colors, fonts, MOOD_GRID, optionFor, TIMES_OF_DAY, WEATHERS } from './theme';
 import { Moon, WatercolorDot } from './widgets';
 
 const capitalize = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
@@ -18,7 +18,7 @@ type JournalItem = { kind: 'dream'; day: string; dream: Dream } | { kind: 'sleep
 export function DreamList(props: {
   selectedId: string | null;
   onOpen: (id: string) => void;
-  onOpenSleep: (id: string) => void;
+  onOpenSleep?: (id: string) => void;
   bottomInset: number;
   header?: React.ReactNode;
 }) {
@@ -34,7 +34,7 @@ export function DreamList(props: {
         .toLowerCase();
       return hay.includes(query);
     });
-    const sleeps = query ? [] : appStore.list('sleeps');
+    const sleeps: Sleep[] = [];
     const byDay = new Map<string, { sleeps: Sleep[]; dreams: Dream[] }>();
     const slot = (day: string) => {
       let v = byDay.get(day);
@@ -55,7 +55,7 @@ export function DreamList(props: {
     return out;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [version, q]);
-  const total = appStore.list('dreams').length + appStore.list('sleeps').length;
+  const total = appStore.list('dreams').length;
 
   return (
     <View style={styles.container}>
@@ -74,7 +74,7 @@ export function DreamList(props: {
             <AppIcon name="logo-grand" size={110} />
             <Title size={22}>{total ? 'Aucun rêve trouvé' : 'Ton journal est vide'}</Title>
             <Txt muted style={{ textAlign: 'center' }}>
-              {total ? 'Essaie un autre mot.' : 'Au réveil, touche le micro pour une note rapide, « Rêve » pour tout raconter, ou « Sommeil » pour noter ta nuit.'}
+              {total ? 'Essaie un autre mot.' : 'Au réveil, note une note rapide ou un rêve complet avec le bouton « + ».'}
             </Txt>
           </View>
         }
@@ -82,7 +82,7 @@ export function DreamList(props: {
           item.kind === 'day' ? (
             <Txt style={styles.dayHeader}>{capitalize(formatLongDate(item.day))}</Txt>
           ) : item.kind === 'sleep' ? (
-            <SleepRow sleep={item.sleep} selected={item.sleep.id === props.selectedId} onPress={() => props.onOpenSleep(item.sleep.id)} />
+            <SleepRow sleep={item.sleep} selected={item.sleep.id === props.selectedId} onPress={() => props.onOpenSleep?.(item.sleep.id)} />
           ) : (
             <DreamRow dream={item.dream} selected={item.dream.id === props.selectedId} onPress={() => props.onOpen(item.dream.id)} />
           )
@@ -124,7 +124,7 @@ function SleepRow({ sleep, selected, onPress }: { sleep: Sleep; selected: boolea
 function DreamRow({ dream, selected, onPress }: { dream: Dream; selected: boolean; onPress: () => void }) {
   const d = normalizeDream(dream);
   const excerpt = d.text.trim().split('\n')[0];
-  const mood = MOOD_LEVELS.find((m) => m.value === d.mood);
+  const moodEmoji = d.moodEmoji ?? (d.mood !== null ? MOOD_GRID.find((g) => g.level === d.mood)?.emojis[0] : undefined);
   const audio = d.media.filter((m) => m.type === 'audio').length;
   return (
     <Pressable
@@ -154,9 +154,9 @@ function DreamRow({ dream, selected, onPress }: { dream: Dream; selected: boolea
           <WatercolorDot key={c} color={c} size={16} seed={i + 2} />
         ))}
         {d.lucidity !== null && <AppIcon name={`lucidite-b-${d.lucidity}` as AppIconName} size={18} />}
-        {(mood || d.weather.length > 0 || d.timeOfDay.length > 0) && (
+        {(moodEmoji || d.weather.length > 0 || d.timeOfDay.length > 0) && (
           <Txt style={{ fontSize: 15, lineHeight: 20, fontFamily: fonts.body }}>
-            {[mood?.emoji, ...d.weather.slice(0, 2).map((w) => optionFor(WEATHERS, w).emoji), d.timeOfDay[0] ? optionFor(TIMES_OF_DAY, d.timeOfDay[0]).emoji : undefined]
+            {[moodEmoji, ...d.weather.slice(0, 2).map((w) => optionFor(WEATHERS, w).emoji), d.timeOfDay[0] ? optionFor(TIMES_OF_DAY, d.timeOfDay[0]).emoji : undefined]
               .filter(Boolean)
               .join(' ')}
           </Txt>
