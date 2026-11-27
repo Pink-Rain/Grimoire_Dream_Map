@@ -4,7 +4,7 @@ import { FlatList, Pressable, StyleSheet, View } from 'react-native';
 import { appStore, useStoreVersion } from '../data/appStore';
 import { formatDuration, sleepEndDate, summarizeSleep } from '../data/sleep';
 import { normalizeDream, type Dream, type Sleep } from '../data/types';
-import { AppIcon } from './AppIcon';
+import { AppIcon, type AppIconName } from './AppIcon';
 import { Field, Title, Txt, type PressState } from './components';
 import { formatLongDate, formatShortDate } from './dates';
 import { colors, fonts, MOOD_LEVELS, optionFor, TIMES_OF_DAY, WEATHERS } from './theme';
@@ -108,9 +108,7 @@ function SleepRow({ sleep, selected, onPress }: { sleep: Sleep; selected: boolea
         selected && { backgroundColor: colors.surfaceActive, borderColor: colors.accent },
       ]}
     >
-      <View style={styles.sleepIcon}>
-        <Ionicons name="bed-outline" size={22} color={colors.ochre} />
-      </View>
+      <AppIcon name="sommeil" size={40} />
       <View style={{ flex: 1, gap: 2 }}>
         <Title size={18}>{title}</Title>
         <Txt muted size={15}>
@@ -137,12 +135,15 @@ function DreamRow({ dream, selected, onPress }: { dream: Dream; selected: boolea
         styles.row,
         (pressed || hovered) && { backgroundColor: colors.surfaceHover },
         selected && { backgroundColor: colors.surfaceActive, borderColor: colors.accent },
+        styles.dreamRow,
       ]}
     >
+      <AppIcon name={d.kind === 'quick' ? 'lune-contour' : 'lune-crepuscule'} size={36} style={{ marginTop: 2 }} />
+      <View style={{ flex: 1, gap: 4 }}>
       <View style={styles.rowTop}>
         {d.kind === 'quick' && (
           <View style={styles.quick}>
-            <Ionicons name="flash" size={11} color={colors.accentText} />
+            <AppIcon name="eclair-encre" size={13} />
             <Txt size={12} weight="semi" style={{ color: colors.accentText, lineHeight: 16 }}>
               Note rapide
             </Txt>
@@ -152,7 +153,7 @@ function DreamRow({ dream, selected, onPress }: { dream: Dream; selected: boolea
         {d.colors.slice(0, 4).map((c, i) => (
           <WatercolorDot key={c} color={c} size={16} seed={i + 2} />
         ))}
-        {d.lucidity !== null && <Moon fraction={d.lucidity / 5} size={18} lit={colors.ochre} />}
+        {d.lucidity !== null && <AppIcon name={`lucidite-b-${d.lucidity}` as AppIconName} size={18} />}
         {(mood || d.weather.length > 0 || d.timeOfDay.length > 0) && (
           <Txt style={{ fontSize: 15, lineHeight: 20, fontFamily: fonts.body }}>
             {[mood?.emoji, ...d.weather.slice(0, 2).map((w) => optionFor(WEATHERS, w).emoji), d.timeOfDay[0] ? optionFor(TIMES_OF_DAY, d.timeOfDay[0]).emoji : undefined]
@@ -176,6 +177,7 @@ function DreamRow({ dream, selected, onPress }: { dream: Dream; selected: boolea
           {audio > 0 && <Meta icon="mic-outline" text={String(audio)} />}
         </View>
       )}
+      </View>
     </Pressable>
   );
 }
@@ -197,6 +199,7 @@ const styles = StyleSheet.create({
   list: { padding: 12, gap: 8 },
   dayHeader: { color: colors.ochre, fontFamily: fonts.display, fontSize: 16, marginTop: 10, marginLeft: 4 },
   sleepRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
+  dreamRow: { flexDirection: 'row', alignItems: 'flex-start', gap: 12 },
   sleepIcon: { width: 40, height: 40, borderRadius: 20, backgroundColor: colors.bg, alignItems: 'center', justifyContent: 'center' },
   row: { backgroundColor: colors.surface, borderRadius: 14, borderWidth: 1, borderColor: colors.borderSoft, paddingVertical: 12, paddingHorizontal: 14, gap: 4 },
   rowTop: { flexDirection: 'row', alignItems: 'center', gap: 6 },

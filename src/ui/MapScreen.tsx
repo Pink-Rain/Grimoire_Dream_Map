@@ -86,7 +86,7 @@ export function MapScreen(props: {
           <Button small label="Modifier" icon="create-outline" onPress={() => setEditing(place.id)} testID="place-edit" />
           <Button small label="Devant" icon="arrow-up-outline" onPress={() => relayer(1)} testID="place-front" />
           <Button small label="Derrière" icon="arrow-down-outline" onPress={() => relayer(-1)} testID="place-back" />
-          <Button small label="Centrer" icon="locate-outline" onPress={() => setLocalFocus({ id: place.id, n: Date.now() })} />
+          <Button small label="Centrer" image="recentrer-fin" onPress={() => setLocalFocus({ id: place.id, n: Date.now() })} />
         </View>
         <Txt weight="semi">{dreamsHere.length ? `Rêvé ${dreamsHere.length} fois ici` : 'Dans aucun rêve pour l’instant'}</Txt>
         {dreamsHere.map((d) => (

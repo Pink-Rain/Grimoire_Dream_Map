@@ -98,7 +98,7 @@ export function DreamEditor(props: {
     <View style={{ gap: 10 }}>
       <View style={styles.topRow}>
         <View style={[styles.badge, quick && styles.badgeQuick]}>
-          {quick ? <AppIcon name="eclair-encre" size={18} /> : <Ionicons name="book-outline" size={14} color={colors.ochre} />}
+          {quick ? <AppIcon name="eclair-encre" size={18} /> : <AppIcon name="lune-crepuscule" size={18} />}
           <Txt size={14} weight="semi" style={{ color: quick ? colors.accentText : colors.ochre }}>
             {quick ? 'Note rapide' : 'Rêve complet'}
           </Txt>

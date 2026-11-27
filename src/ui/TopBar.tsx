@@ -21,7 +21,7 @@ export function TopBar(props: {
     <View style={[styles.bar, { paddingTop: props.topInset }]}>
       <View style={styles.row}>
         {props.onBack ? (
-          <IconButton icon="arrow-back" label="Retour" onPress={props.onBack} testID="back" />
+          <IconButton image="retour" size={22} label="Retour" onPress={props.onBack} testID="back" />
         ) : (
           <View style={styles.logo}>
             <AppIcon name="logo" size={38} />
@@ -38,14 +38,13 @@ export function TopBar(props: {
         {props.actions}
         {layout.showToggle && (
           <IconButton
-            image={layout.phoneMode ? undefined : 'telephone'}
-            icon={layout.phoneMode ? 'desktop-outline' : undefined}
+            image={layout.phoneMode ? 'vue-pc' : 'telephone'}
             label={layout.phoneMode ? 'Passer en format ordinateur' : 'Passer en format téléphone'}
             onPress={layout.togglePhoneMode}
             testID="toggle-format"
           />
         )}
-        {props.onSettings && <IconButton image="reglages" label="Réglages" onPress={props.onSettings} active={props.settingsActive} testID="open-settings" />}
+        {props.onSettings && <IconButton image="reglages-sans-fond" label="Réglages" onPress={props.onSettings} active={props.settingsActive} testID="open-settings" />}
       </View>
     </View>
   );
