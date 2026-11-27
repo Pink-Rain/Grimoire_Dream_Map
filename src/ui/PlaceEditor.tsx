@@ -185,7 +185,7 @@ export function PlaceEditor(props: {
     const id = existing?.id ?? appStore.newId();
     const base = { name: name.trim(), icon, size };
     if (mode === 'real' && geo) {
-      appStore.save('places', id, { ...base, kind: 'place', real: true, lat: geo.lat, lon: geo.lon, address: geo.address });
+      appStore.save('places', id, { ...base, kind: 'place', real: true, lat: geo.lat, lon: geo.lon, address: geo.address, ...(geo.admin ? { admin: geo.admin } : {}) });
     } else if (mode === 'vehicle') {
       appStore.save('places', id, { ...base, kind: 'vehicle', real: false, route: { fromId: fromId!, toId: toId! } });
     } else {

@@ -2,7 +2,7 @@
   "expo": {
     "name": "Dream Map",
     "slug": "grimoire-dream-map",
-    "version": "0.7.0",
+    "version": "0.8.0",
     "orientation": "default",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
@@ -12,7 +12,7 @@
     },
     "android": {
       "package": "com.pinkrain.grimoire.dreammap",
-      "versionCode": 13,
+      "versionCode": 14,
       "allowBackup": true,
       "softwareKeyboardLayoutMode": "resize",
       "backgroundColor": "#0f0d1a",

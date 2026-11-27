@@ -201,3 +201,21 @@ export function trackerSegments(s: Pick<Sleep, 'date' | 'bedTime' | 'asleepTime'
   push(sum.wake, sum.up, 'up');
   return out;
 }
+
+/** Ajoute (ou retire) des minutes à une heure « HH:MM », en passant minuit si besoin. */
+export function addMinutes(t: string, delta: number): string {
+  const m = parseTime(t);
+  if (m === null) return t;
+  const v = (((m + delta) % 1440) + 1440) % 1440;
+  return `${String(Math.floor(v / 60)).padStart(2, '0')}:${String(v % 60).padStart(2, '0')}`;
+}
+
+/**
+ * Réveil pendant la nuit : quand on remplit une seule des deux heures, l'autre se met toute seule
+ * 5 minutes après (ou avant). On peut ensuite la changer à la main.
+ */
+export function completeInterruption(i: { from: string; to: string }, changed: 'from' | 'to'): { from: string; to: string } {
+  if (changed === 'from' && i.from && !i.to) return { ...i, to: addMinutes(i.from, 5) };
+  if (changed === 'to' && i.to && !i.from) return { ...i, from: addMinutes(i.to, -5) };
+  return i;
+}

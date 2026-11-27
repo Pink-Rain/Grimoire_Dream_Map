@@ -74,6 +74,9 @@ Code : `src/data/types.ts`, `src/data/records.ts`, `src/data/store.ts`.
 - v4 : `dreams` + `moodEmoji` (emoji choisi ; `mood` va désormais de 0 à 5, grille MOOD_GRID), `genres`
   (étiquettes), `sleepId` (lien vers le sommeil ; le lien inverse se calcule). `sleeps` + `quality`, `energy`
   (1-5). Liaison auto : un nouveau rêve se lie à la seule nuit (hors sieste) qui finit à sa date.
+- v5 : `sleeps` + `factors`, `sleepPlaces` (étiquettes), `wakeMood` (0-5), `wakeMoodEmoji`, `wakeEmotions`
+  (étiquettes). `places` + `admin` {district, city, county, state, country} pour les vrais lieux (rempli par
+  la recherche ; pour les anciens lieux, deviné depuis `address` par `adminFromAddress`).
 
 ## Architecture
 
@@ -130,8 +133,16 @@ site/                     page de présentation (GitHub Pages) + politique de co
 - Taches d'aquarelle sous chaque lieu = couleurs des rêves où il apparaît (`useMapPlaces`), filtre SVG `#wc`.
 - Superposition : `layer` (boutons Devant / Derrière de la fiche lieu) puis les petits au-dessus des grands.
 - Véhicules : trajet invisible entre deux lieux ; position tirée au hasard sur le trajet à chaque ouverture.
+- Regroupement au dézoom (v0.8.0, `declutter` dans runtime.js) : quand des lieux (nom compris) se chevauchent à
+  l'écran, on garde le plus gros (lieu choisi d'abord, puis taille, puis `layer`) avec une pastille « ×N » ; les
+  autres sont retirés de la carte. Si tous sont réels, le nom devient leur zone commune la plus précise
+  (quartier → ville → département → région → pays, même logique que `src/map/cluster.ts`). Clic = zoom pour les
+  séparer. Les véhicules ne sont pas regroupés.
 - Dessins : 900 icônes game-icons.net (CC BY 3.0, crédit dans Réglages › À propos), triées dans
   `scripts/icon-catalog.json` (label, catégorie, mots-clés FR). Mots-clés en plus : `EXTRA_KEYWORDS` du générateur.
+  Pas de dessin « place de ville / village » chez game-icons : « place » trouve fontaine, obélisque, tour de
+  l'horloge, banc, réverbère. La personne pourra dessiner sa propre place (silhouette SVG/PNG d'une couleur) :
+  il faudra alors permettre des dessins perso sur la carte.
 
 ## Icônes dessinées par la personne (assets/ui, assets/logo-*)
 
@@ -152,13 +163,21 @@ site/                     page de présentation (GitHub Pages) + politique de co
   - Sommeil : sommeil (lit), coucher, endormissement, reveil, lever.
   - Fiche du rêve : chevrons (date), fermer, supprimer, eclair / eclair-encre (note rapide), micro-bouton
     (enregistreur), personne, imaginaire, lieu-reel, vehicule.
-  - Médias : image, musique, video, fichier, lien-b. Lucidité : lucidite-b-0 … -5. Météo : meteo-1 … -5.
+  - Médias : image, musique, video, fichier, lien-b. Lucidité : lucidite-b-0 … -5.
+  - Zip n° 4 : clarte-1 … -5 (clarté), humeur-* (une par emoji de MOOD_GRID, `moodImageFor`), meteo-* (une par
+    météo de WEATHERS : soleil, soleil-voile, eclaircie, nuage, averse, pluie, neige, orage, orage-pluie, tornade,
+    arc-en-ciel), moment-* (aube, journée, crépuscule, nuit : TIME_CHOICES = 4 moments). Les anciennes
+    meteo-1 … -5 ne servent plus.
   - Barres à curseur (barre-reglette / barre-curseur) : **retirées à la demande de la personne** (v0.6.3).
     Humeur, clarté, atmosphère = rangées d'emojis à toucher (`EmojiScale`).
-- Icônes encore standard (à dessiner par la personne) : rêve complet dans le bouton « Compléter ce rêve »,
-  ajouter (+ réveil), lire / pause / arrêter un son, modifier, devant / derrière, ouvrir / partager, télécharger,
-  Google (connexion, synchro, déconnexion), exporter / importer, rechercher / journal des mises à jour,
-  mot-clé, case cochée, sparkles du bandeau de mise à jour.
+- Icônes encore standard ou emojis (liste donnée à la personne en v0.8.0, par priorité) :
+  1. ajouter (+), onglet Statistiques, qualité du sommeil 1-5 (qualite-1…5), énergie au réveil 1-5
+     (energie-1…5), retirer (croix des étiquettes), coché, « Compléter ce rêve », modifier ;
+  2. carte : place (dessin de carte), devant / derrière, voir sur la carte, épingle des résultats, main
+     « glisser », chevron « voir plus » ;
+  3. médias : lecture / pause / stop, ouvrir le lien, partager / télécharger, YouTube, image vide ;
+  4. réglages : exporter / importer, Google, synchroniser, se déconnecter, rechercher / télécharger les mises
+     à jour, redémarrer, rapport technique, étincelles du bandeau.
 
 ## Navigation (v0.7.0)
 
@@ -275,6 +294,8 @@ Expo change à chaque version. Avant d'utiliser une API Expo/React Native, véri
 - [x] v0.6.4 : journal des mises à jour dans les Réglages (3 dernières versions, les autres à la demande).
 - [x] v0.6.5 : app = 3 dernières versions seulement ; historique complet sur la page « Toutes les nouveautés ».
 - [x] v0.7.0 : tracker de sommeil, lien rêves ↔ sommeil, qualité/énergie, formulaire compact, 4 onglets + menu +.
+- [x] v0.8.0 : icônes zip n° 4, 4 moments, horloge (src/ui/TimePicker.tsx), réveils ±5 min auto
+  (`completeInterruption`), facteurs / lieu / humeur au réveil, regroupement des lieux au dézoom.
 - [ ] Synchro des fichiers médias (notes vocales, images…) dans le Drive.
 - [ ] Statistiques (simples et croisées). Transcription voix → texte (facultative).
 - [ ] Synchro Google Drive (appDataFolder) : PC (.exe → client OAuth « Application de bureau », redirection

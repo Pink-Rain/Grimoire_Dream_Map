@@ -157,18 +157,27 @@
     return out + '</svg>';
   }
 
-  function iconFor(place) {
+  function iconFor(place, group) {
     var px = iconPx(place.size, map.getZoom(), place.lat);
-    var showLabel = px >= 28 || place.id === selectedId;
+    var count = group ? group.count : 1;
+    if (count > 1) px = Math.max(px, 30); // un regroupement reste lisible même tout petit
+    var showLabel = px >= 28 || place.id === selectedId || count > 1;
     var fontPx = Math.max(12, Math.min(22, Math.round(px * 0.2)));
-    var cls = 'pl' + (place.id === selectedId ? ' sel' : '') + (place.kind === 'vehicle' ? ' veh' : '') + (place.real ? ' real' : ' dream') + (place.draggable ? ' drag' : '');
+    var label = count > 1 ? group.label : place.name;
+    var cls = 'pl' + (place.id === selectedId ? ' sel' : '') + (place.kind === 'vehicle' ? ' veh' : '') + (place.real ? ' real' : ' dream') + (place.draggable ? ' drag' : '') + (count > 1 ? ' grp' : '');
     var html =
       '<div class="' + cls + '" style="width:' + px + 'px;height:' + px + 'px">' +
       '<div class="stainWrap">' + stainSvg(place) + '</div>' +
       '<svg class="ico" viewBox="0 0 512 512" role="img" aria-label="' + esc(place.name) + '">' + place.icon + '</svg>' +
-      (showLabel ? '<div class="lbl" style="font-size:' + fontPx + 'px">' + esc(place.name) + '</div>' : '') +
+      (count > 1 ? badge(px, count) : '') +
+      (showLabel ? '<div class="lbl' + (count > 1 && group.area ? ' area' : '') + '" style="font-size:' + fontPx + 'px">' + esc(label) + '</div>' : '') +
       '</div>';
     return L.divIcon({ className: 'plWrap', html: html, iconSize: [px, px], iconAnchor: [px / 2, px / 2] });
+  }
+
+  function badge(px, count) {
+    var b = Math.round(Math.max(15, Math.min(24, px * 0.42)));
+    return '<div class="badge" style="min-width:' + b + 'px;height:' + b + 'px;line-height:' + (b - 2) + 'px;font-size:' + Math.round(b * 0.6) + 'px;right:' + -Math.round(b * 0.75) + 'px;top:' + -Math.round(b * 0.45) + 'px">×' + count + '</div>';
   }
 
   function zOffset(place) {
@@ -183,6 +192,8 @@
     if (!cur) {
       var m = L.marker([place.lat, place.lon], { icon: iconFor(place), draggable: !!place.draggable, keyboard: true, title: place.name, riseOnHover: false, autoPanOnFocus: false });
       m.on('click', function () {
+        var c = markers[place.id];
+        if (c && c.group && c.group.count > 1 && zoomInto(c.group)) return;
         send({ type: 'select', id: place.id });
       });
       m.on('dragstart', function () {
@@ -194,6 +205,7 @@
         markers[place.id].place.lat = ll.lat;
         markers[place.id].place.lon = ll.lng;
         send({ type: 'move', id: place.id, lat: ll.lat, lon: ll.lng });
+        declutter();
       });
       m.addTo(map);
       markers[place.id] = { marker: m, place: place };
@@ -201,20 +213,94 @@
     } else {
       cur.place = place;
       if (!cur.marker._dragging) cur.marker.setLatLng([place.lat, place.lon]);
-      cur.marker.setIcon(iconFor(place));
+      cur.marker.setIcon(iconFor(place, cur.group));
       if (cur.marker.dragging) place.draggable ? cur.marker.dragging.enable() : cur.marker.dragging.disable();
     }
     cur.marker.setZIndexOffset(zOffset(place));
   }
 
-  function refreshIcons() {
-    for (var id in markers) {
-      var c = markers[id];
-      c.marker.setIcon(iconFor(c.place));
-      c.marker.setZIndexOffset(zOffset(c.place));
+  // ------------------------------------------------------------ Regroupement au dézoom
+  // Quand des lieux se chevauchent, on ne garde que le plus gros (le lieu choisi passe toujours devant) ;
+  // pour de vrais lieux, le regroupement prend le nom de leur zone commune : quartier → ville →
+  // département → région → pays (même logique que src/map/cluster.ts).
+  var ADMIN_LEVELS = ['district', 'city', 'county', 'state', 'country'];
+  function commonArea(admins) {
+    var list = admins.filter(Boolean);
+    if (list.length < 2) return null;
+    for (var i = 0; i < ADMIN_LEVELS.length; i++) {
+      var k = ADMIN_LEVELS[i];
+      var v = list[0][k];
+      if (v && list.every(function (a) { return a[k] === v; })) return v;
+    }
+    return null;
+  }
+  function footprint(place, zoom) {
+    var px = iconPx(place.size, zoom);
+    // Les noms s'écrivent sous le dessin : ils prennent de la place en largeur.
+    return { w: px >= 28 ? Math.max(px, 120) : px, h: px + (px >= 28 ? 22 : 0) };
+  }
+  function priority(a, b) {
+    if ((a.id === selectedId) !== (b.id === selectedId)) return a.id === selectedId ? -1 : 1;
+    if ((a.kind === 'vehicle') !== (b.kind === 'vehicle')) return a.kind === 'vehicle' ? 1 : -1;
+    if (b.size !== a.size) return b.size - a.size;
+    if ((b.layer || 0) !== (a.layer || 0)) return (b.layer || 0) - (a.layer || 0);
+    return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
+  }
+  function declutter() {
+    var zoom = map.getZoom();
+    var list = [];
+    for (var id in markers) list.push(markers[id]);
+    list.sort(function (a, b) { return priority(a.place, b.place); });
+    var groups = [];
+    for (var i = 0; i < list.length; i++) {
+      var c = list[i];
+      var pt = map.latLngToLayerPoint(c.marker.getLatLng());
+      var fp = footprint(c.place, zoom);
+      var host = null;
+      if (c.place.kind !== 'vehicle' && !c.marker._dragging) {
+        for (var j = 0; j < groups.length; j++) {
+          var g = groups[j];
+          if (g.lead.place.kind === 'vehicle') continue;
+          if (Math.abs(g.pt.x - pt.x) < (g.fp.w + fp.w) / 2 * 0.85 && Math.abs(g.pt.y - pt.y) < (g.fp.h + fp.h) / 2 * 0.85) {
+            host = g;
+            break;
+          }
+        }
+      }
+      if (host) host.members.push(c);
+      else groups.push({ lead: c, pt: pt, fp: fp, members: [c] });
+    }
+    for (var k = 0; k < groups.length; k++) {
+      var gr = groups[k];
+      var real = gr.members.filter(function (m) { return m.place.real; }).map(function (m) { return m.place.admin; });
+      var area = gr.members.length > 1 && real.length === gr.members.length ? commonArea(real) : null;
+      var info = { count: gr.members.length, area: !!area, label: area || gr.lead.place.name, members: gr.members };
+      for (var n = 0; n < gr.members.length; n++) {
+        var m = gr.members[n];
+        var lead = m === gr.lead;
+        m.group = lead ? info : null;
+        m.hidden = !lead;
+        if (lead) {
+          if (!map.hasLayer(m.marker)) m.marker.addTo(map);
+          m.marker.setIcon(iconFor(m.place, info));
+          m.marker.setZIndexOffset(zOffset(m.place));
+        } else if (map.hasLayer(m.marker)) map.removeLayer(m.marker);
+      }
     }
   }
-  map.on('zoomend', refreshIcons);
+  /** Clic sur un regroupement : on zoome pour séparer ses lieux. Faux s'ils sont au même endroit. */
+  function zoomInto(group) {
+    var pts = group.members.map(function (m) { return m.marker.getLatLng(); });
+    var b = L.latLngBounds(pts);
+    var target = Math.min(map.getMaxZoom(), map.getBoundsZoom(b.pad(0.6)));
+    if (target <= map.getZoom() + 0.2) {
+      if (map.getZoom() >= map.getMaxZoom() - 0.5) return false;
+      target = Math.min(map.getMaxZoom(), map.getZoom() + 2);
+    }
+    map.flyTo(b.getCenter(), target, { duration: 0.7 });
+    return true;
+  }
+  map.on('zoomend', declutter);
 
   function applyState(s) {
     places = s.places || [];
@@ -235,6 +321,7 @@
       }
     }
     document.getElementById('empty').style.display = places.length ? 'none' : 'flex';
+    declutter();
     if (firstState) {
       firstState = false;
       if (s.view && places.length) {
@@ -271,6 +358,7 @@
     var c = markers[id];
     if (!c) return;
     var targetZoom = Math.max(map.getZoom(), Math.min(16, 19 - c.place.size * 1.6));
+    if (c.hidden) targetZoom = Math.max(targetZoom, Math.min(map.getMaxZoom(), map.getZoom() + 3));
     map.flyTo(c.marker.getLatLng(), targetZoom, { duration: 0.8 });
   }
 

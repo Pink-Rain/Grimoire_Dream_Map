@@ -57,7 +57,7 @@ export function LucidityScale(props: { value: number | null; onChange: (v: numbe
 
 /** Échelle à degrés en emojis : on touche un emoji ; le retoucher efface le choix. */
 export function EmojiScale(props: {
-  levels: readonly { value: number; emoji: string; label: string }[];
+  levels: readonly { value: number; emoji: string; label: string; image?: string }[];
   value: number | null;
   onChange: (v: number | null) => void;
   name: string;
@@ -81,7 +81,7 @@ export function EmojiScale(props: {
               testID={`${props.testID}-${m.value}`}
               style={({ hovered }: PressState) => [styles.scaleItem, on && styles.scaleItemOn, hovered && !on && { backgroundColor: colors.surfaceHover }]}
             >
-              <Text style={[styles.emoji, dim && { opacity: 0.45 }]}>{m.emoji}</Text>
+              {m.image ? <AppIcon name={m.image as AppIconName} size={30} dim={dim} /> : <Text style={[styles.emoji, dim && { opacity: 0.45 }]}>{m.emoji}</Text>}
               <Text style={[styles.scaleNum, on && { color: colors.ochre }]}>{m.value}</Text>
             </Pressable>
           );
@@ -98,7 +98,7 @@ export interface EmojiChoice {
   id: string;
   emoji: string;
   label: string;
-  image?: 'meteo-1' | 'meteo-2' | 'meteo-3' | 'meteo-4' | 'meteo-5';
+  image?: string;
 }
 
 /** Choix multiple dans une grille d'emojis, avec ajout de mots libres si `allowCustom`. */
@@ -137,7 +137,7 @@ export function EmojiPicker(props: {
               testID={`${props.testID}-${o.id}`}
               style={({ hovered }: PressState) => [styles.emojiTile, on && styles.emojiTileOn, hovered && !on && { backgroundColor: colors.surfaceHover }]}
             >
-              {o.image ? <AppIcon name={o.image} size={32} /> : <Text style={styles.emojiSmall}>{o.emoji}</Text>}
+              {o.image ? <AppIcon name={o.image as AppIconName} size={32} /> : <Text style={styles.emojiSmall}>{o.emoji}</Text>}
               <Text style={[styles.emojiLabel, on && { color: colors.text }]} numberOfLines={2}>
                 {o.label}
               </Text>
@@ -165,11 +165,11 @@ export function EmojiPicker(props: {
 
 /** Rangée compacte de petits emojis ronds, plusieurs choix possibles ; les choix s'affichent en dessous. */
 export function CompactEmojiPicker(props: {
-  options: { id: string; emoji: string; label: string }[];
+  options: { id: string; emoji: string; label: string; image?: string }[];
   value: string[];
   onChange: (v: string[]) => void;
   /** Valeurs anciennes hors de la liste : affichées et retirables. */
-  legacy?: { id: string; emoji: string; label: string }[];
+  legacy?: { id: string; emoji: string; label: string; image?: string }[];
   testID: string;
 }) {
   const extra = props.value.filter((v) => !props.options.some((o) => o.id === v)).map((v) => props.legacy?.find((o) => o.id === v) ?? { id: v, emoji: '✦', label: v });
@@ -192,7 +192,11 @@ export function CompactEmojiPicker(props: {
               testID={`${props.testID}-${o.id}`}
               style={({ hovered }: PressState) => [styles.mini, on && styles.miniOn, hovered && !on && { backgroundColor: colors.surfaceHover }]}
             >
-              <Text style={[styles.miniEmoji, props.value.length > 0 && !on && { opacity: 0.5 }]}>{o.emoji}</Text>
+              {o.image ? (
+                <AppIcon name={o.image as AppIconName} size={30} dim={props.value.length > 0 && !on} />
+              ) : (
+                <Text style={[styles.miniEmoji, props.value.length > 0 && !on && { opacity: 0.5 }]}>{o.emoji}</Text>
+              )}
             </Pressable>
           );
         })}
@@ -205,7 +209,7 @@ export function CompactEmojiPicker(props: {
 // ---------------------------------------------------------------- Humeur (0 à 5, un emoji au choix par niveau)
 
 export function MoodPicker(props: {
-  grid: { level: number; label: string; emojis: string[] }[];
+  grid: { level: number; label: string; emojis: string[]; images?: string[] }[];
   level: number | null;
   emoji: string | null;
   onChange: (level: number | null, emoji: string | null) => void;
@@ -229,7 +233,11 @@ export function MoodPicker(props: {
                   testID={`mood-${g.level}-${i}`}
                   style={({ hovered }: PressState) => [styles.mini, on && styles.miniOn, hovered && !on && { backgroundColor: colors.surfaceHover }]}
                 >
-                  <Text style={[styles.miniEmoji, props.level !== null && !on && { opacity: 0.45 }]}>{e}</Text>
+                  {g.images?.[i] ? (
+                    <AppIcon name={g.images[i] as AppIconName} size={32} dim={props.level !== null && !on} />
+                  ) : (
+                    <Text style={[styles.miniEmoji, props.level !== null && !on && { opacity: 0.45 }]}>{e}</Text>
+                  )}
                 </Pressable>
               );
             })}

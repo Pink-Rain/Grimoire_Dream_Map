@@ -104,3 +104,16 @@ describe('tracker de sommeil', () => {
     expect(seg[0]).toEqual({ row: '2026-11-27', start: 120, end: 165, kind: 'sleep' });
   });
 });
+
+import { addMinutes, completeInterruption } from './sleep';
+describe('réveils pendant la nuit', () => {
+  it('remplit l’autre heure 5 minutes plus tard ou plus tôt', () => {
+    expect(completeInterruption({ from: '03:00', to: '' }, 'from')).toEqual({ from: '03:00', to: '03:05' });
+    expect(completeInterruption({ from: '', to: '03:00' }, 'to')).toEqual({ from: '02:55', to: '03:00' });
+    expect(completeInterruption({ from: '03:00', to: '03:40' }, 'from')).toEqual({ from: '03:00', to: '03:40' });
+  });
+  it('passe minuit', () => {
+    expect(addMinutes('23:58', 5)).toBe('00:03');
+    expect(addMinutes('00:02', -5)).toBe('23:57');
+  });
+});

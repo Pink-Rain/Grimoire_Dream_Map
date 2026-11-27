@@ -9,7 +9,7 @@
  */
 
 /** Version du format de données. À augmenter quand on ajoute des champs ou des collections. */
-export const SCHEMA_VERSION = 4;
+export const SCHEMA_VERSION = 5;
 
 /** Identifiant écrit dans chaque fichier pour reconnaître nos fichiers. */
 export const APP_ID = 'grimoire-dream-map';
@@ -129,6 +129,16 @@ export interface Place extends BaseRecord {
   layer?: number;
   /** Véhicule : trajet entre deux lieux. */
   route?: { fromId: string; toId: string };
+  /** (v5) Lieux réels : quartier, ville, département, région, pays (pour regrouper sur la carte au dézoom). */
+  admin?: PlaceAdmin;
+}
+
+export interface PlaceAdmin {
+  district?: string;
+  city?: string;
+  county?: string;
+  state?: string;
+  country?: string;
 }
 
 /**
@@ -150,6 +160,16 @@ export interface Sleep extends BaseRecord {
   quality?: number | null;
   /** Énergie au réveil, de 1 à 5. */
   energy?: number | null;
+  // --- v5 ---
+  /** Facteurs de la veille (café, écrans, stress…), en étiquettes. */
+  factors?: string[];
+  /** Lieu du sommeil (chez moi, en voyage…), en étiquettes. */
+  sleepPlaces?: string[];
+  /** Humeur au réveil : niveau 0 à 5 et emoji choisi (même grille que les rêves). */
+  wakeMood?: number | null;
+  wakeMoodEmoji?: string | null;
+  /** Émotions au réveil, en étiquettes. */
+  wakeEmotions?: string[];
 }
 
 /** Noms des collections. On peut en ajouter, jamais en renommer. */

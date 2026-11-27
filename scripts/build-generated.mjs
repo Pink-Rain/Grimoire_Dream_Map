@@ -56,6 +56,12 @@ const EXTRA_KEYWORDS = {
   'modern-city': ['ville', 'gratte-ciel', 'immeuble', 'métropole'],
   'subway-train': ['train', 'métro', 'gare', 'tgv'],
   'boat-fishing': ['lac', 'pêche'],
+  // Pas de dessin « place de ville / village » chez game-icons : on propose ce qu'on trouve sur une place.
+  fountain: ['place', 'place du village', 'square', 'esplanade'],
+  obelisk: ['place', 'monument', 'esplanade'],
+  'clock-tower': ['place', 'mairie', 'beffroi', 'centre-ville'],
+  'park-bench': ['place', 'square', 'jardin public'],
+  'street-light': ['place', 'rue', 'réverbère'],
 };
 const byName = new Map(catalog.map((c) => [c.name, c]));
 for (const [name, label, category, kind] of REQUIRED) {
