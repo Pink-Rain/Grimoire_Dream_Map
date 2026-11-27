@@ -1,0 +1,10918 @@
+[
+  {
+    "name": "agave",
+    "label": "Agave",
+    "category": "nature",
+    "keywords": [
+      "agave",
+      "plante",
+      "désert",
+      "succulente"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "algae",
+    "label": "Algues",
+    "category": "nature",
+    "keywords": [
+      "algue",
+      "mer",
+      "océan",
+      "plante aquatique",
+      "varech"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "spotted-mushroom",
+    "label": "Amanite",
+    "category": "nature",
+    "keywords": [
+      "amanite",
+      "champignon",
+      "toxique",
+      "conte",
+      "féerique"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "burning-tree",
+    "label": "Arbre en feu",
+    "category": "nature",
+    "keywords": [
+      "arbre",
+      "feu",
+      "flamme",
+      "brûlant"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "lightning-tree",
+    "label": "Arbre foudroyé",
+    "category": "nature",
+    "keywords": [
+      "arbre",
+      "foudre",
+      "éclair",
+      "orage"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "fruit-tree",
+    "label": "Arbre fruitier",
+    "category": "nature",
+    "keywords": [
+      "arbre fruitier",
+      "pommier",
+      "verger",
+      "fruit"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "evil-tree",
+    "label": "Arbre maléfique",
+    "category": "nature",
+    "keywords": [
+      "arbre",
+      "hanté",
+      "effrayant",
+      "forêt",
+      "sinistre"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "dead-wood",
+    "label": "Arbre mort",
+    "category": "nature",
+    "keywords": [
+      "arbre mort",
+      "bois",
+      "sec",
+      "hiver",
+      "branches"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "asteroid",
+    "label": "Astéroïde",
+    "category": "nature",
+    "keywords": [
+      "astéroïde",
+      "espace",
+      "rocher",
+      "cosmos",
+      "météore"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "heavy-rain",
+    "label": "Averse",
+    "category": "nature",
+    "keywords": [
+      "pluie",
+      "averse",
+      "orage",
+      "trombe"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "bamboo",
+    "label": "Bambou",
+    "category": "nature",
+    "keywords": [
+      "bambou",
+      "asie",
+      "forêt",
+      "plante",
+      "tige"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "icebergs",
+    "label": "Banquise",
+    "category": "nature",
+    "keywords": [
+      "banquise",
+      "glace",
+      "iceberg",
+      "pôle",
+      "antarctique"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "baobab",
+    "label": "Baobab",
+    "category": "nature",
+    "keywords": [
+      "baobab",
+      "arbre",
+      "afrique",
+      "savane"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "wheat",
+    "label": "Blé",
+    "category": "nature",
+    "keywords": [
+      "blé",
+      "épi",
+      "champ",
+      "moisson",
+      "céréale"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "person-in-blizzard",
+    "label": "Blizzard",
+    "category": "nature",
+    "keywords": [
+      "blizzard",
+      "tempête de neige",
+      "froid",
+      "hiver",
+      "perdu"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "frozen-block",
+    "label": "Bloc de glace",
+    "category": "nature",
+    "keywords": [
+      "glace",
+      "gel",
+      "froid",
+      "glacier"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "bonsai-tree",
+    "label": "Bonsaï",
+    "category": "nature",
+    "keywords": [
+      "bonsaï",
+      "arbre",
+      "japon",
+      "miniature",
+      "zen"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "birch-trees",
+    "label": "Bouleaux",
+    "category": "nature",
+    "keywords": [
+      "bouleau",
+      "arbre",
+      "forêt",
+      "bois"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "tree-branch",
+    "label": "Branche",
+    "category": "nature",
+    "keywords": [
+      "branche",
+      "arbre",
+      "bois",
+      "rameau"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "fog",
+    "label": "Brouillard",
+    "category": "nature",
+    "keywords": [
+      "brouillard",
+      "brume",
+      "nuage",
+      "flou"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "berry-bush",
+    "label": "Buisson de baies",
+    "category": "nature",
+    "keywords": [
+      "buisson",
+      "baie",
+      "arbuste",
+      "fruit",
+      "haie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "cactus",
+    "label": "Cactus",
+    "category": "nature",
+    "keywords": [
+      "cactus",
+      "désert",
+      "plante",
+      "épine"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "stone-pile",
+    "label": "Cairn",
+    "category": "nature",
+    "keywords": [
+      "cairn",
+      "tas de pierres",
+      "rochers",
+      "sentier"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "caldera",
+    "label": "Caldeira",
+    "category": "nature",
+    "keywords": [
+      "caldeira",
+      "volcan",
+      "cratère",
+      "lac"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "waterfall",
+    "label": "Cascade",
+    "category": "nature",
+    "keywords": [
+      "cascade",
+      "chute d'eau",
+      "rivière",
+      "torrent"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "underground-cave",
+    "label": "Caverne souterraine",
+    "category": "nature",
+    "keywords": [
+      "caverne",
+      "grotte",
+      "souterrain",
+      "abîme"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "mushroom",
+    "label": "Champignon",
+    "category": "nature",
+    "keywords": [
+      "champignon",
+      "forêt",
+      "cèpe",
+      "bolet"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "mushrooms",
+    "label": "Champignons",
+    "category": "nature",
+    "keywords": [
+      "champignons",
+      "forêt",
+      "cueillette",
+      "sous-bois"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "oak",
+    "label": "Chêne",
+    "category": "nature",
+    "keywords": [
+      "chêne",
+      "arbre",
+      "forêt",
+      "feuillu"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "holy-oak",
+    "label": "Chêne sacré",
+    "category": "nature",
+    "keywords": [
+      "chêne",
+      "arbre sacré",
+      "druide",
+      "ancien"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "snowing",
+    "label": "Chute de neige",
+    "category": "nature",
+    "keywords": [
+      "neige",
+      "hiver",
+      "flocons",
+      "nuage",
+      "tempête de neige"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "night-sky",
+    "label": "Ciel nocturne",
+    "category": "nature",
+    "keywords": [
+      "ciel",
+      "nuit",
+      "étoiles",
+      "lune",
+      "nocturne"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "circle-forest",
+    "label": "Clairière",
+    "category": "nature",
+    "keywords": [
+      "clairière",
+      "forêt",
+      "bois",
+      "arbres",
+      "cercle"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "hills",
+    "label": "Collines",
+    "category": "nature",
+    "keywords": [
+      "colline",
+      "campagne",
+      "vallon",
+      "coteau"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "comet-spark",
+    "label": "Comète",
+    "category": "nature",
+    "keywords": [
+      "comète",
+      "espace",
+      "étoile",
+      "ciel",
+      "queue"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "poppy",
+    "label": "Coquelicot",
+    "category": "nature",
+    "keywords": [
+      "coquelicot",
+      "fleur",
+      "champ",
+      "rouge"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "coral",
+    "label": "Corail",
+    "category": "nature",
+    "keywords": [
+      "corail",
+      "récif",
+      "mer",
+      "océan",
+      "fond marin"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "sunset",
+    "label": "Coucher de soleil",
+    "category": "nature",
+    "keywords": [
+      "crépuscule",
+      "coucher",
+      "soir",
+      "soleil"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "crystal-cluster",
+    "label": "Cristaux",
+    "category": "nature",
+    "keywords": [
+      "cristal",
+      "minéral",
+      "géode",
+      "grotte",
+      "pierre précieuse"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "wave-crest",
+    "label": "Déferlante",
+    "category": "nature",
+    "keywords": [
+      "vague",
+      "déferlante",
+      "mer",
+      "écume"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "desert",
+    "label": "Désert",
+    "category": "nature",
+    "keywords": [
+      "désert",
+      "dune",
+      "sable",
+      "chaleur",
+      "sahara"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "falling-rocks",
+    "label": "Éboulement",
+    "category": "nature",
+    "keywords": [
+      "éboulement",
+      "rochers",
+      "chute",
+      "avalanche",
+      "pierres"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "sun-cloud",
+    "label": "Éclaircie",
+    "category": "nature",
+    "keywords": [
+      "soleil",
+      "nuage",
+      "météo",
+      "éclaircie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "eclipse",
+    "label": "Éclipse",
+    "category": "nature",
+    "keywords": [
+      "éclipse",
+      "soleil",
+      "lune",
+      "ciel",
+      "obscurité"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "cave-entrance",
+    "label": "Entrée de grotte",
+    "category": "nature",
+    "keywords": [
+      "grotte",
+      "caverne",
+      "entrée",
+      "souterrain",
+      "antre"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "crags",
+    "label": "Escarpements",
+    "category": "nature",
+    "keywords": [
+      "escarpement",
+      "falaise",
+      "rocher",
+      "montagne",
+      "à-pic"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "lily-pads",
+    "label": "Étang aux nénuphars",
+    "category": "nature",
+    "keywords": [
+      "nénuphar",
+      "mare",
+      "étang",
+      "lac",
+      "grenouille"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "rainbow-star",
+    "label": "Étoile arc-en-ciel",
+    "category": "nature",
+    "keywords": [
+      "arc-en-ciel",
+      "étoile",
+      "filante",
+      "couleurs",
+      "magie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "falling-star",
+    "label": "Étoile filante",
+    "category": "nature",
+    "keywords": [
+      "étoile filante",
+      "vœu",
+      "ciel",
+      "nuit",
+      "météore"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "polar-star",
+    "label": "Étoile polaire",
+    "category": "nature",
+    "keywords": [
+      "étoile",
+      "nord",
+      "polaire",
+      "ciel",
+      "guide"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "star-formation",
+    "label": "Étoiles",
+    "category": "nature",
+    "keywords": [
+      "étoiles",
+      "ciel",
+      "constellation",
+      "nuit",
+      "briller"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "earth-crack",
+    "label": "Faille",
+    "category": "nature",
+    "keywords": [
+      "faille",
+      "crevasse",
+      "séisme",
+      "tremblement de terre",
+      "fissure"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "sea-cliff",
+    "label": "Falaise maritime",
+    "category": "nature",
+    "keywords": [
+      "falaise",
+      "mer",
+      "côte",
+      "rivage",
+      "littoral"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "fire",
+    "label": "Feu",
+    "category": "nature",
+    "keywords": [
+      "feu",
+      "flamme",
+      "incendie",
+      "brasier"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "maple-leaf",
+    "label": "Feuille d'érable",
+    "category": "nature",
+    "keywords": [
+      "érable",
+      "feuille",
+      "automne",
+      "canada"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "falling-leaf",
+    "label": "Feuille qui tombe",
+    "category": "nature",
+    "keywords": [
+      "feuille",
+      "automne",
+      "chute",
+      "arbre"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "wildfires",
+    "label": "Feux de forêt",
+    "category": "nature",
+    "keywords": [
+      "incendie",
+      "feu",
+      "forêt",
+      "flammes"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "flowers",
+    "label": "Fleurs",
+    "category": "nature",
+    "keywords": [
+      "fleur",
+      "bouquet",
+      "jardin",
+      "printemps"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "snowflake-1",
+    "label": "Flocon de neige",
+    "category": "nature",
+    "keywords": [
+      "neige",
+      "flocon",
+      "hiver",
+      "froid",
+      "cristal"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "forest",
+    "label": "Forêt",
+    "category": "nature",
+    "keywords": [
+      "forêt",
+      "bois",
+      "arbres",
+      "sapin",
+      "sylve"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "burning-forest",
+    "label": "Forêt en feu",
+    "category": "nature",
+    "keywords": [
+      "forêt",
+      "incendie",
+      "feu",
+      "flamme",
+      "brûlé"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "fossil",
+    "label": "Fossile",
+    "category": "nature",
+    "keywords": [
+      "fossile",
+      "pierre",
+      "ancien",
+      "préhistoire"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "fern",
+    "label": "Fougère",
+    "category": "nature",
+    "keywords": [
+      "fougère",
+      "plante",
+      "forêt",
+      "sous-bois"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "galaxy",
+    "label": "Galaxie",
+    "category": "nature",
+    "keywords": [
+      "galaxie",
+      "espace",
+      "étoiles",
+      "cosmos",
+      "univers"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "acorn",
+    "label": "Gland",
+    "category": "nature",
+    "keywords": [
+      "gland",
+      "chêne",
+      "graine",
+      "automne",
+      "noisette"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "water-drop",
+    "label": "Goutte d'eau",
+    "category": "nature",
+    "keywords": [
+      "goutte",
+      "eau",
+      "larme",
+      "pluie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "ursa-major",
+    "label": "Grande Ourse",
+    "category": "nature",
+    "keywords": [
+      "constellation",
+      "étoiles",
+      "ourse",
+      "ciel"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "big-wave",
+    "label": "Grosse vague",
+    "category": "nature",
+    "keywords": [
+      "vague",
+      "mer",
+      "océan",
+      "tsunami",
+      "houle",
+      "surf"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "mountain-cave",
+    "label": "Grotte de montagne",
+    "category": "nature",
+    "keywords": [
+      "grotte",
+      "caverne",
+      "montagne",
+      "repaire"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "beanstalk",
+    "label": "Haricot magique",
+    "category": "nature",
+    "keywords": [
+      "haricot",
+      "tige",
+      "géant",
+      "plante",
+      "ciel",
+      "conte"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "high-grass",
+    "label": "Hautes herbes",
+    "category": "nature",
+    "keywords": [
+      "herbe",
+      "prairie",
+      "savane",
+      "steppe"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "grass",
+    "label": "Herbe",
+    "category": "nature",
+    "keywords": [
+      "herbe",
+      "prairie",
+      "pelouse",
+      "gazon"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "beech",
+    "label": "Hêtre",
+    "category": "nature",
+    "keywords": [
+      "hêtre",
+      "arbre",
+      "feuillu",
+      "forêt"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "boat-horizon",
+    "label": "Horizon marin",
+    "category": "nature",
+    "keywords": [
+      "horizon",
+      "mer",
+      "coucher de soleil",
+      "bateau",
+      "large"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "iceberg",
+    "label": "Iceberg",
+    "category": "nature",
+    "keywords": [
+      "iceberg",
+      "glace",
+      "banquise",
+      "pôle",
+      "arctique"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "island",
+    "label": "Île",
+    "category": "nature",
+    "keywords": [
+      "île",
+      "îlot",
+      "mer",
+      "palmier",
+      "naufragé"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "meteor-impact",
+    "label": "Impact de météorite",
+    "category": "nature",
+    "keywords": [
+      "météorite",
+      "cratère",
+      "impact",
+      "astéroïde"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "flood",
+    "label": "Inondation",
+    "category": "nature",
+    "keywords": [
+      "inondation",
+      "crue",
+      "eau",
+      "déluge",
+      "montée des eaux"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "jungle",
+    "label": "Jungle",
+    "category": "nature",
+    "keywords": [
+      "jungle",
+      "forêt tropicale",
+      "liane",
+      "amazonie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "jupiter",
+    "label": "Jupiter",
+    "category": "nature",
+    "keywords": [
+      "jupiter",
+      "planète",
+      "espace",
+      "géante gazeuse"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "lava",
+    "label": "Lave",
+    "category": "nature",
+    "keywords": [
+      "lave",
+      "magma",
+      "volcan",
+      "feu"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "sunrise",
+    "label": "Lever de soleil",
+    "category": "nature",
+    "keywords": [
+      "aube",
+      "lever",
+      "matin",
+      "soleil",
+      "aurore"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "vines",
+    "label": "Lianes",
+    "category": "nature",
+    "keywords": [
+      "liane",
+      "vigne",
+      "plante grimpante",
+      "lierre"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "forest-entrance",
+    "label": "Lisière de forêt",
+    "category": "nature",
+    "keywords": [
+      "lisière",
+      "forêt",
+      "chemin",
+      "entrée",
+      "sous-bois"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "lotus-flower",
+    "label": "Lotus",
+    "category": "nature",
+    "keywords": [
+      "lotus",
+      "fleur",
+      "étang",
+      "zen",
+      "méditation"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "moon",
+    "label": "Lune",
+    "category": "nature",
+    "keywords": [
+      "lune",
+      "croissant",
+      "nuit",
+      "astre"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "evil-moon",
+    "label": "Lune maléfique",
+    "category": "nature",
+    "keywords": [
+      "lune",
+      "nuit",
+      "cauchemar",
+      "chauve-souris",
+      "sinistre"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "swamp",
+    "label": "Marais",
+    "category": "nature",
+    "keywords": [
+      "marais",
+      "marécage",
+      "tourbière",
+      "boue",
+      "bayou"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "daisy",
+    "label": "Marguerite",
+    "category": "nature",
+    "keywords": [
+      "marguerite",
+      "fleur",
+      "prairie",
+      "pâquerette"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "monument-valley",
+    "label": "Mesa",
+    "category": "nature",
+    "keywords": [
+      "mesa",
+      "canyon",
+      "désert",
+      "ouest",
+      "far west",
+      "plateau"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "world",
+    "label": "Monde",
+    "category": "nature",
+    "keywords": [
+      "monde",
+      "planète",
+      "terre",
+      "globe"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "fuji",
+    "label": "Mont Fuji",
+    "category": "nature",
+    "keywords": [
+      "fuji",
+      "montagne",
+      "japon",
+      "volcan",
+      "neige"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "mountains",
+    "label": "Montagnes",
+    "category": "nature",
+    "keywords": [
+      "montagne",
+      "sommet",
+      "massif",
+      "alpes",
+      "chaîne"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "fluffy-cloud",
+    "label": "Nuage",
+    "category": "nature",
+    "keywords": [
+      "nuage",
+      "ciel",
+      "cotonneux",
+      "nuée"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "oasis",
+    "label": "Oasis",
+    "category": "nature",
+    "keywords": [
+      "oasis",
+      "désert",
+      "palmier",
+      "eau",
+      "mirage"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "lightning-storm",
+    "label": "Orage",
+    "category": "nature",
+    "keywords": [
+      "orage",
+      "éclair",
+      "foudre",
+      "tempête",
+      "tonnerre"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "palm-tree",
+    "label": "Palmier",
+    "category": "nature",
+    "keywords": [
+      "palmier",
+      "plage",
+      "tropique",
+      "île",
+      "cocotier"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "peaks",
+    "label": "Pics",
+    "category": "nature",
+    "keywords": [
+      "pic",
+      "montagne",
+      "sommets",
+      "crêtes"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "dandelion-flower",
+    "label": "Pissenlit",
+    "category": "nature",
+    "keywords": [
+      "pissenlit",
+      "fleur",
+      "graine",
+      "vent",
+      "souffle"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "ringed-planet",
+    "label": "Planète à anneaux",
+    "category": "nature",
+    "keywords": [
+      "planète",
+      "saturne",
+      "anneaux",
+      "espace"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "exploding-planet",
+    "label": "Planète qui explose",
+    "category": "nature",
+    "keywords": [
+      "planète",
+      "explosion",
+      "espace",
+      "apocalypse",
+      "fin du monde"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "earth-africa-europe",
+    "label": "Planète Terre",
+    "category": "nature",
+    "keywords": [
+      "terre",
+      "planète",
+      "globe",
+      "monde",
+      "europe",
+      "afrique"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "carnivorous-plant",
+    "label": "Plante carnivore",
+    "category": "nature",
+    "keywords": [
+      "plante carnivore",
+      "dionée",
+      "monstre",
+      "jungle"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "raining",
+    "label": "Pluie",
+    "category": "nature",
+    "keywords": [
+      "pluie",
+      "nuage",
+      "averse",
+      "météo"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "seedling",
+    "label": "Pousse",
+    "category": "nature",
+    "keywords": [
+      "pousse",
+      "graine",
+      "plante",
+      "germe",
+      "croissance"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "sunbeams",
+    "label": "Rayons de soleil",
+    "category": "nature",
+    "keywords": [
+      "rayon",
+      "soleil",
+      "lumière",
+      "lueur"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "river",
+    "label": "Rivière",
+    "category": "nature",
+    "keywords": [
+      "rivière",
+      "fleuve",
+      "cours d'eau",
+      "eau",
+      "ruisseau"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "rock",
+    "label": "Rocher",
+    "category": "nature",
+    "keywords": [
+      "rocher",
+      "pierre",
+      "caillou",
+      "roc"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "rose",
+    "label": "Rose",
+    "category": "nature",
+    "keywords": [
+      "rose",
+      "fleur",
+      "amour",
+      "épine"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "reed",
+    "label": "Roseaux",
+    "category": "nature",
+    "keywords": [
+      "roseau",
+      "marais",
+      "étang",
+      "jonc"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "quicksand",
+    "label": "Sables mouvants",
+    "category": "nature",
+    "keywords": [
+      "sables mouvants",
+      "piège",
+      "désert",
+      "enlisement"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "pine-tree",
+    "label": "Sapin",
+    "category": "nature",
+    "keywords": [
+      "sapin",
+      "pin",
+      "conifère",
+      "forêt",
+      "noël"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "willow-tree",
+    "label": "Saule pleureur",
+    "category": "nature",
+    "keywords": [
+      "saule",
+      "arbre",
+      "rivière",
+      "pleureur"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "sun",
+    "label": "Soleil",
+    "category": "nature",
+    "keywords": [
+      "soleil",
+      "jour",
+      "lumière",
+      "été",
+      "astre"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "mountaintop",
+    "label": "Sommet",
+    "category": "nature",
+    "keywords": [
+      "sommet",
+      "pic",
+      "montagne",
+      "cime",
+      "neige"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "stump-regrowth",
+    "label": "Souche",
+    "category": "nature",
+    "keywords": [
+      "souche",
+      "arbre coupé",
+      "repousse",
+      "forêt"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "stalactites",
+    "label": "Stalactites",
+    "category": "nature",
+    "keywords": [
+      "stalactite",
+      "grotte",
+      "caverne",
+      "souterrain"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "solar-system",
+    "label": "Système solaire",
+    "category": "nature",
+    "keywords": [
+      "système solaire",
+      "planètes",
+      "espace",
+      "orbite"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "sandstorm",
+    "label": "Tempête de sable",
+    "category": "nature",
+    "keywords": [
+      "tempête",
+      "sable",
+      "désert",
+      "vent"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "tornado",
+    "label": "Tornade",
+    "category": "nature",
+    "keywords": [
+      "tornade",
+      "cyclone",
+      "tempête",
+      "vent",
+      "ouragan"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "whirlwind",
+    "label": "Tourbillon de vent",
+    "category": "nature",
+    "keywords": [
+      "tourbillon",
+      "vent",
+      "tempête",
+      "cyclone"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "sunflower",
+    "label": "Tournesol",
+    "category": "nature",
+    "keywords": [
+      "tournesol",
+      "fleur",
+      "été",
+      "champ"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "clover",
+    "label": "Trèfle",
+    "category": "nature",
+    "keywords": [
+      "trèfle",
+      "chance",
+      "prairie",
+      "quatre feuilles"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "uluru",
+    "label": "Uluru",
+    "category": "nature",
+    "keywords": [
+      "uluru",
+      "australie",
+      "rocher",
+      "désert",
+      "monolithe"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "waves",
+    "label": "Vagues",
+    "category": "nature",
+    "keywords": [
+      "vague",
+      "mer",
+      "océan",
+      "houle",
+      "eau"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "valley",
+    "label": "Vallée",
+    "category": "nature",
+    "keywords": [
+      "vallée",
+      "vallon",
+      "montagne",
+      "rivière",
+      "gorge"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "windy-stripes",
+    "label": "Vent",
+    "category": "nature",
+    "keywords": [
+      "vent",
+      "brise",
+      "souffle",
+      "bourrasque"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "tumbleweed",
+    "label": "Virevoltant",
+    "category": "nature",
+    "keywords": [
+      "virevoltant",
+      "désert",
+      "western",
+      "buisson"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "smoking-volcano",
+    "label": "Volcan",
+    "category": "nature",
+    "keywords": [
+      "volcan",
+      "fumée",
+      "cratère",
+      "éruption",
+      "lave"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "vortex",
+    "label": "Vortex",
+    "category": "nature",
+    "keywords": [
+      "vortex",
+      "tourbillon",
+      "spirale",
+      "maelström",
+      "trou noir"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "bank",
+    "label": "Banque",
+    "category": "habitat",
+    "keywords": [
+      "banque",
+      "argent",
+      "coffre-fort",
+      "bâtiment"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "block-house",
+    "label": "Blockhaus",
+    "category": "habitat",
+    "keywords": [
+      "blockhaus",
+      "fortin",
+      "bunker",
+      "défense"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "snowman",
+    "label": "Bonhomme de neige",
+    "category": "habitat",
+    "keywords": [
+      "bonhomme de neige",
+      "neige",
+      "hiver",
+      "noël"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "shop",
+    "label": "Boutique",
+    "category": "habitat",
+    "keywords": [
+      "boutique",
+      "magasin",
+      "commerce",
+      "échoppe"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "bunker",
+    "label": "Bunker",
+    "category": "habitat",
+    "keywords": [
+      "bunker",
+      "abri",
+      "souterrain",
+      "guerre"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "post-office",
+    "label": "Bureau de poste",
+    "category": "habitat",
+    "keywords": [
+      "poste",
+      "courrier",
+      "lettre",
+      "bureau"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "treehouse",
+    "label": "Cabane dans les arbres",
+    "category": "habitat",
+    "keywords": [
+      "cabane",
+      "arbre",
+      "enfance",
+      "perchée"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "wood-cabin",
+    "label": "Cabane en bois",
+    "category": "habitat",
+    "keywords": [
+      "cabane",
+      "bois",
+      "chalet",
+      "refuge",
+      "forêt"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "goblin-camp",
+    "label": "Camp de gobelins",
+    "category": "habitat",
+    "keywords": [
+      "camp",
+      "gobelin",
+      "tente",
+      "campement"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "desert-camp",
+    "label": "Campement du désert",
+    "category": "habitat",
+    "keywords": [
+      "campement",
+      "désert",
+      "tente",
+      "bédouin",
+      "caravane"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "forest-camp",
+    "label": "Campement en forêt",
+    "category": "habitat",
+    "keywords": [
+      "campement",
+      "forêt",
+      "tente",
+      "camping",
+      "bivouac"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "capitol",
+    "label": "Capitole",
+    "category": "habitat",
+    "keywords": [
+      "capitole",
+      "parlement",
+      "gouvernement",
+      "dôme"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "barracks",
+    "label": "Caserne",
+    "category": "habitat",
+    "keywords": [
+      "caserne",
+      "armée",
+      "soldats",
+      "bâtiment"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "saint-basil-cathedral",
+    "label": "Cathédrale Saint-Basile",
+    "category": "habitat",
+    "keywords": [
+      "cathédrale",
+      "moscou",
+      "russie",
+      "bulbes",
+      "coupoles"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "nuclear-plant",
+    "label": "Centrale nucléaire",
+    "category": "habitat",
+    "keywords": [
+      "centrale",
+      "nucléaire",
+      "usine",
+      "réacteur"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "castle",
+    "label": "Château",
+    "category": "habitat",
+    "keywords": [
+      "château",
+      "fort",
+      "forteresse",
+      "royaume",
+      "donjon"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "water-tower",
+    "label": "Château d'eau",
+    "category": "habitat",
+    "keywords": [
+      "château d'eau",
+      "réservoir",
+      "citerne"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "sand-castle",
+    "label": "Château de sable",
+    "category": "habitat",
+    "keywords": [
+      "château de sable",
+      "plage",
+      "enfance",
+      "seau"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "elven-castle",
+    "label": "Château elfique",
+    "category": "habitat",
+    "keywords": [
+      "château",
+      "elfe",
+      "féerique",
+      "magique",
+      "palais"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "castle-ruins",
+    "label": "Château en ruines",
+    "category": "habitat",
+    "keywords": [
+      "ruines",
+      "château",
+      "abandonné",
+      "vestiges"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "qaitbay-citadel",
+    "label": "Citadelle",
+    "category": "habitat",
+    "keywords": [
+      "citadelle",
+      "forteresse",
+      "remparts",
+      "égypte"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "habitat-dome",
+    "label": "Dôme futuriste",
+    "category": "habitat",
+    "keywords": [
+      "dôme",
+      "base",
+      "colonie",
+      "futur",
+      "lune",
+      "mars"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "stable",
+    "label": "Écurie",
+    "category": "habitat",
+    "keywords": [
+      "écurie",
+      "cheval",
+      "ferme",
+      "étable"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "church",
+    "label": "Église",
+    "category": "habitat",
+    "keywords": [
+      "église",
+      "chapelle",
+      "clocher",
+      "religion"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "viking-church",
+    "label": "Église en bois debout",
+    "category": "habitat",
+    "keywords": [
+      "église",
+      "bois",
+      "viking",
+      "norvège",
+      "stavkirke"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "warehouse",
+    "label": "Entrepôt",
+    "category": "habitat",
+    "keywords": [
+      "entrepôt",
+      "hangar",
+      "stockage",
+      "dépôt"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "military-fort",
+    "label": "Fort militaire",
+    "category": "habitat",
+    "keywords": [
+      "fort",
+      "armée",
+      "palissade",
+      "garnison"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "hill-fort",
+    "label": "Fort sur la colline",
+    "category": "habitat",
+    "keywords": [
+      "fort",
+      "colline",
+      "village fortifié",
+      "défense"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "locked-fortress",
+    "label": "Forteresse",
+    "category": "habitat",
+    "keywords": [
+      "forteresse",
+      "citadelle",
+      "remparts",
+      "fort"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "mechanic-garage",
+    "label": "Garage",
+    "category": "habitat",
+    "keywords": [
+      "garage",
+      "mécanicien",
+      "atelier",
+      "voiture"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "barracks-tent",
+    "label": "Grand chapiteau",
+    "category": "habitat",
+    "keywords": [
+      "chapiteau",
+      "tente",
+      "campement",
+      "cirque",
+      "grand"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "great-pyramid",
+    "label": "Grande pyramide",
+    "category": "habitat",
+    "keywords": [
+      "pyramide",
+      "égypte",
+      "gizeh",
+      "tombeau"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "barn",
+    "label": "Grange",
+    "category": "habitat",
+    "keywords": [
+      "grange",
+      "ferme",
+      "campagne",
+      "foin",
+      "étable"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "granary",
+    "label": "Grenier",
+    "category": "habitat",
+    "keywords": [
+      "grenier",
+      "grain",
+      "ferme",
+      "silo"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "hospital",
+    "label": "Hôpital",
+    "category": "habitat",
+    "keywords": [
+      "hôpital",
+      "clinique",
+      "santé",
+      "médecin",
+      "urgences"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "hut",
+    "label": "Hutte",
+    "category": "habitat",
+    "keywords": [
+      "hutte",
+      "case",
+      "cabane",
+      "paillote"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "igloo",
+    "label": "Igloo",
+    "category": "habitat",
+    "keywords": [
+      "igloo",
+      "neige",
+      "glace",
+      "inuit",
+      "pôle"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "viking-longhouse",
+    "label": "Longère viking",
+    "category": "habitat",
+    "keywords": [
+      "maison longue",
+      "viking",
+      "nordique",
+      "longère"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "house",
+    "label": "Maison",
+    "category": "habitat",
+    "keywords": [
+      "maison",
+      "demeure",
+      "foyer",
+      "domicile"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "home-garage",
+    "label": "Maison avec garage",
+    "category": "habitat",
+    "keywords": [
+      "maison",
+      "garage",
+      "banlieue",
+      "pavillon"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "mushroom-house",
+    "label": "Maison champignon",
+    "category": "habitat",
+    "keywords": [
+      "maison",
+      "champignon",
+      "lutin",
+      "féerique",
+      "gnome"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "hobbit-dwelling",
+    "label": "Maison de hobbit",
+    "category": "habitat",
+    "keywords": [
+      "hobbit",
+      "terrier",
+      "maison",
+      "colline",
+      "comté"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "damaged-house",
+    "label": "Maison en ruine",
+    "category": "habitat",
+    "keywords": [
+      "maison",
+      "ruine",
+      "abandonnée",
+      "délabrée",
+      "détruite"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "family-house",
+    "label": "Maison familiale",
+    "category": "habitat",
+    "keywords": [
+      "maison",
+      "famille",
+      "foyer",
+      "domicile"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "spooky-house",
+    "label": "Maison hantée",
+    "category": "habitat",
+    "keywords": [
+      "maison hantée",
+      "fantôme",
+      "manoir",
+      "effrayant",
+      "halloween"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "samara-mosque",
+    "label": "Mosquée",
+    "category": "habitat",
+    "keywords": [
+      "mosquée",
+      "minaret",
+      "islam",
+      "prière"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "water-mill",
+    "label": "Moulin à eau",
+    "category": "habitat",
+    "keywords": [
+      "moulin",
+      "eau",
+      "roue",
+      "rivière"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "windmill",
+    "label": "Moulin à vent",
+    "category": "habitat",
+    "keywords": [
+      "moulin",
+      "vent",
+      "campagne",
+      "ailes"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "dog-house",
+    "label": "Niche",
+    "category": "habitat",
+    "keywords": [
+      "niche",
+      "chien",
+      "cabane"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "observatory",
+    "label": "Observatoire",
+    "category": "habitat",
+    "keywords": [
+      "observatoire",
+      "télescope",
+      "étoiles",
+      "astronomie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "sydney-opera-house",
+    "label": "Opéra de Sydney",
+    "category": "habitat",
+    "keywords": [
+      "opéra",
+      "sydney",
+      "australie",
+      "salle de concert"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "oppidum",
+    "label": "Oppidum",
+    "category": "habitat",
+    "keywords": [
+      "oppidum",
+      "village gaulois",
+      "fortifié",
+      "celte"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "pagoda",
+    "label": "Pagode",
+    "category": "habitat",
+    "keywords": [
+      "pagode",
+      "temple",
+      "asie",
+      "japon",
+      "chine"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "indian-palace",
+    "label": "Palais indien",
+    "category": "habitat",
+    "keywords": [
+      "palais",
+      "inde",
+      "taj mahal",
+      "coupole",
+      "maharaja"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "medieval-pavilion",
+    "label": "Pavillon médiéval",
+    "category": "habitat",
+    "keywords": [
+      "pavillon",
+      "tente",
+      "tournoi",
+      "médiéval",
+      "chapiteau"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "lighthouse",
+    "label": "Phare",
+    "category": "habitat",
+    "keywords": [
+      "phare",
+      "côte",
+      "mer",
+      "lumière",
+      "gardien"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "louvre-pyramid",
+    "label": "Pyramide du Louvre",
+    "category": "habitat",
+    "keywords": [
+      "louvre",
+      "pyramide",
+      "paris",
+      "musée"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "mayan-pyramid",
+    "label": "Pyramide maya",
+    "category": "habitat",
+    "keywords": [
+      "pyramide",
+      "maya",
+      "aztèque",
+      "temple",
+      "jungle"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "egyptian-pyramids",
+    "label": "Pyramides d'Égypte",
+    "category": "habitat",
+    "keywords": [
+      "pyramide",
+      "égypte",
+      "désert",
+      "pharaon"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "refinery",
+    "label": "Raffinerie",
+    "category": "habitat",
+    "keywords": [
+      "raffinerie",
+      "industrie",
+      "pétrole",
+      "usine"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "ancient-ruins",
+    "label": "Ruines antiques",
+    "category": "habitat",
+    "keywords": [
+      "ruines",
+      "antique",
+      "vestiges",
+      "colonnes",
+      "archéologie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "saloon",
+    "label": "Saloon",
+    "category": "habitat",
+    "keywords": [
+      "saloon",
+      "far west",
+      "western",
+      "bar"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "shinto-shrine",
+    "label": "Sanctuaire shinto",
+    "category": "habitat",
+    "keywords": [
+      "sanctuaire",
+      "torii",
+      "shinto",
+      "japon",
+      "temple"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "greenhouse",
+    "label": "Serre",
+    "category": "habitat",
+    "keywords": [
+      "serre",
+      "jardin",
+      "plantes",
+      "verrière"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "tavern-sign",
+    "label": "Taverne",
+    "category": "habitat",
+    "keywords": [
+      "taverne",
+      "auberge",
+      "bar",
+      "pub",
+      "enseigne"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "byzantin-temple",
+    "label": "Temple byzantin",
+    "category": "habitat",
+    "keywords": [
+      "temple",
+      "byzantin",
+      "église",
+      "coupole",
+      "orthodoxe"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "egyptian-temple",
+    "label": "Temple égyptien",
+    "category": "habitat",
+    "keywords": [
+      "temple",
+      "égypte",
+      "pharaon",
+      "antique"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "greek-temple",
+    "label": "Temple grec",
+    "category": "habitat",
+    "keywords": [
+      "temple",
+      "grec",
+      "antique",
+      "colonnes",
+      "acropole"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "camping-tent",
+    "label": "Tente",
+    "category": "habitat",
+    "keywords": [
+      "tente",
+      "camping",
+      "bivouac",
+      "campement"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "tipi",
+    "label": "Tipi",
+    "category": "habitat",
+    "keywords": [
+      "tipi",
+      "tente",
+      "amérindien",
+      "campement"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "tower-flag",
+    "label": "Tour à drapeau",
+    "category": "habitat",
+    "keywords": [
+      "tour",
+      "drapeau",
+      "château",
+      "donjon"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "white-tower",
+    "label": "Tour crénelée",
+    "category": "habitat",
+    "keywords": [
+      "tour",
+      "crénelée",
+      "donjon",
+      "château",
+      "rempart"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "guarded-tower",
+    "label": "Tour de garde",
+    "category": "habitat",
+    "keywords": [
+      "tour",
+      "garde",
+      "défense",
+      "fort"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "watchtower",
+    "label": "Tour de guet",
+    "category": "habitat",
+    "keywords": [
+      "tour",
+      "guet",
+      "vigie",
+      "sentinelle"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "clock-tower",
+    "label": "Tour de l'horloge",
+    "category": "habitat",
+    "keywords": [
+      "horloge",
+      "tour",
+      "beffroi",
+      "big ben"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "evil-tower",
+    "label": "Tour de l'Œil",
+    "category": "habitat",
+    "keywords": [
+      "tour",
+      "œil",
+      "maléfique",
+      "sauron",
+      "ténèbres"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "stone-tower",
+    "label": "Tour de pierre",
+    "category": "habitat",
+    "keywords": [
+      "tour",
+      "pierre",
+      "donjon",
+      "tourelle"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "pisa-tower",
+    "label": "Tour de Pise",
+    "category": "habitat",
+    "keywords": [
+      "tour",
+      "pise",
+      "penchée",
+      "italie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "tv-tower",
+    "label": "Tour de télévision",
+    "category": "habitat",
+    "keywords": [
+      "tour",
+      "télévision",
+      "antenne",
+      "émetteur"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "heart-tower",
+    "label": "Tour du cœur",
+    "category": "habitat",
+    "keywords": [
+      "tour",
+      "cœur",
+      "amour",
+      "château",
+      "donjon"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "tower-fall",
+    "label": "Tour effondrée",
+    "category": "habitat",
+    "keywords": [
+      "tour",
+      "effondrement",
+      "ruine",
+      "chute",
+      "catastrophe"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "space-needle",
+    "label": "Tour panoramique",
+    "category": "habitat",
+    "keywords": [
+      "tour",
+      "space needle",
+      "seattle",
+      "panorama"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "factory",
+    "label": "Usine",
+    "category": "habitat",
+    "keywords": [
+      "usine",
+      "industrie",
+      "cheminée",
+      "fabrique"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "village",
+    "label": "Village",
+    "category": "habitat",
+    "keywords": [
+      "village",
+      "hameau",
+      "maisons",
+      "bourg"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "huts-village",
+    "label": "Village de huttes",
+    "category": "habitat",
+    "keywords": [
+      "village",
+      "huttes",
+      "tribu",
+      "cases"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "medieval-village-01",
+    "label": "Village médiéval",
+    "category": "habitat",
+    "keywords": [
+      "village",
+      "médiéval",
+      "hameau",
+      "bourg"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "modern-city",
+    "label": "Ville moderne",
+    "category": "habitat",
+    "keywords": [
+      "ville",
+      "gratte-ciel",
+      "cité",
+      "métropole",
+      "building"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "airplane-departure",
+    "label": "Aéroport",
+    "category": "lieux",
+    "keywords": [
+      "aéroport",
+      "décollage",
+      "départ",
+      "vol",
+      "piste"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "kid-slide",
+    "label": "Aire de jeux",
+    "category": "lieux",
+    "keywords": [
+      "aire de jeux",
+      "toboggan",
+      "parc",
+      "enfance",
+      "récréation"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "radio-tower",
+    "label": "Antenne radio",
+    "category": "lieux",
+    "keywords": [
+      "antenne",
+      "émetteur",
+      "radio",
+      "pylône"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "aquarium",
+    "label": "Aquarium",
+    "category": "lieux",
+    "keywords": [
+      "aquarium",
+      "poissons",
+      "bassin",
+      "océanographique"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "aqueduct",
+    "label": "Aqueduc",
+    "category": "lieux",
+    "keywords": [
+      "aqueduc",
+      "romain",
+      "arches",
+      "pont"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "arc-triomphe",
+    "label": "Arc de triomphe",
+    "category": "lieux",
+    "keywords": [
+      "arc de triomphe",
+      "paris",
+      "monument",
+      "arche"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "triple-gate",
+    "label": "Arcades",
+    "category": "lieux",
+    "keywords": [
+      "arcades",
+      "arches",
+      "halle",
+      "portique",
+      "marché"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "bus-stop",
+    "label": "Arrêt de bus",
+    "category": "lieux",
+    "keywords": [
+      "arrêt",
+      "bus",
+      "attente",
+      "station"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "crystal-shrine",
+    "label": "Autel de cristal",
+    "category": "lieux",
+    "keywords": [
+      "autel",
+      "cristal",
+      "sanctuaire",
+      "magie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "tree-swing",
+    "label": "Balançoire",
+    "category": "lieux",
+    "keywords": [
+      "balançoire",
+      "arbre",
+      "enfance",
+      "jardin"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "park-bench",
+    "label": "Banc public",
+    "category": "lieux",
+    "keywords": [
+      "banc",
+      "parc",
+      "square",
+      "jardin public"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "round-straw-bale",
+    "label": "Botte de foin",
+    "category": "lieux",
+    "keywords": [
+      "foin",
+      "paille",
+      "ferme",
+      "campagne",
+      "moisson"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "bowling-alley",
+    "label": "Bowling",
+    "category": "lieux",
+    "keywords": [
+      "bowling",
+      "quilles",
+      "loisir",
+      "piste"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "pyre",
+    "label": "Bûcher",
+    "category": "lieux",
+    "keywords": [
+      "bûcher",
+      "feu",
+      "flammes",
+      "sacrifice"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "crossroad",
+    "label": "Carrefour",
+    "category": "lieux",
+    "keywords": [
+      "carrefour",
+      "croisement",
+      "intersection",
+      "choix",
+      "chemin"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "cellar-barrels",
+    "label": "Cave à vin",
+    "category": "lieux",
+    "keywords": [
+      "cave",
+      "tonneaux",
+      "cellier",
+      "vin",
+      "sous-sol"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "field",
+    "label": "Champ",
+    "category": "lieux",
+    "keywords": [
+      "champ",
+      "prairie",
+      "campagne",
+      "culture",
+      "pré"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "interstellar-path",
+    "label": "Chemin céleste",
+    "category": "lieux",
+    "keywords": [
+      "chemin",
+      "étoiles",
+      "ciel",
+      "route",
+      "infini"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "stone-path",
+    "label": "Chemin de pierres",
+    "category": "lieux",
+    "keywords": [
+      "chemin",
+      "pierres",
+      "dalles",
+      "sentier",
+      "gué"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "journey",
+    "label": "Chemin sinueux",
+    "category": "lieux",
+    "keywords": [
+      "chemin",
+      "voyage",
+      "voyageur",
+      "route",
+      "sinueux"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "graveyard",
+    "label": "Cimetière",
+    "category": "lieux",
+    "keywords": [
+      "cimetière",
+      "tombes",
+      "croix",
+      "nécropole"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "wooden-fence",
+    "label": "Clôture en bois",
+    "category": "lieux",
+    "keywords": [
+      "clôture",
+      "barrière",
+      "jardin",
+      "enclos"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "coliseum",
+    "label": "Colisée",
+    "category": "lieux",
+    "keywords": [
+      "colisée",
+      "rome",
+      "amphithéâtre",
+      "arène",
+      "antique"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "tennis-court",
+    "label": "Court de tennis",
+    "category": "lieux",
+    "keywords": [
+      "court",
+      "tennis",
+      "terrain",
+      "sport"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "hole-ladder",
+    "label": "Descente souterraine",
+    "category": "lieux",
+    "keywords": [
+      "échelle",
+      "trou",
+      "descente",
+      "égout",
+      "souterrain"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "dolmen",
+    "label": "Dolmen",
+    "category": "lieux",
+    "keywords": [
+      "dolmen",
+      "mégalithe",
+      "pierre",
+      "préhistoire",
+      "bretagne"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "ladder",
+    "label": "Échelle",
+    "category": "lieux",
+    "keywords": [
+      "échelle",
+      "monter",
+      "grimper",
+      "barreaux"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "doorway",
+    "label": "Embrasure",
+    "category": "lieux",
+    "keywords": [
+      "embrasure",
+      "porte ouverte",
+      "seuil",
+      "passage",
+      "lumière"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "crypt-entrance",
+    "label": "Entrée de crypte",
+    "category": "lieux",
+    "keywords": [
+      "crypte",
+      "caveau",
+      "tombeau",
+      "souterrain",
+      "mausolée"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "ranch-gate",
+    "label": "Entrée de ranch",
+    "category": "lieux",
+    "keywords": [
+      "ranch",
+      "barrière",
+      "ferme",
+      "far west"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "wind-turbine",
+    "label": "Éolienne",
+    "category": "lieux",
+    "keywords": [
+      "éolienne",
+      "vent",
+      "énergie",
+      "pale"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "ship-wreck",
+    "label": "Épave",
+    "category": "lieux",
+    "keywords": [
+      "épave",
+      "naufrage",
+      "fond marin",
+      "bateau coulé"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "sword-in-stone",
+    "label": "Épée dans le rocher",
+    "category": "lieux",
+    "keywords": [
+      "épée",
+      "rocher",
+      "excalibur",
+      "légende",
+      "arthur"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "scarecrow",
+    "label": "Épouvantail",
+    "category": "lieux",
+    "keywords": [
+      "épouvantail",
+      "champ",
+      "ferme",
+      "corbeau"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "stairs",
+    "label": "Escalier",
+    "category": "lieux",
+    "keywords": [
+      "escalier",
+      "marches",
+      "monter",
+      "descendre"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "campfire",
+    "label": "Feu de camp",
+    "category": "lieux",
+    "keywords": [
+      "feu de camp",
+      "bivouac",
+      "camping",
+      "veillée",
+      "flamme"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "traffic-lights-red",
+    "label": "Feu tricolore",
+    "category": "lieux",
+    "keywords": [
+      "feu rouge",
+      "feu tricolore",
+      "carrefour",
+      "circulation"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "fire-shrine",
+    "label": "Flamme sacrée",
+    "category": "lieux",
+    "keywords": [
+      "flamme",
+      "sacrée",
+      "autel",
+      "feu",
+      "temple"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "fountain",
+    "label": "Fontaine",
+    "category": "lieux",
+    "keywords": [
+      "fontaine",
+      "place",
+      "eau",
+      "bassin",
+      "jet d'eau"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "bamboo-fountain",
+    "label": "Fontaine japonaise",
+    "category": "lieux",
+    "keywords": [
+      "fontaine",
+      "bambou",
+      "jardin zen",
+      "japon",
+      "eau"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "gibbet",
+    "label": "Gibet",
+    "category": "lieux",
+    "keywords": [
+      "gibet",
+      "potence",
+      "pendaison",
+      "sinistre"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "portculis",
+    "label": "Herse",
+    "category": "lieux",
+    "keywords": [
+      "herse",
+      "château",
+      "grille",
+      "entrée"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "floating-platforms",
+    "label": "Île flottante",
+    "category": "lieux",
+    "keywords": [
+      "île flottante",
+      "ciel",
+      "lévitation",
+      "îles volantes",
+      "laputa"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "maze",
+    "label": "Labyrinthe",
+    "category": "lieux",
+    "keywords": [
+      "labyrinthe",
+      "dédale",
+      "jardin",
+      "perdu"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "carousel",
+    "label": "Manège",
+    "category": "lieux",
+    "keywords": [
+      "manège",
+      "carrousel",
+      "fête foraine",
+      "chevaux de bois"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "martyr-memorial",
+    "label": "Mémorial",
+    "category": "lieux",
+    "keywords": [
+      "mémorial",
+      "monument",
+      "commémoration",
+      "flèche"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "menhir",
+    "label": "Menhir",
+    "category": "lieux",
+    "keywords": [
+      "menhir",
+      "mégalithe",
+      "pierre levée",
+      "bretagne"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "mining",
+    "label": "Mine",
+    "category": "lieux",
+    "keywords": [
+      "mine",
+      "galerie",
+      "pioche",
+      "mineur",
+      "charbon"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "gold-mine",
+    "label": "Mine d'or",
+    "category": "lieux",
+    "keywords": [
+      "mine",
+      "or",
+      "galerie",
+      "chercheur d'or"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "moai",
+    "label": "Moaï",
+    "category": "lieux",
+    "keywords": [
+      "moaï",
+      "île de pâques",
+      "statue",
+      "tête",
+      "géant"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "brick-wall",
+    "label": "Mur de briques",
+    "category": "lieux",
+    "keywords": [
+      "mur",
+      "brique",
+      "muraille",
+      "obstacle"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "stone-wall",
+    "label": "Mur de pierre",
+    "category": "lieux",
+    "keywords": [
+      "mur",
+      "pierre",
+      "muret",
+      "enceinte"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "defensive-wall",
+    "label": "Muraille",
+    "category": "lieux",
+    "keywords": [
+      "muraille",
+      "rempart",
+      "fortification",
+      "mur"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "sinking-ship",
+    "label": "Naufrage",
+    "category": "lieux",
+    "keywords": [
+      "naufrage",
+      "navire",
+      "couler",
+      "tempête"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "obelisk",
+    "label": "Obélisque",
+    "category": "lieux",
+    "keywords": [
+      "obélisque",
+      "monument",
+      "égypte",
+      "colonne"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "palisade",
+    "label": "Palissade",
+    "category": "lieux",
+    "keywords": [
+      "palissade",
+      "clôture",
+      "bois",
+      "fort",
+      "pieux"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "wooden-sign",
+    "label": "Panneau en bois",
+    "category": "lieux",
+    "keywords": [
+      "panneau",
+      "pancarte",
+      "bois",
+      "indication"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "direction-sign",
+    "label": "Panneau indicateur",
+    "category": "lieux",
+    "keywords": [
+      "panneau",
+      "direction",
+      "carrefour",
+      "chemin",
+      "poteau"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "stop-sign",
+    "label": "Panneau stop",
+    "category": "lieux",
+    "keywords": [
+      "stop",
+      "panneau",
+      "arrêt",
+      "route"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "level-crossing",
+    "label": "Passage à niveau",
+    "category": "lieux",
+    "keywords": [
+      "passage à niveau",
+      "train",
+      "barrière",
+      "rails"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "secret-door",
+    "label": "Passage secret",
+    "category": "lieux",
+    "keywords": [
+      "passage secret",
+      "bibliothèque",
+      "porte dérobée",
+      "caché"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "temple-gate",
+    "label": "Petit sanctuaire",
+    "category": "lieux",
+    "keywords": [
+      "sanctuaire",
+      "temple",
+      "autel",
+      "chapelle",
+      "oratoire"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "tombstone",
+    "label": "Pierre tombale",
+    "category": "lieux",
+    "keywords": [
+      "tombe",
+      "pierre tombale",
+      "stèle",
+      "cimetière"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "pool-dive",
+    "label": "Piscine",
+    "category": "lieux",
+    "keywords": [
+      "piscine",
+      "plongeon",
+      "natation",
+      "bassin"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "beach-bucket",
+    "label": "Plage",
+    "category": "lieux",
+    "keywords": [
+      "plage",
+      "seau",
+      "pelle",
+      "sable",
+      "vacances"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "oil-rig",
+    "label": "Plateforme pétrolière",
+    "category": "lieux",
+    "keywords": [
+      "plateforme",
+      "pétrole",
+      "mer",
+      "offshore",
+      "forage"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "bridge",
+    "label": "Pont",
+    "category": "lieux",
+    "keywords": [
+      "pont",
+      "traversée",
+      "rivière",
+      "passerelle"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "cable-stayed-bridge",
+    "label": "Pont à haubans",
+    "category": "lieux",
+    "keywords": [
+      "pont",
+      "haubans",
+      "moderne",
+      "viaduc"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "rope-bridge",
+    "label": "Pont de corde",
+    "category": "lieux",
+    "keywords": [
+      "pont suspendu",
+      "corde",
+      "ravin",
+      "jungle"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "stone-bridge",
+    "label": "Pont de pierre",
+    "category": "lieux",
+    "keywords": [
+      "pont",
+      "pierre",
+      "arches",
+      "rivière"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "rialto-bridge",
+    "label": "Pont du Rialto",
+    "category": "lieux",
+    "keywords": [
+      "pont",
+      "venise",
+      "rialto",
+      "canal"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "arch-bridge",
+    "label": "Pont en arc",
+    "category": "lieux",
+    "keywords": [
+      "pont",
+      "arche",
+      "rivière",
+      "traversée"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "japanese-bridge",
+    "label": "Pont japonais",
+    "category": "lieux",
+    "keywords": [
+      "pont",
+      "japon",
+      "jardin",
+      "rouge",
+      "arche"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "suspension-bridge",
+    "label": "Pont suspendu",
+    "category": "lieux",
+    "keywords": [
+      "pont suspendu",
+      "golden gate",
+      "câbles",
+      "baie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "drawbridge",
+    "label": "Pont-levis",
+    "category": "lieux",
+    "keywords": [
+      "pont-levis",
+      "château",
+      "douves",
+      "entrée"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "wooden-pier",
+    "label": "Ponton",
+    "category": "lieux",
+    "keywords": [
+      "ponton",
+      "jetée",
+      "lac",
+      "embarcadère",
+      "quai"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "harbor-dock",
+    "label": "Port",
+    "category": "lieux",
+    "keywords": [
+      "port",
+      "quai",
+      "docks",
+      "bateaux",
+      "marina"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "gate",
+    "label": "Portail",
+    "category": "lieux",
+    "keywords": [
+      "portail",
+      "grille",
+      "entrée",
+      "barrière"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "portal",
+    "label": "Portail dimensionnel",
+    "category": "lieux",
+    "keywords": [
+      "portail",
+      "dimension",
+      "passage",
+      "autre monde"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "magic-portal",
+    "label": "Portail magique",
+    "category": "lieux",
+    "keywords": [
+      "portail",
+      "magique",
+      "vortex",
+      "téléportation",
+      "passage"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "open-gate",
+    "label": "Portail ouvert",
+    "category": "lieux",
+    "keywords": [
+      "portail",
+      "ouvert",
+      "grille",
+      "entrée",
+      "accueil"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "door",
+    "label": "Porte",
+    "category": "lieux",
+    "keywords": [
+      "porte",
+      "entrée",
+      "seuil",
+      "passage"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "tree-door",
+    "label": "Porte dans l'arbre",
+    "category": "lieux",
+    "keywords": [
+      "arbre",
+      "porte",
+      "passage",
+      "féerique",
+      "forêt"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "dungeon-gate",
+    "label": "Porte de donjon",
+    "category": "lieux",
+    "keywords": [
+      "donjon",
+      "cachot",
+      "grille",
+      "prison"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "star-gate",
+    "label": "Porte des étoiles",
+    "category": "lieux",
+    "keywords": [
+      "porte des étoiles",
+      "portail",
+      "espace",
+      "anneau"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "heaven-gate",
+    "label": "Porte du paradis",
+    "category": "lieux",
+    "keywords": [
+      "paradis",
+      "porte",
+      "ciel",
+      "nuages",
+      "au-delà"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "wooden-door",
+    "label": "Porte en bois",
+    "category": "lieux",
+    "keywords": [
+      "porte",
+      "bois",
+      "chaumière",
+      "entrée"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "medieval-gate",
+    "label": "Porte fortifiée",
+    "category": "lieux",
+    "keywords": [
+      "porte",
+      "fortifiée",
+      "château",
+      "herse",
+      "remparts"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "magic-gate",
+    "label": "Porte magique",
+    "category": "lieux",
+    "keywords": [
+      "porte magique",
+      "arche",
+      "enchantée",
+      "passage"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "india-gate",
+    "label": "Porte monumentale",
+    "category": "lieux",
+    "keywords": [
+      "porte",
+      "monument",
+      "arche",
+      "inde"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "arabic-door",
+    "label": "Porte orientale",
+    "category": "lieux",
+    "keywords": [
+      "porte",
+      "orientale",
+      "arabe",
+      "palais",
+      "arche"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "hobbit-door",
+    "label": "Porte ronde",
+    "category": "lieux",
+    "keywords": [
+      "porte ronde",
+      "hobbit",
+      "colline",
+      "terrier"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "locked-door",
+    "label": "Porte verrouillée",
+    "category": "lieux",
+    "keywords": [
+      "porte",
+      "verrouillée",
+      "fermée",
+      "serrure",
+      "interdit"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "window-bars",
+    "label": "Prison",
+    "category": "lieux",
+    "keywords": [
+      "prison",
+      "barreaux",
+      "cellule",
+      "enfermé"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "well",
+    "label": "Puits",
+    "category": "lieux",
+    "keywords": [
+      "puits",
+      "eau",
+      "seau",
+      "village"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "oil-pump",
+    "label": "Puits de pétrole",
+    "category": "lieux",
+    "keywords": [
+      "pétrole",
+      "derrick",
+      "pompe",
+      "forage"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "radar-dish",
+    "label": "Radar",
+    "category": "lieux",
+    "keywords": [
+      "radar",
+      "antenne",
+      "parabole",
+      "station"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "fork-knife-spoon",
+    "label": "Restaurant",
+    "category": "lieux",
+    "keywords": [
+      "restaurant",
+      "repas",
+      "cantine",
+      "manger",
+      "dîner"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "street-light",
+    "label": "Réverbère",
+    "category": "lieux",
+    "keywords": [
+      "réverbère",
+      "lampadaire",
+      "rue",
+      "nuit"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "boxing-ring",
+    "label": "Ring de boxe",
+    "category": "lieux",
+    "keywords": [
+      "ring",
+      "boxe",
+      "combat",
+      "match"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "road",
+    "label": "Route",
+    "category": "lieux",
+    "keywords": [
+      "route",
+      "chemin",
+      "voie",
+      "asphalte"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "mountain-road",
+    "label": "Route de montagne",
+    "category": "lieux",
+    "keywords": [
+      "route",
+      "montagne",
+      "lacets",
+      "col"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "horizon-road",
+    "label": "Route vers l'horizon",
+    "category": "lieux",
+    "keywords": [
+      "route",
+      "horizon",
+      "voyage",
+      "lointain",
+      "chemin"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "theater-curtains",
+    "label": "Scène de spectacle",
+    "category": "lieux",
+    "keywords": [
+      "rideau",
+      "scène",
+      "théâtre",
+      "spectacle",
+      "cabaret"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "trail",
+    "label": "Sentier",
+    "category": "lieux",
+    "keywords": [
+      "sentier",
+      "piste",
+      "randonnée",
+      "chemin"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "egyptian-sphinx",
+    "label": "Sphinx",
+    "category": "lieux",
+    "keywords": [
+      "sphinx",
+      "égypte",
+      "gizeh",
+      "statue",
+      "énigme"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "gas-pump",
+    "label": "Station-service",
+    "category": "lieux",
+    "keywords": [
+      "station-service",
+      "essence",
+      "pompe",
+      "carburant"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "discobolus",
+    "label": "Statue antique",
+    "category": "lieux",
+    "keywords": [
+      "statue",
+      "discobole",
+      "grec",
+      "sculpture",
+      "musée"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "colombian-statue",
+    "label": "Statue précolombienne",
+    "category": "lieux",
+    "keywords": [
+      "statue",
+      "précolombien",
+      "idole",
+      "sculpture"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "shopping-cart",
+    "label": "Supermarché",
+    "category": "lieux",
+    "keywords": [
+      "supermarché",
+      "courses",
+      "caddie",
+      "magasin"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "red-carpet",
+    "label": "Tapis rouge",
+    "category": "lieux",
+    "keywords": [
+      "tapis rouge",
+      "cérémonie",
+      "célébrité",
+      "gala"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "teleport",
+    "label": "Téléporteur",
+    "category": "lieux",
+    "keywords": [
+      "téléporteur",
+      "téléportation",
+      "science-fiction",
+      "faisceau"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "soccer-field",
+    "label": "Terrain de foot",
+    "category": "lieux",
+    "keywords": [
+      "terrain",
+      "football",
+      "stade",
+      "pelouse"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "theater",
+    "label": "Théâtre",
+    "category": "lieux",
+    "keywords": [
+      "théâtre",
+      "scène",
+      "spectacle",
+      "salle"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "pirate-grave",
+    "label": "Tombe de pirate",
+    "category": "lieux",
+    "keywords": [
+      "tombe",
+      "pirate",
+      "tête de mort",
+      "cimetière",
+      "trésor"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "grave-flowers",
+    "label": "Tombe fleurie",
+    "category": "lieux",
+    "keywords": [
+      "tombe",
+      "fleurs",
+      "deuil",
+      "sépulture"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "totem",
+    "label": "Totem",
+    "category": "lieux",
+    "keywords": [
+      "totem",
+      "amérindien",
+      "mât",
+      "sculpture"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "control-tower",
+    "label": "Tour de contrôle",
+    "category": "lieux",
+    "keywords": [
+      "tour de contrôle",
+      "aéroport",
+      "aviation"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "turnstile",
+    "label": "Tourniquet",
+    "category": "lieux",
+    "keywords": [
+      "tourniquet",
+      "portique",
+      "entrée",
+      "métro"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "tower-bridge",
+    "label": "Tower Bridge",
+    "category": "lieux",
+    "keywords": [
+      "pont",
+      "londres",
+      "tours",
+      "tamise"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "floor-hatch",
+    "label": "Trappe",
+    "category": "lieux",
+    "keywords": [
+      "trappe",
+      "sol",
+      "cave",
+      "passage secret",
+      "dessous"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "hole",
+    "label": "Trou",
+    "category": "lieux",
+    "keywords": [
+      "trou",
+      "gouffre",
+      "abîme",
+      "puits",
+      "chute"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "tumulus",
+    "label": "Tumulus",
+    "category": "lieux",
+    "keywords": [
+      "tumulus",
+      "tertre",
+      "tombeau",
+      "colline",
+      "sépulture"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "warp-pipe",
+    "label": "Tuyau magique",
+    "category": "lieux",
+    "keywords": [
+      "tuyau",
+      "passage",
+      "mario",
+      "égout",
+      "téléportation"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "rail-road",
+    "label": "Voie ferrée",
+    "category": "lieux",
+    "keywords": [
+      "voie ferrée",
+      "rails",
+      "chemin de fer",
+      "train"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "ambulance",
+    "label": "Ambulance",
+    "category": "vehicules",
+    "keywords": [
+      "ambulance",
+      "urgence",
+      "secours",
+      "hôpital"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "elevator",
+    "label": "Ascenseur",
+    "category": "vehicules",
+    "keywords": [
+      "ascenseur",
+      "monter",
+      "étage",
+      "cabine"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "airplane",
+    "label": "Avion",
+    "category": "vehicules",
+    "keywords": [
+      "avion",
+      "vol",
+      "ciel",
+      "aviation"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "jet-fighter",
+    "label": "Avion de chasse",
+    "category": "vehicules",
+    "keywords": [
+      "avion de chasse",
+      "chasseur",
+      "jet",
+      "armée"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "commercial-airplane",
+    "label": "Avion de ligne",
+    "category": "vehicules",
+    "keywords": [
+      "avion de ligne",
+      "vol",
+      "aéroport",
+      "voyage"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "paper-plane",
+    "label": "Avion en papier",
+    "category": "vehicules",
+    "keywords": [
+      "avion en papier",
+      "origami",
+      "enfance"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "magic-broom",
+    "label": "Balai volant",
+    "category": "vehicules",
+    "keywords": [
+      "balai",
+      "sorcière",
+      "vol",
+      "magie"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "boat-fishing",
+    "label": "Barque",
+    "category": "vehicules",
+    "keywords": [
+      "barque",
+      "pêche",
+      "lac",
+      "pêcheur",
+      "rame"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "paddle-steamer",
+    "label": "Bateau à aubes",
+    "category": "vehicules",
+    "keywords": [
+      "bateau à aubes",
+      "vapeur",
+      "mississippi",
+      "fleuve"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "fishing-boat",
+    "label": "Bateau de pêche",
+    "category": "vehicules",
+    "keywords": [
+      "bateau",
+      "pêche",
+      "chalutier",
+      "pêcheur"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "paper-boat",
+    "label": "Bateau en papier",
+    "category": "vehicules",
+    "keywords": [
+      "bateau en papier",
+      "origami",
+      "enfance"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "mini-submarine",
+    "label": "Bathyscaphe",
+    "category": "vehicules",
+    "keywords": [
+      "bathyscaphe",
+      "sous-marin",
+      "abysses",
+      "profondeur"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "biplane",
+    "label": "Biplan",
+    "category": "vehicules",
+    "keywords": [
+      "biplan",
+      "avion ancien",
+      "aviateur",
+      "voltige"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "wheelbarrow",
+    "label": "Brouette",
+    "category": "vehicules",
+    "keywords": [
+      "brouette",
+      "jardin",
+      "chantier"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "bulldozer",
+    "label": "Bulldozer",
+    "category": "vehicules",
+    "keywords": [
+      "bulldozer",
+      "chantier",
+      "engin",
+      "travaux"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "bus",
+    "label": "Bus",
+    "category": "vehicules",
+    "keywords": [
+      "bus",
+      "autobus",
+      "transport en commun",
+      "car"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "truck",
+    "label": "Camion",
+    "category": "vehicules",
+    "keywords": [
+      "camion",
+      "poids lourd",
+      "livraison",
+      "routier"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "mine-truck",
+    "label": "Camion-benne",
+    "category": "vehicules",
+    "keywords": [
+      "camion-benne",
+      "chantier",
+      "benne",
+      "camion"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "canoe",
+    "label": "Canoë",
+    "category": "vehicules",
+    "keywords": [
+      "canoë",
+      "kayak",
+      "pagaie",
+      "rivière"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "apollo-capsule",
+    "label": "Capsule spatiale",
+    "category": "vehicules",
+    "keywords": [
+      "capsule",
+      "espace",
+      "apollo",
+      "astronaute"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "caravan",
+    "label": "Caravane",
+    "category": "vehicules",
+    "keywords": [
+      "caravane",
+      "camping",
+      "remorque",
+      "vacances"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "caravel",
+    "label": "Caravelle",
+    "category": "vehicules",
+    "keywords": [
+      "caravelle",
+      "voilier",
+      "explorateur",
+      "navire"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "cargo-ship",
+    "label": "Cargo",
+    "category": "vehicules",
+    "keywords": [
+      "cargo",
+      "porte-conteneurs",
+      "navire",
+      "port"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "cloaked-figure-on-horseback",
+    "label": "Cavalier mystérieux",
+    "category": "vehicules",
+    "keywords": [
+      "cavalier",
+      "cheval",
+      "cape",
+      "mystérieux"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "chariot",
+    "label": "Char antique",
+    "category": "vehicules",
+    "keywords": [
+      "char",
+      "antique",
+      "course",
+      "romain",
+      "chevaux"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "battle-tank",
+    "label": "Char d'assaut",
+    "category": "vehicules",
+    "keywords": [
+      "char",
+      "tank",
+      "armée",
+      "blindé"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "old-wagon",
+    "label": "Chariot de pionnier",
+    "category": "vehicules",
+    "keywords": [
+      "chariot",
+      "charrette",
+      "far west",
+      "pionnier",
+      "diligence"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "forklift",
+    "label": "Chariot élévateur",
+    "category": "vehicules",
+    "keywords": [
+      "chariot élévateur",
+      "entrepôt",
+      "manutention"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "trojan-horse",
+    "label": "Cheval de Troie",
+    "category": "vehicules",
+    "keywords": [
+      "cheval de troie",
+      "troie",
+      "ruse",
+      "bois"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "cavalry",
+    "label": "Cheval monté",
+    "category": "vehicules",
+    "keywords": [
+      "cheval",
+      "cavalier",
+      "monture",
+      "équitation",
+      "galop"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "mounted-knight",
+    "label": "Chevalier à cheval",
+    "category": "vehicules",
+    "keywords": [
+      "cheval",
+      "chevalier",
+      "cavalier",
+      "monture"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "iron-hulled-warship",
+    "label": "Cuirassé",
+    "category": "vehicules",
+    "keywords": [
+      "cuirassé",
+      "navire de guerre",
+      "marine",
+      "bateau"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "hang-glider",
+    "label": "Deltaplane",
+    "category": "vehicules",
+    "keywords": [
+      "deltaplane",
+      "vol libre",
+      "ciel",
+      "parapente"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "tow-truck",
+    "label": "Dépanneuse",
+    "category": "vehicules",
+    "keywords": [
+      "dépanneuse",
+      "remorquage",
+      "camion"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "zeppelin",
+    "label": "Dirigeable",
+    "category": "vehicules",
+    "keywords": [
+      "dirigeable",
+      "zeppelin",
+      "ciel",
+      "ballon"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "drakkar",
+    "label": "Drakkar",
+    "category": "vehicules",
+    "keywords": [
+      "drakkar",
+      "viking",
+      "navire",
+      "voile"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "delivery-drone",
+    "label": "Drone",
+    "category": "vehicules",
+    "keywords": [
+      "drone",
+      "livraison",
+      "vol",
+      "télécommandé"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "escalator",
+    "label": "Escalator",
+    "category": "vehicules",
+    "keywords": [
+      "escalator",
+      "escalier mécanique",
+      "centre commercial"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "food-truck",
+    "label": "Food truck",
+    "category": "vehicules",
+    "keywords": [
+      "food truck",
+      "camion",
+      "restauration",
+      "cuisine"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "rocket",
+    "label": "Fusée",
+    "category": "vehicules",
+    "keywords": [
+      "fusée",
+      "espace",
+      "décollage",
+      "lancement"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "galley",
+    "label": "Galère",
+    "category": "vehicules",
+    "keywords": [
+      "galère",
+      "rames",
+      "navire antique"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "galleon",
+    "label": "Galion",
+    "category": "vehicules",
+    "keywords": [
+      "galion",
+      "navire",
+      "pirate",
+      "trois-mâts"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "shooner-sailboat",
+    "label": "Goélette",
+    "category": "vehicules",
+    "keywords": [
+      "goélette",
+      "voilier",
+      "trois-mâts",
+      "navire"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "velocipede",
+    "label": "Grand-bi",
+    "category": "vehicules",
+    "keywords": [
+      "grand-bi",
+      "vélocipède",
+      "vélo ancien"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "helicopter",
+    "label": "Hélicoptère",
+    "category": "vehicules",
+    "keywords": [
+      "hélicoptère",
+      "vol",
+      "hélice",
+      "ciel"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "speed-boat",
+    "label": "Hors-bord",
+    "category": "vehicules",
+    "keywords": [
+      "hors-bord",
+      "vedette",
+      "bateau à moteur"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "jeep",
+    "label": "Jeep",
+    "category": "vehicules",
+    "keywords": [
+      "jeep",
+      "tout-terrain",
+      "4x4",
+      "safari"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "small-fishing-sailboat",
+    "label": "Jonque",
+    "category": "vehicules",
+    "keywords": [
+      "jonque",
+      "bateau",
+      "asie",
+      "chine",
+      "voilier"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "steam-locomotive",
+    "label": "Locomotive à vapeur",
+    "category": "vehicules",
+    "keywords": [
+      "locomotive",
+      "train",
+      "vapeur",
+      "rails"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "subway",
+    "label": "Métro",
+    "category": "vehicules",
+    "keywords": [
+      "métro",
+      "souterrain",
+      "rame",
+      "station"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "lunar-module",
+    "label": "Module lunaire",
+    "category": "vehicules",
+    "keywords": [
+      "module lunaire",
+      "lune",
+      "alunissage",
+      "espace"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "unicycle",
+    "label": "Monocycle",
+    "category": "vehicules",
+    "keywords": [
+      "monocycle",
+      "cirque",
+      "équilibre"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "air-balloon",
+    "label": "Montgolfière",
+    "category": "vehicules",
+    "keywords": [
+      "montgolfière",
+      "ballon",
+      "ciel",
+      "voyage"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "aero-bike",
+    "label": "Moto",
+    "category": "vehicules",
+    "keywords": [
+      "moto",
+      "motocyclette",
+      "motard",
+      "deux-roues"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "space-shuttle",
+    "label": "Navette spatiale",
+    "category": "vehicules",
+    "keywords": [
+      "navette spatiale",
+      "espace",
+      "décollage"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "ufo",
+    "label": "OVNI",
+    "category": "vehicules",
+    "keywords": [
+      "ovni",
+      "soucoupe volante",
+      "extraterrestre",
+      "enlèvement"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "parachute",
+    "label": "Parachute",
+    "category": "vehicules",
+    "keywords": [
+      "parachute",
+      "saut",
+      "chute",
+      "ciel"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "ice-skate",
+    "label": "Patins à glace",
+    "category": "vehicules",
+    "keywords": [
+      "patin à glace",
+      "patinoire",
+      "glisser",
+      "hiver"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "roller-skate",
+    "label": "Patins à roulettes",
+    "category": "vehicules",
+    "keywords": [
+      "patins à roulettes",
+      "roller",
+      "patiner"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "wood-canoe",
+    "label": "Pirogue",
+    "category": "vehicules",
+    "keywords": [
+      "pirogue",
+      "barque",
+      "rivière",
+      "tribu"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "surf-board",
+    "label": "Planche de surf",
+    "category": "vehicules",
+    "keywords": [
+      "surf",
+      "planche",
+      "vague",
+      "plage"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "glider",
+    "label": "Planeur",
+    "category": "vehicules",
+    "keywords": [
+      "planeur",
+      "vol à voile",
+      "ciel"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "raft",
+    "label": "Radeau",
+    "category": "vehicules",
+    "keywords": [
+      "radeau",
+      "naufragé",
+      "rivière",
+      "bois"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "steamroller",
+    "label": "Rouleau compresseur",
+    "category": "vehicules",
+    "keywords": [
+      "rouleau compresseur",
+      "chantier",
+      "route"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "mars-curiosity",
+    "label": "Rover martien",
+    "category": "vehicules",
+    "keywords": [
+      "rover",
+      "mars",
+      "robot",
+      "exploration"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "satellite",
+    "label": "Satellite",
+    "category": "vehicules",
+    "keywords": [
+      "satellite",
+      "espace",
+      "orbite",
+      "antenne"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "scooter",
+    "label": "Scooter",
+    "category": "vehicules",
+    "keywords": [
+      "scooter",
+      "vespa",
+      "deux-roues",
+      "mobylette"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "skateboard",
+    "label": "Skateboard",
+    "category": "vehicules",
+    "keywords": [
+      "skateboard",
+      "planche à roulettes",
+      "skate"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "skis",
+    "label": "Skis",
+    "category": "vehicules",
+    "keywords": [
+      "ski",
+      "piste",
+      "neige",
+      "station de ski"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "snowboard",
+    "label": "Snowboard",
+    "category": "vehicules",
+    "keywords": [
+      "snowboard",
+      "planche",
+      "neige",
+      "montagne"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "submarine",
+    "label": "Sous-marin",
+    "category": "vehicules",
+    "keywords": [
+      "sous-marin",
+      "océan",
+      "profondeur",
+      "périscope"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "ropeway",
+    "label": "Téléphérique",
+    "category": "vehicules",
+    "keywords": [
+      "téléphérique",
+      "télécabine",
+      "montagne",
+      "câble"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "farm-tractor",
+    "label": "Tracteur",
+    "category": "vehicules",
+    "keywords": [
+      "tracteur",
+      "ferme",
+      "champ",
+      "agricole"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "subway-train",
+    "label": "Train",
+    "category": "vehicules",
+    "keywords": [
+      "train",
+      "rame",
+      "tgv",
+      "wagon"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "trireme",
+    "label": "Trirème",
+    "category": "vehicules",
+    "keywords": [
+      "trirème",
+      "navire antique",
+      "rames",
+      "grec"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "kick-scooter",
+    "label": "Trottinette",
+    "category": "vehicules",
+    "keywords": [
+      "trottinette",
+      "patinette",
+      "rue"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "flying-fox",
+    "label": "Tyrolienne",
+    "category": "vehicules",
+    "keywords": [
+      "tyrolienne",
+      "câble",
+      "glisser",
+      "accrobranche"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "spaceship",
+    "label": "Vaisseau spatial",
+    "category": "vehicules",
+    "keywords": [
+      "vaisseau",
+      "spatial",
+      "science-fiction",
+      "espace"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "surfer-van",
+    "label": "Van",
+    "category": "vehicules",
+    "keywords": [
+      "van",
+      "camping-car",
+      "combi",
+      "road trip"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "dutch-bike",
+    "label": "Vélo",
+    "category": "vehicules",
+    "keywords": [
+      "vélo",
+      "bicyclette",
+      "cycliste",
+      "pédaler"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "sailboat",
+    "label": "Voilier",
+    "category": "vehicules",
+    "keywords": [
+      "voilier",
+      "voile",
+      "mer",
+      "navigation"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "city-car",
+    "label": "Voiture",
+    "category": "vehicules",
+    "keywords": [
+      "voiture",
+      "auto",
+      "automobile",
+      "citadine"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "race-car",
+    "label": "Voiture de course",
+    "category": "vehicules",
+    "keywords": [
+      "voiture de course",
+      "course",
+      "circuit",
+      "vitesse"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "police-car",
+    "label": "Voiture de police",
+    "category": "vehicules",
+    "keywords": [
+      "police",
+      "voiture",
+      "gendarmerie",
+      "sirène"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "coal-wagon",
+    "label": "Wagon",
+    "category": "vehicules",
+    "keywords": [
+      "wagon",
+      "train",
+      "charbon",
+      "marchandises"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "mine-wagon",
+    "label": "Wagonnet de mine",
+    "category": "vehicules",
+    "keywords": [
+      "wagonnet",
+      "mine",
+      "rails",
+      "minerai"
+    ],
+    "kind": "vehicle"
+  },
+  {
+    "name": "bee",
+    "label": "Abeille",
+    "category": "creatures",
+    "keywords": [
+      "abeille",
+      "miel",
+      "ruche",
+      "insecte"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "acrobatic",
+    "label": "Acrobate",
+    "category": "creatures",
+    "keywords": [
+      "acrobate",
+      "cirque",
+      "saut",
+      "voltige"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "eagle-head",
+    "label": "Aigle",
+    "category": "creatures",
+    "keywords": [
+      "aigle",
+      "rapace",
+      "oiseau",
+      "montagne"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "mountain-climbing",
+    "label": "Alpiniste",
+    "category": "creatures",
+    "keywords": [
+      "alpiniste",
+      "escalade",
+      "montagne",
+      "ascension"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "soul",
+    "label": "Âme",
+    "category": "creatures",
+    "keywords": [
+      "âme",
+      "esprit",
+      "flamme",
+      "au-delà"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "three-friends",
+    "label": "Amis",
+    "category": "creatures",
+    "keywords": [
+      "amis",
+      "groupe",
+      "bande",
+      "famille",
+      "gens"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "lovers",
+    "label": "Amoureux",
+    "category": "creatures",
+    "keywords": [
+      "amoureux",
+      "couple",
+      "amour",
+      "baiser"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "android-mask",
+    "label": "Androïde",
+    "category": "creatures",
+    "keywords": [
+      "androïde",
+      "robot humanoïde",
+      "cyborg",
+      "intelligence artificielle"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "donkey",
+    "label": "Âne",
+    "category": "creatures",
+    "keywords": [
+      "âne",
+      "baudet",
+      "ferme",
+      "mulet"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "angel-wings",
+    "label": "Ange",
+    "category": "creatures",
+    "keywords": [
+      "ange",
+      "ailes",
+      "auréole",
+      "céleste",
+      "gardien"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "eel",
+    "label": "Anguille",
+    "category": "creatures",
+    "keywords": [
+      "anguille",
+      "poisson",
+      "murène",
+      "rivière"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "anubis",
+    "label": "Anubis",
+    "category": "creatures",
+    "keywords": [
+      "anubis",
+      "dieu",
+      "égypte",
+      "chacal",
+      "mort"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "long-legged-spider",
+    "label": "Araignée",
+    "category": "creatures",
+    "keywords": [
+      "araignée",
+      "toile",
+      "peur",
+      "arachnide"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "tree-face",
+    "label": "Arbre vivant",
+    "category": "creatures",
+    "keywords": [
+      "arbre vivant",
+      "ent",
+      "esprit de la forêt",
+      "visage"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "archer",
+    "label": "Archer",
+    "category": "creatures",
+    "keywords": [
+      "archer",
+      "arc",
+      "flèche",
+      "chasseur"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "space-suit",
+    "label": "Astronaute",
+    "category": "creatures",
+    "keywords": [
+      "astronaute",
+      "cosmonaute",
+      "scaphandre",
+      "espace"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "ostrich",
+    "label": "Autruche",
+    "category": "creatures",
+    "keywords": [
+      "autruche",
+      "oiseau",
+      "savane"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "axolotl",
+    "label": "Axolotl",
+    "category": "creatures",
+    "keywords": [
+      "axolotl",
+      "amphibien",
+      "salamandre",
+      "mexique"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "whale-tail",
+    "label": "Baleine",
+    "category": "creatures",
+    "keywords": [
+      "baleine",
+      "océan",
+      "queue",
+      "cétacé"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "sperm-whale",
+    "label": "Baleine-île",
+    "category": "creatures",
+    "keywords": [
+      "baleine",
+      "cachalot",
+      "île",
+      "océan",
+      "géant"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "school-of-fish",
+    "label": "Banc de poissons",
+    "category": "creatures",
+    "keywords": [
+      "banc",
+      "poissons",
+      "océan",
+      "mer"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "bandit",
+    "label": "Bandit",
+    "category": "creatures",
+    "keywords": [
+      "bandit",
+      "brigand",
+      "hors-la-loi",
+      "voleur"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "barbarian",
+    "label": "Barbare",
+    "category": "creatures",
+    "keywords": [
+      "barbare",
+      "guerrier",
+      "conan",
+      "sauvage"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "bastet",
+    "label": "Bastet",
+    "category": "creatures",
+    "keywords": [
+      "bastet",
+      "déesse",
+      "chat",
+      "égypte"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "baby-face",
+    "label": "Bébé",
+    "category": "creatures",
+    "keywords": [
+      "bébé",
+      "enfant",
+      "nourrisson",
+      "naissance"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "ram-profile",
+    "label": "Bélier",
+    "category": "creatures",
+    "keywords": [
+      "bélier",
+      "mouton",
+      "cornes",
+      "montagne"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "bison",
+    "label": "Bison",
+    "category": "creatures",
+    "keywords": [
+      "bison",
+      "prairie",
+      "buffle",
+      "troupeau"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "badger",
+    "label": "Blaireau",
+    "category": "creatures",
+    "keywords": [
+      "blaireau",
+      "animal",
+      "forêt",
+      "terrier"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "gingerbread-man",
+    "label": "Bonhomme en pain d'épice",
+    "category": "creatures",
+    "keywords": [
+      "pain d'épice",
+      "biscuit",
+      "noël",
+      "conte"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "giant-squid",
+    "label": "Calmar géant",
+    "category": "creatures",
+    "keywords": [
+      "calmar",
+      "céphalopode",
+      "abysses",
+      "monstre marin"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "duck",
+    "label": "Canard",
+    "category": "creatures",
+    "keywords": [
+      "canard",
+      "mare",
+      "oiseau",
+      "cane"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "pirate-captain",
+    "label": "Capitaine pirate",
+    "category": "creatures",
+    "keywords": [
+      "pirate",
+      "capitaine",
+      "corsaire",
+      "crochet"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "capybara",
+    "label": "Capybara",
+    "category": "creatures",
+    "keywords": [
+      "capybara",
+      "rongeur",
+      "animal"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "beaver",
+    "label": "Castor",
+    "category": "creatures",
+    "keywords": [
+      "castor",
+      "barrage",
+      "rivière",
+      "rongeur"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "centaur",
+    "label": "Centaure",
+    "category": "creatures",
+    "keywords": [
+      "centaure",
+      "mythologie",
+      "cheval",
+      "archer"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "deer",
+    "label": "Cerf",
+    "category": "creatures",
+    "keywords": [
+      "cerf",
+      "biche",
+      "forêt",
+      "bois",
+      "daim"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "camel",
+    "label": "Chameau",
+    "category": "creatures",
+    "keywords": [
+      "chameau",
+      "dromadaire",
+      "désert",
+      "caravane"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "cat",
+    "label": "Chat",
+    "category": "creatures",
+    "keywords": [
+      "chat",
+      "félin",
+      "minou",
+      "animal de compagnie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "bat",
+    "label": "Chauve-souris",
+    "category": "creatures",
+    "keywords": [
+      "chauve-souris",
+      "nuit",
+      "vampire",
+      "grotte"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "caterpillar",
+    "label": "Chenille",
+    "category": "creatures",
+    "keywords": [
+      "chenille",
+      "larve",
+      "papillon",
+      "insecte"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "horse-head",
+    "label": "Cheval",
+    "category": "creatures",
+    "keywords": [
+      "cheval",
+      "jument",
+      "étalon",
+      "équitation"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "goat",
+    "label": "Chèvre",
+    "category": "creatures",
+    "keywords": [
+      "chèvre",
+      "bouc",
+      "ferme",
+      "montagne"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "sitting-dog",
+    "label": "Chien",
+    "category": "creatures",
+    "keywords": [
+      "chien",
+      "toutou",
+      "animal de compagnie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "falling",
+    "label": "Chute",
+    "category": "creatures",
+    "keywords": [
+      "chute",
+      "tomber",
+      "vertige",
+      "vide",
+      "cauchemar"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "stork-delivery",
+    "label": "Cigogne",
+    "category": "creatures",
+    "keywords": [
+      "cigogne",
+      "bébé",
+      "livraison",
+      "naissance"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "clown",
+    "label": "Clown",
+    "category": "creatures",
+    "keywords": [
+      "clown",
+      "cirque",
+      "nez rouge",
+      "rire"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "cobra",
+    "label": "Cobra",
+    "category": "creatures",
+    "keywords": [
+      "cobra",
+      "serpent",
+      "venin",
+      "charmeur"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "ladybug",
+    "label": "Coccinelle",
+    "category": "creatures",
+    "keywords": [
+      "coccinelle",
+      "bête à bon dieu",
+      "insecte",
+      "chance"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "pig",
+    "label": "Cochon",
+    "category": "creatures",
+    "keywords": [
+      "cochon",
+      "porc",
+      "ferme",
+      "truie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "hummingbird",
+    "label": "Colibri",
+    "category": "creatures",
+    "keywords": [
+      "colibri",
+      "oiseau-mouche",
+      "fleur",
+      "oiseau"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "dove",
+    "label": "Colombe",
+    "category": "creatures",
+    "keywords": [
+      "colombe",
+      "paix",
+      "oiseau",
+      "pigeon"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "rooster",
+    "label": "Coq",
+    "category": "creatures",
+    "keywords": [
+      "coq",
+      "ferme",
+      "matin",
+      "chant"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "raven",
+    "label": "Corbeau",
+    "category": "creatures",
+    "keywords": [
+      "corbeau",
+      "corneille",
+      "oiseau noir",
+      "présage"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "crab",
+    "label": "Crabe",
+    "category": "creatures",
+    "keywords": [
+      "crabe",
+      "plage",
+      "mer",
+      "pinces"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "frankenstein-creature",
+    "label": "Créature de Frankenstein",
+    "category": "creatures",
+    "keywords": [
+      "frankenstein",
+      "monstre",
+      "créature",
+      "savant fou"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "shrimp",
+    "label": "Crevette",
+    "category": "creatures",
+    "keywords": [
+      "crevette",
+      "mer",
+      "crustacé"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "screaming",
+    "label": "Cri",
+    "category": "creatures",
+    "keywords": [
+      "cri",
+      "hurler",
+      "peur",
+      "terreur",
+      "panique"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "cook",
+    "label": "Cuisinier",
+    "category": "creatures",
+    "keywords": [
+      "cuisinier",
+      "chef",
+      "cuisine",
+      "toque"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "cultist",
+    "label": "Cultiste",
+    "category": "creatures",
+    "keywords": [
+      "cultiste",
+      "secte",
+      "capuche",
+      "rituel"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "cyclops",
+    "label": "Cyclope",
+    "category": "creatures",
+    "keywords": [
+      "cyclope",
+      "géant",
+      "œil unique",
+      "mythologie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "swan",
+    "label": "Cygne",
+    "category": "creatures",
+    "keywords": [
+      "cygne",
+      "lac",
+      "oiseau",
+      "blanc"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "dolphin",
+    "label": "Dauphin",
+    "category": "creatures",
+    "keywords": [
+      "dauphin",
+      "mer",
+      "océan",
+      "cétacé"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "gooey-daemon",
+    "label": "Démon",
+    "category": "creatures",
+    "keywords": [
+      "démon",
+      "diable",
+      "enfer",
+      "maléfique"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "despair",
+    "label": "Désespoir",
+    "category": "creatures",
+    "keywords": [
+      "désespoir",
+      "tristesse",
+      "chagrin",
+      "pleurer"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "sherlock-holmes",
+    "label": "Détective",
+    "category": "creatures",
+    "keywords": [
+      "détective",
+      "enquête",
+      "sherlock",
+      "loupe"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "two-shadows",
+    "label": "Deux ombres",
+    "category": "creatures",
+    "keywords": [
+      "ombres",
+      "double",
+      "silhouettes",
+      "dédoublement"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "imp",
+    "label": "Diablotin",
+    "category": "creatures",
+    "keywords": [
+      "diablotin",
+      "lutin",
+      "petit démon",
+      "farceur"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "diplodocus",
+    "label": "Diplodocus",
+    "category": "creatures",
+    "keywords": [
+      "diplodocus",
+      "dinosaure",
+      "long cou",
+      "préhistoire"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "dodo",
+    "label": "Dodo",
+    "category": "creatures",
+    "keywords": [
+      "dodo",
+      "oiseau disparu",
+      "île maurice"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "person-in-bed",
+    "label": "Dormeur",
+    "category": "creatures",
+    "keywords": [
+      "dormeur",
+      "lit",
+      "sommeil",
+      "rêveur",
+      "dormir"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "dragon-head",
+    "label": "Dragon",
+    "category": "creatures",
+    "keywords": [
+      "dragon",
+      "cracheur de feu",
+      "légende",
+      "monstre"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "dragon-spiral",
+    "label": "Dragon chinois",
+    "category": "creatures",
+    "keywords": [
+      "dragon",
+      "chinois",
+      "asie",
+      "serpent"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "sea-dragon",
+    "label": "Dragon des mers",
+    "category": "creatures",
+    "keywords": [
+      "dragon des mers",
+      "léviathan",
+      "serpent",
+      "océan"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "body-swapping",
+    "label": "Échange de corps",
+    "category": "creatures",
+    "keywords": [
+      "échange",
+      "corps",
+      "double",
+      "identité",
+      "transformation"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "squirrel",
+    "label": "Écureuil",
+    "category": "creatures",
+    "keywords": [
+      "écureuil",
+      "noisette",
+      "arbre",
+      "forêt"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "elephant",
+    "label": "Éléphant",
+    "category": "creatures",
+    "keywords": [
+      "éléphant",
+      "savane",
+      "trompe",
+      "afrique"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "woman-elf-face",
+    "label": "Elfe",
+    "category": "creatures",
+    "keywords": [
+      "elfe",
+      "oreilles pointues",
+      "fée",
+      "fantasy"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "caesar",
+    "label": "Empereur romain",
+    "category": "creatures",
+    "keywords": [
+      "empereur",
+      "césar",
+      "rome",
+      "laurier"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "snail",
+    "label": "Escargot",
+    "category": "creatures",
+    "keywords": [
+      "escargot",
+      "lenteur",
+      "coquille",
+      "limace"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "spy",
+    "label": "Espion",
+    "category": "creatures",
+    "keywords": [
+      "espion",
+      "agent secret",
+      "imperméable",
+      "mystère"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "sea-star",
+    "label": "Étoile de mer",
+    "category": "creatures",
+    "keywords": [
+      "étoile de mer",
+      "plage",
+      "mer"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "alien-stare",
+    "label": "Extraterrestre",
+    "category": "creatures",
+    "keywords": [
+      "extraterrestre",
+      "alien",
+      "martien",
+      "petit homme gris"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "ghost",
+    "label": "Fantôme",
+    "category": "creatures",
+    "keywords": [
+      "fantôme",
+      "esprit",
+      "spectre",
+      "hanté"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "fairy",
+    "label": "Fée",
+    "category": "creatures",
+    "keywords": [
+      "fée",
+      "ailes",
+      "magie",
+      "féerique",
+      "clochette"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "farmer",
+    "label": "Fermier",
+    "category": "creatures",
+    "keywords": [
+      "fermier",
+      "paysan",
+      "agriculteur",
+      "ferme"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "flamingo",
+    "label": "Flamant rose",
+    "category": "creatures",
+    "keywords": [
+      "flamant rose",
+      "oiseau",
+      "rose",
+      "lagune"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "ant",
+    "label": "Fourmi",
+    "category": "creatures",
+    "keywords": [
+      "fourmi",
+      "insecte",
+      "colonie",
+      "fourmilière"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "anteater",
+    "label": "Fourmilier",
+    "category": "creatures",
+    "keywords": [
+      "fourmilier",
+      "tamanoir",
+      "animal"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "run",
+    "label": "Fuite",
+    "category": "creatures",
+    "keywords": [
+      "courir",
+      "fuite",
+      "poursuite",
+      "course",
+      "échapper"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "tightrope",
+    "label": "Funambule",
+    "category": "creatures",
+    "keywords": [
+      "funambule",
+      "fil",
+      "équilibre",
+      "cirque",
+      "vertige"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "gargoyle",
+    "label": "Gargouille",
+    "category": "creatures",
+    "keywords": [
+      "gargouille",
+      "cathédrale",
+      "statue",
+      "démon"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "giant",
+    "label": "Géant",
+    "category": "creatures",
+    "keywords": [
+      "géant",
+      "colosse",
+      "titan"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "gecko",
+    "label": "Gecko",
+    "category": "creatures",
+    "keywords": [
+      "gecko",
+      "lézard",
+      "reptile"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "slime",
+    "label": "Gelée vivante",
+    "category": "creatures",
+    "keywords": [
+      "slime",
+      "gelée",
+      "blob",
+      "visqueux",
+      "monstre"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "djinn",
+    "label": "Génie",
+    "category": "creatures",
+    "keywords": [
+      "génie",
+      "djinn",
+      "lampe",
+      "vœux"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "bad-gnome",
+    "label": "Gnome",
+    "category": "creatures",
+    "keywords": [
+      "gnome",
+      "lutin",
+      "nain de jardin"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "goblin",
+    "label": "Gobelin",
+    "category": "creatures",
+    "keywords": [
+      "gobelin",
+      "lutin",
+      "créature",
+      "fantasy"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "ice-golem",
+    "label": "Golem de glace",
+    "category": "creatures",
+    "keywords": [
+      "golem",
+      "glace",
+      "géant",
+      "hiver"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "rock-golem",
+    "label": "Golem de pierre",
+    "category": "creatures",
+    "keywords": [
+      "golem",
+      "pierre",
+      "géant",
+      "rocher"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "medusa-head",
+    "label": "Gorgone",
+    "category": "creatures",
+    "keywords": [
+      "méduse",
+      "gorgone",
+      "serpents",
+      "pétrifier"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "gorilla",
+    "label": "Gorille",
+    "category": "creatures",
+    "keywords": [
+      "gorille",
+      "singe",
+      "jungle",
+      "primate"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "frog",
+    "label": "Grenouille",
+    "category": "creatures",
+    "keywords": [
+      "grenouille",
+      "mare",
+      "crapaud",
+      "amphibien"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "griffin-symbol",
+    "label": "Griffon",
+    "category": "creatures",
+    "keywords": [
+      "griffon",
+      "aigle",
+      "lion",
+      "mythologie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "cricket",
+    "label": "Grillon",
+    "category": "creatures",
+    "keywords": [
+      "grillon",
+      "criquet",
+      "insecte",
+      "chant"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "harpy",
+    "label": "Harpie",
+    "category": "creatures",
+    "keywords": [
+      "harpie",
+      "mythologie",
+      "ailes",
+      "créature"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "strong-man",
+    "label": "Hercule de foire",
+    "category": "creatures",
+    "keywords": [
+      "hercule",
+      "costaud",
+      "cirque",
+      "force"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "hedgehog",
+    "label": "Hérisson",
+    "category": "creatures",
+    "keywords": [
+      "hérisson",
+      "piquants",
+      "animal",
+      "jardin"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "heron",
+    "label": "Héron",
+    "category": "creatures",
+    "keywords": [
+      "héron",
+      "échassier",
+      "marais",
+      "oiseau"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "owl",
+    "label": "Hibou",
+    "category": "creatures",
+    "keywords": [
+      "hibou",
+      "chouette",
+      "nuit",
+      "sagesse"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "seahorse",
+    "label": "Hippocampe",
+    "category": "creatures",
+    "keywords": [
+      "hippocampe",
+      "cheval de mer",
+      "mer"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "caveman",
+    "label": "Homme des cavernes",
+    "category": "creatures",
+    "keywords": [
+      "homme préhistorique",
+      "caverne",
+      "néandertal",
+      "préhistoire"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "invisible",
+    "label": "Homme invisible",
+    "category": "creatures",
+    "keywords": [
+      "invisible",
+      "fantôme",
+      "transparent",
+      "disparaître"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "human-cannonball",
+    "label": "Homme-canon",
+    "category": "creatures",
+    "keywords": [
+      "homme-canon",
+      "cirque",
+      "canon",
+      "voler"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "lizardman",
+    "label": "Homme-lézard",
+    "category": "creatures",
+    "keywords": [
+      "homme-lézard",
+      "reptilien",
+      "créature"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "fish-monster",
+    "label": "Homme-poisson",
+    "category": "creatures",
+    "keywords": [
+      "homme-poisson",
+      "créature",
+      "marais",
+      "monstre"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "horus",
+    "label": "Horus",
+    "category": "creatures",
+    "keywords": [
+      "horus",
+      "dieu",
+      "faucon",
+      "égypte"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "hydra",
+    "label": "Hydre",
+    "category": "creatures",
+    "keywords": [
+      "hydre",
+      "serpent",
+      "têtes multiples",
+      "mythologie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "icarus",
+    "label": "Icare",
+    "category": "creatures",
+    "keywords": [
+      "icare",
+      "voler",
+      "ailes",
+      "soleil",
+      "chute"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "nurse-female",
+    "label": "Infirmière",
+    "category": "creatures",
+    "keywords": [
+      "infirmière",
+      "hôpital",
+      "soins"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "juggler",
+    "label": "Jongleur",
+    "category": "creatures",
+    "keywords": [
+      "jongleur",
+      "cirque",
+      "saltimbanque",
+      "balles"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "kangaroo",
+    "label": "Kangourou",
+    "category": "creatures",
+    "keywords": [
+      "kangourou",
+      "australie",
+      "marsupial"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "kiwi-bird",
+    "label": "Kiwi",
+    "category": "creatures",
+    "keywords": [
+      "kiwi",
+      "oiseau",
+      "nouvelle-zélande"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "koala",
+    "label": "Koala",
+    "category": "creatures",
+    "keywords": [
+      "koala",
+      "australie",
+      "eucalyptus"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "kraken-tentacle",
+    "label": "Kraken",
+    "category": "creatures",
+    "keywords": [
+      "kraken",
+      "tentacule",
+      "monstre marin",
+      "pieuvre géante"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "grim-reaper",
+    "label": "La Faucheuse",
+    "category": "creatures",
+    "keywords": [
+      "faucheuse",
+      "mort",
+      "faux",
+      "squelette"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "rabbit",
+    "label": "Lapin",
+    "category": "creatures",
+    "keywords": [
+      "lapin",
+      "lièvre",
+      "terrier",
+      "pâques"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "dragonfly",
+    "label": "Libellule",
+    "category": "creatures",
+    "keywords": [
+      "libellule",
+      "insecte",
+      "étang",
+      "ailes"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "unicorn",
+    "label": "Licorne",
+    "category": "creatures",
+    "keywords": [
+      "licorne",
+      "corne",
+      "magique",
+      "cheval"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "lion",
+    "label": "Lion",
+    "category": "creatures",
+    "keywords": [
+      "lion",
+      "roi des animaux",
+      "savane",
+      "crinière"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "wolf-howl",
+    "label": "Loup",
+    "category": "creatures",
+    "keywords": [
+      "loup",
+      "hurlement",
+      "meute",
+      "pleine lune"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "werewolf",
+    "label": "Loup-garou",
+    "category": "creatures",
+    "keywords": [
+      "loup-garou",
+      "pleine lune",
+      "lycanthrope",
+      "bête"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "wizard-face",
+    "label": "Magicien",
+    "category": "creatures",
+    "keywords": [
+      "magicien",
+      "sorcier",
+      "merlin",
+      "mage"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "mammoth",
+    "label": "Mammouth",
+    "category": "creatures",
+    "keywords": [
+      "mammouth",
+      "préhistoire",
+      "glace",
+      "défenses"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "penguin",
+    "label": "Manchot",
+    "category": "creatures",
+    "keywords": [
+      "manchot",
+      "pingouin",
+      "banquise",
+      "antarctique"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "praying-mantis",
+    "label": "Mante religieuse",
+    "category": "creatures",
+    "keywords": [
+      "mante religieuse",
+      "insecte",
+      "prédatrice",
+      "mante"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "doctor-face",
+    "label": "Médecin",
+    "category": "creatures",
+    "keywords": [
+      "médecin",
+      "docteur",
+      "hôpital",
+      "soignant"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "plague-doctor-profile",
+    "label": "Médecin de peste",
+    "category": "creatures",
+    "keywords": [
+      "médecin de peste",
+      "masque",
+      "bec",
+      "peste"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "meditation",
+    "label": "Méditation",
+    "category": "creatures",
+    "keywords": [
+      "méditation",
+      "yoga",
+      "zen",
+      "sérénité",
+      "lotus"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "jellyfish",
+    "label": "Méduse",
+    "category": "creatures",
+    "keywords": [
+      "méduse",
+      "mer",
+      "tentacules",
+      "piquer"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "centipede",
+    "label": "Mille-pattes",
+    "category": "creatures",
+    "keywords": [
+      "mille-pattes",
+      "insecte",
+      "scolopendre"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "miner",
+    "label": "Mineur",
+    "category": "creatures",
+    "keywords": [
+      "mineur",
+      "mine",
+      "casque",
+      "pioche"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "minotaur",
+    "label": "Minotaure",
+    "category": "creatures",
+    "keywords": [
+      "minotaure",
+      "labyrinthe",
+      "taureau",
+      "mythologie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "monk-face",
+    "label": "Moine",
+    "category": "creatures",
+    "keywords": [
+      "moine",
+      "monastère",
+      "religion",
+      "prière"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "sparrow",
+    "label": "Moineau",
+    "category": "creatures",
+    "keywords": [
+      "moineau",
+      "oiseau",
+      "passereau"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "mummy-head",
+    "label": "Momie",
+    "category": "creatures",
+    "keywords": [
+      "momie",
+      "égypte",
+      "bandelettes",
+      "sarcophage"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "ringmaster",
+    "label": "Monsieur Loyal",
+    "category": "creatures",
+    "keywords": [
+      "monsieur loyal",
+      "cirque",
+      "dompteur",
+      "chapiteau"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "plesiosaurus",
+    "label": "Monstre du loch",
+    "category": "creatures",
+    "keywords": [
+      "plésiosaure",
+      "nessie",
+      "loch ness",
+      "monstre"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "walrus-head",
+    "label": "Morse",
+    "category": "creatures",
+    "keywords": [
+      "morse",
+      "défenses",
+      "banquise"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "fly",
+    "label": "Mouche",
+    "category": "creatures",
+    "keywords": [
+      "mouche",
+      "insecte",
+      "bourdonnement"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "seagull",
+    "label": "Mouette",
+    "category": "creatures",
+    "keywords": [
+      "mouette",
+      "goéland",
+      "mer",
+      "port"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "sheep",
+    "label": "Mouton",
+    "category": "creatures",
+    "keywords": [
+      "mouton",
+      "brebis",
+      "laine",
+      "troupeau",
+      "compter"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "dwarf-face",
+    "label": "Nain",
+    "category": "creatures",
+    "keywords": [
+      "nain",
+      "barbe",
+      "mine",
+      "fantasy"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "running-ninja",
+    "label": "Ninja",
+    "category": "creatures",
+    "keywords": [
+      "ninja",
+      "japon",
+      "ombre",
+      "furtif"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "drowning",
+    "label": "Noyade",
+    "category": "creatures",
+    "keywords": [
+      "noyade",
+      "eau",
+      "se noyer",
+      "bulles",
+      "cauchemar"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "ogre",
+    "label": "Ogre",
+    "category": "creatures",
+    "keywords": [
+      "ogre",
+      "géant",
+      "conte",
+      "monstre"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "goose",
+    "label": "Oie",
+    "category": "creatures",
+    "keywords": [
+      "oie",
+      "ferme",
+      "oiseau",
+      "jars"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "shadow-follower",
+    "label": "Ombre qui suit",
+    "category": "creatures",
+    "keywords": [
+      "ombre",
+      "poursuite",
+      "double",
+      "inquiétant"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "oni",
+    "label": "Oni",
+    "category": "creatures",
+    "keywords": [
+      "oni",
+      "démon japonais",
+      "japon",
+      "masque"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "orc-head",
+    "label": "Orc",
+    "category": "creatures",
+    "keywords": [
+      "orc",
+      "orque",
+      "monstre",
+      "fantasy"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "bear-head",
+    "label": "Ours",
+    "category": "creatures",
+    "keywords": [
+      "ours",
+      "forêt",
+      "grizzli",
+      "animal"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "polar-bear",
+    "label": "Ours polaire",
+    "category": "creatures",
+    "keywords": [
+      "ours polaire",
+      "ours blanc",
+      "banquise",
+      "arctique"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "panda",
+    "label": "Panda",
+    "category": "creatures",
+    "keywords": [
+      "panda",
+      "chine",
+      "bambou",
+      "ours"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "feline",
+    "label": "Panthère",
+    "category": "creatures",
+    "keywords": [
+      "panthère",
+      "félin",
+      "jaguar",
+      "chat noir"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "butterfly",
+    "label": "Papillon",
+    "category": "creatures",
+    "keywords": [
+      "papillon",
+      "ailes",
+      "métamorphose",
+      "insecte"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "sloth",
+    "label": "Paresseux",
+    "category": "creatures",
+    "keywords": [
+      "paresseux",
+      "lenteur",
+      "arbre",
+      "jungle"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "pegasus",
+    "label": "Pégase",
+    "category": "creatures",
+    "keywords": [
+      "pégase",
+      "cheval ailé",
+      "mythologie",
+      "ciel"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "eating-pelican",
+    "label": "Pélican",
+    "category": "creatures",
+    "keywords": [
+      "pélican",
+      "oiseau",
+      "bec",
+      "poisson"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "parrot-head",
+    "label": "Perroquet",
+    "category": "creatures",
+    "keywords": [
+      "perroquet",
+      "ara",
+      "pirate",
+      "oiseau tropical"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "person",
+    "label": "Personne",
+    "category": "creatures",
+    "keywords": [
+      "personne",
+      "silhouette",
+      "humain",
+      "quelqu'un",
+      "inconnu"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "pharoah",
+    "label": "Pharaon",
+    "category": "creatures",
+    "keywords": [
+      "pharaon",
+      "égypte",
+      "roi",
+      "pyramide"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "pianist",
+    "label": "Pianiste",
+    "category": "creatures",
+    "keywords": [
+      "pianiste",
+      "piano",
+      "musicien",
+      "concert"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "octopus",
+    "label": "Pieuvre",
+    "category": "creatures",
+    "keywords": [
+      "pieuvre",
+      "poulpe",
+      "tentacules",
+      "mer"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "piranha",
+    "label": "Piranha",
+    "category": "creatures",
+    "keywords": [
+      "piranha",
+      "poisson",
+      "dents",
+      "amazonie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "angler-fish",
+    "label": "Poisson abyssal",
+    "category": "creatures",
+    "keywords": [
+      "baudroie",
+      "poisson",
+      "abysses",
+      "lanterne"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "tropical-fish",
+    "label": "Poisson tropical",
+    "category": "creatures",
+    "keywords": [
+      "poisson",
+      "tropical",
+      "aquarium",
+      "récif"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "flying-trout",
+    "label": "Poisson volant",
+    "category": "creatures",
+    "keywords": [
+      "poisson volant",
+      "truite",
+      "rêve",
+      "ailes",
+      "ciel"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "clownfish",
+    "label": "Poisson-clown",
+    "category": "creatures",
+    "keywords": [
+      "poisson-clown",
+      "nemo",
+      "récif",
+      "mer"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "police-officer-head",
+    "label": "Policier",
+    "category": "creatures",
+    "keywords": [
+      "policier",
+      "police",
+      "agent",
+      "gendarme"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "porcupine",
+    "label": "Porc-épic",
+    "category": "creatures",
+    "keywords": [
+      "porc-épic",
+      "piquants",
+      "animal"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "chicken",
+    "label": "Poule",
+    "category": "creatures",
+    "keywords": [
+      "poule",
+      "ferme",
+      "œuf",
+      "volaille"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "new-born",
+    "label": "Poussin",
+    "category": "creatures",
+    "keywords": [
+      "poussin",
+      "éclosion",
+      "œuf",
+      "naissance"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "sun-priest",
+    "label": "Prêtre",
+    "category": "creatures",
+    "keywords": [
+      "prêtre",
+      "druide",
+      "chaman",
+      "culte"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "frog-prince",
+    "label": "Prince grenouille",
+    "category": "creatures",
+    "keywords": [
+      "prince",
+      "grenouille",
+      "conte",
+      "baiser"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "prisoner",
+    "label": "Prisonnier",
+    "category": "creatures",
+    "keywords": [
+      "prisonnier",
+      "détenu",
+      "bagnard",
+      "prison"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "teacher",
+    "label": "Professeur",
+    "category": "creatures",
+    "keywords": [
+      "professeur",
+      "enseignant",
+      "école",
+      "maître"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "pterodactylus",
+    "label": "Ptérodactyle",
+    "category": "creatures",
+    "keywords": [
+      "ptérodactyle",
+      "dinosaure volant",
+      "préhistoire"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "manta-ray",
+    "label": "Raie manta",
+    "category": "creatures",
+    "keywords": [
+      "raie",
+      "manta",
+      "mer",
+      "océan"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "hiking",
+    "label": "Randonneur",
+    "category": "creatures",
+    "keywords": [
+      "randonneur",
+      "marche",
+      "sac à dos",
+      "montagne"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "rat",
+    "label": "Rat",
+    "category": "creatures",
+    "keywords": [
+      "rat",
+      "égout",
+      "rongeur"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "raccoon-head",
+    "label": "Raton laveur",
+    "category": "creatures",
+    "keywords": [
+      "raton laveur",
+      "animal",
+      "nuit"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "cleopatra",
+    "label": "Reine d'Égypte",
+    "category": "creatures",
+    "keywords": [
+      "cléopâtre",
+      "reine",
+      "égypte",
+      "pharaonne"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "nun-face",
+    "label": "Religieuse",
+    "category": "creatures",
+    "keywords": [
+      "nonne",
+      "religieuse",
+      "couvent",
+      "sœur"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "fox",
+    "label": "Renard",
+    "category": "creatures",
+    "keywords": [
+      "renard",
+      "forêt",
+      "rusé",
+      "goupil"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "shark-fin",
+    "label": "Requin",
+    "category": "creatures",
+    "keywords": [
+      "requin",
+      "aileron",
+      "mer",
+      "danger"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "rhinoceros-horn",
+    "label": "Rhinocéros",
+    "category": "creatures",
+    "keywords": [
+      "rhinocéros",
+      "savane",
+      "corne",
+      "afrique"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "vintage-robot",
+    "label": "Robot",
+    "category": "creatures",
+    "keywords": [
+      "robot",
+      "androïde",
+      "machine",
+      "automate"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "megabot",
+    "label": "Robot géant",
+    "category": "creatures",
+    "keywords": [
+      "robot géant",
+      "mecha",
+      "machine",
+      "colosse"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "king",
+    "label": "Roi",
+    "category": "creatures",
+    "keywords": [
+      "roi",
+      "couronne",
+      "monarque",
+      "royauté"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "salamander",
+    "label": "Salamandre",
+    "category": "creatures",
+    "keywords": [
+      "salamandre",
+      "amphibien",
+      "feu"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "boar",
+    "label": "Sanglier",
+    "category": "creatures",
+    "keywords": [
+      "sanglier",
+      "forêt",
+      "cochon sauvage"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "salmon",
+    "label": "Saumon",
+    "category": "creatures",
+    "keywords": [
+      "saumon",
+      "poisson",
+      "rivière"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "mad-scientist",
+    "label": "Savant fou",
+    "category": "creatures",
+    "keywords": [
+      "savant fou",
+      "scientifique",
+      "laboratoire",
+      "expérience"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "flying-beetle",
+    "label": "Scarabée",
+    "category": "creatures",
+    "keywords": [
+      "scarabée",
+      "coléoptère",
+      "insecte"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "scorpion",
+    "label": "Scorpion",
+    "category": "creatures",
+    "keywords": [
+      "scorpion",
+      "désert",
+      "dard",
+      "venin"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "snake",
+    "label": "Serpent",
+    "category": "creatures",
+    "keywords": [
+      "serpent",
+      "reptile",
+      "vipère",
+      "sifflement"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "sea-serpent",
+    "label": "Serpent de mer",
+    "category": "creatures",
+    "keywords": [
+      "serpent de mer",
+      "léviathan",
+      "monstre marin"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "hooded-figure",
+    "label": "Silhouette encapuchonnée",
+    "category": "creatures",
+    "keywords": [
+      "silhouette",
+      "capuche",
+      "inconnu",
+      "mystère",
+      "ombre"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "monkey",
+    "label": "Singe",
+    "category": "creatures",
+    "keywords": [
+      "singe",
+      "jungle",
+      "primate",
+      "ouistiti"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "mermaid",
+    "label": "Sirène",
+    "category": "creatures",
+    "keywords": [
+      "sirène",
+      "mer",
+      "queue de poisson",
+      "ondine"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "skier",
+    "label": "Skieur",
+    "category": "creatures",
+    "keywords": [
+      "skieur",
+      "ski",
+      "neige",
+      "piste"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "witch-face",
+    "label": "Sorcière",
+    "category": "creatures",
+    "keywords": [
+      "sorcière",
+      "magie",
+      "chapeau pointu",
+      "sortilège"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "witch-flight",
+    "label": "Sorcière en vol",
+    "category": "creatures",
+    "keywords": [
+      "sorcière",
+      "balai",
+      "vol",
+      "halloween"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "mouse",
+    "label": "Souris",
+    "category": "creatures",
+    "keywords": [
+      "souris",
+      "rongeur",
+      "fromage",
+      "petit"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "spectre",
+    "label": "Spectre",
+    "category": "creatures",
+    "keywords": [
+      "spectre",
+      "revenant",
+      "âme",
+      "esprit"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "greek-sphinx",
+    "label": "Sphinx ailé",
+    "category": "creatures",
+    "keywords": [
+      "sphinx",
+      "énigme",
+      "mythologie",
+      "créature ailée"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "skeleton",
+    "label": "Squelette",
+    "category": "creatures",
+    "keywords": [
+      "squelette",
+      "os",
+      "mort",
+      "crâne"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "wave-surfer",
+    "label": "Surfeur",
+    "category": "creatures",
+    "keywords": [
+      "surfeur",
+      "surf",
+      "vague",
+      "plage"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "armadillo",
+    "label": "Tatou",
+    "category": "creatures",
+    "keywords": [
+      "tatou",
+      "carapace",
+      "animal"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "mole",
+    "label": "Taupe",
+    "category": "creatures",
+    "keywords": [
+      "taupe",
+      "terrier",
+      "jardin",
+      "souterrain"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "bull",
+    "label": "Taureau",
+    "category": "creatures",
+    "keywords": [
+      "taureau",
+      "corrida",
+      "bovin",
+      "ferme"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "tiger",
+    "label": "Tigre",
+    "category": "creatures",
+    "keywords": [
+      "tigre",
+      "félin",
+      "jungle",
+      "rayures"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "saber-toothed-cat-head",
+    "label": "Tigre à dents de sabre",
+    "category": "creatures",
+    "keywords": [
+      "smilodon",
+      "dents de sabre",
+      "préhistoire",
+      "félin"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "tortoise",
+    "label": "Tortue",
+    "category": "creatures",
+    "keywords": [
+      "tortue",
+      "carapace",
+      "lenteur"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "sea-turtle",
+    "label": "Tortue de mer",
+    "category": "creatures",
+    "keywords": [
+      "tortue de mer",
+      "océan",
+      "plage"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "toucan",
+    "label": "Toucan",
+    "category": "creatures",
+    "keywords": [
+      "toucan",
+      "oiseau tropical",
+      "bec",
+      "jungle"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "triceratops-head",
+    "label": "Tricératops",
+    "category": "creatures",
+    "keywords": [
+      "tricératops",
+      "dinosaure",
+      "cornes"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "troll",
+    "label": "Troll",
+    "category": "creatures",
+    "keywords": [
+      "troll",
+      "pont",
+      "monstre",
+      "montagne"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "dinosaur-rex",
+    "label": "Tyrannosaure",
+    "category": "creatures",
+    "keywords": [
+      "tyrannosaure",
+      "t-rex",
+      "dinosaure",
+      "préhistoire"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "cow",
+    "label": "Vache",
+    "category": "creatures",
+    "keywords": [
+      "vache",
+      "ferme",
+      "lait",
+      "pré"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "vampire-dracula",
+    "label": "Vampire",
+    "category": "creatures",
+    "keywords": [
+      "vampire",
+      "dracula",
+      "canines",
+      "sang"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "vulture",
+    "label": "Vautour",
+    "category": "creatures",
+    "keywords": [
+      "vautour",
+      "charognard",
+      "désert"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "velociraptor",
+    "label": "Vélociraptor",
+    "category": "creatures",
+    "keywords": [
+      "vélociraptor",
+      "raptor",
+      "dinosaure"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "viking-head",
+    "label": "Viking",
+    "category": "creatures",
+    "keywords": [
+      "viking",
+      "guerrier",
+      "nordique",
+      "casque"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "robber",
+    "label": "Voleur",
+    "category": "creatures",
+    "keywords": [
+      "voleur",
+      "cambrioleur",
+      "masque",
+      "sac"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "wyvern",
+    "label": "Wyverne",
+    "category": "creatures",
+    "keywords": [
+      "wyverne",
+      "dragon",
+      "créature ailée"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "sasquatch",
+    "label": "Yéti",
+    "category": "creatures",
+    "keywords": [
+      "yéti",
+      "bigfoot",
+      "sasquatch",
+      "abominable homme des neiges"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "shambling-zombie",
+    "label": "Zombie",
+    "category": "creatures",
+    "keywords": [
+      "zombie",
+      "mort-vivant",
+      "horreur"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "accordion",
+    "label": "Accordéon",
+    "category": "objets",
+    "keywords": [
+      "accordéon",
+      "musette",
+      "musique",
+      "bal"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "angel-outfit",
+    "label": "Ailes d'ange",
+    "category": "objets",
+    "keywords": [
+      "ailes",
+      "ange",
+      "plumes",
+      "voler"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "amphora",
+    "label": "Amphore",
+    "category": "objets",
+    "keywords": [
+      "amphore",
+      "vase",
+      "antique",
+      "poterie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "light-bulb",
+    "label": "Ampoule",
+    "category": "objets",
+    "keywords": [
+      "ampoule",
+      "idée",
+      "lumière",
+      "électricité"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "anchor",
+    "label": "Ancre",
+    "category": "objets",
+    "keywords": [
+      "ancre",
+      "bateau",
+      "marin",
+      "port"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "ankh",
+    "label": "Ankh",
+    "category": "objets",
+    "keywords": [
+      "ankh",
+      "croix de vie",
+      "égypte",
+      "symbole"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "ring",
+    "label": "Anneau",
+    "category": "objets",
+    "keywords": [
+      "anneau",
+      "bague",
+      "alliance",
+      "pouvoir"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "photo-camera",
+    "label": "Appareil photo",
+    "category": "objets",
+    "keywords": [
+      "appareil photo",
+      "photographie",
+      "souvenir"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "watering-can",
+    "label": "Arrosoir",
+    "category": "objets",
+    "keywords": [
+      "arrosoir",
+      "jardin",
+      "arroser",
+      "plantes"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "astrolabe",
+    "label": "Astrolabe",
+    "category": "objets",
+    "keywords": [
+      "astrolabe",
+      "astronomie",
+      "navigation",
+      "instrument"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "atom",
+    "label": "Atome",
+    "category": "objets",
+    "keywords": [
+      "atome",
+      "science",
+      "physique",
+      "électron"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "dream-catcher",
+    "label": "Attrape-rêves",
+    "category": "objets",
+    "keywords": [
+      "attrape-rêves",
+      "rêve",
+      "plumes",
+      "amérindien"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "diamond-ring",
+    "label": "Bague",
+    "category": "objets",
+    "keywords": [
+      "bague",
+      "anneau",
+      "fiançailles",
+      "mariage"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "fairy-wand",
+    "label": "Baguette magique",
+    "category": "objets",
+    "keywords": [
+      "baguette",
+      "magie",
+      "fée",
+      "étoile",
+      "sortilège"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "bathtub",
+    "label": "Baignoire",
+    "category": "objets",
+    "keywords": [
+      "baignoire",
+      "bain",
+      "salle de bain",
+      "eau"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "broom",
+    "label": "Balai",
+    "category": "objets",
+    "keywords": [
+      "balai",
+      "ménage",
+      "sorcière"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "scales",
+    "label": "Balance",
+    "category": "objets",
+    "keywords": [
+      "balance",
+      "justice",
+      "équilibre",
+      "peser"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "soccer-ball",
+    "label": "Ballon de foot",
+    "category": "objets",
+    "keywords": [
+      "ballon",
+      "football",
+      "sport",
+      "jeu"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "beach-ball",
+    "label": "Ballon de plage",
+    "category": "objets",
+    "keywords": [
+      "ballon",
+      "plage",
+      "vacances",
+      "jeu"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "balloons",
+    "label": "Ballons",
+    "category": "objets",
+    "keywords": [
+      "ballons",
+      "fête",
+      "anniversaire",
+      "hélium"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "ship-wheel",
+    "label": "Barre de navire",
+    "category": "objets",
+    "keywords": [
+      "barre",
+      "gouvernail",
+      "navire",
+      "capitaine"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "drum-kit",
+    "label": "Batterie",
+    "category": "objets",
+    "keywords": [
+      "batterie",
+      "percussion",
+      "rock",
+      "musique"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "bookshelf",
+    "label": "Bibliothèque",
+    "category": "objets",
+    "keywords": [
+      "bibliothèque",
+      "étagère",
+      "livres",
+      "lecture"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "mailbox",
+    "label": "Boîte aux lettres",
+    "category": "objets",
+    "keywords": [
+      "boîte aux lettres",
+      "courrier",
+      "lettre",
+      "facteur"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "wrapped-sweet",
+    "label": "Bonbon",
+    "category": "objets",
+    "keywords": [
+      "bonbon",
+      "friandise",
+      "sucrerie",
+      "confiserie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "boots",
+    "label": "Bottes",
+    "category": "objets",
+    "keywords": [
+      "bottes",
+      "chaussures",
+      "marche"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "life-buoy",
+    "label": "Bouée de sauvetage",
+    "category": "objets",
+    "keywords": [
+      "bouée",
+      "sauvetage",
+      "mer",
+      "naufrage"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "candle-holder",
+    "label": "Bougeoir",
+    "category": "objets",
+    "keywords": [
+      "bougeoir",
+      "bougie",
+      "chandelle",
+      "lumière"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "candles",
+    "label": "Bougies",
+    "category": "objets",
+    "keywords": [
+      "bougies",
+      "flamme",
+      "chandelles",
+      "lumière"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "crystal-ball",
+    "label": "Boule de cristal",
+    "category": "objets",
+    "keywords": [
+      "boule de cristal",
+      "voyance",
+      "divination",
+      "avenir"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "compass",
+    "label": "Boussole",
+    "category": "objets",
+    "keywords": [
+      "boussole",
+      "nord",
+      "orientation",
+      "direction"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "wine-bottle",
+    "label": "Bouteille de vin",
+    "category": "objets",
+    "keywords": [
+      "vin",
+      "bouteille",
+      "boisson",
+      "cave"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "thought-bubble",
+    "label": "Bulle de pensée",
+    "category": "objets",
+    "keywords": [
+      "pensée",
+      "bulle",
+      "rêverie",
+      "idée"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "bubbles",
+    "label": "Bulles",
+    "category": "objets",
+    "keywords": [
+      "bulles",
+      "savon",
+      "air",
+      "flotter"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "desk",
+    "label": "Bureau",
+    "category": "objets",
+    "keywords": [
+      "bureau",
+      "travail",
+      "meuble",
+      "école"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "stone-bust",
+    "label": "Buste",
+    "category": "objets",
+    "keywords": [
+      "buste",
+      "statue",
+      "sculpture",
+      "musée"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "present",
+    "label": "Cadeau",
+    "category": "objets",
+    "keywords": [
+      "cadeau",
+      "paquet",
+      "surprise",
+      "anniversaire"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "padlock",
+    "label": "Cadenas",
+    "category": "objets",
+    "keywords": [
+      "cadenas",
+      "fermé",
+      "verrou",
+      "secret"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "cage",
+    "label": "Cage",
+    "category": "objets",
+    "keywords": [
+      "cage",
+      "prison",
+      "enfermé",
+      "barreaux"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "bird-cage",
+    "label": "Cage à oiseau",
+    "category": "objets",
+    "keywords": [
+      "cage",
+      "oiseau",
+      "enfermé",
+      "captif"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "wooden-crate",
+    "label": "Caisse en bois",
+    "category": "objets",
+    "keywords": [
+      "caisse",
+      "bois",
+      "cargaison",
+      "boîte"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "calavera",
+    "label": "Calavera",
+    "category": "objets",
+    "keywords": [
+      "calavera",
+      "crâne",
+      "mexique",
+      "jour des morts"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "calendar",
+    "label": "Calendrier",
+    "category": "objets",
+    "keywords": [
+      "calendrier",
+      "date",
+      "jour",
+      "agenda"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "video-camera",
+    "label": "Caméra",
+    "category": "objets",
+    "keywords": [
+      "caméra",
+      "filmer",
+      "vidéo",
+      "tournage"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "sofa",
+    "label": "Canapé",
+    "category": "objets",
+    "keywords": [
+      "canapé",
+      "salon",
+      "divan",
+      "sofa"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "plastic-duck",
+    "label": "Canard en plastique",
+    "category": "objets",
+    "keywords": [
+      "canard",
+      "bain",
+      "jouet",
+      "caoutchouc"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "lit-candelabra",
+    "label": "Candélabre",
+    "category": "objets",
+    "keywords": [
+      "candélabre",
+      "chandelier",
+      "bougies",
+      "manoir"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "cloak",
+    "label": "Cape",
+    "category": "objets",
+    "keywords": [
+      "cape",
+      "manteau",
+      "capuche",
+      "voyageur"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "windchimes",
+    "label": "Carillon à vent",
+    "category": "objets",
+    "keywords": [
+      "carillon",
+      "vent",
+      "tintement",
+      "véranda"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "notebook",
+    "label": "Carnet",
+    "category": "objets",
+    "keywords": [
+      "carnet",
+      "journal intime",
+      "notes",
+      "cahier"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "treasure-map",
+    "label": "Carte au trésor",
+    "category": "objets",
+    "keywords": [
+      "carte",
+      "trésor",
+      "pirate",
+      "croix"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "cardboard-box",
+    "label": "Carton",
+    "category": "objets",
+    "keywords": [
+      "carton",
+      "boîte",
+      "déménagement",
+      "colis"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "coffin",
+    "label": "Cercueil",
+    "category": "objets",
+    "keywords": [
+      "cercueil",
+      "mort",
+      "enterrement",
+      "vampire"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "kite",
+    "label": "Cerf-volant",
+    "category": "objets",
+    "keywords": [
+      "cerf-volant",
+      "vent",
+      "enfance",
+      "plage"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "brain",
+    "label": "Cerveau",
+    "category": "objets",
+    "keywords": [
+      "cerveau",
+      "esprit",
+      "pensée",
+      "mémoire"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "breaking-chain",
+    "label": "Chaîne brisée",
+    "category": "objets",
+    "keywords": [
+      "chaîne",
+      "brisée",
+      "liberté",
+      "évasion"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "wooden-chair",
+    "label": "Chaise",
+    "category": "objets",
+    "keywords": [
+      "chaise",
+      "bois",
+      "siège",
+      "meuble"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "jester-hat",
+    "label": "Chapeau de bouffon",
+    "category": "objets",
+    "keywords": [
+      "bouffon",
+      "fou du roi",
+      "grelots",
+      "cirque"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "magic-hat",
+    "label": "Chapeau de magicien",
+    "category": "objets",
+    "keywords": [
+      "chapeau",
+      "magicien",
+      "lapin",
+      "tour de magie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "top-hat",
+    "label": "Chapeau haut-de-forme",
+    "category": "objets",
+    "keywords": [
+      "chapeau",
+      "haut-de-forme",
+      "élégance",
+      "magicien"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "pointy-hat",
+    "label": "Chapeau pointu",
+    "category": "objets",
+    "keywords": [
+      "chapeau pointu",
+      "sorcière",
+      "magicien"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "prayer-beads",
+    "label": "Chapelet",
+    "category": "objets",
+    "keywords": [
+      "chapelet",
+      "prière",
+      "perles",
+      "religion"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "cauldron",
+    "label": "Chaudron",
+    "category": "objets",
+    "keywords": [
+      "chaudron",
+      "potion",
+      "sorcière",
+      "marmite"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "ballerina-shoes",
+    "label": "Chaussons de danse",
+    "category": "objets",
+    "keywords": [
+      "chaussons",
+      "danse",
+      "ballerine",
+      "ballet"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "fireplace",
+    "label": "Cheminée",
+    "category": "objets",
+    "keywords": [
+      "cheminée",
+      "âtre",
+      "feu",
+      "salon",
+      "foyer"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "easel",
+    "label": "Chevalet",
+    "category": "objets",
+    "keywords": [
+      "chevalet",
+      "peinture",
+      "tableau",
+      "artiste"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "balloon-dog",
+    "label": "Chien ballon",
+    "category": "objets",
+    "keywords": [
+      "ballon",
+      "chien",
+      "sculpture",
+      "fête"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "scissors",
+    "label": "Ciseaux",
+    "category": "objets",
+    "keywords": [
+      "ciseaux",
+      "couper",
+      "découper"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "pumpkin",
+    "label": "Citrouille",
+    "category": "objets",
+    "keywords": [
+      "citrouille",
+      "potiron",
+      "carrosse",
+      "automne"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "pumpkin-lantern",
+    "label": "Citrouille d'Halloween",
+    "category": "objets",
+    "keywords": [
+      "citrouille",
+      "halloween",
+      "lanterne",
+      "jack-o'-lantern"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "key",
+    "label": "Clé",
+    "category": "objets",
+    "keywords": [
+      "clé",
+      "serrure",
+      "ouvrir",
+      "secret"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "skeleton-key",
+    "label": "Clé ancienne",
+    "category": "objets",
+    "keywords": [
+      "clé",
+      "ancienne",
+      "passe-partout",
+      "serrure"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "heart-key",
+    "label": "Clé du cœur",
+    "category": "objets",
+    "keywords": [
+      "clé",
+      "cœur",
+      "amour",
+      "secret"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "house-keys",
+    "label": "Clés de maison",
+    "category": "objets",
+    "keywords": [
+      "clés",
+      "trousseau",
+      "maison",
+      "porte"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "ringing-bell",
+    "label": "Cloche",
+    "category": "objets",
+    "keywords": [
+      "cloche",
+      "sonner",
+      "église",
+      "alarme"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "hearts",
+    "label": "Cœur",
+    "category": "objets",
+    "keywords": [
+      "cœur",
+      "amour",
+      "sentiment",
+      "passion"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "heart-wings",
+    "label": "Cœur ailé",
+    "category": "objets",
+    "keywords": [
+      "cœur",
+      "ailes",
+      "amour",
+      "liberté"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "broken-heart",
+    "label": "Cœur brisé",
+    "category": "objets",
+    "keywords": [
+      "cœur brisé",
+      "chagrin",
+      "rupture",
+      "tristesse"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "chest",
+    "label": "Coffre",
+    "category": "objets",
+    "keywords": [
+      "coffre",
+      "malle",
+      "secret",
+      "rangement"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "open-treasure-chest",
+    "label": "Coffre au trésor",
+    "category": "objets",
+    "keywords": [
+      "trésor",
+      "coffre",
+      "or",
+      "pirate"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "mimic-chest",
+    "label": "Coffre-monstre",
+    "category": "objets",
+    "keywords": [
+      "coffre",
+      "monstre",
+      "piège",
+      "dents"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "spiral-shell",
+    "label": "Coquillage",
+    "category": "objets",
+    "keywords": [
+      "coquillage",
+      "escargot de mer",
+      "plage",
+      "océan"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "scallop",
+    "label": "Coquille Saint-Jacques",
+    "category": "objets",
+    "keywords": [
+      "coquillage",
+      "coquille",
+      "plage",
+      "saint-jacques"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "rope-coil",
+    "label": "Corde",
+    "category": "objets",
+    "keywords": [
+      "corde",
+      "nœud",
+      "cordage",
+      "attacher"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "ice-cream-cone",
+    "label": "Cornet de glace",
+    "category": "objets",
+    "keywords": [
+      "glace",
+      "cornet",
+      "dessert",
+      "été"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "cuckoo-clock",
+    "label": "Coucou",
+    "category": "objets",
+    "keywords": [
+      "coucou",
+      "horloge",
+      "pendule",
+      "heure"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "crown",
+    "label": "Couronne",
+    "category": "objets",
+    "keywords": [
+      "couronne",
+      "roi",
+      "reine",
+      "royauté"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "laurel-crown",
+    "label": "Couronne de laurier",
+    "category": "objets",
+    "keywords": [
+      "laurier",
+      "couronne",
+      "victoire",
+      "césar"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "skull-in-jar",
+    "label": "Crâne en bocal",
+    "category": "objets",
+    "keywords": [
+      "crâne",
+      "bocal",
+      "laboratoire",
+      "étrange"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "floating-crystal",
+    "label": "Cristal flottant",
+    "category": "objets",
+    "keywords": [
+      "cristal",
+      "flottant",
+      "magie",
+      "pierre",
+      "énergie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "croissant",
+    "label": "Croissant",
+    "category": "objets",
+    "keywords": [
+      "croissant",
+      "viennoiserie",
+      "petit-déjeuner",
+      "boulangerie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "crucifix",
+    "label": "Crucifix",
+    "category": "objets",
+    "keywords": [
+      "croix",
+      "crucifix",
+      "religion",
+      "foi"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "tooth",
+    "label": "Dent",
+    "category": "objets",
+    "keywords": [
+      "dent",
+      "perdre ses dents",
+      "dentiste",
+      "sourire"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "cut-diamond",
+    "label": "Diamant",
+    "category": "objets",
+    "keywords": [
+      "diamant",
+      "pierre précieuse",
+      "bijou",
+      "joyau"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "pirate-flag",
+    "label": "Drapeau pirate",
+    "category": "objets",
+    "keywords": [
+      "drapeau pirate",
+      "tête de mort",
+      "jolly roger"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "incense",
+    "label": "Encens",
+    "category": "objets",
+    "keywords": [
+      "encens",
+      "fumée",
+      "méditation",
+      "temple"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "anvil",
+    "label": "Enclume",
+    "category": "objets",
+    "keywords": [
+      "enclume",
+      "forge",
+      "forgeron",
+      "métal"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "gears",
+    "label": "Engrenages",
+    "category": "objets",
+    "keywords": [
+      "engrenages",
+      "rouages",
+      "mécanique",
+      "machine"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "envelope",
+    "label": "Enveloppe",
+    "category": "objets",
+    "keywords": [
+      "enveloppe",
+      "lettre",
+      "courrier",
+      "message"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "high-heel",
+    "label": "Escarpin",
+    "category": "objets",
+    "keywords": [
+      "escarpin",
+      "talon",
+      "chaussure",
+      "élégance"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "sparkles",
+    "label": "Étincelles magiques",
+    "category": "objets",
+    "keywords": [
+      "étincelles",
+      "scintillement",
+      "magie",
+      "paillettes"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "armchair",
+    "label": "Fauteuil",
+    "category": "objets",
+    "keywords": [
+      "fauteuil",
+      "salon",
+      "siège",
+      "confort"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "window",
+    "label": "Fenêtre",
+    "category": "objets",
+    "keywords": [
+      "fenêtre",
+      "vitre",
+      "regarder",
+      "dehors"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "horseshoe",
+    "label": "Fer à cheval",
+    "category": "objets",
+    "keywords": [
+      "fer à cheval",
+      "chance",
+      "porte-bonheur"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "firework-rocket",
+    "label": "Feu d'artifice",
+    "category": "objets",
+    "keywords": [
+      "feu d'artifice",
+      "fusée",
+      "fête",
+      "célébration"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "figurehead",
+    "label": "Figure de proue",
+    "category": "objets",
+    "keywords": [
+      "figure de proue",
+      "navire",
+      "sirène",
+      "proue"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "drink-me",
+    "label": "Fiole « Bois-moi »",
+    "category": "objets",
+    "keywords": [
+      "fiole",
+      "bois-moi",
+      "alice",
+      "potion",
+      "rapetisser"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "bubbling-flask",
+    "label": "Fiole bouillonnante",
+    "category": "objets",
+    "keywords": [
+      "fiole",
+      "laboratoire",
+      "alchimie",
+      "expérience"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "flute",
+    "label": "Flûte",
+    "category": "objets",
+    "keywords": [
+      "flûte",
+      "musique",
+      "instrument",
+      "vent"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "pan-flute",
+    "label": "Flûte de Pan",
+    "category": "objets",
+    "keywords": [
+      "flûte de pan",
+      "musique",
+      "berger"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "pitchfork",
+    "label": "Fourche",
+    "category": "objets",
+    "keywords": [
+      "fourche",
+      "ferme",
+      "foin",
+      "paysan"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "cheese-wedge",
+    "label": "Fromage",
+    "category": "objets",
+    "keywords": [
+      "fromage",
+      "part",
+      "gruyère",
+      "souris"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "globe",
+    "label": "Globe terrestre",
+    "category": "objets",
+    "keywords": [
+      "globe",
+      "mappemonde",
+      "géographie",
+      "voyage"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "gong",
+    "label": "Gong",
+    "category": "objets",
+    "keywords": [
+      "gong",
+      "asie",
+      "temple",
+      "résonner"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "spell-book",
+    "label": "Grimoire",
+    "category": "objets",
+    "keywords": [
+      "grimoire",
+      "sortilège",
+      "magie",
+      "livre de sorts"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "paper-crane",
+    "label": "Grue en papier",
+    "category": "objets",
+    "keywords": [
+      "origami",
+      "grue",
+      "papier",
+      "pliage"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "guitar",
+    "label": "Guitare",
+    "category": "objets",
+    "keywords": [
+      "guitare",
+      "musique",
+      "instrument",
+      "cordes"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "wood-axe",
+    "label": "Hache de bûcheron",
+    "category": "objets",
+    "keywords": [
+      "hache",
+      "bûcheron",
+      "bois",
+      "forêt"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "harp",
+    "label": "Harpe",
+    "category": "objets",
+    "keywords": [
+      "harpe",
+      "musique",
+      "ange",
+      "cordes"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "oyster-pearl",
+    "label": "Huître perlière",
+    "category": "objets",
+    "keywords": [
+      "huître",
+      "perle",
+      "mer",
+      "trésor"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "infinity",
+    "label": "Infini",
+    "category": "objets",
+    "keywords": [
+      "infini",
+      "éternité",
+      "boucle",
+      "symbole"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "newspaper",
+    "label": "Journal",
+    "category": "objets",
+    "keywords": [
+      "journal",
+      "presse",
+      "nouvelles",
+      "article"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "binoculars",
+    "label": "Jumelles",
+    "category": "objets",
+    "keywords": [
+      "jumelles",
+      "observer",
+      "regarder",
+      "lointain"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "bed-lamp",
+    "label": "Lampe de chevet",
+    "category": "objets",
+    "keywords": [
+      "lampe",
+      "chevet",
+      "chambre",
+      "lumière"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "magic-lamp",
+    "label": "Lampe magique",
+    "category": "objets",
+    "keywords": [
+      "lampe",
+      "génie",
+      "aladdin",
+      "vœu"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "flashlight",
+    "label": "Lampe torche",
+    "category": "objets",
+    "keywords": [
+      "lampe torche",
+      "lumière",
+      "obscurité",
+      "faisceau"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "old-lantern",
+    "label": "Lanterne",
+    "category": "objets",
+    "keywords": [
+      "lanterne",
+      "lumière",
+      "ancienne",
+      "nuit"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "asian-lantern",
+    "label": "Lanterne asiatique",
+    "category": "objets",
+    "keywords": [
+      "lanterne",
+      "asie",
+      "chine",
+      "fête"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "paper-lantern",
+    "label": "Lanterne en papier",
+    "category": "objets",
+    "keywords": [
+      "lanterne",
+      "papier",
+      "lampion",
+      "fête"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "love-letter",
+    "label": "Lettre d'amour",
+    "category": "objets",
+    "keywords": [
+      "lettre",
+      "amour",
+      "cœur",
+      "déclaration"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "money-stack",
+    "label": "Liasse de billets",
+    "category": "objets",
+    "keywords": [
+      "billets",
+      "argent",
+      "liasse",
+      "richesse"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "bed",
+    "label": "Lit",
+    "category": "objets",
+    "keywords": [
+      "lit",
+      "chambre",
+      "dormir",
+      "sommeil"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "bunk-beds",
+    "label": "Lits superposés",
+    "category": "objets",
+    "keywords": [
+      "lits superposés",
+      "chambre",
+      "dortoir",
+      "colonie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "open-book",
+    "label": "Livre ouvert",
+    "category": "objets",
+    "keywords": [
+      "livre",
+      "lecture",
+      "histoire",
+      "pages"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "spyglass",
+    "label": "Longue-vue",
+    "category": "objets",
+    "keywords": [
+      "longue-vue",
+      "lunette",
+      "pirate",
+      "horizon"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "magnifying-glass",
+    "label": "Loupe",
+    "category": "objets",
+    "keywords": [
+      "loupe",
+      "chercher",
+      "indice",
+      "enquête"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "spectacles",
+    "label": "Lunettes",
+    "category": "objets",
+    "keywords": [
+      "lunettes",
+      "vue",
+      "lecture",
+      "binocles"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "lyre",
+    "label": "Lyre",
+    "category": "objets",
+    "keywords": [
+      "lyre",
+      "musique",
+      "antique",
+      "orphée"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "puppet",
+    "label": "Marionnette",
+    "category": "objets",
+    "keywords": [
+      "marionnette",
+      "fils",
+      "pantin",
+      "manipulé"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "gas-mask",
+    "label": "Masque à gaz",
+    "category": "objets",
+    "keywords": [
+      "masque à gaz",
+      "toxique",
+      "apocalypse",
+      "protection"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "carnival-mask",
+    "label": "Masque de carnaval",
+    "category": "objets",
+    "keywords": [
+      "masque",
+      "carnaval",
+      "venise",
+      "bal masqué"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "drama-masks",
+    "label": "Masques de théâtre",
+    "category": "objets",
+    "keywords": [
+      "masques",
+      "théâtre",
+      "comédie",
+      "tragédie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "medicine-pills",
+    "label": "Médicaments",
+    "category": "objets",
+    "keywords": [
+      "médicaments",
+      "pilules",
+      "comprimés",
+      "pharmacie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "handcuffs",
+    "label": "Menottes",
+    "category": "objets",
+    "keywords": [
+      "menottes",
+      "police",
+      "arrestation",
+      "prisonnier"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "microphone",
+    "label": "Micro",
+    "category": "objets",
+    "keywords": [
+      "micro",
+      "chanter",
+      "scène",
+      "karaoké"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "microscope",
+    "label": "Microscope",
+    "category": "objets",
+    "keywords": [
+      "microscope",
+      "science",
+      "laboratoire",
+      "biologie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "mirror-mirror",
+    "label": "Miroir",
+    "category": "objets",
+    "keywords": [
+      "miroir",
+      "reflet",
+      "glace",
+      "conte"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "pocket-watch",
+    "label": "Montre à gousset",
+    "category": "objets",
+    "keywords": [
+      "montre",
+      "gousset",
+      "temps",
+      "lapin blanc"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "apothecary",
+    "label": "Mortier et pilon",
+    "category": "objets",
+    "keywords": [
+      "mortier",
+      "pilon",
+      "apothicaire",
+      "herboriste",
+      "remède"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "bird-house",
+    "label": "Nichoir",
+    "category": "objets",
+    "keywords": [
+      "nichoir",
+      "oiseau",
+      "cabane",
+      "arbre"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "nest-eggs",
+    "label": "Nid",
+    "category": "objets",
+    "keywords": [
+      "nid",
+      "œufs",
+      "oiseau",
+      "branche"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "musical-notes",
+    "label": "Notes de musique",
+    "category": "objets",
+    "keywords": [
+      "musique",
+      "notes",
+      "mélodie",
+      "chanson"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "eyeball",
+    "label": "Œil",
+    "category": "objets",
+    "keywords": [
+      "œil",
+      "regard",
+      "vue",
+      "observer"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "eye-of-horus",
+    "label": "Œil d'Horus",
+    "category": "objets",
+    "keywords": [
+      "œil",
+      "horus",
+      "égypte",
+      "protection"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "all-seeing-eye",
+    "label": "Œil qui voit tout",
+    "category": "objets",
+    "keywords": [
+      "œil",
+      "providence",
+      "triangle",
+      "mystique",
+      "surveillance"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "cosmic-egg",
+    "label": "Œuf cosmique",
+    "category": "objets",
+    "keywords": [
+      "œuf",
+      "cosmique",
+      "origine",
+      "naissance"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "easter-egg",
+    "label": "Œuf de Pâques",
+    "category": "objets",
+    "keywords": [
+      "œuf",
+      "pâques",
+      "chocolat",
+      "décoré"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "bottled-shadow",
+    "label": "Ombre en bouteille",
+    "category": "objets",
+    "keywords": [
+      "bouteille",
+      "ombre",
+      "fiole",
+      "mystère"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "laptop",
+    "label": "Ordinateur portable",
+    "category": "objets",
+    "keywords": [
+      "ordinateur",
+      "portable",
+      "écran",
+      "travail"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "pillow",
+    "label": "Oreiller",
+    "category": "objets",
+    "keywords": [
+      "oreiller",
+      "coussin",
+      "lit",
+      "dormir"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "ouroboros",
+    "label": "Ouroboros",
+    "category": "objets",
+    "keywords": [
+      "ouroboros",
+      "serpent",
+      "cycle",
+      "éternité"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "bread",
+    "label": "Pain",
+    "category": "objets",
+    "keywords": [
+      "pain",
+      "boulangerie",
+      "baguette",
+      "miche"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "palette",
+    "label": "Palette de peintre",
+    "category": "objets",
+    "keywords": [
+      "palette",
+      "peinture",
+      "couleurs",
+      "artiste"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "umbrella",
+    "label": "Parapluie",
+    "category": "objets",
+    "keywords": [
+      "parapluie",
+      "pluie",
+      "abri",
+      "ombrelle"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "scroll-unfurled",
+    "label": "Parchemin",
+    "category": "objets",
+    "keywords": [
+      "parchemin",
+      "rouleau",
+      "message",
+      "ancien"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "perfume-bottle",
+    "label": "Parfum",
+    "category": "objets",
+    "keywords": [
+      "parfum",
+      "flacon",
+      "odeur",
+      "senteur"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "cake-slice",
+    "label": "Part de gâteau",
+    "category": "objets",
+    "keywords": [
+      "gâteau",
+      "anniversaire",
+      "dessert",
+      "pâtisserie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "spade",
+    "label": "Pelle",
+    "category": "objets",
+    "keywords": [
+      "pelle",
+      "creuser",
+      "jardin",
+      "trou"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "pendulum-swing",
+    "label": "Pendule hypnotique",
+    "category": "objets",
+    "keywords": [
+      "pendule",
+      "hypnose",
+      "balancier",
+      "oscillation"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "periscope",
+    "label": "Périscope",
+    "category": "objets",
+    "keywords": [
+      "périscope",
+      "sous-marin",
+      "observer"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "grand-piano",
+    "label": "Piano à queue",
+    "category": "objets",
+    "keywords": [
+      "piano",
+      "musique",
+      "concert",
+      "clavier"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "jigsaw-piece",
+    "label": "Pièce de puzzle",
+    "category": "objets",
+    "keywords": [
+      "puzzle",
+      "pièce",
+      "énigme",
+      "manquant"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "stairs-cake",
+    "label": "Pièce montée",
+    "category": "objets",
+    "keywords": [
+      "pièce montée",
+      "gâteau",
+      "mariage",
+      "fête"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "coins",
+    "label": "Pièces",
+    "category": "objets",
+    "keywords": [
+      "pièces",
+      "argent",
+      "monnaie",
+      "or"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "rune-stone",
+    "label": "Pierre runique",
+    "category": "objets",
+    "keywords": [
+      "rune",
+      "pierre",
+      "viking",
+      "inscription"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "gems",
+    "label": "Pierres précieuses",
+    "category": "objets",
+    "keywords": [
+      "gemmes",
+      "pierres précieuses",
+      "joyaux",
+      "trésor"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "book-pile",
+    "label": "Pile de livres",
+    "category": "objets",
+    "keywords": [
+      "livres",
+      "pile",
+      "lecture",
+      "bibliothèque"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "smoking-pipe",
+    "label": "Pipe",
+    "category": "objets",
+    "keywords": [
+      "pipe",
+      "fumer",
+      "tabac",
+      "grand-père"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "feather",
+    "label": "Plume",
+    "category": "objets",
+    "keywords": [
+      "plume",
+      "léger",
+      "oiseau",
+      "voler"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "quill-ink",
+    "label": "Plume et encrier",
+    "category": "objets",
+    "keywords": [
+      "plume",
+      "encre",
+      "écrire",
+      "encrier"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "poison-bottle",
+    "label": "Poison",
+    "category": "objets",
+    "keywords": [
+      "poison",
+      "fiole",
+      "toxique",
+      "venin"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "shiny-apple",
+    "label": "Pomme",
+    "category": "objets",
+    "keywords": [
+      "pomme",
+      "fruit",
+      "croquer",
+      "tentation"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "popcorn",
+    "label": "Pop-corn",
+    "category": "objets",
+    "keywords": [
+      "pop-corn",
+      "cinéma",
+      "film",
+      "friandise"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "portrait",
+    "label": "Portrait",
+    "category": "objets",
+    "keywords": [
+      "portrait",
+      "cadre",
+      "tableau",
+      "ancêtre"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "flower-pot",
+    "label": "Pot de fleurs",
+    "category": "objets",
+    "keywords": [
+      "pot",
+      "fleur",
+      "plante",
+      "jardinage"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "honey-jar",
+    "label": "Pot de miel",
+    "category": "objets",
+    "keywords": [
+      "miel",
+      "pot",
+      "abeille",
+      "douceur"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "magic-potion",
+    "label": "Potion magique",
+    "category": "objets",
+    "keywords": [
+      "potion",
+      "fiole",
+      "magie",
+      "élixir"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "voodoo-doll",
+    "label": "Poupée vaudou",
+    "category": "objets",
+    "keywords": [
+      "poupée vaudou",
+      "épingles",
+      "malédiction",
+      "sort"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "matryoshka-dolls",
+    "label": "Poupées russes",
+    "category": "objets",
+    "keywords": [
+      "poupées russes",
+      "matriochka",
+      "emboîtées"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "film-projector",
+    "label": "Projecteur de cinéma",
+    "category": "objets",
+    "keywords": [
+      "cinéma",
+      "projecteur",
+      "film",
+      "bobine"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "pocket-radio",
+    "label": "Radio",
+    "category": "objets",
+    "keywords": [
+      "radio",
+      "poste",
+      "transistor",
+      "ondes"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "boombox",
+    "label": "Radio-cassette",
+    "category": "objets",
+    "keywords": [
+      "radio-cassette",
+      "ghetto blaster",
+      "musique",
+      "années 80"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "alarm-clock",
+    "label": "Réveil",
+    "category": "objets",
+    "keywords": [
+      "réveil",
+      "horloge",
+      "heure",
+      "matin",
+      "sonnerie"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "dress",
+    "label": "Robe",
+    "category": "objets",
+    "keywords": [
+      "robe",
+      "vêtement",
+      "soirée",
+      "mode"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "rocking-chair",
+    "label": "Rocking-chair",
+    "category": "objets",
+    "keywords": [
+      "fauteuil à bascule",
+      "rocking-chair",
+      "grand-mère",
+      "véranda"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "clockwork",
+    "label": "Rouages",
+    "category": "objets",
+    "keywords": [
+      "rouages",
+      "horlogerie",
+      "mécanisme",
+      "engrenage"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "spinning-wheel",
+    "label": "Rouet",
+    "category": "objets",
+    "keywords": [
+      "rouet",
+      "filer",
+      "laine",
+      "belle au bois dormant"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "beehive",
+    "label": "Ruche",
+    "category": "objets",
+    "keywords": [
+      "ruche",
+      "abeilles",
+      "miel",
+      "apiculture"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "hourglass",
+    "label": "Sablier",
+    "category": "objets",
+    "keywords": [
+      "sablier",
+      "temps",
+      "sable",
+      "attente"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "backpack",
+    "label": "Sac à dos",
+    "category": "objets",
+    "keywords": [
+      "sac à dos",
+      "voyage",
+      "randonnée",
+      "école"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "holy-grail",
+    "label": "Saint Graal",
+    "category": "objets",
+    "keywords": [
+      "graal",
+      "calice",
+      "coupe",
+      "quête"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "saxophone",
+    "label": "Saxophone",
+    "category": "objets",
+    "keywords": [
+      "saxophone",
+      "jazz",
+      "musique"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "diving-helmet",
+    "label": "Scaphandre",
+    "category": "objets",
+    "keywords": [
+      "scaphandre",
+      "plongée",
+      "casque",
+      "profondeurs"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "saddle",
+    "label": "Selle",
+    "category": "objets",
+    "keywords": [
+      "selle",
+      "cheval",
+      "équitation",
+      "cavalier"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "syringe",
+    "label": "Seringue",
+    "category": "objets",
+    "keywords": [
+      "seringue",
+      "piqûre",
+      "vaccin",
+      "hôpital"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "whistle",
+    "label": "Sifflet",
+    "category": "objets",
+    "keywords": [
+      "sifflet",
+      "siffler",
+      "arbitre",
+      "signal"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "smartphone",
+    "label": "Smartphone",
+    "category": "objets",
+    "keywords": [
+      "téléphone",
+      "portable",
+      "smartphone",
+      "écran"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "night-sleep",
+    "label": "Sommeil",
+    "category": "objets",
+    "keywords": [
+      "sommeil",
+      "nuit",
+      "dormir",
+      "lune",
+      "zzz"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "spiral-lollipop",
+    "label": "Sucette",
+    "category": "objets",
+    "keywords": [
+      "sucette",
+      "bonbon",
+      "friandise",
+      "enfance"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "table",
+    "label": "Table",
+    "category": "objets",
+    "keywords": [
+      "table",
+      "repas",
+      "meuble",
+      "salle à manger"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "mona-lisa",
+    "label": "Tableau",
+    "category": "objets",
+    "keywords": [
+      "tableau",
+      "joconde",
+      "peinture",
+      "musée",
+      "portrait"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "stone-tablet",
+    "label": "Tablette de pierre",
+    "category": "objets",
+    "keywords": [
+      "tablette",
+      "pierre",
+      "inscription",
+      "commandements"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "drum",
+    "label": "Tambour",
+    "category": "objets",
+    "keywords": [
+      "tambour",
+      "percussion",
+      "musique",
+      "rythme"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "coffee-cup",
+    "label": "Tasse de café",
+    "category": "objets",
+    "keywords": [
+      "café",
+      "tasse",
+      "boisson",
+      "petit-déjeuner"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "rotary-phone",
+    "label": "Téléphone à cadran",
+    "category": "objets",
+    "keywords": [
+      "téléphone",
+      "cadran",
+      "rétro",
+      "appel"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "candlestick-phone",
+    "label": "Téléphone ancien",
+    "category": "objets",
+    "keywords": [
+      "téléphone",
+      "ancien",
+      "rétro",
+      "appel"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "telescope",
+    "label": "Télescope",
+    "category": "objets",
+    "keywords": [
+      "télescope",
+      "étoiles",
+      "astronomie",
+      "observer"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "tv",
+    "label": "Télévision",
+    "category": "objets",
+    "keywords": [
+      "télévision",
+      "écran",
+      "tv",
+      "émission"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "skull-crossed-bones",
+    "label": "Tête de mort",
+    "category": "objets",
+    "keywords": [
+      "crâne",
+      "tête de mort",
+      "danger",
+      "pirate"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "teapot",
+    "label": "Théière",
+    "category": "objets",
+    "keywords": [
+      "théière",
+      "thé",
+      "tasse",
+      "goûter"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "ticket",
+    "label": "Ticket",
+    "category": "objets",
+    "keywords": [
+      "ticket",
+      "billet",
+      "entrée",
+      "voyage"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "piggy-bank",
+    "label": "Tirelire",
+    "category": "objets",
+    "keywords": [
+      "tirelire",
+      "cochon",
+      "économies",
+      "argent"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "spider-web",
+    "label": "Toile d'araignée",
+    "category": "objets",
+    "keywords": [
+      "toile",
+      "araignée",
+      "piège",
+      "grenier"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "barrel",
+    "label": "Tonneau",
+    "category": "objets",
+    "keywords": [
+      "tonneau",
+      "baril",
+      "fût",
+      "vin"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "graduate-cap",
+    "label": "Toque de diplômé",
+    "category": "objets",
+    "keywords": [
+      "diplôme",
+      "remise des diplômes",
+      "université",
+      "étudiant"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "torch",
+    "label": "Torche",
+    "category": "objets",
+    "keywords": [
+      "torche",
+      "flambeau",
+      "feu",
+      "lumière"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "spinning-top",
+    "label": "Toupie",
+    "category": "objets",
+    "keywords": [
+      "toupie",
+      "jouet",
+      "tourner",
+      "enfance"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "third-eye",
+    "label": "Troisième œil",
+    "category": "objets",
+    "keywords": [
+      "troisième œil",
+      "intuition",
+      "voyance",
+      "spirituel"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "trumpet",
+    "label": "Trompette",
+    "category": "objets",
+    "keywords": [
+      "trompette",
+      "cuivre",
+      "jazz",
+      "fanfare"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "throne-king",
+    "label": "Trône",
+    "category": "objets",
+    "keywords": [
+      "trône",
+      "roi",
+      "pouvoir",
+      "royaume"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "trophy",
+    "label": "Trophée",
+    "category": "objets",
+    "keywords": [
+      "trophée",
+      "coupe",
+      "victoire",
+      "récompense"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "suitcase",
+    "label": "Valise",
+    "category": "objets",
+    "keywords": [
+      "valise",
+      "voyage",
+      "bagage",
+      "départ"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "violin",
+    "label": "Violon",
+    "category": "objets",
+    "keywords": [
+      "violon",
+      "musique",
+      "classique",
+      "cordes"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "steering-wheel",
+    "label": "Volant",
+    "category": "objets",
+    "keywords": [
+      "volant",
+      "conduire",
+      "voiture",
+      "route"
+    ],
+    "kind": "place"
+  },
+  {
+    "name": "yin-yang",
+    "label": "Yin et yang",
+    "category": "objets",
+    "keywords": [
+      "yin yang",
+      "équilibre",
+      "dualité",
+      "taoïsme"
+    ],
+    "kind": "place"
+  }
+]

@@ -9,7 +9,7 @@
  */
 
 /** Version du format de données. À augmenter quand on ajoute des champs ou des collections. */
-export const SCHEMA_VERSION = 1;
+export const SCHEMA_VERSION = 2;
 
 /** Identifiant écrit dans chaque fichier pour reconnaître nos fichiers. */
 export const APP_ID = 'grimoire-dream-map';
@@ -28,17 +28,92 @@ export interface BaseRecord {
   [extra: string]: unknown;
 }
 
-/** Un rêve noté dans le journal. (schemaVersion 1) */
+/** Un rêve noté dans le journal. */
 export interface Dream extends BaseRecord {
+  // --- v1 ---
   /** Date du rêve, format AAAA-MM-JJ (date locale). */
   dreamDate: string;
   title: string;
+  /** Description du rêve (pour une entrée rapide : les quelques détails notés). */
   text: string;
+  // --- v2 (peuvent manquer sur les anciens rêves : utiliser normalizeDream) ---
+  /** « quick » = entrée rapide au réveil, « full » = rêve complet. */
+  kind?: DreamKind;
+  /** Lucidité de 0 (pas du tout) à 5 (contrôle total). null = non renseigné. */
+  lucidity?: number | null;
+  /** Humeur de 1 (très mauvaise) à 5 (excellente). null = non renseigné. */
+  mood?: number | null;
+  /** Ambiances (mots choisis dans une liste ou ajoutés). */
+  ambiances?: string[];
+  /** Étiquettes et mots-clés libres. */
+  tags?: string[];
+  /** Couleurs du rêve (#rrggbb) : taches d'aquarelle sous ses lieux sur la carte. */
+  colors?: string[];
+  /** Personnes présentes (ids de la collection people). */
+  peopleIds?: string[];
+  /** Lieux et véhicules du rêve (ids de la collection places). */
+  placeIds?: string[];
+  /** Notes vocales, images, musiques, vidéos, fichiers, liens. */
+  media?: MediaItem[];
+}
+
+export type DreamKind = 'quick' | 'full';
+
+export type MediaType = 'audio' | 'image' | 'video' | 'music' | 'file' | 'link' | 'youtube';
+
+/** Un média attaché à un rêve. Les fichiers sont gardés à part (voir src/platform/media). */
+export interface MediaItem {
+  id: string;
+  type: MediaType;
+  /** Nom affiché. */
+  name: string;
+  /** Adresse web (liens, YouTube). */
+  url?: string;
+  /** Nom du fichier enregistré sur l'appareil (notes vocales, images, fichiers…). */
+  localId?: string;
+  mime?: string;
+  /** Durée des sons, en millisecondes. */
+  durationMs?: number;
+  createdAt: string;
+}
+
+/** Une personne qui apparaît dans des rêves (réutilisable). */
+export interface Person extends BaseRecord {
+  name: string;
+  /** true = existe pour de vrai, false = personnage imaginaire. */
+  real: boolean;
+}
+
+/** Position d'un lieu imaginaire décrite par rapport à un autre lieu. */
+export type PlaceRelationDir = 'north' | 'south' | 'east' | 'west' | 'in' | 'near';
+
+/** Un lieu (réel ou imaginaire) ou un véhicule, dessiné sur la carte. Réutilisable entre rêves. */
+export interface Place extends BaseRecord {
+  name: string;
+  /** « place » = lieu, « vehicle » = véhicule qui circule entre deux lieux. */
+  kind: 'place' | 'vehicle';
+  /** true = lieu qui existe pour de vrai (coordonnées fixes), false = imaginaire. */
+  real: boolean;
+  /** Dessin (nom d'icône game-icons, ex. « wood-cabin »). */
+  icon: string;
+  /** Taille de 1 (minuscule) à 7 (immense) : voir PLACE_SIZES. */
+  size: number;
+  /** Position. Réel : vraies coordonnées. Imaginaire : position choisie sur la carte. */
+  lat?: number;
+  lon?: number;
+  /** Adresse complète trouvée par la recherche (lieux réels). */
+  address?: string;
+  /** Lieu imaginaire décrit par rapport à un autre : « au nord de … ». */
+  relation?: { dir: PlaceRelationDir; placeId: string };
+  /** Ordre de superposition : plus grand = dessiné par-dessus. */
+  layer?: number;
+  /** Véhicule : trajet entre deux lieux. */
+  route?: { fromId: string; toId: string };
 }
 
 /** Noms des collections. On peut en ajouter, jamais en renommer. */
-export type CollectionName = 'dreams';
-export const COLLECTIONS: CollectionName[] = ['dreams'];
+export type CollectionName = 'dreams' | 'people' | 'places';
+export const COLLECTIONS: CollectionName[] = ['dreams', 'people', 'places'];
 
 /**
  * Un « morceau » (shard) d'une collection = un fichier.
@@ -61,4 +136,32 @@ export interface ExportBundle {
   schemaVersion: number;
   exportedAt: string;
   shards: ShardDoc[];
+}
+
+/** Tailles des lieux : taille réelle approximative (mètres) qui fixe la taille du dessin selon le zoom. */
+export const PLACE_SIZES: { level: number; label: string; meters: number }[] = [
+  { level: 1, label: 'Minuscule', meters: 40 },
+  { level: 2, label: 'Petit', meters: 200 },
+  { level: 3, label: 'Moyen', meters: 1_000 },
+  { level: 4, label: 'Grand', meters: 5_000 },
+  { level: 5, label: 'Très grand', meters: 25_000 },
+  { level: 6, label: 'Immense', meters: 120_000 },
+  { level: 7, label: 'Gigantesque', meters: 600_000 },
+];
+
+/** Complète un rêve ancien avec les valeurs par défaut des champs v2. */
+export function normalizeDream(d: Dream): Required<Pick<Dream, 'kind' | 'ambiances' | 'tags' | 'colors' | 'peopleIds' | 'placeIds' | 'media'>> &
+  Dream & { lucidity: number | null; mood: number | null } {
+  return {
+    ...d,
+    kind: d.kind ?? 'full',
+    lucidity: d.lucidity ?? null,
+    mood: d.mood ?? null,
+    ambiances: d.ambiances ?? [],
+    tags: d.tags ?? [],
+    colors: d.colors ?? [],
+    peopleIds: d.peopleIds ?? [],
+    placeIds: d.placeIds ?? [],
+    media: d.media ?? [],
+  };
 }
