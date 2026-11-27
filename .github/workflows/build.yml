@@ -42,7 +42,8 @@ jobs:
         shell: bash
         env:
           SECRET: ${{ secrets.GOOGLE_DESKTOP_CLIENT_SECRET }}
-        run: node -e "require('fs').writeFileSync('google-oauth.json', JSON.stringify({ clientSecret: process.env.SECRET || '' }))"
+        run: |
+          node -e "require('fs').writeFileSync('google-oauth.json', JSON.stringify({ clientSecret: process.env.SECRET || '' }))"
       - name: Installateur Windows
         working-directory: desktop
         run: |

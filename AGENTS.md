@@ -129,6 +129,9 @@ EXPO_OFFLINE=1 npx expo export -p web --output-dir dist   # version web dans dis
 cd desktop && npm install && npx electron .                # app PC (après l'export web)
 ```
 
+Avant d'envoyer une modification de `.github/workflows/*.yml` : `npx -y @action-validator/cli <fichier>`
+(une erreur de syntaxe fait échouer toute la fabrication sans rien lancer).
+
 Tests navigateur / Electron : scripts Playwright à écrire dans le dossier scratchpad (pas dans le dépôt).
 Electron sous Linux : `xvfb-run`, `executablePath: desktop/node_modules/electron/dist/electron`.
 Si l'Electron n'est pas téléchargé : `ELECTRON_GET_USE_PROXY=1 node desktop/node_modules/electron/install.js`.
