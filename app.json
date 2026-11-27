@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "Dream Map",
+    "slug": "grimoire-dream-map",
+    "version": "0.2.0",
+    "orientation": "default",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#0f0d1a",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.pinkrain.grimoire.dreammap",
+      "versionCode": 3,
+      "allowBackup": true,
+      "softwareKeyboardLayoutMode": "resize",
+      "backgroundColor": "#0f0d1a",
+      "adaptiveIcon": {
+        "backgroundColor": "#0f0d1a",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "name": "Grimoire - Dream Map",
+      "shortName": "Dream Map",
+      "backgroundColor": "#0f0d1a",
+      "themeColor": "#0f0d1a",
+      "lang": "fr"
+    },
+    "plugins": [
+      "expo-sharing"
+    ]
+  }
+}
