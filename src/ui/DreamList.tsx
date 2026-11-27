@@ -2,31 +2,60 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { useMemo, useState } from 'react';
 import { FlatList, Pressable, StyleSheet, View } from 'react-native';
 import { appStore, useStoreVersion } from '../data/appStore';
-import { normalizeDream, type Dream } from '../data/types';
+import { formatDuration, sleepEndDate, summarizeSleep } from '../data/sleep';
+import { normalizeDream, type Dream, type Sleep } from '../data/types';
+import { AppIcon } from './AppIcon';
 import { Field, Title, Txt, type PressState } from './components';
-import { formatShortDate } from './dates';
-import { colors, MOOD_LEVELS } from './theme';
+import { formatLongDate, formatShortDate } from './dates';
+import { colors, fonts, MOOD_LEVELS, optionFor, TIMES_OF_DAY, WEATHERS } from './theme';
 import { Moon, WatercolorDot } from './widgets';
 
-export function DreamList(props: { selectedId: string | null; onOpen: (id: string) => void; bottomInset: number; header?: React.ReactNode }) {
+const capitalize = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
+
+type JournalItem = { kind: 'dream'; day: string; dream: Dream } | { kind: 'sleep'; day: string; sleep: Sleep } | { kind: 'day'; day: string };
+
+/** Journal : rêves et sommeils, regroupés par jour (le sommeil d'une nuit est rangé au jour du réveil). */
+export function DreamList(props: {
+  selectedId: string | null;
+  onOpen: (id: string) => void;
+  onOpenSleep: (id: string) => void;
+  bottomInset: number;
+  header?: React.ReactNode;
+}) {
   const version = useStoreVersion();
   const [q, setQ] = useState('');
-  const dreams = useMemo(() => {
+  const items = useMemo(() => {
     const query = q.trim().toLowerCase();
-    return appStore
-      .list('dreams')
-      .filter((d) => {
-        if (!query) return true;
-        const n = normalizeDream(d);
-        const hay = [d.title, d.text, ...n.tags, ...n.ambiances, ...n.placeIds.map((id) => appStore.get('places', id)?.name ?? ''), ...n.peopleIds.map((id) => appStore.get('people', id)?.name ?? '')]
-          .join(' ')
-          .toLowerCase();
-        return hay.includes(query);
-      })
-      .sort((a, b) => (a.dreamDate === b.dreamDate ? b.createdAt.localeCompare(a.createdAt) : b.dreamDate.localeCompare(a.dreamDate)));
+    const dreams = appStore.list('dreams').filter((d) => {
+      if (!query) return true;
+      const n = normalizeDream(d);
+      const hay = [d.title, d.text, ...n.tags, ...n.ambiances, ...n.emotions, ...n.dreamTypes, ...n.placeIds.map((id) => appStore.get('places', id)?.name ?? ''), ...n.peopleIds.map((id) => appStore.get('people', id)?.name ?? '')]
+        .join(' ')
+        .toLowerCase();
+      return hay.includes(query);
+    });
+    const sleeps = query ? [] : appStore.list('sleeps');
+    const byDay = new Map<string, { sleeps: Sleep[]; dreams: Dream[] }>();
+    const slot = (day: string) => {
+      let v = byDay.get(day);
+      if (!v) byDay.set(day, (v = { sleeps: [], dreams: [] }));
+      return v;
+    };
+    for (const d of dreams) slot(d.dreamDate).dreams.push(d);
+    for (const sl of sleeps) slot(sleepEndDate(sl)).sleeps.push(sl);
+    const out: JournalItem[] = [];
+    for (const day of [...byDay.keys()].sort((x, y) => y.localeCompare(x))) {
+      const v = byDay.get(day)!;
+      out.push({ kind: 'day', day });
+      v.sleeps.sort((x, y) => (summarizeSleep(x).bed ?? 0) - (summarizeSleep(y).bed ?? 0));
+      for (const sl of v.sleeps) out.push({ kind: 'sleep', day, sleep: sl });
+      v.dreams.sort((x, y) => x.createdAt.localeCompare(y.createdAt));
+      for (const d of v.dreams) out.push({ kind: 'dream', day, dream: d });
+    }
+    return out;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [version, q]);
-  const total = appStore.list('dreams').length;
+  const total = appStore.list('dreams').length + appStore.list('sleeps').length;
 
   return (
     <View style={styles.container}>
@@ -37,21 +66,60 @@ export function DreamList(props: { selectedId: string | null; onOpen: (id: strin
         </View>
       )}
       <FlatList
-        data={dreams}
-        keyExtractor={(d) => d.id}
+        data={items}
+        keyExtractor={(it) => (it.kind === 'day' ? 'day-' + it.day : it.kind === 'sleep' ? it.sleep.id : it.dream.id)}
         contentContainerStyle={[styles.list, { paddingBottom: 16 + props.bottomInset }]}
         ListEmptyComponent={
           <View style={styles.empty}>
-            <Txt style={styles.emptyGlyph}>☾</Txt>
+            <AppIcon name="logo-grand" size={110} />
             <Title size={22}>{total ? 'Aucun rêve trouvé' : 'Ton journal est vide'}</Title>
             <Txt muted style={{ textAlign: 'center' }}>
-              {total ? 'Essaie un autre mot.' : 'Au réveil, touche le micro pour une note rapide, ou « Nouveau rêve » pour tout raconter.'}
+              {total ? 'Essaie un autre mot.' : 'Au réveil, touche le micro pour une note rapide, « Rêve » pour tout raconter, ou « Sommeil » pour noter ta nuit.'}
             </Txt>
           </View>
         }
-        renderItem={({ item }) => <DreamRow dream={item} selected={item.id === props.selectedId} onPress={() => props.onOpen(item.id)} />}
+        renderItem={({ item }) =>
+          item.kind === 'day' ? (
+            <Txt style={styles.dayHeader}>{capitalize(formatLongDate(item.day))}</Txt>
+          ) : item.kind === 'sleep' ? (
+            <SleepRow sleep={item.sleep} selected={item.sleep.id === props.selectedId} onPress={() => props.onOpenSleep(item.sleep.id)} />
+          ) : (
+            <DreamRow dream={item.dream} selected={item.dream.id === props.selectedId} onPress={() => props.onOpen(item.dream.id)} />
+          )
+        }
       />
     </View>
+  );
+}
+
+function SleepRow({ sleep, selected, onPress }: { sleep: Sleep; selected: boolean; onPress: () => void }) {
+  const s = summarizeSleep(sleep);
+  const span = [sleep.bedTime ?? sleep.asleepTime, sleep.upTime ?? sleep.wakeTime].filter(Boolean).join(' → ');
+  const title = s.isNap ? 'Sieste' : `Nuit du ${formatShortDate(sleep.date).replace(/\s\d{4}$/, '')}`;
+  return (
+    <Pressable
+      onPress={onPress}
+      accessibilityRole="button"
+      testID="sleep-row"
+      style={({ pressed, hovered }: PressState) => [
+        styles.row,
+        styles.sleepRow,
+        (pressed || hovered) && { backgroundColor: colors.surfaceHover },
+        selected && { backgroundColor: colors.surfaceActive, borderColor: colors.accent },
+      ]}
+    >
+      <View style={styles.sleepIcon}>
+        <Ionicons name="bed-outline" size={22} color={colors.ochre} />
+      </View>
+      <View style={{ flex: 1, gap: 2 }}>
+        <Title size={18}>{title}</Title>
+        <Txt muted size={15}>
+          {[span, s.sleep !== null ? `${formatDuration(s.sleep)} de sommeil` : null, s.interruptions.length ? `${s.interruptions.length} réveil${s.interruptions.length > 1 ? 's' : ''}` : null]
+            .filter(Boolean)
+            .join(' · ') || 'Heures à compléter'}
+        </Txt>
+      </View>
+    </Pressable>
   );
 }
 
@@ -72,9 +140,6 @@ function DreamRow({ dream, selected, onPress }: { dream: Dream; selected: boolea
       ]}
     >
       <View style={styles.rowTop}>
-        <Txt faint size={14}>
-          {formatShortDate(d.dreamDate)}
-        </Txt>
         {d.kind === 'quick' && (
           <View style={styles.quick}>
             <Ionicons name="flash" size={11} color={colors.accentText} />
@@ -88,7 +153,13 @@ function DreamRow({ dream, selected, onPress }: { dream: Dream; selected: boolea
           <WatercolorDot key={c} color={c} size={16} seed={i + 2} />
         ))}
         {d.lucidity !== null && <Moon fraction={d.lucidity / 5} size={18} lit={colors.ochre} />}
-        {mood && <Ionicons name={mood.icon} size={18} color={colors.ochre} />}
+        {(mood || d.weather.length > 0 || d.timeOfDay.length > 0) && (
+          <Txt style={{ fontSize: 15, lineHeight: 20, fontFamily: fonts.body }}>
+            {[mood?.emoji, ...d.weather.slice(0, 2).map((w) => optionFor(WEATHERS, w).emoji), d.timeOfDay[0] ? optionFor(TIMES_OF_DAY, d.timeOfDay[0]).emoji : undefined]
+              .filter(Boolean)
+              .join(' ')}
+          </Txt>
+        )}
       </View>
       <Title size={19} numberOfLines={1} style={!d.title.trim() && { color: colors.faint, fontStyle: 'italic' }}>
         {d.title.trim() || 'Sans titre'}
@@ -124,11 +195,13 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   search: { paddingHorizontal: 12, paddingTop: 12 },
   list: { padding: 12, gap: 8 },
+  dayHeader: { color: colors.ochre, fontFamily: fonts.display, fontSize: 16, marginTop: 10, marginLeft: 4 },
+  sleepRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
+  sleepIcon: { width: 40, height: 40, borderRadius: 20, backgroundColor: colors.bg, alignItems: 'center', justifyContent: 'center' },
   row: { backgroundColor: colors.surface, borderRadius: 14, borderWidth: 1, borderColor: colors.borderSoft, paddingVertical: 12, paddingHorizontal: 14, gap: 4 },
   rowTop: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   quick: { flexDirection: 'row', alignItems: 'center', gap: 3, backgroundColor: colors.accent, borderRadius: 8, paddingHorizontal: 6 },
   meta: { flexDirection: 'row', gap: 12, marginTop: 2 },
   metaItem: { flexDirection: 'row', alignItems: 'center', gap: 3 },
   empty: { alignItems: 'center', paddingTop: 48, paddingHorizontal: 24, gap: 8 },
-  emptyGlyph: { color: colors.accent, fontSize: 48, lineHeight: 56 },
 });

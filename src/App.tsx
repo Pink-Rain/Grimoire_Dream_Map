@@ -18,13 +18,15 @@ import { Button, Segmented, Title, Txt } from './ui/components';
 import { DreamList } from './ui/DreamList';
 import { MapScreen } from './ui/MapScreen';
 import { SettingsScreen } from './ui/SettingsScreen';
+import { SleepEditor } from './ui/SleepEditor';
+import { AppIcon, type AppIconName } from './ui/AppIcon';
 import { colors, fonts } from './ui/theme';
 import { TopBar } from './ui/TopBar';
 import { UpdateBanner } from './ui/UpdateBanner';
 import { useLayoutMode } from './ui/useLayoutMode';
 
 type Tab = 'map' | 'journal';
-type Overlay = { kind: 'dream'; id: string; initialKind?: 'quick' | 'full' } | { kind: 'settings' } | null;
+type Overlay = { kind: 'dream'; id: string; initialKind?: 'quick' | 'full' } | { kind: 'sleep'; id: string } | { kind: 'settings' } | null;
 
 export default function App() {
   return (
@@ -111,6 +113,8 @@ function Main() {
   const close = () => setOverlay(null);
   const openDream = (id: string) => setOverlay({ kind: 'dream', id });
   const newDream = (initialKind: 'quick' | 'full') => setOverlay({ kind: 'dream', id: appStore.newId(), initialKind });
+  const openSleep = (id: string) => setOverlay({ kind: 'sleep', id });
+  const newSleep = () => setOverlay({ kind: 'sleep', id: appStore.newId() });
   const toggleSettings = () => setOverlay((o) => (o?.kind === 'settings' ? null : { kind: 'settings' }));
   const showOnMap = (placeId: string) => {
     setTab('map');
@@ -134,6 +138,8 @@ function Main() {
   const editor =
     overlay?.kind === 'dream' ? (
       <DreamEditor key={overlay.id} dreamId={overlay.id} initialKind={overlay.initialKind} onDeleted={close} onShowOnMap={showOnMap} bottomInset={insets.bottom} />
+    ) : overlay?.kind === 'sleep' ? (
+      <SleepEditor key={overlay.id} sleepId={overlay.id} onDeleted={close} bottomInset={insets.bottom} />
     ) : overlay?.kind === 'settings' ? (
       <SettingsScreen bottomInset={insets.bottom} />
     ) : null;
@@ -144,8 +150,8 @@ function Main() {
         value={tab}
         onChange={(t) => setTab(t)}
         options={[
-          { value: 'map', label: 'Carte', icon: 'map-outline' },
-          { value: 'journal', label: 'Journal', icon: 'book-outline' },
+          { value: 'map', label: 'Carte', image: 'carte', imageOn: 'carte-encre' },
+          { value: 'journal', label: 'Journal', image: 'journal', imageOn: 'journal-encre' },
         ]}
         testID="tab"
       />
@@ -155,7 +161,7 @@ function Main() {
   let body;
   if (phone) {
     if (overlay) {
-      const title = overlay.kind === 'settings' ? 'Réglages' : 'Rêve';
+      const title = overlay.kind === 'settings' ? 'Réglages' : overlay.kind === 'sleep' ? 'Sommeil' : 'Rêve';
       body = (
         <>
           <TopBar title={title} layout={layout} topInset={insets.top} onBack={close} />
@@ -171,26 +177,27 @@ function Main() {
             {tab === 'map' ? (
               <MapScreen phone bottomInset={0} onOpenDream={openDream} focus={focus} />
             ) : (
-              <DreamList selectedId={null} onOpen={openDream} bottomInset={0} />
+              <DreamList selectedId={null} onOpen={openDream} onOpenSleep={openSleep} bottomInset={0} />
             )}
           </View>
-          <BottomBar tab={tab} onTab={setTab} onQuick={() => newDream('quick')} onNew={() => newDream('full')} bottomInset={insets.bottom} />
+          <BottomBar tab={tab} onTab={setTab} onQuick={() => newDream('quick')} onNew={() => newDream('full')} onSleep={newSleep} bottomInset={insets.bottom} />
         </>
       );
     }
   } else {
     const actions = (
       <>
-        <Button small label="Note rapide" icon="mic" onPress={() => newDream('quick')} testID="new-quick" />
-        <Button small label="Nouveau rêve" icon="add" variant="primary" onPress={() => newDream('full')} testID="new-dream" />
+        <Button small label="Sommeil" icon="bed-outline" onPress={newSleep} testID="new-sleep" />
+        <Button small label="Note rapide" image="micro" onPress={() => newDream('quick')} testID="new-quick" />
+        <Button small label="Nouveau rêve" image="lune-crepuscule" variant="primary" onPress={() => newDream('full')} testID="new-dream" />
       </>
     );
     const side = editor && (
       <View style={[styles.sidePanel, tab === 'journal' && styles.sidePanelJournal]}>
-        {overlay?.kind === 'dream' && tab === 'map' && (
+        {(overlay?.kind === 'dream' || overlay?.kind === 'sleep') && tab === 'map' && (
           <View style={styles.sideHead}>
             <Title size={18} style={{ flex: 1 }}>
-              Rêve
+              {overlay.kind === 'sleep' ? 'Sommeil' : 'Rêve'}
             </Title>
             <Button small variant="ghost" label="Fermer" icon="close" onPress={close} testID="close-panel" />
           </View>
@@ -213,9 +220,14 @@ function Main() {
           ) : (
             <>
               <View style={styles.sidebar}>
-                <DreamList selectedId={overlay?.kind === 'dream' ? overlay.id : null} onOpen={openDream} bottomInset={insets.bottom} />
+                <DreamList
+                  selectedId={overlay?.kind === 'dream' || overlay?.kind === 'sleep' ? overlay.id : null}
+                  onOpen={openDream}
+                  onOpenSleep={openSleep}
+                  bottomInset={insets.bottom}
+                />
               </View>
-              <View style={styles.fill}>{side ?? <Welcome onQuick={() => newDream('quick')} onNew={() => newDream('full')} />}</View>
+              <View style={styles.fill}>{side ?? <Welcome onQuick={() => newDream('quick')} onNew={() => newDream('full')} onSleep={newSleep} />}</View>
             </>
           )}
         </View>
@@ -234,50 +246,59 @@ function Main() {
   return <View style={styles.fill}>{body}</View>;
 }
 
-function BottomBar(props: { tab: Tab; onTab: (t: Tab) => void; onQuick: () => void; onNew: () => void; bottomInset: number }) {
-  const item = (t: Tab, icon: keyof typeof Ionicons.glyphMap, label: string) => {
+function BottomBar(props: { tab: Tab; onTab: (t: Tab) => void; onQuick: () => void; onNew: () => void; onSleep: () => void; bottomInset: number }) {
+  const item = (t: Tab, image: AppIconName, label: string) => {
     const on = props.tab === t;
     return (
       <Pressable onPress={() => props.onTab(t)} accessibilityRole="tab" accessibilityState={{ selected: on }} style={styles.tabItem} testID={`tab-${t}`}>
-        <Ionicons name={on ? (icon.replace('-outline', '') as typeof icon) : icon} size={24} color={on ? colors.accent : colors.muted} />
+        <View style={[styles.tabIcon, on && styles.tabIconOn]}>
+          <AppIcon name={image} size={28} dim={!on} />
+        </View>
         <Text style={[styles.tabLabel, on && { color: colors.accent }]}>{label}</Text>
       </Pressable>
     );
   };
   return (
     <View style={[styles.bottomBar, { paddingBottom: Math.max(8, props.bottomInset) }]}>
-      {item('map', 'map-outline', 'Carte')}
+      {item('map', 'carte', 'Carte')}
+      {item('journal', 'journal', 'Journal')}
       <Pressable onPress={props.onQuick} accessibilityRole="button" accessibilityLabel="Note rapide" style={styles.fabWrap} testID="new-quick">
         <View style={[styles.fab, styles.fabQuick]}>
-          <Ionicons name="mic" size={26} color={colors.accentText} />
+          <AppIcon name="micro-encre" size={34} />
         </View>
         <Text style={styles.tabLabel}>Note rapide</Text>
       </Pressable>
       <Pressable onPress={props.onNew} accessibilityRole="button" accessibilityLabel="Nouveau rêve" style={styles.fabWrap} testID="new-dream">
         <View style={styles.fab}>
-          <Ionicons name="add" size={28} color={colors.text} />
+          <AppIcon name="lune-crepuscule" size={32} />
         </View>
-        <Text style={styles.tabLabel}>Nouveau rêve</Text>
+        <Text style={styles.tabLabel}>Rêve</Text>
       </Pressable>
-      {item('journal', 'book-outline', 'Journal')}
+      <Pressable onPress={props.onSleep} accessibilityRole="button" accessibilityLabel="Nouveau sommeil" style={styles.fabWrap} testID="new-sleep">
+        <View style={styles.fab}>
+          <Ionicons name="bed-outline" size={26} color={colors.text} />
+        </View>
+        <Text style={styles.tabLabel}>Sommeil</Text>
+      </Pressable>
     </View>
   );
 }
 
-function Welcome(props: { onQuick: () => void; onNew: () => void }) {
+function Welcome(props: { onQuick: () => void; onNew: () => void; onSleep: () => void }) {
   return (
     <View style={[styles.fill, styles.center, { gap: 10, padding: 24 }]}>
-      <Text style={{ color: colors.accent, fontSize: 56 }}>☾</Text>
+      <AppIcon name="logo-grand" size={150} />
       <Txt faint size={13} style={{ letterSpacing: 4 }}>
         GRIMOIRE
       </Txt>
       <Title size={30}>Dream Map</Title>
       <Txt muted style={{ textAlign: 'center' }}>
-        Choisis un rêve dans la liste, ou note-en un nouveau.
+        Choisis une entrée dans le journal, ou note-en une nouvelle.
       </Txt>
-      <View style={{ flexDirection: 'row', gap: 10, marginTop: 8 }}>
-        <Button label="Note rapide" icon="mic" onPress={props.onQuick} />
-        <Button label="Nouveau rêve" icon="add" variant="primary" onPress={props.onNew} />
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 10, marginTop: 8 }}>
+        <Button label="Note rapide" image="micro" onPress={props.onQuick} />
+        <Button label="Nouveau rêve" image="lune-crepuscule" variant="primary" onPress={props.onNew} />
+        <Button label="Sommeil" icon="bed-outline" onPress={props.onSleep} />
       </View>
     </View>
   );
@@ -300,9 +321,11 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: colors.border,
   },
-  tabItem: { alignItems: 'center', justifyContent: 'center', minWidth: 72, minHeight: 52, gap: 2 },
+  tabItem: { alignItems: 'center', justifyContent: 'center', minWidth: 64, minHeight: 52, gap: 2 },
+  tabIcon: { width: 44, height: 36, borderRadius: 12, alignItems: 'center', justifyContent: 'center' },
+  tabIconOn: { backgroundColor: colors.surfaceActive },
   tabLabel: { color: colors.muted, fontFamily: fonts.body, fontSize: 12 },
-  fabWrap: { alignItems: 'center', gap: 2, minWidth: 72 },
+  fabWrap: { alignItems: 'center', gap: 2, minWidth: 64 },
   fab: { width: 52, height: 52, borderRadius: 26, backgroundColor: colors.surfaceActive, borderWidth: 1, borderColor: colors.border, alignItems: 'center', justifyContent: 'center' },
   fabQuick: { backgroundColor: colors.accent, borderColor: colors.accent },
   phoneFrame: {

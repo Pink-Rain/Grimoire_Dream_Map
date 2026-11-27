@@ -1,9 +1,10 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useMemo, useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useMemo, useRef, useState } from 'react';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import Svg, { Circle, Defs, Path, RadialGradient, Stop } from 'react-native-svg';
+import { AppIcon, CURSEUR, REGLETTE } from './AppIcon';
 import { Chip, Field, type PressState } from './components';
-import { colors, DREAM_COLORS, fonts, LUCIDITY_LABELS, MOOD_LEVELS } from './theme';
+import { colors, DREAM_COLORS, fonts, LUCIDITY_LABELS } from './theme';
 
 // ---------------------------------------------------------------- Lune (lucidité)
 
@@ -52,32 +53,175 @@ export function LucidityScale(props: { value: number | null; onChange: (v: numbe
   );
 }
 
-// ---------------------------------------------------------------- Humeur
+// ---------------------------------------------------------------- Échelles à emojis (humeur, clarté, atmosphère)
 
-export function MoodScale(props: { value: number | null; onChange: (v: number | null) => void }) {
-  const current = MOOD_LEVELS.find((m) => m.value === props.value);
+/** Position des 5 crans sur l'image de la réglette (fraction de la largeur). */
+const NOTCHES = [0.125, 0.322, 0.519, 0.718, 0.915];
+const BAR_RATIO = 76 / 472;
+
+/**
+ * Échelle à degrés sur la réglette dessinée : on touche ou on fait glisser, le curseur se cale sur le cran
+ * le plus proche. Les emojis au-dessus des crans sont aussi cliquables. Retoucher le cran choisi l'efface.
+ */
+export function EmojiScale(props: {
+  levels: readonly { value: number; emoji: string; label: string }[];
+  value: number | null;
+  onChange: (v: number | null) => void;
+  name: string;
+  placeholder: string;
+  testID: string;
+}) {
+  const [width, setWidth] = useState(0);
+  const [drag, setDrag] = useState<number | null>(null);
+  const moved = useRef(false);
+  const shown = drag ?? props.value;
+  const current = props.levels.find((m) => m.value === shown);
+  const barW = Math.min(width, 520);
+  const barH = barW * BAR_RATIO;
+  const n = props.levels.length;
+  const notch = (i: number) => NOTCHES[Math.round((i / (n - 1)) * (NOTCHES.length - 1))] ?? i / (n - 1);
+  const levelAt = (x: number) => {
+    let best = 0;
+    for (let i = 0; i < n; i++) if (Math.abs(notch(i) * barW - x) < Math.abs(notch(best) * barW - x)) best = i;
+    return props.levels[best].value;
+  };
+  const pick = (v: number) => props.onChange(props.value === v ? null : v);
+  const idx = shown === null ? -1 : props.levels.findIndex((m) => m.value === shown);
+  const cursor = barH * 1.35;
+
+  return (
+    <View style={{ gap: 6, alignItems: 'center' }} onLayout={(e) => setWidth(e.nativeEvent.layout.width)}>
+      {barW > 0 && (
+        <>
+          <View style={{ width: barW, height: 40 }} accessibilityRole="radiogroup" accessibilityLabel={props.name}>
+            {props.levels.map((m, i) => {
+              const on = shown === m.value;
+              return (
+                <Pressable
+                  key={m.value}
+                  onPress={() => pick(m.value)}
+                  accessibilityRole="radio"
+                  accessibilityState={{ checked: on }}
+                  accessibilityLabel={`${props.name} ${m.value} : ${m.label}`}
+                  testID={`${props.testID}-${m.value}`}
+                  style={[styles.notchEmoji, { left: notch(i) * barW - 22 }]}
+                >
+                  <Text style={[styles.emoji, { fontSize: on ? 30 : 24, opacity: shown !== null && !on ? 0.5 : 1 }]}>{m.emoji}</Text>
+                </Pressable>
+              );
+            })}
+          </View>
+          <View
+            style={{ width: barW, height: cursor, justifyContent: 'center' }}
+            onStartShouldSetResponder={() => true}
+            onMoveShouldSetResponder={() => true}
+            onResponderGrant={(e) => {
+              moved.current = false;
+              setDrag(levelAt(e.nativeEvent.locationX));
+            }}
+            onResponderMove={(e) => {
+              moved.current = true;
+              setDrag(levelAt(e.nativeEvent.locationX));
+            }}
+            onResponderRelease={(e) => {
+              const v = levelAt(e.nativeEvent.locationX);
+              setDrag(null);
+              if (moved.current) props.onChange(v);
+              else pick(v);
+            }}
+            onResponderTerminate={() => setDrag(null)}
+            accessibilityRole="adjustable"
+            accessibilityLabel={props.name}
+            accessibilityValue={{ text: current?.label ?? 'non renseigné' }}
+            accessibilityActions={[{ name: 'increment' }, { name: 'decrement' }]}
+            onAccessibilityAction={(e) => {
+              const i = Math.max(0, idx);
+              const j = e.nativeEvent.actionName === 'increment' ? Math.min(n - 1, idx < 0 ? 0 : i + 1) : Math.max(0, i - 1);
+              props.onChange(props.levels[j].value);
+            }}
+            testID={`${props.testID}-bar`}
+          >
+            <Image source={REGLETTE} style={{ width: barW, height: barH }} resizeMode="stretch" pointerEvents="none" />
+            {idx >= 0 && (
+              <Image
+                source={CURSEUR}
+                pointerEvents="none"
+                style={{ position: 'absolute', width: cursor, height: cursor, left: notch(idx) * barW - cursor / 2, top: 0 }}
+              />
+            )}
+          </View>
+        </>
+      )}
+      <Text style={styles.scaleLabel}>{current ? current.label : props.placeholder}</Text>
+    </View>
+  );
+}
+
+// ---------------------------------------------------------------- Grilles d'emojis à cocher (météo, moment, type, émotions)
+
+export interface EmojiChoice {
+  id: string;
+  emoji: string;
+  label: string;
+  image?: 'meteo-1' | 'meteo-2' | 'meteo-3' | 'meteo-4' | 'meteo-5';
+}
+
+/** Choix multiple dans une grille d'emojis, avec ajout de mots libres si `allowCustom`. */
+export function EmojiPicker(props: {
+  options: EmojiChoice[];
+  value: string[];
+  onChange: (v: string[]) => void;
+  allowCustom?: boolean;
+  customPlaceholder?: string;
+  testID: string;
+}) {
+  const [draft, setDraft] = useState('');
+  const custom = props.value.filter((v) => !props.options.some((o) => o.id === v));
+  const all: EmojiChoice[] = [...props.options, ...custom.map((c) => ({ id: c, emoji: '✦', label: c }))];
+  const toggle = (id: string) => props.onChange(props.value.includes(id) ? props.value.filter((v) => v !== id) : [...props.value, id]);
+  const add = () => {
+    const t = draft.trim();
+    setDraft('');
+    if (!t) return;
+    const known = props.options.find((o) => o.label.toLowerCase() === t.toLowerCase());
+    const id = known ? known.id : t;
+    if (!props.value.includes(id)) props.onChange([...props.value, id]);
+  };
   return (
     <View style={{ gap: 10 }}>
-      <View style={styles.scaleRow} accessibilityRole="radiogroup" accessibilityLabel="Humeur">
-        {MOOD_LEVELS.map((m) => {
-          const on = props.value === m.value;
+      <View style={styles.emojiGrid}>
+        {all.map((o) => {
+          const on = props.value.includes(o.id);
           return (
             <Pressable
-              key={m.value}
-              onPress={() => props.onChange(on ? null : m.value)}
-              accessibilityRole="radio"
+              key={o.id}
+              onPress={() => toggle(o.id)}
+              accessibilityRole="checkbox"
               accessibilityState={{ checked: on }}
-              accessibilityLabel={`Humeur ${m.value} : ${m.label}`}
-              testID={`mood-${m.value}`}
-              style={({ hovered }: PressState) => [styles.scaleItem, on && styles.scaleItemOn, hovered && !on && { backgroundColor: colors.surfaceHover }]}
+              accessibilityLabel={o.label}
+              testID={`${props.testID}-${o.id}`}
+              style={({ hovered }: PressState) => [styles.emojiTile, on && styles.emojiTileOn, hovered && !on && { backgroundColor: colors.surfaceHover }]}
             >
-              <Ionicons name={m.icon} size={30} color={on ? colors.ochre : colors.muted} />
-              <Text style={[styles.scaleNum, on && { color: colors.ochre }]}>{m.value}</Text>
+              {o.image ? <AppIcon name={o.image} size={32} /> : <Text style={styles.emojiSmall}>{o.emoji}</Text>}
+              <Text style={[styles.emojiLabel, on && { color: colors.text }]} numberOfLines={2}>
+                {o.label}
+              </Text>
             </Pressable>
           );
         })}
       </View>
-      <Text style={styles.scaleLabel}>{current ? current.label : 'Comment était l’humeur du rêve ?'}</Text>
+      {props.allowCustom && (
+        <Field
+          value={draft}
+          onChangeText={setDraft}
+          placeholder={props.customPlaceholder ?? 'Autre… puis Entrée'}
+          onSubmitEditing={add}
+          onBlur={add}
+          blurOnSubmit={false}
+          returnKeyType="done"
+          testID={`${props.testID}-input`}
+        />
+      )}
     </View>
   );
 }
@@ -278,4 +422,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   wrap: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+  emoji: { fontSize: 30, lineHeight: 38 },
+  notchEmoji: { position: 'absolute', top: 0, width: 44, height: 40, alignItems: 'center', justifyContent: 'center' },
+  emojiGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
+  emojiTile: {
+    width: 88,
+    minHeight: 76,
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 2,
+    paddingHorizontal: 4,
+    paddingVertical: 6,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: colors.borderSoft,
+    backgroundColor: colors.bg,
+  },
+  emojiTileOn: { borderColor: colors.ochre, backgroundColor: colors.surfaceActive },
+  emojiSmall: { fontSize: 26, lineHeight: 32 },
+  emojiLabel: { color: colors.muted, fontFamily: fonts.body, fontSize: 13, lineHeight: 16, textAlign: 'center' },
 });

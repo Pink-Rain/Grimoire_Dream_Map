@@ -88,11 +88,128 @@ export const LUCIDITY_LABELS = [
   'Contrôle total',
 ];
 
-/** Humeur 1 → 5. */
+/** Une option à choisir, avec son emoji. `id` est ce qui est enregistré (ne jamais le changer). */
+export interface EmojiOption {
+  id: string;
+  emoji: string;
+  label: string;
+  /** Icône dessinée à la place de l'emoji (nom dans AppIcon). */
+  image?: 'meteo-1' | 'meteo-2' | 'meteo-3' | 'meteo-4' | 'meteo-5';
+}
+
+/** Humeur 1 → 5 (emojis). */
 export const MOOD_LEVELS = [
-  { value: 1, label: 'Très mauvaise', icon: 'thunderstorm-outline' },
-  { value: 2, label: 'Mauvaise', icon: 'rainy-outline' },
-  { value: 3, label: 'Neutre', icon: 'cloud-outline' },
-  { value: 4, label: 'Bonne', icon: 'partly-sunny-outline' },
-  { value: 5, label: 'Excellente', icon: 'sunny-outline' },
+  { value: 1, emoji: '😫', label: 'Très mauvaise' },
+  { value: 2, emoji: '🙁', label: 'Mauvaise' },
+  { value: 3, emoji: '😐', label: 'Neutre' },
+  { value: 4, emoji: '🙂', label: 'Bonne' },
+  { value: 5, emoji: '😄', label: 'Excellente' },
 ] as const;
+
+/** Clarté du souvenir 1 → 5. */
+export const CLARITY_LEVELS = [
+  { value: 1, emoji: '🌫️', label: 'Très flou' },
+  { value: 2, emoji: '🌁', label: 'Flou' },
+  { value: 3, emoji: '🌥️', label: 'Moyen' },
+  { value: 4, emoji: '🔍', label: 'Net' },
+  { value: 5, emoji: '💎', label: 'Très net' },
+] as const;
+
+/** Atmosphère du monde rêvé 1 → 5. */
+export const ATMOSPHERE_LEVELS = [
+  { value: 1, emoji: '👹', label: 'Cauchemardesque' },
+  { value: 2, emoji: '🕸️', label: 'Inquiétante' },
+  { value: 3, emoji: '🌗', label: 'Neutre' },
+  { value: 4, emoji: '🌸', label: 'Douce' },
+  { value: 5, emoji: '✨', label: 'Féerique' },
+] as const;
+
+/** Toutes les météos (réelles, plus une pour l'impossible). */
+export const WEATHERS: EmojiOption[] = [
+  { id: 'soleil', emoji: '☀️', label: 'Ensoleillé', image: 'meteo-5' },
+  { id: 'eclaircies', emoji: '🌤️', label: 'Éclaircies', image: 'meteo-4' },
+  { id: 'partiel', emoji: '⛅', label: 'Partiellement nuageux' },
+  { id: 'nuageux', emoji: '☁️', label: 'Nuageux', image: 'meteo-3' },
+  { id: 'couvert', emoji: '🌥️', label: 'Couvert' },
+  { id: 'brouillard', emoji: '🌫️', label: 'Brouillard' },
+  { id: 'brume', emoji: '🌁', label: 'Brume' },
+  { id: 'bruine', emoji: '💧', label: 'Bruine' },
+  { id: 'averses', emoji: '🌦️', label: 'Averses' },
+  { id: 'pluie', emoji: '🌧️', label: 'Pluie', image: 'meteo-2' },
+  { id: 'deluge', emoji: '☔', label: 'Pluie battante' },
+  { id: 'orage', emoji: '⛈️', label: 'Orage', image: 'meteo-1' },
+  { id: 'eclairs', emoji: '🌩️', label: 'Éclairs' },
+  { id: 'grele', emoji: '🧊', label: 'Grêle' },
+  { id: 'neige', emoji: '🌨️', label: 'Neige' },
+  { id: 'flocons', emoji: '❄️', label: 'Blizzard' },
+  { id: 'verglas', emoji: '⛸️', label: 'Verglas' },
+  { id: 'gel', emoji: '🥶', label: 'Froid glacial' },
+  { id: 'vent', emoji: '🌬️', label: 'Vent' },
+  { id: 'tempete', emoji: '💨', label: 'Tempête' },
+  { id: 'tornade', emoji: '🌪️', label: 'Tornade' },
+  { id: 'ouragan', emoji: '🌀', label: 'Ouragan' },
+  { id: 'canicule', emoji: '🥵', label: 'Canicule' },
+  { id: 'secheresse', emoji: '🌵', label: 'Sécheresse' },
+  { id: 'sable', emoji: '🏜️', label: 'Tempête de sable' },
+  { id: 'cendres', emoji: '🌋', label: 'Pluie de cendres' },
+  { id: 'smog', emoji: '🏭', label: 'Smog' },
+  { id: 'arc-en-ciel', emoji: '🌈', label: 'Arc-en-ciel' },
+  { id: 'aurore', emoji: '🌌', label: 'Aurore boréale' },
+  { id: 'etoiles', emoji: '🌠', label: 'Étoiles filantes' },
+  { id: 'eclipse', emoji: '🌑', label: 'Éclipse' },
+  { id: 'impossible', emoji: '🔮', label: 'Météo impossible' },
+];
+
+/** Moment du jour dans le rêve. */
+export const TIMES_OF_DAY: EmojiOption[] = [
+  { id: 'aube', emoji: '🌅', label: 'Aube' },
+  { id: 'matin', emoji: '🌄', label: 'Matin' },
+  { id: 'midi', emoji: '☀️', label: 'Plein jour' },
+  { id: 'crepuscule', emoji: '🌇', label: 'Crépuscule' },
+  { id: 'soir', emoji: '🌆', label: 'Soir' },
+  { id: 'nuit', emoji: '🌙', label: 'Nuit' },
+  { id: 'nuit-noire', emoji: '🌑', label: 'Nuit noire' },
+  { id: 'jour-nuit', emoji: '🌗', label: 'Jour et nuit mêlés' },
+  { id: 'hors-temps', emoji: '⏳', label: 'Hors du temps' },
+];
+
+/** Types de rêve. */
+export const DREAM_TYPES: EmojiOption[] = [
+  { id: 'cauchemar', emoji: '😱', label: 'Cauchemar' },
+  { id: 'mauvais', emoji: '😟', label: 'Mauvais rêve' },
+  { id: 'recurrent', emoji: '🔁', label: 'Récurrent' },
+  { id: 'faux-reveil', emoji: '⏰', label: 'Faux réveil' },
+  { id: 'paralysie', emoji: '🛏️', label: 'Paralysie du sommeil' },
+  { id: 'premonitoire', emoji: '🔮', label: 'Prémonitoire' },
+  { id: 'reve-dans-reve', emoji: '🪆', label: 'Rêve dans le rêve' },
+  { id: 'demi-sommeil', emoji: '😪', label: 'Demi-sommeil' },
+];
+
+/** Émotions ressenties. */
+export const EMOTIONS: EmojiOption[] = [
+  { id: 'joie', emoji: '😄', label: 'Joie' },
+  { id: 'serenite', emoji: '😌', label: 'Sérénité' },
+  { id: 'amour', emoji: '🥰', label: 'Amour' },
+  { id: 'emerveillement', emoji: '🤩', label: 'Émerveillement' },
+  { id: 'excitation', emoji: '🤗', label: 'Excitation' },
+  { id: 'liberte', emoji: '🕊️', label: 'Liberté' },
+  { id: 'fierte', emoji: '😎', label: 'Fierté' },
+  { id: 'surprise', emoji: '😮', label: 'Surprise' },
+  { id: 'curiosite', emoji: '🧐', label: 'Curiosité' },
+  { id: 'nostalgie', emoji: '🥹', label: 'Nostalgie' },
+  { id: 'tristesse', emoji: '😢', label: 'Tristesse' },
+  { id: 'solitude', emoji: '🫥', label: 'Solitude' },
+  { id: 'peur', emoji: '😨', label: 'Peur' },
+  { id: 'angoisse', emoji: '😰', label: 'Angoisse' },
+  { id: 'colere', emoji: '😠', label: 'Colère' },
+  { id: 'degout', emoji: '🤢', label: 'Dégoût' },
+  { id: 'honte', emoji: '😳', label: 'Honte' },
+  { id: 'culpabilite', emoji: '😔', label: 'Culpabilité' },
+  { id: 'jalousie', emoji: '😒', label: 'Jalousie' },
+  { id: 'confusion', emoji: '😵‍💫', label: 'Confusion' },
+];
+
+/** Libellé + emoji d'une valeur enregistrée (identifiant connu, ou mot libre ajouté par la personne). */
+export function optionFor(list: EmojiOption[], value: string): EmojiOption {
+  return list.find((o) => o.id === value) ?? { id: value, emoji: '✦', label: value };
+}
