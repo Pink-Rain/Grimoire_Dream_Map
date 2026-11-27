@@ -4,6 +4,7 @@ import { ActivityIndicator, AppState, BackHandler, Platform, StyleSheet, Text, V
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { appStore } from './data/appStore';
 import { desktop } from './platform/desktop';
+import { syncManager } from './sync/syncManager';
 import { DreamEditor } from './ui/DreamEditor';
 import { DreamList } from './ui/DreamList';
 import { SettingsScreen } from './ui/SettingsScreen';
@@ -27,7 +28,13 @@ function Root() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    appStore.load().then(() => setReady(true), (e) => setError(String(e)));
+    appStore.load().then(
+      () => {
+        setReady(true);
+        void syncManager.start();
+      },
+      (e) => setError(String(e)),
+    );
     return installAutoFlush();
   }, []);
 

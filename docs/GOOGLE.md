@@ -85,10 +85,15 @@ En mode Test : seules les personnes ajoutées ici (100 max) peuvent se connecter
 > se connecte elle-même. Il sera intégré au .exe. Ne m'envoie en revanche **jamais** ton mot de passe Google.
 
 ### Plus tard dans Google Cloud (je te dirai quand)
-- **Passer « en production »** : je mets en ligne (gratuitement, GitHub Pages) une page d'accueil et une
-  politique de confidentialité. Tu colles leurs adresses dans **Branding** (« Page d'accueil de l'application »,
-  « Lien vers les règles de confidentialité », et `pink-rain.github.io` dans « Domaines autorisés »), sans logo.
-  Puis **Audience → « Publier l'application »**. Fini la reconnexion hebdomadaire et la liste de testeurs.
+- **Passer « en production »** (dès que la page de présentation est en ligne) :
+  1. Google Auth Platform → **Branding**. Ne mets **pas** de logo. Remplis :
+     - **Page d'accueil de l'application** : `https://pink-rain.github.io/Grimoire_Dream_Map/`
+     - **Lien vers les règles de confidentialité** : `https://pink-rain.github.io/Grimoire_Dream_Map/confidentialite.html`
+     - **Conditions d'utilisation** : laisse vide.
+     - **Domaines autorisés** → « Ajouter un domaine » : `pink-rain.github.io`
+     - **Enregistrer**.
+  2. **Audience** → **« Publier l'application »** → confirmer.
+  Ensuite, tout le monde peut se connecter (plus besoin de liste de testeurs), et plus de reconnexion chaque semaine.
 - **Client « Web »** (version navigateur) : il faut d'abord que la version web soit en ligne (je la mets
   gratuitement sur GitHub Pages), car Google demande son adresse.
 - **Client « Android »** : il faut l'« empreinte SHA-1 » de la clé de signature de l'app, qu'on récupère

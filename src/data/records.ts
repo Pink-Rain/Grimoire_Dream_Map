@@ -23,7 +23,44 @@ export function parseStorageKey(key: string): { collection: string; shard: strin
 export function pickWinner<T extends BaseRecord>(a: T, b: T): T {
   if (a.updatedAt > b.updatedAt) return a;
   if (b.updatedAt > a.updatedAt) return b;
-  return JSON.stringify(a) >= JSON.stringify(b) ? a : b;
+  return stableStringify(a) >= stableStringify(b) ? a : b;
+}
+
+/** JSON avec les clés toujours dans le même ordre (pour comparer deux contenus de façon fiable). */
+export function stableStringify(value: unknown): string {
+  if (Array.isArray(value)) return '[' + value.map(stableStringify).join(',') + ']';
+  if (value && typeof value === 'object') {
+    const obj = value as Record<string, unknown>;
+    return (
+      '{' +
+      Object.keys(obj)
+        .filter((k) => obj[k] !== undefined)
+        .sort()
+        .map((k) => JSON.stringify(k) + ':' + stableStringify(obj[k]))
+        .join(',') +
+      '}'
+    );
+  }
+  return JSON.stringify(value) ?? 'null';
+}
+
+/** Empreinte courte d'un texte (cyrb53). Sert à savoir si un contenu a changé. */
+export function hashText(text: string): string {
+  let h1 = 0xdeadbeef;
+  let h2 = 0x41c6ce57;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text.charCodeAt(i);
+    h1 = Math.imul(h1 ^ ch, 2654435761);
+    h2 = Math.imul(h2 ^ ch, 1597334677);
+  }
+  h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+  h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+  return (h2 >>> 0).toString(16).padStart(8, '0') + (h1 >>> 0).toString(16).padStart(8, '0');
+}
+
+/** Empreinte du contenu d'un morceau : ne dépend que des éléments (pas de l'ordre ni de la version du format). */
+export function recordsHash(records: BaseRecord[]): string {
+  return hashText(stableStringify([...records].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0))));
 }
 
 /** Fusionne deux listes d'éléments, élément par élément. */

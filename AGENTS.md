@@ -22,6 +22,10 @@ Fichier de reprise pour l'agent qui code l'app. **À lire en premier, à tenir �
   La personne teste le téléphone et dit ce qui ne va pas.
 - Expliquer simplement, sans jargon, en français. **Ne rien supposer** : si un point n'est pas clair, demander.
 - Interface de l'app en **français**.
+- **La personne ne veut pas toucher à GitHub** : l'agent gère tout, y compris les pull requests. Il travaille sur
+  sa branche `claude/...`, ouvre une PR vers `main`, et la fusionne lui-même une fois testée (accord explicite).
+  Seuls les réglages impossibles à faire par l'agent (secrets, activation de Pages…) sont demandés, pas à pas.
+- Dépôt : `Pink-Rain/Grimoire_Dream_Map` (renommé depuis `Grimoire_Dream_Journal`).
 
 ## Décisions fixées (ne pas changer sans accord)
 
@@ -73,7 +77,15 @@ public/index.html         modèle HTML de la version web (langue fr, fond sombre
 desktop/                  app PC Electron : main.js (fenêtre, schéma app://grimoire, format téléphone),
                           preload.js (pont sécurisé). Sert le dossier dist/ (export web).
 .github/workflows/build.yml  fabrique le .exe (Windows) et un APK de test, publiés dans Releases
-docs/GOOGLE.md            guide pas à pas pour la configuration Google (pour la personne)
+docs/GOOGLE.md            guide pas à pas des comptes Google / Play (pour la personne)
+src/sync/                 synchro Drive : drive.ts (API Drive appDataFolder), engine.ts (algorithme, testé
+                          avec un faux Drive dans engine.test.ts), syncManager.ts (connexion, quand synchroniser,
+                          état affiché dans Réglages)
+desktop/google.js         connexion Google de l'app PC (navigateur système + serveur local 127.0.0.1 + PKCE),
+                          jeton chiffré (safeStorage) dans userData/google-auth.json, requêtes Drive faites par
+                          le processus principal (pas de souci CORS)
+site/                     page de présentation (GitHub Pages) + politique de confidentialité ; __VERSION__ et
+                          __REPO__ sont remplacés au déploiement
 ```
 
 - Pas d'Expo Router : navigation simple par état dans `App.tsx` (fiable sur web, Android et Electron).
@@ -86,6 +98,23 @@ docs/GOOGLE.md            guide pas à pas pour la configuration Google (pour la
 - Enregistrement : en mémoire immédiatement, sur disque 400 ms après (par morceau modifié), et forcé quand
   l'app passe en arrière-plan / se cache / avant fermeture de l'app PC (`onBeforeClose`).
 - Éditeur : enregistrement automatique ; un nouveau rêve n'est créé qu'à la première saisie.
+
+## Synchro Google Drive
+
+- Un fichier Drive par morceau local (`dreams.2026-11.json`) dans `appDataFolder`.
+- État retenu localement sous le nom `local.sync` : pour chaque morceau, id Drive, md5 Drive et empreinte du contenu.
+  On ne télécharge que si le md5 Drive a changé ; on n'envoie que si le contenu fusionné diffère du Drive.
+- Doublons de fichiers (deux appareils qui créent en même temps) : fusionnés, on garde le plus ancien.
+- Empreinte = `recordsHash` (JSON à clés triées, éléments triés par id) : indépendante de l'ordre et de `schemaVersion`.
+- Fichiers Drive inconnus (autres collections, futures versions) : jamais touchés.
+- Déclencheurs : démarrage, 5 s après une modification, retour sur l'app, toutes les 5 min, bouton.
+- Google Cloud : projet « Grimoire Dream Map ». Client « Dream Map PC » (Application de bureau) :
+  ID en clair dans `desktop/google.js` ; **code secret dans le secret GitHub `GOOGLE_DESKTOP_CLIENT_SECRET`**,
+  écrit dans `desktop/google-oauth.json` (ignoré par git) au moment de fabriquer le .exe.
+  En local : créer `desktop/google-oauth.json` = `{"clientSecret": "..."}` (demander la valeur à la personne).
+- Écran de consentement en mode **Test** tant que la page d'accueil + confidentialité ne sont pas renseignées dans
+  Branding ; en mode Test, il faut se reconnecter tous les 7 jours (géré : message « connexion expirée »).
+- Android et navigateur : pas encore (« arrive bientôt » dans les réglages).
 
 ## Commandes
 
@@ -106,9 +135,13 @@ Si l'Electron n'est pas téléchargé : `ELECTRON_GET_USE_PROXY=1 node desktop/n
 
 ## Publier une version (.exe + APK)
 
-1. Augmenter `version` dans `package.json` ET `app.json` (`expo.version`), et `android.versionCode` (+1).
-2. Committer avec `[build]` dans le message → GitHub Actions fabrique `Grimoire-Dream-Map-Setup-<version>.exe`
-   et `Grimoire-Dream-Map-<version>-test.apk`, publiés dans Releases (tag `v<version>`).
+1. Augmenter `version` dans `package.json`, `desktop/package.json` ET `app.json` (`expo.version`),
+   et `android.versionCode` (+1).
+2. Fusionner dans `main` (PR) → GitHub Actions fabrique `Grimoire-Dream-Map-Setup-<version>.exe` et
+   `Grimoire-Dream-Map-<version>-test.apk`, les publie dans Releases (tag `v<version>`), puis met à jour la page
+   https://pink-rain.github.io/Grimoire_Dream_Map/ (liens de téléchargement vers cette version).
+   Sur une branche `claude/...`, mettre `[build]` dans le message du commit pour fabriquer une préversion
+   (pas de mise à jour de la page).
 - L'exe n'est pas signé (signature payante) : Windows affiche « Windows a protégé votre ordinateur »
   → « Informations complémentaires » → « Exécuter quand même ».
 - L'APK de test est signé avec une clé de test : il faudra le désinstaller (après export des données)
@@ -125,13 +158,13 @@ Expo change à chaque version. Avant d'utiliser une API Expo/React Native, véri
 
 - [x] Étape 1 : base de l'app — journal de rêves minimal (date, titre, texte), stockage local, export/import,
   format téléphone/ordinateur, app PC .exe, APK de test.
-- [ ] Étape suivante à décider avec la personne (contenu du journal, puis synchro Google).
+- [x] Étape 2 : synchro Google Drive sur l'app PC (v0.2.0) + page de présentation et politique de confidentialité.
+- [ ] Contenu de Dream Map : à définir avec la personne (question posée, pas encore de réponse).
 - [ ] Synchro Google Drive (appDataFolder) : PC (.exe → client OAuth « Application de bureau », redirection
   locale 127.0.0.1 + PKCE, ouverture du navigateur système) ; web (Google Identity Services, client « Web ») ;
   Android (client « Android » + empreinte SHA-1 de la clé de signature).
 - [ ] Google Cloud : projet « Grimoire Dream Map » créé, Drive API activée, écran de consentement en mode **Test**
   (la personne s'est ajoutée comme testeur). « Publier l'application » exige dans Branding une page d'accueil +
   une politique de confidentialité → à publier sur GitHub Pages, puis passer en production.
-- [ ] Le dépôt doit être renommé `Grimoire_Dream_Map` par la personne (Settings → Repository name).
 - [ ] Version web hébergée (GitHub Pages, gratuit car dépôt public) + installable (PWA).
 - [ ] Publication Play Store (AAB signé, politique de confidentialité).

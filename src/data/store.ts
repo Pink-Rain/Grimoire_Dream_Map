@@ -122,6 +122,36 @@ export class DataStore {
     this.put(collection, { ...existing, deleted: true, updatedAt: this.now().toISOString() });
   }
 
+  // ---------- Pour la synchro ----------
+
+  /** Tous les morceaux existants, ex. [{collection: 'dreams', shard: '2026-11'}]. */
+  shardKeys(): { collection: CollectionName; shard: string }[] {
+    const out: { collection: CollectionName; shard: string }[] = [];
+    for (const [collection, shards] of this.data) {
+      for (const [shard, records] of shards) if (records.size) out.push({ collection, shard });
+    }
+    return out;
+  }
+
+  /** Tous les éléments d'un morceau, y compris ceux marqués supprimés. */
+  shardRecords(collection: CollectionName, shard: string): BaseRecord[] {
+    return [...(this.data.get(collection)?.get(shard)?.values() ?? [])];
+  }
+
+  /** Fusionne des éléments reçus (règle : le plus récent gagne). Renvoie le nombre d'éléments changés. */
+  mergeRecords(collection: CollectionName, incoming: BaseRecord[]): number {
+    if (!COLLECTIONS.includes(collection)) return 0;
+    let changed = 0;
+    for (const r of incoming) {
+      const existing = this.findAny(collection, r.id);
+      if (existing && mergeRecordLists([existing], [r])[0] === existing) continue;
+      this.put(collection, r, false);
+      changed++;
+    }
+    if (changed) this.emit();
+    return changed;
+  }
+
   // ---------- Export / import ----------
 
   exportBundle(): ExportBundle {

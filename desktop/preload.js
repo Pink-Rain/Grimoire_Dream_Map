@@ -20,4 +20,10 @@ contextBridge.exposeInMainWorld('grimoireDesktop', {
   onBeforeClose: (handler) => {
     beforeClose = handler;
   },
+  google: {
+    info: () => ipcRenderer.sendSync('grimoire:google-info'),
+    signIn: () => ipcRenderer.invoke('grimoire:google-sign-in'),
+    signOut: () => ipcRenderer.invoke('grimoire:google-sign-out'),
+    request: (req) => ipcRenderer.invoke('grimoire:google-request', req),
+  },
 });

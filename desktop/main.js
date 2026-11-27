@@ -7,6 +7,7 @@ const { app, BrowserWindow, ipcMain, net, protocol, screen, shell, Menu } = requ
 const fs = require('fs');
 const path = require('path');
 const { pathToFileURL } = require('url');
+const google = require('./google');
 
 const SCHEME = 'app';
 const HOST = 'dreammap';
@@ -161,6 +162,23 @@ function createWindow() {
 ipcMain.on('grimoire:get-initial', (e) => {
   e.returnValue = { phoneMode: !!state.phoneMode, appVersion: app.getVersion() };
 });
+// Connexion Google et accès au Drive (voir google.js).
+ipcMain.on('grimoire:google-info', (e) => {
+  e.returnValue = { configured: google.isConfigured(), account: google.getAccount() };
+});
+ipcMain.handle('grimoire:google-sign-in', () =>
+  google.signIn(() => {
+    // Quand la personne revient du navigateur, on remet Dream Map au premier plan.
+    if (win) {
+      if (win.isMinimized()) win.restore();
+      win.show();
+      win.focus();
+    }
+  }),
+);
+ipcMain.handle('grimoire:google-sign-out', () => google.signOut());
+ipcMain.handle('grimoire:google-request', (_e, req) => google.authorizedRequest(req));
+
 ipcMain.on('grimoire:set-phone-mode', (_e, on) => {
   rememberBounds();
   state.phoneMode = !!on;
@@ -187,6 +205,7 @@ app.whenReady().then(() => {
     return net.fetch(pathToFileURL(file).toString());
   });
 
+  google.init();
   createWindow();
 });
 

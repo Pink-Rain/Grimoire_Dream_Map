@@ -1,7 +1,7 @@
 {
   "name": "grimoire-dream-map-desktop",
   "productName": "Grimoire - Dream Map",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Grimoire - Dream Map (application PC)",
   "author": "Grimoire",
   "main": "main.js",
@@ -19,6 +19,7 @@
     "files": [
       "main.js",
       "preload.js",
+      "google.js",
       "package.json",
       "icon.png"
     ],
@@ -26,6 +27,10 @@
       {
         "from": "../dist",
         "to": "web"
+      },
+      {
+        "from": "google-oauth.json",
+        "to": "google-oauth.json"
       }
     ],
     "win": {

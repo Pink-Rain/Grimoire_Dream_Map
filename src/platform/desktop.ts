@@ -3,6 +3,8 @@
  * dans un navigateur ou sur Android, `desktop` vaut null.
  * Défini côté PC dans desktop/preload.js.
  */
+import type { HttpRequest, HttpResponse } from '../sync/drive';
+
 export interface DesktopBridge {
   isDesktopApp: true;
   appVersion: string;
@@ -12,6 +14,13 @@ export interface DesktopBridge {
   setPhoneMode(on: boolean): void;
   /** Appelé par l'app PC avant de fermer la fenêtre, pour finir d'enregistrer. */
   onBeforeClose(handler: () => Promise<void>): void;
+  /** Connexion Google (synchro). Voir desktop/google.js. */
+  google?: {
+    info(): { configured: boolean; account: { email: string } | null };
+    signIn(): Promise<{ email: string }>;
+    signOut(): Promise<void>;
+    request(req: HttpRequest): Promise<HttpResponse>;
+  };
 }
 
 declare global {

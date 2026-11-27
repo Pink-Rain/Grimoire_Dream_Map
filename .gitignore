@@ -42,3 +42,6 @@ yarn-error.*
 
 # App PC
 desktop/release/
+
+# Code secret Google (ajouté au moment de fabriquer le .exe, jamais dans le dépôt)
+desktop/google-oauth.json
