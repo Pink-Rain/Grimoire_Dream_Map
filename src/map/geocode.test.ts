@@ -32,6 +32,8 @@ describe('recherche de vrais lieux', () => {
     expect(r[0]).toMatchObject({ name: 'Montpellier', lat: 43.6112, lon: 3.8767, osmType: 'city' });
     expect(r[0].address).toContain('France');
     expect(r[1].address).toContain('Montpellier');
+    expect(r[0].admin).toMatchObject({ city: 'Montpellier', county: 'Hérault', state: 'Occitanie', country: 'France' });
+    expect(r[1].admin).toMatchObject({ city: 'Montpellier', country: 'France' });
   });
 
   it('passe à Nominatim si Photon ne répond pas', async () => {

@@ -2,41 +2,30 @@ import { randomUUID } from 'expo-crypto';
 import { useEffect, useRef, useState } from 'react';
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { appStore } from '../data/appStore';
-import { defaultSleepDate, formatDuration, normalizeTime, sleepEndDate, summarizeSleep, type SleepSummary } from '../data/sleep';
+import { completeInterruption, defaultSleepDate, formatDuration, sleepEndDate, summarizeSleep, type SleepSummary } from '../data/sleep';
 import { useStoreVersion } from '../data/appStore';
 import type { Sleep } from '../data/types';
 import { confirmAsync } from '../platform/dialogs';
 import { AppIcon, type AppIconName } from './AppIcon';
 import { Button, Chip, IconButton, Section, Txt } from './components';
-import { EmojiScale } from './widgets';
+import { EmojiScale, MoodPicker, WordPicker } from './widgets';
+import { TimePicker } from './TimePicker';
+import type { PressState } from './components';
 import { addDays, formatLongDate } from './dates';
-import { colors, fonts, SLEEP_QUALITY, WAKE_ENERGY } from './theme';
+import { colors, EMOTIONS, fonts, MOOD_GRID, optionFor, SLEEP_FACTORS, SLEEP_PLACES, SLEEP_QUALITY, WAKE_ENERGY } from './theme';
 
-type Draft = Required<Pick<Sleep, 'date' | 'bedTime' | 'asleepTime' | 'wakeTime' | 'upTime' | 'interruptions' | 'quality' | 'energy'>>;
+type Draft = Required<
+  Pick<Sleep, 'date' | 'bedTime' | 'asleepTime' | 'wakeTime' | 'upTime' | 'interruptions' | 'quality' | 'energy' | 'factors' | 'sleepPlaces' | 'wakeMood' | 'wakeMoodEmoji' | 'wakeEmotions'>
+>;
 
 function nowHHMM() {
   const d = new Date();
   return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
 }
 
-/** Champ d'heure « HH:MM » : on peut taper « 2330 » ou « 7h05 », ou toucher « Maintenant ». */
+/** Champ d'heure : on le touche pour ouvrir le mini popup horloge. */
 function TimeField(props: { label: string; emoji: string; image?: AppIconName; value: string | null; onChange: (v: string | null) => void; testID: string; compact?: boolean }) {
-  const [text, setText] = useState(props.value ?? '');
-  const [bad, setBad] = useState(false);
-  useEffect(() => setText(props.value ?? ''), [props.value]);
-  const commit = () => {
-    if (!text.trim()) {
-      setBad(false);
-      if (props.value !== null) props.onChange(null);
-      return;
-    }
-    const t = normalizeTime(text);
-    setBad(!t);
-    if (t) {
-      setText(t);
-      if (t !== props.value) props.onChange(t);
-    }
-  };
+  const [open, setOpen] = useState(false);
   return (
     <View style={[styles.timeRow, props.compact && { gap: 6 }]}>
       {!props.compact && (props.image ? <AppIcon name={props.image} size={32} /> : <Text style={styles.timeEmoji}>{props.emoji}</Text>)}
@@ -45,20 +34,17 @@ function TimeField(props: { label: string; emoji: string; image?: AppIconName; v
           {props.label}
         </Txt>
       )}
-      <TextInput
-        value={text}
-        onChangeText={setText}
-        onBlur={commit}
-        onSubmitEditing={commit}
-        placeholder="--:--"
-        placeholderTextColor={colors.faint}
-        keyboardType="numbers-and-punctuation"
-        maxLength={5}
-        accessibilityLabel={props.label}
+      <Pressable
+        onPress={() => setOpen(true)}
+        accessibilityRole="button"
+        accessibilityLabel={`${props.label} : ${props.value ?? 'non renseigné'}`}
         testID={props.testID}
-        style={[styles.timeInput, bad && { borderColor: colors.danger }, Platform.OS === 'web' ? ({ outlineStyle: 'none' } as object) : null]}
-      />
+        style={({ hovered }: PressState) => [styles.timeInput, hovered && { borderColor: colors.accent }]}
+      >
+        <Text style={[styles.timeText, !props.value && { color: colors.faint }]}>{props.value ?? '--:--'}</Text>
+      </Pressable>
       {!props.compact && <Button small variant="ghost" label="Maintenant" onPress={() => props.onChange(nowHHMM())} testID={`${props.testID}-now`} />}
+      <TimePicker visible={open} title={props.label} value={props.value} onClose={() => setOpen(false)} onChange={props.onChange} />
     </View>
   );
 }
@@ -141,13 +127,30 @@ export function SleepEditor(props: {
     interruptions: existing?.interruptions ?? [],
     quality: existing?.quality ?? null,
     energy: existing?.energy ?? null,
+    factors: existing?.factors ?? [],
+    sleepPlaces: existing?.sleepPlaces ?? [],
+    wakeMood: existing?.wakeMood ?? null,
+    wakeMoodEmoji: existing?.wakeMoodEmoji ?? null,
+    wakeEmotions: existing?.wakeEmotions ?? [],
   }));
   const exists = useRef(!!existing);
 
   function commit(fields: Partial<Draft>) {
     const next = { ...d, ...fields };
     setD(next);
-    const hasContent = !!(next.bedTime || next.asleepTime || next.wakeTime || next.upTime || next.interruptions.length || next.quality || next.energy);
+    const hasContent = !!(
+      next.bedTime ||
+      next.asleepTime ||
+      next.wakeTime ||
+      next.upTime ||
+      next.interruptions.length ||
+      next.quality ||
+      next.energy ||
+      next.factors.length ||
+      next.sleepPlaces.length ||
+      next.wakeMood !== null ||
+      next.wakeEmotions.length
+    );
     if (!exists.current && !hasContent) return;
     appStore.save('sleeps', props.sleepId, next);
     exists.current = true;
@@ -165,7 +168,18 @@ export function SleepEditor(props: {
   const dreams = appStore.list('dreams').filter((x) => x.sleepId === props.sleepId);
   const loose = appStore.list('dreams').filter((x) => !x.sleepId && x.dreamDate === endDate);
   const setInt = (id: string, k: 'from' | 'to', v: string | null) =>
-    commit({ interruptions: d.interruptions.map((i) => (i.id === id ? { ...i, [k]: v ?? '' } : i)) });
+    commit({ interruptions: d.interruptions.map((i) => (i.id === id ? { ...i, ...completeInterruption({ ...i, [k]: v ?? '' }, k) } : i)) });
+  const emotionSuggestions = Array.from(
+    new Map(
+      [
+        ...appStore.list('sleeps').flatMap((x) => x.wakeEmotions ?? []),
+        ...appStore.list('dreams').flatMap((x) => (x.emotions ?? []).map((v) => optionFor(EMOTIONS, v).label)),
+        ...EMOTIONS.map((o) => o.label),
+      ].map((w) => [w.toLowerCase(), w]),
+    ).values(),
+  );
+  const suggest = (pick: (x: Sleep) => string[] | undefined, base: string[]) =>
+    Array.from(new Map([...appStore.list('sleeps').flatMap((x) => pick(x) ?? []), ...base].map((w) => [w.toLowerCase(), w])).values());
 
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'web' ? undefined : 'padding'}>
@@ -218,6 +232,16 @@ export function SleepEditor(props: {
         <Section title="Ressenti">
           <EmojiScale levels={SLEEP_QUALITY} value={d.quality} onChange={(quality) => commit({ quality })} name="Qualité du sommeil" placeholder="Qualité du sommeil" testID="quality" />
           <EmojiScale levels={WAKE_ENERGY} value={d.energy} onChange={(energy) => commit({ energy })} name="Énergie au réveil" placeholder="Énergie au réveil" testID="energy" />
+        </Section>
+
+        <Section title="Humeur au réveil">
+          <MoodPicker grid={MOOD_GRID} level={d.wakeMood} emoji={d.wakeMoodEmoji} onChange={(wakeMood, wakeMoodEmoji) => commit({ wakeMood, wakeMoodEmoji })} />
+          <WordPicker value={d.wakeEmotions} onChange={(wakeEmotions) => commit({ wakeEmotions })} suggestions={emotionSuggestions} placeholder="Émotions au réveil… puis Entrée" testID="wake-emotion" />
+        </Section>
+
+        <Section title="La veille et le lieu">
+          <WordPicker value={d.factors} onChange={(factors) => commit({ factors })} suggestions={suggest((x) => x.factors, SLEEP_FACTORS)} placeholder="Facteurs : café, écrans, stress… puis Entrée" testID="factor" />
+          <WordPicker value={d.sleepPlaces} onChange={(sleepPlaces) => commit({ sleepPlaces })} suggestions={suggest((x) => x.sleepPlaces, SLEEP_PLACES)} placeholder="Lieu : chez moi, en voyage… puis Entrée" testID="sleep-place" />
         </Section>
 
         <Section title="Rêves de cette nuit">
@@ -287,11 +311,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.border,
     backgroundColor: colors.bg,
-    color: colors.text,
-    fontFamily: fonts.display,
-    fontSize: 22,
-    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
+  timeText: { color: colors.text, fontFamily: fonts.display, fontSize: 22 },
   intRow: { flexDirection: 'row', alignItems: 'center', gap: 6, flexWrap: 'wrap' },
   stats: { flexDirection: 'row', flexWrap: 'wrap', gap: 10 },
   stat: { flexGrow: 1, minWidth: 140, padding: 12, borderRadius: 12, backgroundColor: colors.bg, borderWidth: 1, borderColor: colors.borderSoft, gap: 2 },

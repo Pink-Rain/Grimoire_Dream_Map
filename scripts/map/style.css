@@ -92,6 +92,26 @@ body {
 .pl.sel .lbl {
   color: #f6c89a;
 }
+/* Regroupement au dézoom : petit sceau « ×N » et nom de la zone (ville, région…) en capitales. */
+.badge {
+  position: absolute;
+  padding: 0 4px;
+  box-sizing: border-box;
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 30%, #d9a066, #9c5a2c);
+  border: 1px solid #f0d2a4;
+  color: #1a1530;
+  font-weight: 700;
+  font-family: 'EB Garamond', Georgia, serif;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(8, 6, 20, 0.8);
+  pointer-events: none;
+}
+.lbl.area {
+  font-variant: small-caps;
+  letter-spacing: 0.08em;
+  color: #e8c48f;
+}
 #controls {
   position: absolute;
   right: 12px;

@@ -1,5 +1,17 @@
 [
   {
+    "version": "0.8.0",
+    "date": "2026-11-27",
+    "changes": [
+      "Carte : quand tu dézoomes et que des lieux se chevauchent, ils se regroupent. On garde le plus gros, avec une pastille « ×2 », « ×3 »… Pour de vrais lieux, le regroupement prend le nom de leur zone commune : quartier, ville, département, région ou pays. Touche un regroupement pour zoomer dessus.",
+      "Sommeil : une petite horloge pour choisir les heures et les minutes.",
+      "Réveils pendant la nuit : la deuxième heure se remplit toute seule 5 minutes après la première (ou la première 5 minutes avant), et tu peux toujours la changer.",
+      "Sommeil : facteurs de la veille et lieu du sommeil en étiquettes, humeur au réveil avec les mêmes emojis que les rêves, et des émotions en étiquettes.",
+      "Nouvelles icônes dessinées pour la météo, les moments de la journée, la clarté et les humeurs. Les moments sont maintenant quatre : aube, journée, crépuscule, nuit.",
+      "Dessins de la carte : en cherchant « place », tu trouves la fontaine, l’obélisque, la tour de l’horloge, le banc et le réverbère."
+    ]
+  },
+  {
     "version": "0.7.0",
     "date": "2026-11-27",
     "changes": [

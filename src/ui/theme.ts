@@ -94,7 +94,7 @@ export interface EmojiOption {
   emoji: string;
   label: string;
   /** Icône dessinée à la place de l'emoji (nom dans AppIcon). */
-  image?: 'meteo-1' | 'meteo-2' | 'meteo-3' | 'meteo-4' | 'meteo-5';
+  image?: string;
 }
 
 /** Humeur 1 → 5 (emojis). */
@@ -108,11 +108,11 @@ export const MOOD_LEVELS = [
 
 /** Clarté du souvenir 1 → 5. */
 export const CLARITY_LEVELS = [
-  { value: 1, emoji: '🌫️', label: 'Très flou' },
-  { value: 2, emoji: '🌁', label: 'Flou' },
-  { value: 3, emoji: '🌥️', label: 'Moyen' },
-  { value: 4, emoji: '🔍', label: 'Net' },
-  { value: 5, emoji: '💎', label: 'Très net' },
+  { value: 1, emoji: '🌫️', label: 'Très flou', image: 'clarte-1' },
+  { value: 2, emoji: '🌁', label: 'Flou', image: 'clarte-2' },
+  { value: 3, emoji: '🌥️', label: 'Moyen', image: 'clarte-3' },
+  { value: 4, emoji: '🔍', label: 'Net', image: 'clarte-4' },
+  { value: 5, emoji: '💎', label: 'Très net', image: 'clarte-5' },
 ] as const;
 
 /** Atmosphère du monde rêvé 1 → 5. */
@@ -126,34 +126,34 @@ export const ATMOSPHERE_LEVELS = [
 
 /** Toutes les météos (réelles, plus une pour l'impossible). */
 export const WEATHERS: EmojiOption[] = [
-  { id: 'soleil', emoji: '☀️', label: 'Ensoleillé', image: 'meteo-5' },
-  { id: 'eclaircies', emoji: '🌤️', label: 'Éclaircies', image: 'meteo-4' },
-  { id: 'partiel', emoji: '⛅', label: 'Partiellement nuageux' },
-  { id: 'nuageux', emoji: '☁️', label: 'Nuageux', image: 'meteo-3' },
+  { id: 'soleil', emoji: '☀️', label: 'Ensoleillé', image: 'meteo-soleil' },
+  { id: 'eclaircies', emoji: '🌤️', label: 'Éclaircies', image: 'meteo-soleil-voile' },
+  { id: 'partiel', emoji: '⛅', label: 'Partiellement nuageux', image: 'meteo-eclaircie' },
+  { id: 'nuageux', emoji: '☁️', label: 'Nuageux', image: 'meteo-nuage' },
   { id: 'couvert', emoji: '🌥️', label: 'Couvert' },
   { id: 'brouillard', emoji: '🌫️', label: 'Brouillard' },
   { id: 'brume', emoji: '🌁', label: 'Brume' },
   { id: 'bruine', emoji: '💧', label: 'Bruine' },
-  { id: 'averses', emoji: '🌦️', label: 'Averses' },
-  { id: 'pluie', emoji: '🌧️', label: 'Pluie', image: 'meteo-2' },
+  { id: 'averses', emoji: '🌦️', label: 'Averses', image: 'meteo-averse' },
+  { id: 'pluie', emoji: '🌧️', label: 'Pluie', image: 'meteo-pluie' },
   { id: 'deluge', emoji: '☔', label: 'Pluie battante' },
-  { id: 'orage', emoji: '⛈️', label: 'Orage', image: 'meteo-1' },
-  { id: 'eclairs', emoji: '🌩️', label: 'Éclairs' },
+  { id: 'orage', emoji: '⛈️', label: 'Orage', image: 'meteo-orage-pluie' },
+  { id: 'eclairs', emoji: '🌩️', label: 'Éclairs', image: 'meteo-orage' },
   { id: 'grele', emoji: '🧊', label: 'Grêle' },
-  { id: 'neige', emoji: '🌨️', label: 'Neige' },
+  { id: 'neige', emoji: '🌨️', label: 'Neige', image: 'meteo-neige' },
   { id: 'flocons', emoji: '❄️', label: 'Blizzard' },
   { id: 'verglas', emoji: '⛸️', label: 'Verglas' },
   { id: 'gel', emoji: '🥶', label: 'Froid glacial' },
   { id: 'vent', emoji: '🌬️', label: 'Vent' },
   { id: 'tempete', emoji: '💨', label: 'Tempête' },
-  { id: 'tornade', emoji: '🌪️', label: 'Tornade' },
+  { id: 'tornade', emoji: '🌪️', label: 'Tornade', image: 'meteo-tornade' },
   { id: 'ouragan', emoji: '🌀', label: 'Ouragan' },
   { id: 'canicule', emoji: '🥵', label: 'Canicule' },
   { id: 'secheresse', emoji: '🌵', label: 'Sécheresse' },
   { id: 'sable', emoji: '🏜️', label: 'Tempête de sable' },
   { id: 'cendres', emoji: '🌋', label: 'Pluie de cendres' },
   { id: 'smog', emoji: '🏭', label: 'Smog' },
-  { id: 'arc-en-ciel', emoji: '🌈', label: 'Arc-en-ciel' },
+  { id: 'arc-en-ciel', emoji: '🌈', label: 'Arc-en-ciel', image: 'meteo-arc-en-ciel' },
   { id: 'aurore', emoji: '🌌', label: 'Aurore boréale' },
   { id: 'etoiles', emoji: '🌠', label: 'Étoiles filantes' },
   { id: 'eclipse', emoji: '🌑', label: 'Éclipse' },
@@ -166,13 +166,13 @@ export const WEATHER_CHOICES: EmojiOption[] = ['soleil', 'eclaircies', 'partiel'
 );
 
 /** Humeur : niveau de 0 à 5, et un emoji au choix dans chaque niveau. */
-export const MOOD_GRID: { level: number; label: string; emojis: string[] }[] = [
-  { level: 0, label: 'Horrible', emojis: ['😡', '🤮', '😭'] },
-  { level: 1, label: 'Très mauvaise', emojis: ['😱', '😤', '😔'] },
-  { level: 2, label: 'Mauvaise', emojis: ['🫩', '🙄', '🫠'] },
-  { level: 3, label: 'Mitigée', emojis: ['🙃', '🤭', '🙂'] },
-  { level: 4, label: 'Bonne', emojis: ['🤗', '🥰', '😎'] },
-  { level: 5, label: 'Excellente', emojis: ['😍', '😁', '🤣'] },
+export const MOOD_GRID: { level: number; label: string; emojis: string[]; images: string[] }[] = [
+  { level: 0, label: 'Horrible', emojis: ['😡', '🤮', '😭'], images: ['humeur-colere', 'humeur-degout', 'humeur-pleurs'] },
+  { level: 1, label: 'Très mauvaise', emojis: ['😱', '😤', '😔'], images: ['humeur-peur', 'humeur-soupir', 'humeur-tristesse'] },
+  { level: 2, label: 'Mauvaise', emojis: ['🫩', '🙄', '🫠'], images: ['humeur-ennui', 'humeur-agacement', 'humeur-gene'] },
+  { level: 3, label: 'Mitigée', emojis: ['🙃', '🤭', '🙂'], images: ['humeur-ironie', 'humeur-gloussement', 'humeur-sourire'] },
+  { level: 4, label: 'Bonne', emojis: ['🤗', '🥰', '😎'], images: ['humeur-tendresse', 'humeur-amour', 'humeur-cool'] },
+  { level: 5, label: 'Excellente', emojis: ['😍', '😁', '🤣'], images: ['humeur-emerveille', 'humeur-joie', 'humeur-fou-rire'] },
 ];
 
 /** Genres proposés (étiquettes). */
@@ -197,6 +197,12 @@ export const GENRES = [
   'Super-héros',
 ];
 
+/** Facteurs de la veille proposés (étiquettes). */
+export const SLEEP_FACTORS = ['Café', 'Thé', 'Alcool', 'Écrans tard', 'Sport', 'Stress', 'Repas tardif', 'Médicament', 'Sieste', 'Lecture', 'Méditation', 'Bruit', 'Chaleur', 'Froid', 'Douleur', 'Maladie'];
+
+/** Lieux du sommeil proposés (étiquettes). */
+export const SLEEP_PLACES = ['Chez moi', 'Chez quelqu’un', 'En voyage', 'Hôtel', 'Canapé', 'Train', 'Avion', 'Voiture', 'Tente', 'Hôpital'];
+
 /** Sommeil : qualité 1 → 5. */
 export const SLEEP_QUALITY = [
   { value: 1, emoji: '😫', label: 'Très mauvaise' },
@@ -217,16 +223,19 @@ export const WAKE_ENERGY = [
 
 /** Moment du jour dans le rêve. */
 export const TIMES_OF_DAY: EmojiOption[] = [
-  { id: 'aube', emoji: '🌅', label: 'Aube' },
+  { id: 'aube', emoji: '🌅', label: 'Aube', image: 'moment-aube' },
   { id: 'matin', emoji: '🌄', label: 'Matin' },
-  { id: 'midi', emoji: '☀️', label: 'Plein jour' },
-  { id: 'crepuscule', emoji: '🌇', label: 'Crépuscule' },
+  { id: 'midi', emoji: '☀️', label: 'Journée', image: 'moment-journee' },
+  { id: 'crepuscule', emoji: '🌇', label: 'Crépuscule', image: 'moment-crepuscule' },
   { id: 'soir', emoji: '🌆', label: 'Soir' },
-  { id: 'nuit', emoji: '🌙', label: 'Nuit' },
+  { id: 'nuit', emoji: '🌙', label: 'Nuit', image: 'moment-nuit' },
   { id: 'nuit-noire', emoji: '🌑', label: 'Nuit noire' },
   { id: 'jour-nuit', emoji: '🌗', label: 'Jour et nuit mêlés' },
   { id: 'hors-temps', emoji: '⏳', label: 'Hors du temps' },
 ];
+
+/** Moments proposés dans le formulaire (les autres restent lisibles sur les anciens rêves). */
+export const TIME_CHOICES: EmojiOption[] = ['aube', 'midi', 'crepuscule', 'nuit'].map((id) => TIMES_OF_DAY.find((t) => t.id === id)!);
 
 /** Types de rêve. */
 export const DREAM_TYPES: EmojiOption[] = [
@@ -267,4 +276,14 @@ export const EMOTIONS: EmojiOption[] = [
 /** Libellé + emoji d'une valeur enregistrée (identifiant connu, ou mot libre ajouté par la personne). */
 export function optionFor(list: EmojiOption[], value: string): EmojiOption {
   return list.find((o) => o.id === value) ?? { id: value, emoji: '✦', label: value };
+}
+
+/** Icône dessinée d'un emoji d'humeur (pour afficher l'humeur enregistrée). */
+export function moodImageFor(emoji: string | null | undefined, level: number | null | undefined): string | undefined {
+  for (const g of MOOD_GRID) {
+    const i = emoji ? g.emojis.indexOf(emoji) : -1;
+    if (i >= 0) return g.images[i];
+  }
+  const g = MOOD_GRID.find((x) => x.level === level);
+  return g?.images[0];
 }

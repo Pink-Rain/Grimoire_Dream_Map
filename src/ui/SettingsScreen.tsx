@@ -69,7 +69,8 @@ export function SettingsScreen(props: { bottomInset: number }) {
         <Text style={styles.p}>Grimoire - Dream Map — version {APP_VERSION}</Text>
         <Text style={styles.p}>
           Dessins de la carte : game-icons.net, par Lorc, Delapouite et leurs contributeurs, sous licence Creative Commons
-          Attribution 3.0 (CC BY 3.0). Polices : IM Fell English et EB Garamond (SIL Open Font License).
+          Attribution 3.0 (CC BY 3.0). Humeurs : d’après les Fluent Emoji de Microsoft (licence MIT). Polices : IM Fell English et EB
+          Garamond (SIL Open Font License).
         </Text>
       </Section>
     </ScrollView>

@@ -12,7 +12,7 @@ import { Button, Chip, Field, IconButton, Section, Txt } from './components';
 import { addDays, formatLongDate } from './dates';
 import { PeopleSection, PlacesSection } from './DreamSections';
 import { MediaSection } from './MediaSection';
-import { AMBIANCES, CLARITY_LEVELS, colors, DREAM_TYPES, EMOTIONS, fonts, GENRES, MOOD_GRID, optionFor, TIMES_OF_DAY, WEATHER_CHOICES, WEATHERS } from './theme';
+import { AMBIANCES, CLARITY_LEVELS, colors, DREAM_TYPES, EMOTIONS, fonts, GENRES, MOOD_GRID, optionFor, TIME_CHOICES, TIMES_OF_DAY, WEATHER_CHOICES, WEATHERS } from './theme';
 import { ColorPicker, CompactEmojiPicker, EmojiScale, LucidityScale, MoodPicker, WordPicker } from './widgets';
 
 type Draft = ReturnType<typeof normalizeDream>;
@@ -196,7 +196,7 @@ export function DreamEditor(props: {
             </Section>
             <Section title="Météo et moment">
               <CompactEmojiPicker options={WEATHER_CHOICES} legacy={WEATHERS} value={draft.weather} onChange={(weather) => commit({ weather })} testID="weather" />
-              <CompactEmojiPicker options={TIMES_OF_DAY} value={draft.timeOfDay} onChange={(timeOfDay) => commit({ timeOfDay })} testID="time" />
+              <CompactEmojiPicker options={TIME_CHOICES} legacy={TIMES_OF_DAY} value={draft.timeOfDay} onChange={(timeOfDay) => commit({ timeOfDay })} testID="time" />
             </Section>
             <Section title="Étiquettes et mots-clés">
               <WordPicker value={draft.tags} onChange={(tags) => commit({ tags })} suggestions={allTags} placeholder="Mot-clé puis Entrée" testID="tag" />

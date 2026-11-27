@@ -1,6 +1,7 @@
 import { useMemo, useRef } from 'react';
 import { appStore, useStoreVersion } from '../data/appStore';
-import type { Place } from '../data/types';
+import type { Place, PlaceAdmin } from '../data/types';
+import { adminFromAddress } from './cluster';
 import { pointOnRoute } from './geometry';
 import { iconBody } from './icons';
 
@@ -17,6 +18,8 @@ export interface MapPlace {
   icon: string;
   colors: string[];
   draggable: boolean;
+  /** Vrais lieux : quartier, ville… pour nommer les regroupements au dézoom. */
+  admin?: PlaceAdmin;
 }
 
 /**
@@ -53,6 +56,7 @@ export function useMapPlaces(filterDreamId?: string | null): MapPlace[] {
       icon: iconBody(p.icon),
       colors: colorsByPlace.get(p.id) ?? [],
       draggable: p.kind === 'place' && !p.real,
+      admin: p.real ? (p.admin ?? adminFromAddress(p.name, p.address)) : undefined,
     });
     for (const p of all) {
       if (onlyIds && !onlyIds.has(p.id)) continue;
