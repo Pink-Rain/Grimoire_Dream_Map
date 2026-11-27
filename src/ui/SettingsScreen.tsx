@@ -5,6 +5,8 @@ import { pickTextFile, saveTextFile } from '../platform/backup';
 import { desktop } from '../platform/desktop';
 import { confirmAsync, notify } from '../platform/dialogs';
 import { syncManager, useSyncStatus } from '../sync/syncManager';
+import { APP_VERSION as CURRENT_VERSION, checkForUpdates, installUpdate, openUpdateLog, updatesSupported, useUpdateState } from '../platform/updates';
+import { desktop as desktopBridge } from '../platform/desktop';
 import { Button, Section } from './components';
 import { colors, fonts } from './theme';
 
@@ -60,6 +62,7 @@ export function SettingsScreen(props: { bottomInset: number }) {
         <Button label="Importer des données" icon="push-outline" onPress={onImport} testID="import" />
       </Section>
       <SyncSection />
+      {updatesSupported && <UpdatesSection />}
       <Section title="À propos">
         <Text style={styles.p}>Grimoire - Dream Map — version {APP_VERSION}</Text>
         <Text style={styles.p}>
@@ -68,6 +71,41 @@ export function SettingsScreen(props: { bottomInset: number }) {
         </Text>
       </Section>
     </ScrollView>
+  );
+}
+
+function UpdatesSection() {
+  const s = useUpdateState();
+  const busy = s.status === 'checking' || s.status === 'downloading' || s.status === 'installing';
+  const line =
+    s.status === 'checking'
+      ? 'Recherche en cours…'
+      : s.status === 'latest'
+        ? 'Tu as la dernière version.'
+        : s.status === 'downloading'
+          ? `Téléchargement de la version ${s.version}… ${s.percent} %`
+          : s.status === 'ready'
+            ? `La version ${s.version} est prête à être installée.`
+            : s.status === 'installing'
+              ? `Installation de la version ${s.version}… l’app va se fermer puis se rouvrir.`
+              : s.status === 'available'
+                ? `La version ${s.version} est disponible.`
+                : s.status === 'error'
+                  ? `La recherche a échoué : ${s.message}`
+                  : desktopBridge
+                    ? 'L’app vérifie toute seule au démarrage puis toutes les 4 heures.'
+                    : 'L’app vérifie toute seule à chaque ouverture.';
+  return (
+    <Section title="Mises à jour">
+      <Text style={styles.p}>Version installée : {CURRENT_VERSION}</Text>
+      <Text style={[styles.p, s.status === 'error' && { color: colors.danger }]} testID="update-status">
+        {line}
+      </Text>
+      {s.status === 'ready' && <Button label="Redémarrer pour installer" icon="refresh" variant="primary" onPress={installUpdate} testID="update-install" />}
+      {s.status === 'available' && <Button label="Télécharger la nouvelle version" icon="download-outline" variant="primary" onPress={installUpdate} testID="update-install" />}
+      <Button label="Rechercher les mises à jour" icon="search-outline" onPress={() => void checkForUpdates()} disabled={busy} testID="update-check" />
+      {desktopBridge && <Button label="Journal des mises à jour" icon="document-text-outline" variant="ghost" onPress={openUpdateLog} testID="update-log" />}
+    </Section>
   );
 }
 

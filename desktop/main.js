@@ -161,34 +161,103 @@ function createWindow() {
 
 // ---------- Messages venant de l'app ----------
 // ---------- Mises à jour automatiques (GitHub Releases) ----------
-// Au démarrage puis toutes les 4 h : si une nouvelle version existe, elle est téléchargée en arrière-plan.
-// L'app propose alors de redémarrer ; sinon la mise à jour s'installe à la prochaine fermeture.
+// Au démarrage puis toutes les 4 h (ou sur demande dans les Réglages) : si une nouvelle version existe, elle est
+// téléchargée en arrière-plan. L'app propose alors de redémarrer ; sinon elle s'installe à la prochaine fermeture.
+// Tout est noté dans userData/update.log (bouton « Journal des mises à jour » dans les Réglages).
 let updateState = { status: 'idle' };
+const updateLogPath = () => path.join(app.getPath('userData'), 'update.log');
+function ulog(level, ...parts) {
+  try {
+    const line = `${new Date().toISOString()} [${level}] ${parts.map((p) => (p instanceof Error ? p.stack || p.message : typeof p === 'string' ? p : JSON.stringify(p))).join(' ')}\n`;
+    const f = updateLogPath();
+    if (fs.existsSync(f) && fs.statSync(f).size > 512 * 1024) fs.writeFileSync(f, '');
+    fs.appendFileSync(f, line);
+  } catch {}
+}
 function sendUpdate(s) {
   updateState = s;
-  if (win) win.webContents.send('grimoire:update', s);
+  if (win && !win.isDestroyed()) win.webContents.send('grimoire:update', s);
 }
+let updatesReady = false;
 function setupUpdates() {
   if (!app.isPackaged) return;
+  updatesReady = true;
+  autoUpdater.logger = { info: (...a) => ulog('info', ...a), warn: (...a) => ulog('warn', ...a), error: (...a) => ulog('error', ...a), debug: () => {} };
   autoUpdater.setFeedURL({ provider: 'github', owner: 'Pink-Rain', repo: 'Grimoire_Dream_Map', releaseType: 'release' });
   autoUpdater.autoDownload = true;
   autoUpdater.autoInstallOnAppQuit = true;
+  ulog('info', `Démarrage, version ${app.getVersion()}`);
+  autoUpdater.on('checking-for-update', () => {
+    if (updateState.status !== 'downloading' && updateState.status !== 'ready') sendUpdate({ status: 'checking' });
+  });
+  autoUpdater.on('update-not-available', () => sendUpdate({ status: 'latest', version: app.getVersion(), checkedAt: Date.now() }));
   autoUpdater.on('update-available', (i) => sendUpdate({ status: 'downloading', version: i.version, percent: 0 }));
   autoUpdater.on('download-progress', (p) => sendUpdate({ ...updateState, status: 'downloading', percent: Math.round(p.percent || 0) }));
   autoUpdater.on('update-downloaded', (i) => sendUpdate({ status: 'ready', version: i.version }));
   autoUpdater.on('error', (e) => {
-    console.warn('Mise à jour :', e && e.message);
-    if (updateState.status === 'downloading') sendUpdate({ status: 'idle' });
+    ulog('error', e);
+    if (updateState.status !== 'ready') sendUpdate({ status: 'error', message: (e && e.message) || String(e) });
   });
-  const check = () => autoUpdater.checkForUpdates().catch(() => {});
+  const check = () => autoUpdater.checkForUpdates().catch((e) => ulog('error', e));
   setTimeout(check, 8000);
   setInterval(check, 4 * 3600 * 1000);
 }
+
+/** Demande à l'app de finir d'enregistrer (au plus `ms` millisecondes). */
+function flushRenderer(ms) {
+  return new Promise((resolve) => {
+    if (!win || win.isDestroyed()) return resolve();
+    const done = () => {
+      clearTimeout(t);
+      resolve();
+    };
+    const t = setTimeout(() => {
+      ipcMain.removeListener('grimoire:ready-to-close', done);
+      resolve();
+    }, ms);
+    ipcMain.once('grimoire:ready-to-close', done);
+    win.webContents.send('grimoire:before-close');
+  });
+}
+
 ipcMain.on('grimoire:get-update', (e) => {
   e.returnValue = updateState;
 });
-ipcMain.on('grimoire:install-update', () => {
-  if (updateState.status === 'ready') autoUpdater.quitAndInstall(true, true);
+ipcMain.handle('grimoire:check-update', async () => {
+  if (!updatesReady) {
+    sendUpdate({ status: 'error', message: 'Les mises à jour ne fonctionnent que dans l’app installée.' });
+    return updateState;
+  }
+  if (updateState.status === 'downloading' || updateState.status === 'ready' || updateState.status === 'installing') return updateState;
+  sendUpdate({ status: 'checking' });
+  try {
+    await autoUpdater.checkForUpdates();
+  } catch (e) {
+    ulog('error', e);
+    sendUpdate({ status: 'error', message: (e && e.message) || String(e) });
+  }
+  return updateState;
+});
+ipcMain.on('grimoire:install-update', async () => {
+  if (updateState.status !== 'ready') return;
+  ulog('info', `Redémarrage demandé pour installer ${updateState.version}`);
+  sendUpdate({ status: 'installing', version: updateState.version });
+  // 1) on finit d'enregistrer, 2) on laisse la fenêtre se fermer sans la retenir, 3) on installe et on relance.
+  await flushRenderer(3000);
+  allowClose = true;
+  setImmediate(() => {
+    try {
+      autoUpdater.quitAndInstall(true, true);
+    } catch (e) {
+      ulog('error', e);
+      allowClose = false;
+      sendUpdate({ status: 'error', message: (e && e.message) || String(e) });
+    }
+  });
+});
+ipcMain.on('grimoire:open-update-log', () => {
+  if (!fs.existsSync(updateLogPath())) fs.writeFileSync(updateLogPath(), '');
+  shell.openPath(updateLogPath());
 });
 
 ipcMain.on('grimoire:get-initial', (e) => {
