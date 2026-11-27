@@ -150,7 +150,8 @@ site/                     page de présentation (GitHub Pages) + politique de co
   - Fiche du rêve : chevrons (date), fermer, supprimer, eclair / eclair-encre (note rapide), micro-bouton
     (enregistreur), personne, imaginaire, lieu-reel, vehicule.
   - Médias : image, musique, video, fichier, lien-b. Lucidité : lucidite-b-0 … -5. Météo : meteo-1 … -5.
-  - barre-reglette + barre-curseur : curseur 5 crans `EmojiScale` (humeur, clarté, atmosphère).
+  - Barres à curseur (barre-reglette / barre-curseur) : **retirées à la demande de la personne** (v0.6.3).
+    Humeur, clarté, atmosphère = rangées d'emojis à toucher (`EmojiScale`).
 - Icônes encore standard (à dessiner par la personne) : rêve complet dans le bouton « Compléter ce rêve »,
   ajouter (+ réveil), lire / pause / arrêter un son, modifier, devant / derrière, ouvrir / partager, télécharger,
   Google (connexion, synchro, déconnexion), exporter / importer, rechercher / journal des mises à jour,
@@ -251,6 +252,9 @@ Expo change à chaque version. Avant d'utiliser une API Expo/React Native, véri
   sommeil (3e type d'entrée), journal groupé par jour, logo et icônes de la personne.
 - [x] v0.6.0 : correctif du redémarrage pour mise à jour, journal des mises à jour, bouton « Rechercher ».
 - [x] v0.6.1 : icône PC transparente. v0.6.2 : 22 nouvelles icônes de la personne (zip n° 3).
+- [x] v0.6.3 : barres retirées ; émotions et type de rêve = étiquettes réutilisables (WordPicker : Entrée crée
+  l'étiquette, propositions seulement pendant la frappe, tirées des étiquettes déjà utilisées + liste de départ ;
+  les anciens identifiants comme « peur » s'affichent avec leur libellé) ; clarté sous la lucidité.
 - [ ] Synchro des fichiers médias (notes vocales, images…) dans le Drive.
 - [ ] Statistiques (simples et croisées). Transcription voix → texte (facultative).
 - [ ] Synchro Google Drive (appDataFolder) : PC (.exe → client OAuth « Application de bureau », redirection
