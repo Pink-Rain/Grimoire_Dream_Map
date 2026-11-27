@@ -52,7 +52,11 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: windows
-          path: desktop/release/*.exe
+          # latest.yml + .blockmap : utilisés par la mise à jour automatique de l'app PC.
+          path: |
+            desktop/release/*.exe
+            desktop/release/*.exe.blockmap
+            desktop/release/latest.yml
 
   android:
     needs: check
@@ -112,6 +116,12 @@ jobs:
           sed -i "s/__VERSION__/${{ needs.check.outputs.version }}/g; s#__REPO__#${{ github.repository }}#g" _site/*.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
-        with: { path: _site }
+        with:
+          path: _site
+          name: github-pages-${{ github.run_attempt }}
+      # GitHub met parfois quelques secondes à voir le paquet qu'on vient d'envoyer.
+      - run: sleep 20
       - id: deploy
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages-${{ github.run_attempt }}

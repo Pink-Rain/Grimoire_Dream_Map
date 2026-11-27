@@ -20,6 +20,7 @@ import { MapScreen } from './ui/MapScreen';
 import { SettingsScreen } from './ui/SettingsScreen';
 import { colors, fonts } from './ui/theme';
 import { TopBar } from './ui/TopBar';
+import { UpdateBanner } from './ui/UpdateBanner';
 import { useLayoutMode } from './ui/useLayoutMode';
 
 type Tab = 'map' | 'journal';
@@ -165,6 +166,7 @@ function Main() {
       body = (
         <>
           <TopBar title={tab === 'map' ? 'Dream Map' : 'Journal'} layout={layout} topInset={insets.top} onSettings={toggleSettings} />
+          <UpdateBanner />
           <View style={styles.fill}>
             {tab === 'map' ? (
               <MapScreen phone bottomInset={0} onOpenDream={openDream} focus={focus} />
@@ -199,6 +201,7 @@ function Main() {
     body = (
       <>
         <TopBar title="Dream Map" layout={layout} topInset={insets.top} onSettings={toggleSettings} settingsActive={overlay?.kind === 'settings'} center={tabs} actions={actions} />
+        <UpdateBanner />
         <View style={[styles.fill, styles.columns]}>
           {tab === 'map' ? (
             <>

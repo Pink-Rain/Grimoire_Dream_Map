@@ -1,7 +1,7 @@
 {
   "name": "grimoire-dream-map-desktop",
   "productName": "Grimoire - Dream Map",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Grimoire - Dream Map (application PC)",
   "author": "Grimoire",
   "main": "main.js",
@@ -49,10 +49,21 @@
     },
     "linux": {
       "target": "dir"
-    }
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "Pink-Rain",
+        "repo": "Grimoire_Dream_Map",
+        "releaseType": "release"
+      }
+    ]
   },
   "devDependencies": {
     "electron": "^45.5.0",
     "electron-builder": "^26.18.0"
+  },
+  "dependencies": {
+    "electron-updater": "^6.8.11"
   }
 }

@@ -185,6 +185,15 @@ Si l'Electron n'est pas téléchargé : `ELECTRON_GET_USE_PROXY=1 node desktop/n
    https://pink-rain.github.io/Grimoire_Dream_Map/ (liens de téléchargement vers cette version).
    Sur une branche `claude/...`, mettre `[build]` dans le message du commit pour fabriquer une préversion
    (pas de mise à jour de la page).
+- **Mises à jour automatiques** :
+  - App PC : `electron-updater` (desktop/main.js) lit les Releases GitHub (dernière release non « préversion »,
+    donc celles de `main`), télécharge en arrière-plan, bandeau « Redémarrer » (src/ui/UpdateBanner.tsx), sinon
+    installation à la fermeture. Il faut publier `latest.yml` et le `.blockmap` avec l'exe (fait par build.yml).
+    Le numéro de version doit augmenter à chaque publication. Disponible à partir de la 0.4.0 (installer celle-ci
+    une fois à la main).
+  - Android hors Play Store : impossible de se mettre à jour en silence ; l'app consulte l'API GitHub
+    (`releases/latest`) et propose de télécharger le nouvel APK (Android demande une confirmation).
+    Sur le Play Store, les mises à jour seront automatiques.
 - L'exe n'est pas signé (signature payante) : Windows affiche « Windows a protégé votre ordinateur »
   → « Informations complémentaires » → « Exécuter quand même ».
 - L'APK de test est signé avec une clé de test : il faudra le désinstaller (après export des données)
@@ -203,6 +212,7 @@ Expo change à chaque version. Avant d'utiliser une API Expo/React Native, véri
   format téléphone/ordinateur, app PC .exe, APK de test.
 - [x] Étape 2 : synchro Google Drive sur l'app PC (v0.2.0) + page de présentation et politique de confidentialité.
 - [x] Étape 3 (v0.3.0) : carte parchemin, formulaires rapide/complet, médias, lieux/personnes/véhicules.
+- [x] v0.4.0 : mises à jour automatiques (PC) et détection de nouvelle version (Android).
 - [ ] Synchro des fichiers médias (notes vocales, images…) dans le Drive.
 - [ ] Statistiques (simples et croisées). Transcription voix → texte (facultative).
 - [ ] Synchro Google Drive (appDataFolder) : PC (.exe → client OAuth « Application de bureau », redirection
