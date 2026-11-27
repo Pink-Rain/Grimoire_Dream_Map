@@ -8,6 +8,7 @@ const fs = require('fs');
 const path = require('path');
 const { pathToFileURL } = require('url');
 const google = require('./google');
+const { autoUpdater } = require('electron-updater');
 
 const SCHEME = 'app';
 const HOST = 'dreammap';
@@ -159,6 +160,37 @@ function createWindow() {
 }
 
 // ---------- Messages venant de l'app ----------
+// ---------- Mises à jour automatiques (GitHub Releases) ----------
+// Au démarrage puis toutes les 4 h : si une nouvelle version existe, elle est téléchargée en arrière-plan.
+// L'app propose alors de redémarrer ; sinon la mise à jour s'installe à la prochaine fermeture.
+let updateState = { status: 'idle' };
+function sendUpdate(s) {
+  updateState = s;
+  if (win) win.webContents.send('grimoire:update', s);
+}
+function setupUpdates() {
+  if (!app.isPackaged) return;
+  autoUpdater.setFeedURL({ provider: 'github', owner: 'Pink-Rain', repo: 'Grimoire_Dream_Map', releaseType: 'release' });
+  autoUpdater.autoDownload = true;
+  autoUpdater.autoInstallOnAppQuit = true;
+  autoUpdater.on('update-available', (i) => sendUpdate({ status: 'downloading', version: i.version, percent: 0 }));
+  autoUpdater.on('download-progress', (p) => sendUpdate({ ...updateState, status: 'downloading', percent: Math.round(p.percent || 0) }));
+  autoUpdater.on('update-downloaded', (i) => sendUpdate({ status: 'ready', version: i.version }));
+  autoUpdater.on('error', (e) => {
+    console.warn('Mise à jour :', e && e.message);
+    if (updateState.status === 'downloading') sendUpdate({ status: 'idle' });
+  });
+  const check = () => autoUpdater.checkForUpdates().catch(() => {});
+  setTimeout(check, 8000);
+  setInterval(check, 4 * 3600 * 1000);
+}
+ipcMain.on('grimoire:get-update', (e) => {
+  e.returnValue = updateState;
+});
+ipcMain.on('grimoire:install-update', () => {
+  if (updateState.status === 'ready') autoUpdater.quitAndInstall(true, true);
+});
+
 ipcMain.on('grimoire:get-initial', (e) => {
   e.returnValue = { phoneMode: !!state.phoneMode, appVersion: app.getVersion() };
 });
@@ -207,6 +239,7 @@ app.whenReady().then(() => {
 
   google.init();
   createWindow();
+  setupUpdates();
 });
 
 app.on('window-all-closed', () => app.quit());
