@@ -141,6 +141,6 @@ describe('DataStore', () => {
 describe('compatibilité', () => {
   it('un rêve de la version 1 reçoit des valeurs par défaut', () => {
     const old = { id: 'a', createdAt: 'x', updatedAt: 'x', deleted: false, dreamDate: '2026-11-01', title: 't', text: '' } as Dream;
-    expect(normalizeDream(old)).toMatchObject({ kind: 'full', lucidity: null, mood: null, tags: [], colors: [], media: [], peopleIds: [], placeIds: [] });
+    expect(normalizeDream(old)).toMatchObject({ kind: 'full', lucidity: null, mood: null, tags: [], colors: [], media: [], peopleIds: [], placeIds: [], weather: [], clarity: null, atmosphere: null, timeOfDay: [], dreamTypes: [], emotions: [] });
   });
 });

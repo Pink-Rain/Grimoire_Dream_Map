@@ -14,6 +14,7 @@ import { Image, Linking, Modal, Platform, Pressable, StyleSheet, Text, View } fr
 import type { MediaItem, MediaType } from '../data/types';
 import { notify, confirmAsync } from '../platform/dialogs';
 import { openMedia, pickAndStore, removeMedia, storeRecording, uriFor } from '../platform/media';
+import { AppIcon } from './AppIcon';
 import { Button, Field, IconButton, Txt, type PressState } from './components';
 import { colors, fonts } from './theme';
 
@@ -96,9 +97,9 @@ export function VoiceRecorder(props: { onRecorded: (item: MediaItem) => void; bi
         accessibilityRole="button"
         accessibilityLabel={rec ? 'Arrêter l’enregistrement' : 'Enregistrer une note vocale'}
         testID={rec ? 'record-stop' : 'record-start'}
-        style={({ pressed }) => [styles.recButton, props.big && styles.recButtonBig, rec && styles.recButtonOn, pressed && { opacity: 0.85 }]}
+        style={({ pressed }) => [rec ? [styles.recButton, props.big && styles.recButtonBig, styles.recButtonOn] : null, pressed && { opacity: 0.85 }]}
       >
-        <Ionicons name={rec ? 'stop' : 'mic'} size={props.big ? 36 : 26} color={rec ? colors.text : colors.accentText} />
+        {rec ? <Ionicons name="stop" size={props.big ? 36 : 26} color={colors.text} /> : <AppIcon name="micro-bouton" size={props.big ? 84 : 62} />}
       </Pressable>
       <View style={{ flex: 1, gap: 2 }}>
         <Txt weight="semi">{rec ? 'Enregistrement…' : busy ? 'Enregistrement du son…' : 'Note vocale'}</Txt>
@@ -153,6 +154,13 @@ function AudioRow(props: { item: MediaItem; onRemove: () => void }) {
 
 // ---------------------------------------------------------------- Autres médias
 
+const DRAWN: Partial<Record<MediaType, 'image' | 'musique' | 'video' | 'fichier'>> = { image: 'image', music: 'musique', video: 'video', file: 'fichier' };
+
+function MediaTypeIcon({ type }: { type: MediaType }) {
+  const drawn = DRAWN[type];
+  return drawn ? <AppIcon name={drawn} size={30} /> : <Ionicons name={TYPE_ICON[type]} size={22} color={colors.accent} />;
+}
+
 const TYPE_ICON: Record<MediaType, keyof typeof Ionicons.glyphMap> = {
   audio: 'mic-outline',
   music: 'musical-notes-outline',
@@ -196,7 +204,7 @@ function LinkRow(props: { item: MediaItem; onRemove: () => void }) {
           <Image source={{ uri: `https://img.youtube.com/vi/${yt}/mqdefault.jpg` }} style={styles.ytThumb} />
         ) : (
           <View style={styles.fileIcon}>
-            <Ionicons name={TYPE_ICON[props.item.type]} size={22} color={colors.accent} />
+            <MediaTypeIcon type={props.item.type} />
           </View>
         )}
         <View style={{ flex: 1 }}>
@@ -221,7 +229,7 @@ function FileRow(props: { item: MediaItem; onRemove: () => void }) {
         style={({ hovered }: PressState) => [styles.linkMain, hovered && { backgroundColor: colors.surfaceHover }]}
       >
         <View style={styles.fileIcon}>
-          <Ionicons name={TYPE_ICON[props.item.type]} size={22} color={colors.accent} />
+          <MediaTypeIcon type={props.item.type} />
         </View>
         <Txt numberOfLines={1} style={{ flex: 1 }}>
           {props.item.name}
@@ -303,10 +311,10 @@ export function MediaSection(props: { value: MediaItem[]; onChange: (v: MediaIte
             <FileRow key={m.id} item={m} onRemove={() => remove(m)} />
           ))}
           <View style={styles.addRow}>
-            <Button small label="Image" icon="image-outline" onPress={() => pick('image')} testID="add-image" />
-            <Button small label="Musique" icon="musical-notes-outline" onPress={() => pick('audio')} testID="add-music" />
-            <Button small label="Vidéo" icon="film-outline" onPress={() => pick('video')} testID="add-video" />
-            <Button small label="Fichier" icon="document-outline" onPress={() => pick('any')} testID="add-file" />
+            <Button small label="Image" image="image" onPress={() => pick('image')} testID="add-image" />
+            <Button small label="Musique" image="musique" onPress={() => pick('audio')} testID="add-music" />
+            <Button small label="Vidéo" image="video" onPress={() => pick('video')} testID="add-video" />
+            <Button small label="Fichier" image="fichier" onPress={() => pick('any')} testID="add-file" />
             <Button small label="Lien / YouTube" icon="link-outline" onPress={() => setLinkOpen((o) => !o)} testID="add-link" />
           </View>
           {linkOpen && (

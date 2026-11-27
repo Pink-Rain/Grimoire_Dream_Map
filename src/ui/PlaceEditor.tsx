@@ -229,7 +229,7 @@ export function PlaceEditor(props: {
             <Title size={24} style={{ flex: 1 }}>
               {title}
             </Title>
-            <IconButton icon="close" label="Fermer" onPress={props.onClose} testID="place-close" />
+            <IconButton image="fermer" size={18} label="Fermer" onPress={props.onClose} testID="place-close" />
           </View>
           <ScrollView contentContainerStyle={styles.body} keyboardShouldPersistTaps="handled">
             {!existing && (
@@ -241,9 +241,9 @@ export function PlaceEditor(props: {
                   setSize(m === 'vehicle' ? 2 : 3);
                 }}
                 options={[
-                  { value: 'real', label: 'Réel', icon: 'earth-outline' },
-                  { value: 'dream', label: 'Imaginaire', icon: 'sparkles-outline' },
-                  { value: 'vehicle', label: 'Véhicule', icon: 'boat-outline' },
+                  { value: 'real', label: 'Réel', image: 'lieu-reel' },
+                  { value: 'dream', label: 'Imaginaire', image: 'imaginaire' },
+                  { value: 'vehicle', label: 'Véhicule', image: 'vehicule' },
                 ]}
                 testID="place-mode"
               />
@@ -386,7 +386,7 @@ export function PlaceEditor(props: {
             )}
           </ScrollView>
           <View style={styles.foot}>
-            {existing && <Button label="Supprimer" icon="trash-outline" variant="danger" onPress={remove} testID="place-delete" />}
+            {existing && <Button label="Supprimer" image="supprimer" variant="danger" onPress={remove} testID="place-delete" />}
             <View style={{ flex: 1 }} />
             <Button label="Annuler" variant="ghost" onPress={props.onClose} />
             <Button label={existing ? 'Enregistrer' : 'Ajouter'} icon="checkmark" variant="primary" onPress={save} disabled={!canSave} testID="place-save" />

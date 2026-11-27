@@ -27,6 +27,7 @@ a { color: var(--accent); }
 
 /* En-tête */
 .hero { text-align: center; padding: 72px 0 40px; }
+.logo { display: block; margin: 0 auto; width: 148px; height: 148px; filter: drop-shadow(0 0 28px #8e5fd855); }
 .moon { font-size: 64px; color: var(--accent); line-height: 1; text-shadow: 0 0 40px #b69cff55; }
 .suite { margin-top: 16px; letter-spacing: .35em; font-size: 13px; color: var(--faint); }
 h1 { font-family: var(--serif); font-weight: normal; font-size: clamp(40px, 8vw, 64px); margin: 4px 0 12px; }

@@ -9,7 +9,7 @@
  */
 
 /** Version du format de données. À augmenter quand on ajoute des champs ou des collections. */
-export const SCHEMA_VERSION = 2;
+export const SCHEMA_VERSION = 3;
 
 /** Identifiant écrit dans chaque fichier pour reconnaître nos fichiers. */
 export const APP_ID = 'grimoire-dream-map';
@@ -55,6 +55,19 @@ export interface Dream extends BaseRecord {
   placeIds?: string[];
   /** Notes vocales, images, musiques, vidéos, fichiers, liens. */
   media?: MediaItem[];
+  // --- v3 ---
+  /** Météo(s) du rêve (identifiants de WEATHERS, ou mots libres). */
+  weather?: string[];
+  /** Clarté du souvenir, de 1 (très flou) à 5 (très net). */
+  clarity?: number | null;
+  /** Atmosphère du monde rêvé, de 1 (cauchemardesque) à 5 (féerique). */
+  atmosphere?: number | null;
+  /** Moment(s) du jour dans le rêve (identifiants de TIMES_OF_DAY). */
+  timeOfDay?: string[];
+  /** Types de rêve : cauchemar, récurrent, faux réveil… (identifiants de DREAM_TYPES, ou mots libres). */
+  dreamTypes?: string[];
+  /** Émotions ressenties (identifiants de EMOTIONS, ou mots libres). */
+  emotions?: string[];
 }
 
 export type DreamKind = 'quick' | 'full';
@@ -111,9 +124,25 @@ export interface Place extends BaseRecord {
   route?: { fromId: string; toId: string };
 }
 
+/**
+ * Un sommeil (nuit ou sieste) : troisième type d'entrée, indépendant des rêves. (v3)
+ * Les heures sont « HH:MM » ; chacune est comprise comme venant après la précédente
+ * (coucher → endormissement → réveils → réveil → lever), en passant minuit si besoin.
+ */
+export interface Sleep extends BaseRecord {
+  /** Jour du coucher, AAAA-MM-JJ. */
+  date: string;
+  bedTime?: string | null;
+  asleepTime?: string | null;
+  wakeTime?: string | null;
+  upTime?: string | null;
+  /** Réveils pendant le sommeil. */
+  interruptions?: { id: string; from: string; to: string }[];
+}
+
 /** Noms des collections. On peut en ajouter, jamais en renommer. */
-export type CollectionName = 'dreams' | 'people' | 'places';
-export const COLLECTIONS: CollectionName[] = ['dreams', 'people', 'places'];
+export type CollectionName = 'dreams' | 'people' | 'places' | 'sleeps';
+export const COLLECTIONS: CollectionName[] = ['dreams', 'people', 'places', 'sleeps'];
 
 /**
  * Un « morceau » (shard) d'une collection = un fichier.
@@ -150,8 +179,10 @@ export const PLACE_SIZES: { level: number; label: string; meters: number }[] = [
 ];
 
 /** Complète un rêve ancien avec les valeurs par défaut des champs v2. */
-export function normalizeDream(d: Dream): Required<Pick<Dream, 'kind' | 'ambiances' | 'tags' | 'colors' | 'peopleIds' | 'placeIds' | 'media'>> &
-  Dream & { lucidity: number | null; mood: number | null } {
+export function normalizeDream(
+  d: Dream,
+): Required<Pick<Dream, 'kind' | 'ambiances' | 'tags' | 'colors' | 'peopleIds' | 'placeIds' | 'media' | 'weather' | 'timeOfDay' | 'dreamTypes' | 'emotions'>> &
+  Dream & { lucidity: number | null; mood: number | null; clarity: number | null; atmosphere: number | null } {
   return {
     ...d,
     kind: d.kind ?? 'full',
@@ -163,5 +194,11 @@ export function normalizeDream(d: Dream): Required<Pick<Dream, 'kind' | 'ambianc
     peopleIds: d.peopleIds ?? [],
     placeIds: d.placeIds ?? [],
     media: d.media ?? [],
+    weather: d.weather ?? [],
+    clarity: d.clarity ?? null,
+    atmosphere: d.atmosphere ?? null,
+    timeOfDay: d.timeOfDay ?? [],
+    dreamTypes: d.dreamTypes ?? [],
+    emotions: d.emotions ?? [],
   };
 }

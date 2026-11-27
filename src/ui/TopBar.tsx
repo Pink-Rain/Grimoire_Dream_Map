@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { AppIcon } from './AppIcon';
 import { IconButton } from './components';
 import { colors, fonts } from './theme';
 import type { LayoutMode } from './useLayoutMode';
@@ -23,7 +24,7 @@ export function TopBar(props: {
           <IconButton icon="arrow-back" label="Retour" onPress={props.onBack} testID="back" />
         ) : (
           <View style={styles.logo}>
-            <Text style={styles.logoGlyph}>☾</Text>
+            <AppIcon name="logo" size={38} />
           </View>
         )}
         <View style={styles.titleBox}>
@@ -37,13 +38,14 @@ export function TopBar(props: {
         {props.actions}
         {layout.showToggle && (
           <IconButton
-            icon={layout.phoneMode ? 'desktop-outline' : 'phone-portrait-outline'}
+            image={layout.phoneMode ? undefined : 'telephone'}
+            icon={layout.phoneMode ? 'desktop-outline' : undefined}
             label={layout.phoneMode ? 'Passer en format ordinateur' : 'Passer en format téléphone'}
             onPress={layout.togglePhoneMode}
             testID="toggle-format"
           />
         )}
-        {props.onSettings && <IconButton icon="settings-outline" label="Réglages" onPress={props.onSettings} active={props.settingsActive} testID="open-settings" />}
+        {props.onSettings && <IconButton image="reglages" label="Réglages" onPress={props.onSettings} active={props.settingsActive} testID="open-settings" />}
       </View>
     </View>
   );

@@ -237,8 +237,15 @@
     document.getElementById('empty').style.display = places.length ? 'none' : 'flex';
     if (firstState) {
       firstState = false;
-      if (s.view && places.length) map.setView([s.view.lat, s.view.lon], s.view.zoom, { animate: false });
-      else fitAll(false);
+      if (s.view && places.length) {
+        map.setView([s.view.lat, s.view.lon], s.view.zoom, { animate: false });
+        // La fenêtre a pu changer de taille (format téléphone…) : si des lieux sont hors de vue, on recadre.
+        var vb = map.getBounds().pad(-0.08);
+        var out = places.some(function (p) {
+          return !vb.contains([p.lat, p.lon]);
+        });
+        if (out) fitAll(false);
+      } else fitAll(false);
       drawGrid();
     } else if (s.fit) fitAll(true);
     else if (added.length) {

@@ -8,9 +8,9 @@ import {
   storageKey,
 } from './records';
 import type { TextStorage } from './storage/types';
-import { BaseRecord, COLLECTIONS, CollectionName, Dream, ExportBundle, Person, Place } from './types';
+import { BaseRecord, COLLECTIONS, CollectionName, Dream, ExportBundle, Person, Place, Sleep } from './types';
 
-type RecordTypes = { dreams: Dream; people: Person; places: Place };
+type RecordTypes = { dreams: Dream; people: Person; places: Place; sleeps: Sleep };
 
 export interface StoreOptions {
   storage: TextStorage;

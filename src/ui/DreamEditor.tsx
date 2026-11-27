@@ -6,12 +6,13 @@ import { localDateString } from '../data/records';
 import { normalizeDream, type Dream } from '../data/types';
 import { confirmAsync } from '../platform/dialogs';
 import { removeMedia } from '../platform/media';
+import { AppIcon } from './AppIcon';
 import { Button, Field, IconButton, Section, Txt } from './components';
 import { addDays, formatLongDate } from './dates';
 import { PeopleSection, PlacesSection } from './DreamSections';
 import { MediaSection } from './MediaSection';
-import { AMBIANCES, colors, fonts } from './theme';
-import { ColorPicker, LucidityScale, MoodScale, WordPicker } from './widgets';
+import { AMBIANCES, ATMOSPHERE_LEVELS, CLARITY_LEVELS, colors, DREAM_TYPES, EMOTIONS, fonts, MOOD_LEVELS, TIMES_OF_DAY, WEATHERS } from './theme';
+import { ColorPicker, EmojiPicker, EmojiScale, LucidityScale, WordPicker } from './widgets';
 
 type Draft = ReturnType<typeof normalizeDream>;
 type Editable = Partial<Omit<Dream, 'id' | 'createdAt' | 'updatedAt' | 'deleted'>>;
@@ -41,7 +42,13 @@ function hasContent(d: Draft) {
     d.ambiances.length > 0 ||
     d.colors.length > 0 ||
     d.lucidity !== null ||
-    d.mood !== null
+    d.mood !== null ||
+    d.clarity !== null ||
+    d.atmosphere !== null ||
+    d.weather.length > 0 ||
+    d.timeOfDay.length > 0 ||
+    d.dreamTypes.length > 0 ||
+    d.emotions.length > 0
   );
 }
 
@@ -91,17 +98,17 @@ export function DreamEditor(props: {
     <View style={{ gap: 10 }}>
       <View style={styles.topRow}>
         <View style={[styles.badge, quick && styles.badgeQuick]}>
-          <Ionicons name={quick ? 'flash-outline' : 'book-outline'} size={14} color={quick ? colors.accentText : colors.ochre} />
+          {quick ? <AppIcon name="eclair-encre" size={18} /> : <Ionicons name="book-outline" size={14} color={colors.ochre} />}
           <Txt size={14} weight="semi" style={{ color: quick ? colors.accentText : colors.ochre }}>
             {quick ? 'Note rapide' : 'Rêve complet'}
           </Txt>
         </View>
         <View style={styles.dateRow}>
-          <IconButton icon="chevron-back" label="Jour précédent" size={20} onPress={() => commit({ dreamDate: addDays(draft.dreamDate, -1) })} />
+          <IconButton image="chevron-gauche" label="Jour précédent" size={16} onPress={() => commit({ dreamDate: addDays(draft.dreamDate, -1) })} />
           <Txt muted size={15} testID="dream-date" style={{ textAlign: 'center', flexShrink: 1 }}>
             {formatLongDate(draft.dreamDate)}
           </Txt>
-          <IconButton icon="chevron-forward" label="Jour suivant" size={20} onPress={() => commit({ dreamDate: addDays(draft.dreamDate, 1) })} />
+          <IconButton image="chevron-droit" label="Jour suivant" size={16} onPress={() => commit({ dreamDate: addDays(draft.dreamDate, 1) })} />
         </View>
       </View>
       <Field big value={draft.title} onChangeText={(v) => commit({ title: v })} placeholder="Titre du rêve" maxLength={200} testID="dream-title" />
@@ -138,13 +145,30 @@ export function DreamEditor(props: {
             <Section title="Personnes">
               <PeopleSection value={draft.peopleIds} onChange={(peopleIds) => commit({ peopleIds })} />
             </Section>
+            <Section title="Type de rêve">
+              <EmojiPicker options={DREAM_TYPES} value={draft.dreamTypes} onChange={(dreamTypes) => commit({ dreamTypes })} allowCustom customPlaceholder="Autre type… puis Entrée" testID="type" />
+            </Section>
+            <Section title="Émotions ressenties">
+              <EmojiPicker options={EMOTIONS} value={draft.emotions} onChange={(emotions) => commit({ emotions })} allowCustom customPlaceholder="Autre émotion… puis Entrée" testID="emotion" />
+            </Section>
+            <Section title="Humeur">
+              <EmojiScale levels={MOOD_LEVELS} value={draft.mood} onChange={(mood) => commit({ mood })} name="Humeur" placeholder="Comment te sentais-tu dans ce rêve ?" testID="mood" />
+            </Section>
             <Section title="Lucidité">
               <LucidityScale value={draft.lucidity} onChange={(lucidity) => commit({ lucidity })} />
             </Section>
-            <Section title="Humeur">
-              <MoodScale value={draft.mood} onChange={(mood) => commit({ mood })} />
+            <Section title="Clarté du rêve">
+              <EmojiScale levels={CLARITY_LEVELS} value={draft.clarity} onChange={(clarity) => commit({ clarity })} name="Clarté" placeholder="Ton souvenir est-il flou ou net ?" testID="clarity" />
             </Section>
             <Section title="Ambiance">
+              <EmojiScale
+                levels={ATMOSPHERE_LEVELS}
+                value={draft.atmosphere}
+                onChange={(atmosphere) => commit({ atmosphere })}
+                name="Atmosphère"
+                placeholder="L’atmosphère du rêve, de cauchemardesque à féerique"
+                testID="atmosphere"
+              />
               <WordPicker
                 value={draft.ambiances}
                 onChange={(ambiances) => commit({ ambiances })}
@@ -153,6 +177,12 @@ export function DreamEditor(props: {
                 placeholder="Autre ambiance…"
                 testID="ambiance"
               />
+            </Section>
+            <Section title="Météo du rêve">
+              <EmojiPicker options={WEATHERS} value={draft.weather} onChange={(weather) => commit({ weather })} allowCustom customPlaceholder="Autre météo… puis Entrée" testID="weather" />
+            </Section>
+            <Section title="Jour ou nuit">
+              <EmojiPicker options={TIMES_OF_DAY} value={draft.timeOfDay} onChange={(timeOfDay) => commit({ timeOfDay })} testID="time" />
             </Section>
             <Section title="Couleurs du rêve">
               <ColorPicker value={draft.colors} onChange={(c) => commit({ colors: c })} />
@@ -167,7 +197,7 @@ export function DreamEditor(props: {
           <Txt faint size={14}>
             {saved ? 'Enregistré automatiquement' : quick ? 'Parle ou écris pour créer la note' : 'Commence à écrire pour créer le rêve'}
           </Txt>
-          <Button label="Supprimer" icon="trash-outline" variant="danger" small onPress={onDelete} testID="delete-dream" />
+          <Button label="Supprimer" image="supprimer" variant="danger" small onPress={onDelete} testID="delete-dream" />
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

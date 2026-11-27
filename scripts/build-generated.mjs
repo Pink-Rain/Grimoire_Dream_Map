@@ -83,6 +83,7 @@ const runtime = read(path.join(root, 'scripts/map/runtime.js'));
 const style = read(path.join(root, 'scripts/map/style.css'));
 const font = readFileSync(require.resolve('@expo-google-fonts/im-fell-english/400Regular/IMFellEnglish_400Regular.ttf')).toString('base64');
 
+const boussole = readFileSync(path.join(root, 'assets/ui/boussole-256.png')).toString('base64');
 const compass = `<svg id="compass" viewBox="0 0 100 100" aria-hidden="true">
 <g fill="none" stroke="#b8955c" stroke-width="1"><circle cx="50" cy="50" r="38" stroke-opacity=".6"/><circle cx="50" cy="50" r="33" stroke-opacity=".35" stroke-dasharray="1 3"/></g>
 <g stroke="#b8955c" stroke-width=".8" stroke-opacity=".9">
@@ -102,7 +103,7 @@ ${style}</style></head><body>
 <feDisplacementMap in="SourceGraphic" in2="n" scale="22" xChannelSelector="R" yChannelSelector="G" result="d"/>
 <feGaussianBlur in="d" stdDeviation="2.6"/></filter></defs></svg>
 ${compass}
-<div id="controls"><button id="zin" type="button" aria-label="Zoomer">+</button><button id="zout" type="button" aria-label="Dézoomer">−</button><button id="zfit" type="button" aria-label="Voir tous les lieux">✧</button></div>
+<div id="controls"><button id="zin" type="button" aria-label="Zoomer">+</button><button id="zout" type="button" aria-label="Dézoomer">−</button><button id="zfit" type="button" aria-label="Voir tous les lieux"><img alt="" src="data:image/png;base64,${boussole}"></button></div>
 <div id="empty"><div>Ta carte est encore vierge.<em>Elle se dessinera au fil de tes rêves.</em></div></div>
 <script>${leafletJs.replace(/<\/script/gi, '<\\/script')}</script>
 <script>${runtime.replace(/<\/script/gi, '<\\/script')}</script>

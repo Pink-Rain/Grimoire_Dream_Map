@@ -35,8 +35,7 @@ export function PeopleSection(props: { value: string[]; onChange: (ids: string[]
             <Chip
               key={p.id}
               label={p.name}
-              icon={p.real ? 'person' : 'sparkles'}
-              color={p.real ? colors.text : colors.ochre}
+              image={p.real ? 'personne' : 'imaginaire'}
               onRemove={() => props.onChange(props.value.filter((id) => id !== p.id))}
               testID={`person-${p.name}`}
             />
@@ -46,8 +45,8 @@ export function PeopleSection(props: { value: string[]; onChange: (ids: string[]
       <Field value={q} onChangeText={setQ} placeholder="Ajouter une personne : Maman, un inconnu, la sorcière…" testID="person-input" />
       {query.length > 0 && !exact && (
         <View style={styles.wrap}>
-          <Button small icon="person-add-outline" label={`« ${q.trim()} » existe vraiment`} onPress={() => create(true)} testID="person-add-real" />
-          <Button small icon="sparkles-outline" label={`« ${q.trim()} » est imaginaire`} onPress={() => create(false)} testID="person-add-dream" />
+          <Button small image="personne" label={`« ${q.trim()} » existe vraiment`} onPress={() => create(true)} testID="person-add-real" />
+          <Button small image="imaginaire" label={`« ${q.trim()} » est imaginaire`} onPress={() => create(false)} testID="person-add-dream" />
         </View>
       )}
       {suggestions.length > 0 && (
@@ -56,7 +55,7 @@ export function PeopleSection(props: { value: string[]; onChange: (ids: string[]
             <Chip
               key={p.id}
               label={p.name}
-              icon={p.real ? 'person-outline' : 'sparkles-outline'}
+              image={p.real ? 'personne' : 'imaginaire'}
               onPress={() => {
                 props.onChange([...props.value, p.id]);
                 setQ('');
@@ -67,7 +66,7 @@ export function PeopleSection(props: { value: string[]; onChange: (ids: string[]
         </View>
       )}
       <Txt faint size={14}>
-        <Ionicons name="person" size={13} color={colors.faint} /> personne réelle   <Ionicons name="sparkles" size={13} color={colors.faint} /> personnage imaginaire
+        Réelle ou imaginaire : choisis en l’ajoutant.
       </Txt>
     </View>
   );
@@ -131,9 +130,9 @@ export function PlacesSection(props: { value: string[]; onChange: (ids: string[]
         />
       ))}
       <View style={styles.wrap}>
-        <Button small icon="earth-outline" label="Lieu réel" onPress={() => setEditor({ id: null, mode: 'real' })} testID="add-real-place" />
-        <Button small icon="sparkles-outline" label="Lieu imaginaire" onPress={() => setEditor({ id: null, mode: 'dream' })} testID="add-dream-place" />
-        <Button small icon="boat-outline" label="Véhicule" onPress={() => setEditor({ id: null, mode: 'vehicle' })} testID="add-vehicle" />
+        <Button small image="lieu-reel" label="Lieu réel" onPress={() => setEditor({ id: null, mode: 'real' })} testID="add-real-place" />
+        <Button small image="imaginaire" label="Lieu imaginaire" onPress={() => setEditor({ id: null, mode: 'dream' })} testID="add-dream-place" />
+        <Button small image="vehicule" label="Véhicule" onPress={() => setEditor({ id: null, mode: 'vehicle' })} testID="add-vehicle" />
       </View>
       {appStore.list('places').length > inDream.length && (
         <View style={{ gap: 8 }}>
@@ -143,7 +142,7 @@ export function PlacesSection(props: { value: string[]; onChange: (ids: string[]
               <Chip
                 key={p.id}
                 label={p.name}
-                icon={p.kind === 'vehicle' ? 'boat-outline' : p.real ? 'earth-outline' : 'sparkles-outline'}
+                image={p.kind === 'vehicle' ? 'vehicule' : p.real ? 'lieu-reel' : 'imaginaire'}
                 onPress={() => {
                   props.onChange([...props.value, p.id]);
                   setQ('');

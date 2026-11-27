@@ -13,6 +13,7 @@ import {
   type TextStyle,
   type ViewStyle,
 } from 'react-native';
+import { AppIcon, type AppIconName } from './AppIcon';
 import { colors, fonts, TOUCH } from './theme';
 
 export type IconName = ComponentProps<typeof Ionicons>['name'];
@@ -47,7 +48,9 @@ export function Title(props: TextProps & { size?: number }) {
 
 /** Bouton rond avec une icône (barre du haut, etc.). */
 export function IconButton(props: {
-  icon: IconName;
+  icon?: IconName;
+  /** Icône dessinée (prioritaire sur `icon`). */
+  image?: AppIconName;
   label: string;
   onPress: () => void;
   color?: string;
@@ -69,7 +72,11 @@ export function IconButton(props: {
         (pressed || hovered) && { backgroundColor: colors.surfaceHover },
       ]}
     >
-      <Ionicons name={props.icon} size={props.size ?? 24} color={props.color ?? (props.active ? colors.accent : colors.text)} />
+      {props.image ? (
+        <AppIcon name={props.image} size={(props.size ?? 24) + 6} />
+      ) : (
+        <Ionicons name={props.icon ?? 'ellipse'} size={props.size ?? 24} color={props.color ?? (props.active ? colors.accent : colors.text)} />
+      )}
     </Pressable>
   );
 }
@@ -79,6 +86,8 @@ export function Button(props: {
   label: string;
   onPress: () => void;
   icon?: IconName;
+  /** Icône dessinée (prioritaire sur `icon`). */
+  image?: AppIconName;
   variant?: 'primary' | 'secondary' | 'danger' | 'ghost';
   small?: boolean;
   disabled?: boolean;
@@ -104,7 +113,11 @@ export function Button(props: {
         props.style,
       ]}
     >
-      {props.icon && <Ionicons name={props.icon} size={props.small ? 17 : 20} color={fg} />}
+      {props.image ? (
+        <AppIcon name={props.image} size={props.small ? 22 : 26} />
+      ) : (
+        props.icon && <Ionicons name={props.icon} size={props.small ? 17 : 20} color={fg} />
+      )}
       <Text style={[styles.buttonText, props.small && { fontSize: 15 }, { color: fg }]}>{props.label}</Text>
     </Pressable>
   );
@@ -137,12 +150,14 @@ export function Chip(props: {
   onPress?: () => void;
   onRemove?: () => void;
   icon?: IconName;
+  image?: AppIconName;
   color?: string;
   testID?: string;
 }) {
   const content = (
     <>
-      {props.icon && <Ionicons name={props.icon} size={16} color={props.selected ? colors.accentText : props.color ?? colors.muted} />}
+      {props.image && <AppIcon name={props.image} size={20} />}
+      {!props.image && props.icon && <Ionicons name={props.icon} size={16} color={props.selected ? colors.accentText : props.color ?? colors.muted} />}
       <Text style={[styles.chipText, props.selected && { color: colors.accentText }]} numberOfLines={1}>
         {props.label}
       </Text>
@@ -191,7 +206,7 @@ export function Label(props: { children: ReactNode }) {
 /** Choix exclusif en segments (ex. Réel / Imaginaire). */
 export function Segmented<T extends string>(props: {
   value: T;
-  options: { value: T; label: string; icon?: IconName }[];
+  options: { value: T; label: string; icon?: IconName; image?: AppIconName; imageOn?: AppIconName }[];
   onChange: (v: T) => void;
   testID?: string;
 }) {
@@ -208,7 +223,11 @@ export function Segmented<T extends string>(props: {
             testID={props.testID ? `${props.testID}-${o.value}` : undefined}
             style={[styles.segment, on && styles.segmentOn]}
           >
-            {o.icon && <Ionicons name={o.icon} size={17} color={on ? colors.accentText : colors.muted} />}
+            {o.image ? (
+              <AppIcon name={on && o.imageOn ? o.imageOn : o.image} size={22} />
+            ) : (
+              o.icon && <Ionicons name={o.icon} size={17} color={on ? colors.accentText : colors.muted} />
+            )}
             <Text style={[styles.segmentText, on && { color: colors.accentText }]} numberOfLines={1}>
               {o.label}
             </Text>

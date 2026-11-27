@@ -59,7 +59,7 @@ export function MapScreen(props: {
             {placeModeLabel(place)} · {PLACE_SIZES.find((s) => s.level === place.size)?.label}
           </Txt>
         </View>
-        <IconButton icon="close" label="Fermer la fiche" onPress={() => setSelected(null)} testID="place-panel-close" />
+        <IconButton image="fermer" size={18} label="Fermer la fiche" onPress={() => setSelected(null)} testID="place-panel-close" />
       </View>
       <ScrollView style={{ maxHeight: props.phone ? 260 : undefined }} contentContainerStyle={{ gap: 12 }}>
         {!!place.address && (

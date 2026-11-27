@@ -65,6 +65,12 @@ Code : `src/data/types.ts`, `src/data/records.ts`, `src/data/store.ts`.
   (#rrggbb, taches d'aquarelle), `peopleIds`, `placeIds`, `media` (MediaItem[]). Nouvelles collections `people`
   (`name`, `real`) et `places` (`name`, `kind` place|vehicle, `real`, `icon`, `size` 1-7, `lat`/`lon`, `address`,
   `relation` {dir, placeId}, `layer`, `route` {fromId, toId}). Les anciens rêves passent par `normalizeDream`.
+- v3 : `dreams` + `weather` (ids WEATHERS), `clarity` (1-5|null), `atmosphere` (1-5|null), `timeOfDay` (ids),
+  `dreamTypes` (ids), `emotions` (ids) — listes dans src/ui/theme.ts ; les mots libres sont stockés tels quels.
+  Nouvelle collection `sleeps` (sommeil, **indépendante des rêves**) : `date` (jour du coucher), `bedTime`,
+  `asleepTime`, `wakeTime`, `upTime` (« HH:MM »), `interruptions` [{id, from, to}]. Calculs dans
+  src/data/sleep.ts (passage de minuit, siestes 9 h-19 h, rangement au jour du réveil).
+  **Ne jamais changer les `id` des listes** (WEATHERS, EMOTIONS…) : ce sont eux qui sont enregistrés.
 
 ## Architecture
 
@@ -123,6 +129,21 @@ site/                     page de présentation (GitHub Pages) + politique de co
 - Véhicules : trajet invisible entre deux lieux ; position tirée au hasard sur le trajet à chaque ouverture.
 - Dessins : 900 icônes game-icons.net (CC BY 3.0, crédit dans Réglages › À propos), triées dans
   `scripts/icon-catalog.json` (label, catégorie, mots-clés FR). Mots-clés en plus : `EXTRA_KEYWORDS` du générateur.
+
+## Icônes dessinées par la personne (assets/ui, assets/logo-*)
+
+- Série « or rose, émail crépuscule » + logo (globe de constellations). Composant `src/ui/AppIcon.tsx`.
+- **Règle : chaque icône dessinée ne sert QU'À son usage prévu** (voir LISEZMOI de la personne). S'il manque une
+  icône, utiliser une icône standard Ionicons (la personne dessinera la vraie) — ne jamais réutiliser une icône
+  dessinée pour un autre sens. Les « -encre » vont sur les boutons abricot.
+- Usages : carte/journal (+ -encre actifs), micro (note rapide), micro-encre (bouton rond abricot note rapide),
+  micro-bouton (enregistreur), lune-crepuscule (nouveau rêve), telephone, reglages, boussole (« voir tous les
+  lieux » sur la carte), chevrons (date), fermer, supprimer, eclair(-encre) (note rapide), personne, imaginaire,
+  lieu-reel, vehicule, image/musique/video/fichier, meteo-1..5 (orage, pluie, nuageux, éclaircies, soleil),
+  barre-reglette + barre-curseur (curseur 5 crans `EmojiScale` : humeur, clarté, atmosphère).
+- Icônes encore standard (à dessiner par la personne) : sommeil (lit), retour, rêve complet (livre), ajouter (+),
+  arrêter/lire/pause un son, format ordinateur, centrer, modifier, devant/derrière, lien/YouTube, ouvrir/partager,
+  télécharger, se connecter Google, synchroniser, se déconnecter, exporter/importer, mot-clé, case cochée.
 
 ## Formulaires
 
@@ -213,6 +234,8 @@ Expo change à chaque version. Avant d'utiliser une API Expo/React Native, véri
 - [x] Étape 2 : synchro Google Drive sur l'app PC (v0.2.0) + page de présentation et politique de confidentialité.
 - [x] Étape 3 (v0.3.0) : carte parchemin, formulaires rapide/complet, médias, lieux/personnes/véhicules.
 - [x] v0.4.0 : mises à jour automatiques (PC) et détection de nouvelle version (Android).
+- [x] v0.5.0 : sélecteurs à emojis (humeur, clarté, atmosphère sur la réglette ; météo, jour/nuit, type, émotions),
+  sommeil (3e type d'entrée), journal groupé par jour, logo et icônes de la personne.
 - [ ] Synchro des fichiers médias (notes vocales, images…) dans le Drive.
 - [ ] Statistiques (simples et croisées). Transcription voix → texte (facultative).
 - [ ] Synchro Google Drive (appDataFolder) : PC (.exe → client OAuth « Application de bureau », redirection
