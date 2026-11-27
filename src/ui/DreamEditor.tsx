@@ -11,10 +11,20 @@ import { Button, Field, IconButton, Section, Txt } from './components';
 import { addDays, formatLongDate } from './dates';
 import { PeopleSection, PlacesSection } from './DreamSections';
 import { MediaSection } from './MediaSection';
-import { AMBIANCES, ATMOSPHERE_LEVELS, CLARITY_LEVELS, colors, DREAM_TYPES, EMOTIONS, fonts, MOOD_LEVELS, TIMES_OF_DAY, WEATHERS } from './theme';
+import { AMBIANCES, ATMOSPHERE_LEVELS, CLARITY_LEVELS, colors, DREAM_TYPES, EMOTIONS, fonts, MOOD_LEVELS, optionFor, TIMES_OF_DAY, WEATHERS } from './theme';
 import { ColorPicker, EmojiPicker, EmojiScale, LucidityScale, WordPicker } from './widgets';
 
 type Draft = ReturnType<typeof normalizeDream>;
+
+function uniqueCi(list: string[]): string[] {
+  const seen = new Set<string>();
+  return list.filter((w) => {
+    const k = w.trim().toLowerCase();
+    if (!k || seen.has(k)) return false;
+    seen.add(k);
+    return true;
+  });
+}
 type Editable = Partial<Omit<Dream, 'id' | 'createdAt' | 'updatedAt' | 'deleted'>>;
 
 function emptyDraft(id: string, kind: 'quick' | 'full'): Draft {
@@ -93,6 +103,11 @@ export function DreamEditor(props: {
   const allTags = Array.from(new Set(appStore.list('dreams').flatMap((d) => d.tags ?? []))).sort((a, b) => a.localeCompare(b));
   const customAmbiances = Array.from(new Set(appStore.list('dreams').flatMap((d) => d.ambiances ?? []))).filter((a) => !AMBIANCES.includes(a));
   const quick = draft.kind === 'quick';
+  // Étiquettes réutilisables : celles déjà utilisées dans le journal + une liste de départ.
+  const labelsOf = (list: typeof EMOTIONS, pick: (d: Dream) => string[] | undefined) =>
+    uniqueCi([...appStore.list('dreams').flatMap((d) => (pick(d) ?? []).map((v) => optionFor(list, v).label)), ...list.map((o) => o.label)]);
+  const emotionSuggestions = labelsOf(EMOTIONS, (d) => d.emotions);
+  const typeSuggestions = labelsOf(DREAM_TYPES, (d) => d.dreamTypes);
 
   const header = (
     <View style={{ gap: 10 }}>
@@ -145,11 +160,23 @@ export function DreamEditor(props: {
             <Section title="Personnes">
               <PeopleSection value={draft.peopleIds} onChange={(peopleIds) => commit({ peopleIds })} />
             </Section>
-            <Section title="Type de rêve">
-              <EmojiPicker options={DREAM_TYPES} value={draft.dreamTypes} onChange={(dreamTypes) => commit({ dreamTypes })} allowCustom customPlaceholder="Autre type… puis Entrée" testID="type" />
+            <Section title="Type de rêve" hint="Écris un type puis Entrée. Tes types déjà utilisés te sont proposés pendant que tu tapes.">
+              <WordPicker
+                value={draft.dreamTypes.map((v) => optionFor(DREAM_TYPES, v).label)}
+                onChange={(dreamTypes) => commit({ dreamTypes })}
+                suggestions={typeSuggestions}
+                placeholder="Cauchemar, récurrent, faux réveil… puis Entrée"
+                testID="type"
+              />
             </Section>
-            <Section title="Émotions ressenties">
-              <EmojiPicker options={EMOTIONS} value={draft.emotions} onChange={(emotions) => commit({ emotions })} allowCustom customPlaceholder="Autre émotion… puis Entrée" testID="emotion" />
+            <Section title="Émotions ressenties" hint="Écris une émotion puis Entrée. Tes émotions déjà utilisées te sont proposées pendant que tu tapes.">
+              <WordPicker
+                value={draft.emotions.map((v) => optionFor(EMOTIONS, v).label)}
+                onChange={(emotions) => commit({ emotions })}
+                suggestions={emotionSuggestions}
+                placeholder="Peur, joie, nostalgie… puis Entrée"
+                testID="emotion"
+              />
             </Section>
             <Section title="Humeur">
               <EmojiScale levels={MOOD_LEVELS} value={draft.mood} onChange={(mood) => commit({ mood })} name="Humeur" placeholder="Comment te sentais-tu dans ce rêve ?" testID="mood" />

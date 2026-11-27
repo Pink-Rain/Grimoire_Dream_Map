@@ -55,8 +55,6 @@ const ICONS = {
 
 export type AppIconName = keyof typeof ICONS;
 
-export const REGLETTE = require('../../assets/ui/barre-reglette.png');
-export const CURSEUR = require('../../assets/ui/barre-curseur.png');
 
 export function AppIcon(props: { name: AppIconName; size: number; style?: StyleProp<ImageStyle>; dim?: boolean }) {
   return (
