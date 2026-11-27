@@ -1,16 +1,18 @@
 import { randomUUID } from 'expo-crypto';
 import { useEffect, useRef, useState } from 'react';
-import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { appStore } from '../data/appStore';
-import { defaultSleepDate, formatDuration, normalizeTime, summarizeSleep, type SleepSummary } from '../data/sleep';
+import { defaultSleepDate, formatDuration, normalizeTime, sleepEndDate, summarizeSleep, type SleepSummary } from '../data/sleep';
+import { useStoreVersion } from '../data/appStore';
 import type { Sleep } from '../data/types';
 import { confirmAsync } from '../platform/dialogs';
 import { AppIcon, type AppIconName } from './AppIcon';
-import { Button, IconButton, Section, Txt } from './components';
+import { Button, Chip, IconButton, Section, Txt } from './components';
+import { EmojiScale } from './widgets';
 import { addDays, formatLongDate } from './dates';
-import { colors, fonts } from './theme';
+import { colors, fonts, SLEEP_QUALITY, WAKE_ENERGY } from './theme';
 
-type Draft = Required<Pick<Sleep, 'date' | 'bedTime' | 'asleepTime' | 'wakeTime' | 'upTime' | 'interruptions'>>;
+type Draft = Required<Pick<Sleep, 'date' | 'bedTime' | 'asleepTime' | 'wakeTime' | 'upTime' | 'interruptions' | 'quality' | 'energy'>>;
 
 function nowHHMM() {
   const d = new Date();
@@ -120,22 +122,32 @@ function Stat(props: { label: string; value: string; testID?: string }) {
 }
 
 /** Sommeil (nuit ou sieste) : troisième type d'entrée, indépendant des rêves. Enregistrement automatique. */
-export function SleepEditor(props: { sleepId: string; onDeleted: () => void; bottomInset: number }) {
+export function SleepEditor(props: {
+  sleepId: string;
+  initialDate?: string;
+  onDeleted: () => void;
+  onOpenDream?: (id: string) => void;
+  onNewDream?: (sleepId: string, date: string) => void;
+  bottomInset: number;
+}) {
+  useStoreVersion();
   const existing = appStore.get('sleeps', props.sleepId);
   const [d, setD] = useState<Draft>(() => ({
-    date: existing?.date ?? defaultSleepDate(),
+    date: existing?.date ?? props.initialDate ?? defaultSleepDate(),
     bedTime: existing?.bedTime ?? null,
     asleepTime: existing?.asleepTime ?? null,
     wakeTime: existing?.wakeTime ?? null,
     upTime: existing?.upTime ?? null,
     interruptions: existing?.interruptions ?? [],
+    quality: existing?.quality ?? null,
+    energy: existing?.energy ?? null,
   }));
   const exists = useRef(!!existing);
 
   function commit(fields: Partial<Draft>) {
     const next = { ...d, ...fields };
     setD(next);
-    const hasContent = !!(next.bedTime || next.asleepTime || next.wakeTime || next.upTime || next.interruptions.length);
+    const hasContent = !!(next.bedTime || next.asleepTime || next.wakeTime || next.upTime || next.interruptions.length || next.quality || next.energy);
     if (!exists.current && !hasContent) return;
     appStore.save('sleeps', props.sleepId, next);
     exists.current = true;
@@ -149,6 +161,9 @@ export function SleepEditor(props: { sleepId: string; onDeleted: () => void; bot
   }
 
   const s = summarizeSleep(d);
+  const endDate = sleepEndDate(d);
+  const dreams = appStore.list('dreams').filter((x) => x.sleepId === props.sleepId);
+  const loose = appStore.list('dreams').filter((x) => !x.sleepId && x.dreamDate === endDate);
   const setInt = (id: string, k: 'from' | 'to', v: string | null) =>
     commit({ interruptions: d.interruptions.map((i) => (i.id === id ? { ...i, [k]: v ?? '' } : i)) });
 
@@ -171,7 +186,7 @@ export function SleepEditor(props: { sleepId: string; onDeleted: () => void; bot
           </View>
         </View>
 
-        <Section title="Heures" hint="Tape l’heure (ex. 2330) ou touche « Maintenant ». Le passage de minuit est compris tout seul.">
+        <Section title="Heures">
           <TimeField label="Coucher" emoji="🛏️" image="coucher" value={d.bedTime} onChange={(v) => commit({ bedTime: v })} testID="bed-time" />
           <TimeField label="Endormissement" emoji="😴" image="endormissement" value={d.asleepTime} onChange={(v) => commit({ asleepTime: v })} testID="asleep-time" />
           <TimeField label="Réveil" emoji="⏰" image="reveil" value={d.wakeTime} onChange={(v) => commit({ wakeTime: v })} testID="wake-time" />
@@ -198,6 +213,42 @@ export function SleepEditor(props: { sleepId: string; onDeleted: () => void; bot
             </View>
           ))}
           <Button small label="Ajouter un réveil" icon="add" onPress={() => commit({ interruptions: [...d.interruptions, { id: randomUUID(), from: '', to: '' }] })} testID="add-interruption" />
+        </Section>
+
+        <Section title="Ressenti">
+          <EmojiScale levels={SLEEP_QUALITY} value={d.quality} onChange={(quality) => commit({ quality })} name="Qualité du sommeil" placeholder="Qualité du sommeil" testID="quality" />
+          <EmojiScale levels={WAKE_ENERGY} value={d.energy} onChange={(energy) => commit({ energy })} name="Énergie au réveil" placeholder="Énergie au réveil" testID="energy" />
+        </Section>
+
+        <Section title="Rêves de cette nuit">
+          {dreams.map((dr) => (
+            <Pressable key={dr.id} onPress={() => props.onOpenDream?.(dr.id)} accessibilityRole="button" style={styles.dreamRow} testID="sleep-dream">
+              <AppIcon name={dr.kind === 'quick' ? 'lune-contour' : 'lune-crepuscule'} size={26} />
+              <Txt style={{ flex: 1 }} numberOfLines={1}>
+                {dr.title.trim() || 'Sans titre'}
+              </Txt>
+            </Pressable>
+          ))}
+          {loose.length > 0 && (
+            <View style={styles.wrapRow}>
+              <Txt faint size={14}>Lier :</Txt>
+              {loose.map((dr) => (
+                <Chip key={dr.id} label={dr.title.trim() || 'Sans titre'} image="lune-contour" onPress={() => appStore.save('dreams', dr.id, { sleepId: props.sleepId })} testID="link-dream" />
+              ))}
+            </View>
+          )}
+          <Button
+            small
+            label="Ajouter un rêve de cette nuit"
+            image="nouveau-reve-b"
+            onPress={() => {
+              if (!exists.current) commit({});
+              appStore.save('sleeps', props.sleepId, d);
+              exists.current = true;
+              props.onNewDream?.(props.sleepId, sleepEndDate(d));
+            }}
+            testID="sleep-new-dream"
+          />
         </Section>
 
         <Section title="Bilan">
@@ -249,5 +300,7 @@ const styles = StyleSheet.create({
   seg: { position: 'absolute', top: 0, bottom: 0 },
   trackLabels: { flexDirection: 'row', justifyContent: 'space-between' },
   legend: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
+  dreamRow: { flexDirection: 'row', alignItems: 'center', gap: 10, minHeight: 44 },
+  wrapRow: { flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', gap: 8 },
   footer: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap', marginTop: 8 },
 });

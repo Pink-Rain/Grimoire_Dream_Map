@@ -9,7 +9,7 @@
  */
 
 /** Version du format de données. À augmenter quand on ajoute des champs ou des collections. */
-export const SCHEMA_VERSION = 3;
+export const SCHEMA_VERSION = 4;
 
 /** Identifiant écrit dans chaque fichier pour reconnaître nos fichiers. */
 export const APP_ID = 'grimoire-dream-map';
@@ -68,6 +68,13 @@ export interface Dream extends BaseRecord {
   dreamTypes?: string[];
   /** Émotions ressenties (identifiants de EMOTIONS, ou mots libres). */
   emotions?: string[];
+  // --- v4 ---
+  /** Emoji choisi pour l'humeur (la note `mood` va maintenant de 0 à 5). */
+  moodEmoji?: string | null;
+  /** Genre du rêve (aventure, horreur…), en étiquettes. */
+  genres?: string[];
+  /** Sommeil (nuit ou sieste) pendant lequel ce rêve a eu lieu. */
+  sleepId?: string | null;
 }
 
 export type DreamKind = 'quick' | 'full';
@@ -138,6 +145,11 @@ export interface Sleep extends BaseRecord {
   upTime?: string | null;
   /** Réveils pendant le sommeil. */
   interruptions?: { id: string; from: string; to: string }[];
+  // --- v4 ---
+  /** Qualité du sommeil, de 1 à 5. */
+  quality?: number | null;
+  /** Énergie au réveil, de 1 à 5. */
+  energy?: number | null;
 }
 
 /** Noms des collections. On peut en ajouter, jamais en renommer. */
@@ -181,8 +193,15 @@ export const PLACE_SIZES: { level: number; label: string; meters: number }[] = [
 /** Complète un rêve ancien avec les valeurs par défaut des champs v2. */
 export function normalizeDream(
   d: Dream,
-): Required<Pick<Dream, 'kind' | 'ambiances' | 'tags' | 'colors' | 'peopleIds' | 'placeIds' | 'media' | 'weather' | 'timeOfDay' | 'dreamTypes' | 'emotions'>> &
-  Dream & { lucidity: number | null; mood: number | null; clarity: number | null; atmosphere: number | null } {
+): Required<Pick<Dream, 'kind' | 'ambiances' | 'tags' | 'colors' | 'peopleIds' | 'placeIds' | 'media' | 'weather' | 'timeOfDay' | 'dreamTypes' | 'emotions' | 'genres'>> &
+  Dream & {
+    lucidity: number | null;
+    mood: number | null;
+    clarity: number | null;
+    atmosphere: number | null;
+    moodEmoji: string | null;
+    sleepId: string | null;
+  } {
   return {
     ...d,
     kind: d.kind ?? 'full',
@@ -200,5 +219,8 @@ export function normalizeDream(
     timeOfDay: d.timeOfDay ?? [],
     dreamTypes: d.dreamTypes ?? [],
     emotions: d.emotions ?? [],
+    moodEmoji: d.moodEmoji ?? null,
+    genres: d.genres ?? [],
+    sleepId: d.sleepId ?? null,
   };
 }

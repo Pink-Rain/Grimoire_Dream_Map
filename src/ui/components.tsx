@@ -128,7 +128,7 @@ export function Section(props: { title: string; hint?: string; children: ReactNo
   return (
     <View style={styles.section} testID={props.testID}>
       <View style={styles.sectionHead}>
-        <Title size={20} style={{ flex: 1 }}>
+        <Title size={18} style={{ flex: 1 }}>
           {props.title}
         </Title>
         {props.right}
@@ -255,13 +255,14 @@ const styles = StyleSheet.create({
   buttonText: { fontSize: 17, fontFamily: fonts.bodySemi },
   section: {
     backgroundColor: colors.surface,
-    borderRadius: 16,
+    borderRadius: 14,
     borderWidth: 1,
     borderColor: colors.borderSoft,
-    padding: 16,
-    gap: 12,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    gap: 10,
   },
-  sectionHead: { flexDirection: 'row', alignItems: 'center', gap: 8, minHeight: 28 },
+  sectionHead: { flexDirection: 'row', alignItems: 'center', gap: 8, minHeight: 24 },
   chip: {
     flexDirection: 'row',
     alignItems: 'center',

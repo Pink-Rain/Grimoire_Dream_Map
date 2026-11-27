@@ -27,7 +27,7 @@ export function Moon(props: { fraction: number; size: number; lit?: string; dark
 
 export function LucidityScale(props: { value: number | null; onChange: (v: number | null) => void }) {
   return (
-    <View style={{ gap: 10 }}>
+    <View style={{ gap: 4 }}>
       <View style={styles.scaleRow} accessibilityRole="radiogroup" accessibilityLabel="Lucidité">
         {LUCIDITY_LABELS.map((label, i) => {
           const on = props.value === i;
@@ -42,13 +42,13 @@ export function LucidityScale(props: { value: number | null; onChange: (v: numbe
               testID={`lucidity-${i}`}
               style={({ hovered }: PressState) => [styles.scaleItem, on && styles.scaleItemOn, hovered && !on && { backgroundColor: colors.surfaceHover }]}
             >
-              <AppIcon name={`lucidite-b-${i}` as AppIconName} size={42} dim={props.value !== null && !reached} />
+              <AppIcon name={`lucidite-b-${i}` as AppIconName} size={30} dim={props.value !== null && !reached} />
               <Text style={[styles.scaleNum, reached && { color: colors.ochre }]}>{i}</Text>
             </Pressable>
           );
         })}
       </View>
-      <Text style={styles.scaleLabel}>{props.value === null ? 'Touche une lune pour noter ta lucidité' : LUCIDITY_LABELS[props.value]}</Text>
+      <Text style={styles.scaleLabel}>{props.value === null ? 'De 0 (pas lucide) à 5 (contrôle total)' : LUCIDITY_LABELS[props.value]}</Text>
     </View>
   );
 }
@@ -157,6 +157,86 @@ export function EmojiPicker(props: {
           testID={`${props.testID}-input`}
         />
       )}
+    </View>
+  );
+}
+
+// ---------------------------------------------------------------- Petits emojis à cocher (météo, moment)
+
+/** Rangée compacte de petits emojis ronds, plusieurs choix possibles ; les choix s'affichent en dessous. */
+export function CompactEmojiPicker(props: {
+  options: { id: string; emoji: string; label: string }[];
+  value: string[];
+  onChange: (v: string[]) => void;
+  /** Valeurs anciennes hors de la liste : affichées et retirables. */
+  legacy?: { id: string; emoji: string; label: string }[];
+  testID: string;
+}) {
+  const extra = props.value.filter((v) => !props.options.some((o) => o.id === v)).map((v) => props.legacy?.find((o) => o.id === v) ?? { id: v, emoji: '✦', label: v });
+  const all = [...props.options, ...extra];
+  const toggle = (id: string) => props.onChange(props.value.includes(id) ? props.value.filter((v) => v !== id) : [...props.value, id]);
+  const chosen = all.filter((o) => props.value.includes(o.id)).map((o) => o.label);
+  return (
+    <View style={{ gap: 6 }}>
+      <View style={styles.miniRow}>
+        {all.map((o) => {
+          const on = props.value.includes(o.id);
+          return (
+            <Pressable
+              key={o.id}
+              onPress={() => toggle(o.id)}
+              accessibilityRole="checkbox"
+              accessibilityState={{ checked: on }}
+              accessibilityLabel={o.label}
+              {...({ title: o.label } as object)}
+              testID={`${props.testID}-${o.id}`}
+              style={({ hovered }: PressState) => [styles.mini, on && styles.miniOn, hovered && !on && { backgroundColor: colors.surfaceHover }]}
+            >
+              <Text style={[styles.miniEmoji, props.value.length > 0 && !on && { opacity: 0.5 }]}>{o.emoji}</Text>
+            </Pressable>
+          );
+        })}
+      </View>
+      {chosen.length > 0 && <Text style={styles.miniLabel}>{chosen.join(' · ')}</Text>}
+    </View>
+  );
+}
+
+// ---------------------------------------------------------------- Humeur (0 à 5, un emoji au choix par niveau)
+
+export function MoodPicker(props: {
+  grid: { level: number; label: string; emojis: string[] }[];
+  level: number | null;
+  emoji: string | null;
+  onChange: (level: number | null, emoji: string | null) => void;
+}) {
+  const current = props.grid.find((g) => g.level === props.level);
+  return (
+    <View style={{ gap: 6 }}>
+      <View style={styles.moodGrid} accessibilityRole="radiogroup" accessibilityLabel="Humeur">
+        {props.grid.map((g) => (
+          <View key={g.level} style={styles.moodCol}>
+            <Text style={[styles.moodNum, props.level === g.level && { color: colors.ochre }]}>{g.level}</Text>
+            {g.emojis.map((e, i) => {
+              const on = props.level === g.level && (props.emoji === e || (!props.emoji && i === 0));
+              return (
+                <Pressable
+                  key={e + i}
+                  onPress={() => (on ? props.onChange(null, null) : props.onChange(g.level, e))}
+                  accessibilityRole="radio"
+                  accessibilityState={{ checked: on }}
+                  accessibilityLabel={`Humeur ${g.level}, ${g.label}`}
+                  testID={`mood-${g.level}-${i}`}
+                  style={({ hovered }: PressState) => [styles.mini, on && styles.miniOn, hovered && !on && { backgroundColor: colors.surfaceHover }]}
+                >
+                  <Text style={[styles.miniEmoji, props.level !== null && !on && { opacity: 0.45 }]}>{e}</Text>
+                </Pressable>
+              );
+            })}
+          </View>
+        ))}
+      </View>
+      <Text style={styles.miniLabel}>{current ? `${current.label} (${current.level}/5)` : 'Humeur de 0 (horrible) à 5 (excellente)'}</Text>
     </View>
   );
 }
@@ -335,9 +415,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 2,
-    minWidth: 52,
-    minHeight: 64,
-    paddingVertical: 6,
+    minWidth: 44,
+    minHeight: 52,
+    paddingVertical: 4,
     paddingHorizontal: 4,
     borderRadius: 12,
     borderWidth: 1,
@@ -346,7 +426,7 @@ const styles = StyleSheet.create({
   },
   scaleItemOn: { borderColor: colors.ochre, backgroundColor: colors.surfaceActive },
   scaleNum: { color: colors.faint, fontFamily: fonts.bodySemi, fontSize: 13 },
-  scaleLabel: { color: colors.muted, fontFamily: fonts.bodyItalic, fontSize: 16, textAlign: 'center' },
+  scaleLabel: { color: colors.muted, fontFamily: fonts.bodyItalic, fontSize: 14, textAlign: 'center' },
   colorGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
   colorItem: { width: 48, height: 48, borderRadius: 24, alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: 'transparent' },
   colorItemOn: { borderColor: colors.text, backgroundColor: colors.surfaceActive },
@@ -362,7 +442,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   wrap: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  emoji: { fontSize: 30, lineHeight: 38 },
+  miniRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 4 },
+  mini: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: 'transparent' },
+  miniOn: { borderColor: colors.ochre, backgroundColor: colors.surfaceActive },
+  miniEmoji: { fontSize: 22, lineHeight: 28 },
+  miniLabel: { color: colors.muted, fontFamily: fonts.bodyItalic, fontSize: 14 },
+  moodGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 2, justifyContent: 'space-between' },
+  moodCol: { alignItems: 'center', gap: 2, minWidth: 44 },
+  moodNum: { color: colors.faint, fontFamily: fonts.bodySemi, fontSize: 13 },
+  emoji: { fontSize: 24, lineHeight: 30 },
   emojiGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
   emojiTile: {
     width: 88,

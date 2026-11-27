@@ -131,3 +131,73 @@ export function defaultSleepDate(now: Date = new Date()): string {
   const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
   return now.getHours() < 14 ? shiftDate(today, -1) : today;
 }
+
+/** Libellé court d'un sommeil : « Nuit du 26 au 27 nov. » ou « Sieste du 27 nov. ». */
+export function sleepTitle(s: Pick<Sleep, 'date' | 'bedTime' | 'asleepTime' | 'wakeTime' | 'upTime' | 'interruptions'>): string {
+  const sum = summarizeSleep(s);
+  const fmt = (d: string, withMonth: boolean) => {
+    const [y, m, day] = d.split('-').map(Number);
+    return new Date(y, m - 1, day, 12).toLocaleDateString('fr-FR', withMonth ? { day: 'numeric', month: 'short' } : { day: 'numeric' });
+  };
+  if (sum.isNap) return `Sieste du ${fmt(s.date, true)}`;
+  const end = sleepEndDate(s);
+  return end === s.date ? `Nuit du ${fmt(s.date, true)}` : `Nuit du ${fmt(s.date, false)} au ${fmt(end, true)}`;
+}
+
+/** Sommeils qui peuvent contenir un rêve noté à cette date (fin du sommeil ce jour-là, ou coucher ce jour-là). */
+export function candidateSleepsFor<T extends Pick<Sleep, 'date' | 'bedTime' | 'asleepTime' | 'wakeTime' | 'upTime' | 'interruptions'>>(
+  sleeps: T[],
+  dreamDate: string,
+): T[] {
+  return sleeps.filter((s) => sleepEndDate(s) === dreamDate || s.date === dreamDate);
+}
+
+/** Sommeil à lier automatiquement à un nouveau rêve : la seule nuit (hors sieste) qui finit ce jour-là. */
+export function autoSleepFor<T extends Pick<Sleep, 'date' | 'bedTime' | 'asleepTime' | 'wakeTime' | 'upTime' | 'interruptions'>>(
+  sleeps: T[],
+  dreamDate: string,
+): T | null {
+  const nights = sleeps.filter((s) => sleepEndDate(s) === dreamDate && !summarizeSleep(s).isNap);
+  return nights.length === 1 ? nights[0] : null;
+}
+
+/** Un morceau de barre du tracker : minutes depuis midi du jour de la ligne (0 → 1440 = midi suivant). */
+export interface TrackerSegment {
+  row: string;
+  start: number;
+  end: number;
+  /** au lit éveillé avant de dormir, sommeil, réveil pendant la nuit, au lit après le réveil */
+  kind: 'bed' | 'sleep' | 'awake' | 'up';
+}
+
+/**
+ * Découpe un sommeil en barres pour le tracker façon bullet journal : une ligne par jour, de midi à midi,
+ * pour qu'une nuit tienne sur une seule ligne et qu'une sieste apparaisse aussi.
+ */
+export function trackerSegments(s: Pick<Sleep, 'date' | 'bedTime' | 'asleepTime' | 'wakeTime' | 'upTime' | 'interruptions'>): TrackerSegment[] {
+  const sum = summarizeSleep(s);
+  const first = sum.bed ?? sum.asleep ?? sum.wake;
+  if (first === null) return [];
+  const row = first >= 720 ? s.date : shiftDate(s.date, -1);
+  const shift = first >= 720 ? -720 : 720;
+  const out: TrackerSegment[] = [];
+  const push = (a: number | null, b: number | null, kind: TrackerSegment['kind']) => {
+    if (a === null || b === null || b <= a) return;
+    const start = Math.max(0, a + shift);
+    const end = Math.min(1440, b + shift);
+    if (end > start) out.push({ row, start, end, kind });
+  };
+  const sleepStart = sum.asleep ?? sum.bed;
+  if (sum.asleep !== null) push(sum.bed, sum.asleep, 'bed');
+  if (sleepStart !== null && sum.wake !== null) {
+    let cursor = sleepStart;
+    for (const i of sum.interruptions) {
+      push(cursor, i.from, 'sleep');
+      push(i.from, i.to, 'awake');
+      cursor = Math.max(cursor, i.to);
+    }
+    push(cursor, sum.wake, 'sleep');
+  }
+  push(sum.wake, sum.up, 'up');
+  return out;
+}

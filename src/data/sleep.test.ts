@@ -66,3 +66,41 @@ describe('sommeil', () => {
     expect(defaultSleepDate(new Date(2026, 10, 27, 16, 0))).toBe('2026-11-27');
   });
 });
+
+import { autoSleepFor, candidateSleepsFor, sleepTitle } from './sleep';
+describe('lien rêves ↔ sommeil', () => {
+  const night = { date: '2026-11-26', bedTime: '23:30', wakeTime: '07:00' };
+  const nap = { date: '2026-11-27', bedTime: '14:00', wakeTime: '14:40' };
+  it('lie un rêve du matin à la nuit qui vient de finir', () => {
+    expect(autoSleepFor([night, nap], '2026-11-27')).toBe(night);
+    expect(autoSleepFor([nap], '2026-11-27')).toBeNull();
+    expect(candidateSleepsFor([night, nap], '2026-11-27')).toEqual([night, nap]);
+  });
+  it('nomme les nuits et les siestes', () => {
+    expect(sleepTitle(night)).toBe('Nuit du 26 au 27 nov.');
+    expect(sleepTitle(nap)).toBe('Sieste du 27 nov.');
+  });
+});
+
+import { trackerSegments } from './sleep';
+describe('tracker de sommeil', () => {
+  it('une nuit tient sur la ligne du soir, de midi à midi', () => {
+    const seg = trackerSegments({ date: '2026-11-26', bedTime: '23:00', asleepTime: '23:30', wakeTime: '07:00', upTime: '07:20', interruptions: [{ id: 'a', from: '03:00', to: '03:30' }] });
+    expect(seg.every((x) => x.row === '2026-11-26')).toBe(true);
+    expect(seg.map((x) => [x.kind, x.start, x.end])).toEqual([
+      ['bed', 660, 690],
+      ['sleep', 690, 900],
+      ['awake', 900, 930],
+      ['sleep', 930, 1140],
+      ['up', 1140, 1160],
+    ]);
+  });
+  it('un coucher après minuit reste sur la ligne de la veille', () => {
+    const seg = trackerSegments({ date: '2026-11-27', bedTime: '00:30', wakeTime: '08:00' });
+    expect(seg[0]).toEqual({ row: '2026-11-26', start: 750, end: 1200, kind: 'sleep' });
+  });
+  it('une sieste apparaît dans l’après-midi de sa journée', () => {
+    const seg = trackerSegments({ date: '2026-11-27', bedTime: '14:00', wakeTime: '14:45' });
+    expect(seg[0]).toEqual({ row: '2026-11-27', start: 120, end: 165, kind: 'sleep' });
+  });
+});

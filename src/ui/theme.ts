@@ -160,6 +160,61 @@ export const WEATHERS: EmojiOption[] = [
   { id: 'impossible', emoji: '🔮', label: 'Météo impossible' },
 ];
 
+/** Météos proposées dans le formulaire (les autres restent lisibles sur les anciens rêves). */
+export const WEATHER_CHOICES: EmojiOption[] = ['soleil', 'eclaircies', 'partiel', 'nuageux', 'averses', 'pluie', 'neige', 'eclairs', 'orage', 'tornade', 'arc-en-ciel'].map(
+  (id) => WEATHERS.find((w) => w.id === id)!,
+);
+
+/** Humeur : niveau de 0 à 5, et un emoji au choix dans chaque niveau. */
+export const MOOD_GRID: { level: number; label: string; emojis: string[] }[] = [
+  { level: 0, label: 'Horrible', emojis: ['😡', '🤮', '😭'] },
+  { level: 1, label: 'Très mauvaise', emojis: ['😱', '😤', '😔'] },
+  { level: 2, label: 'Mauvaise', emojis: ['🫩', '🙄', '🫠'] },
+  { level: 3, label: 'Mitigée', emojis: ['🙃', '🤭', '🙂'] },
+  { level: 4, label: 'Bonne', emojis: ['🤗', '🥰', '😎'] },
+  { level: 5, label: 'Excellente', emojis: ['😍', '😁', '🤣'] },
+];
+
+/** Genres proposés (étiquettes). */
+export const GENRES = [
+  'Aventure',
+  'Action',
+  'Horreur',
+  'Thriller',
+  'Mystère',
+  'Policier',
+  'Comédie',
+  'Romance',
+  'Drame',
+  'Fantastique',
+  'Science-fiction',
+  'Conte',
+  'Épique',
+  'Absurde',
+  'Tranche de vie',
+  'Post-apocalyptique',
+  'Guerre',
+  'Super-héros',
+];
+
+/** Sommeil : qualité 1 → 5. */
+export const SLEEP_QUALITY = [
+  { value: 1, emoji: '😫', label: 'Très mauvaise' },
+  { value: 2, emoji: '😕', label: 'Mauvaise' },
+  { value: 3, emoji: '😐', label: 'Moyenne' },
+  { value: 4, emoji: '😌', label: 'Bonne' },
+  { value: 5, emoji: '🤩', label: 'Excellente' },
+] as const;
+
+/** Sommeil : énergie au réveil 1 → 5. */
+export const WAKE_ENERGY = [
+  { value: 1, emoji: '🪫', label: 'À plat' },
+  { value: 2, emoji: '🥱', label: 'Fatigue' },
+  { value: 3, emoji: '😐', label: 'Moyenne' },
+  { value: 4, emoji: '🙂', label: 'En forme' },
+  { value: 5, emoji: '⚡', label: 'Pleine forme' },
+] as const;
+
 /** Moment du jour dans le rêve. */
 export const TIMES_OF_DAY: EmojiOption[] = [
   { id: 'aube', emoji: '🌅', label: 'Aube' },
