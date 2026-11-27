@@ -298,7 +298,7 @@ Expo change à chaque version. Avant d'utiliser une API Expo/React Native, véri
 - [x] v0.6.5 : app = 3 dernières versions seulement ; historique complet sur la page « Toutes les nouveautés ».
 - [x] v0.7.0 : tracker de sommeil, lien rêves ↔ sommeil, qualité/énergie, formulaire compact, 4 onglets + menu +.
 - [x] v0.8.1 : icônes zip n° 5 partout, tracker redessiné (src/ui/SleepRibbon.tsx : ruban dégradé nuit → aube
-  pour le sommeil ; **éveillé au lit = même ruban vide partout**, avant, pendant et après — demande de la
+  pour le sommeil ; **un seul ruban continu du coucher au lever, vide quand on est éveillé** (avant, pendant, après) — demande de la
   personne), date du coucher auto après minuit (`autoSleepDate`).
 - [x] v0.8.0 : icônes zip n° 4, 4 moments, horloge (src/ui/TimePicker.tsx), réveils ±5 min auto
   (`completeInterruption`), facteurs / lieu / humeur au réveil, regroupement des lieux au dézoom.
