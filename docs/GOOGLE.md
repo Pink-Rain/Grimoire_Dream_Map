@@ -28,8 +28,8 @@ avec **son** compte et ses rêves iront dans **son** Drive.
    Si Google propose un « essai gratuit » avec carte bancaire : **ignore-le** (ferme le bandeau). On n'en a pas besoin.
 3. En haut à gauche, clique sur le **sélecteur de projet** (à côté du logo « Google Cloud »),
    puis **« Nouveau projet »**.
-4. Nom du projet : `Grimoire`. Laisse « Emplacement » sur « Aucune organisation ». Clique **« Créer »**.
-5. Attends quelques secondes, puis vérifie qu'en haut de la page c'est bien **Grimoire** qui est sélectionné.
+4. Nom du projet : `Grimoire Dream Map`. Laisse « Emplacement » sur « Aucune organisation ». Clique **« Créer »**.
+5. Attends quelques secondes, puis vérifie qu'en haut de la page c'est bien **Grimoire Dream Map** qui est sélectionné.
 
 ### Étape 2 : activer l'accès à Google Drive
 1. Dans la barre de recherche en haut, tape **`Google Drive API`** et ouvre le résultat.
@@ -39,7 +39,7 @@ avec **son** compte et ses rêves iront dans **son** Drive.
 1. Dans la barre de recherche, tape **`Google Auth Platform`** et ouvre-le
    (parfois appelé « Écran de consentement OAuth »).
 2. Clique **« Commencer »** (ou « Get started ») et remplis :
-   - **Nom de l'application** : `Grimoire`
+   - **Nom de l'application** : `Grimoire - Dream Map`
    - **Adresse e-mail d'assistance** : ton adresse
    - **Audience** : **« Externe »**
    - **Coordonnées** : ton adresse e-mail
@@ -54,7 +54,9 @@ avec **son** compte et ses rêves iront dans **son** Drive.
 4. Clique **« Mettre à jour »**, puis **« Enregistrer »** en bas de la page.
 
 > L'app aura accès **uniquement** à son propre dossier caché dans le Drive de la personne.
-> Elle ne pourra ni voir ni toucher ses autres fichiers. C'est aussi ce qui évite la longue vérification de Google.
+> Elle ne pourra ni voir ni toucher ses autres fichiers.
+> C'est aussi ce qui évite la longue vérification de Google.
+> Chaque app de la suite Grimoire aura son propre projet Google Cloud, donc son propre dossier caché.
 
 ### Étape 5 : passer l'app « en production »
 1. Menu de gauche : **« Audience »**.
@@ -67,13 +69,13 @@ avec **son** compte et ses rêves iront dans **son** Drive.
 ### Étape 6 : créer l'identifiant de l'app PC (.exe)
 1. Menu de gauche : **« Clients »**, puis **« Créer un client »**.
 2. **Type d'application** : **« Application de bureau »** (Desktop app).
-3. **Nom** : `Grimoire PC`. Clique **« Créer »**.
+3. **Nom** : `Dream Map PC`. Clique **« Créer »**.
 4. Une fenêtre affiche un **ID client** (se termine par `.apps.googleusercontent.com`) et un
    **code secret du client**. Clique **« Télécharger le fichier JSON »** pour les garder.
 
 ### ✉️ Ce que tu m'envoies à la fin de la Partie 1
-- l'**ID client** de « Grimoire PC » ;
-- le **code secret du client** de « Grimoire PC ».
+- l'**ID client** de « Dream Map PC » ;
+- le **code secret du client** de « Dream Map PC ».
 
 > Malgré son nom, ce « code secret » n'est **pas** un mot de passe : pour une application installée sur un
 > ordinateur, Google considère qu'il sera visible dans l'app, et il ne donne accès à rien sans que la personne
@@ -111,7 +113,7 @@ Je te dirai quand commencer.
   qui acceptent d'installer l'app et de la garder 2 semaines. Commence à les chercher dès maintenant.
 
 ### Étape 3 : créer l'app dans la Play Console (je te guiderai écran par écran)
-- Nom : Grimoire, langue par défaut : français, type : application, gratuite.
+- Nom : Grimoire - Dream Map, langue par défaut : français, type : application, gratuite.
 - Questionnaires obligatoires (je te donnerai les réponses) : classification du contenu, public cible,
   **sécurité des données** (« Data safety » : on déclare que les données restent sur l'appareil ou dans le
   Drive de la personne, rien n'est envoyé ailleurs), publicités (non).
@@ -130,5 +132,5 @@ Je te dirai quand commencer.
 ---
 
 ## Récapitulatif de ce que tu m'envoies, au fil du temps
-1. Maintenant : ID client + code secret de « Grimoire PC » (Partie 1).
+1. Maintenant : ID client + code secret de « Dream Map PC » (Partie 1).
 2. Plus tard : l'empreinte SHA-1 (Partie 2, étape 5), les 12 adresses des testeurs (à saisir toi-même dans la Play Console).

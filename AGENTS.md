@@ -1,6 +1,17 @@
-# AGENTS.md — Grimoire (journal de rêves)
+# AGENTS.md — Grimoire - Dream Map (journal de rêves)
 
 Fichier de reprise pour l'agent qui code l'app. **À lire en premier, à tenir à jour à chaque étape.**
+
+## Nom
+
+- **Grimoire** = la suite d'applications. **Dream Map** = cette app. Nom complet : **Grimoire - Dream Map**.
+- Nom sous l'icône Android : « Dream Map » (un nom long serait coupé). Fenêtre PC, installateur, Play Store :
+  « Grimoire - Dream Map ».
+- Identifiants techniques : paquet Android / app PC `com.pinkrain.grimoire.dreammap` (modifiable seulement AVANT
+  la 1re publication Play Store) ; identifiant des fichiers de données `grimoire-dream-map` ; base IndexedDB
+  `grimoire-dream-map` ; dossier Android `dreammap-data` ; adresse interne de l'app PC `app://dreammap/`.
+- Chaque app de la suite doit avoir ses propres identifiants et son **propre projet Google Cloud**
+  (sinon elles partageraient le même dossier caché Drive).
 
 ## La personne et la façon de travailler
 
@@ -39,7 +50,7 @@ Code : `src/data/types.ts`, `src/data/records.ts`, `src/data/store.ts`.
 - Découpage en fichiers (« morceaux ») : un fichier par collection et par **mois de création**
   (`dreams.2026-11`). `createdAt` ne change jamais, donc un élément reste toujours dans le même fichier.
   Le même découpage servira pour les fichiers Drive.
-- Contenu d'un fichier : `{ app: "grimoire-dream-journal", schemaVersion, collection, shard, records: [...] }`.
+- Contenu d'un fichier : `{ app: "grimoire-dream-map", schemaVersion, collection, shard, records: [...] }`.
 - Export : `{ app, kind: "export", schemaVersion, exportedAt, shards: [...] }`. L'import **fusionne**
   (règle « le plus récent gagne »), il ne remplace pas.
 - Toute modification passe par `appStore` (`src/data/appStore.ts`) : `save`, `remove`, `importBundle`.
@@ -54,7 +65,7 @@ index.ts                  point d'entrée Expo → src/App.tsx
 src/App.tsx               navigation (liste / rêve / réglages), mise en page téléphone ou ordinateur
 src/data/                 format, règles de fusion, magasin de données (DataStore) + tests (vitest)
 src/data/storage/         stockage local : index.ts (Android, fichiers expo-file-system dans
-                          Paths.document/grimoire-data/*.json) ; index.web.ts (IndexedDB via idb-keyval)
+                          Paths.document/dreammap-data/*.json) ; index.web.ts (IndexedDB via idb-keyval)
 src/platform/             backup.ts / backup.web.ts (export/import de fichier), dialogs.ts (confirmations),
                           desktop.ts (pont vers l'app PC, window.grimoireDesktop)
 src/ui/                   écrans et composants
@@ -70,12 +81,11 @@ docs/GOOGLE.md            guide pas à pas pour la configuration Google (pour la
   sinon « ordinateur » (liste à gauche, détail à droite).
 - Bouton téléphone/ordinateur (barre du haut) : uniquement sur PC.
   - App PC : redimensionne la fenêtre (412×860) et revient à la taille précédente ; mémorisé dans
-    `userData/window-state.json`.
+    `userData/window-state.json`. Le schéma `app://dreammap/` donne une origine stable (IndexedDB permanent).
   - Navigateur : affiche l'app dans un cadre de téléphone ; mémorisé dans localStorage.
 - Enregistrement : en mémoire immédiatement, sur disque 400 ms après (par morceau modifié), et forcé quand
   l'app passe en arrière-plan / se cache / avant fermeture de l'app PC (`onBeforeClose`).
 - Éditeur : enregistrement automatique ; un nouveau rêve n'est créé qu'à la première saisie.
-- Identifiants Android / PC : `com.pinkrain.grimoire` (modifiable seulement AVANT la 1re publication Play Store).
 
 ## Commandes
 
@@ -97,8 +107,8 @@ Si l'Electron n'est pas téléchargé : `ELECTRON_GET_USE_PROXY=1 node desktop/n
 ## Publier une version (.exe + APK)
 
 1. Augmenter `version` dans `package.json` ET `app.json` (`expo.version`), et `android.versionCode` (+1).
-2. Committer avec `[build]` dans le message → GitHub Actions fabrique `Grimoire-Setup-<version>.exe`
-   et `Grimoire-<version>-test.apk`, publiés dans Releases (tag `v<version>`).
+2. Committer avec `[build]` dans le message → GitHub Actions fabrique `Grimoire-Dream-Map-Setup-<version>.exe`
+   et `Grimoire-Dream-Map-<version>-test.apk`, publiés dans Releases (tag `v<version>`).
 - L'exe n'est pas signé (signature payante) : Windows affiche « Windows a protégé votre ordinateur »
   → « Informations complémentaires » → « Exécuter quand même ».
 - L'APK de test est signé avec une clé de test : il faudra le désinstaller (après export des données)

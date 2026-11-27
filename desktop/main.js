@@ -1,4 +1,4 @@
-// Application PC de Grimoire (Electron).
+// Application PC de Grimoire - Dream Map (Electron).
 // Elle affiche la version web de l'app (dossier dist/), avec quelques fonctions en plus :
 // - le bouton téléphone/ordinateur redimensionne la fenêtre ;
 // - la taille de la fenêtre et le format sont mémorisés ;
@@ -9,11 +9,11 @@ const path = require('path');
 const { pathToFileURL } = require('url');
 
 const SCHEME = 'app';
-const HOST = 'grimoire';
+const HOST = 'dreammap';
 const PHONE_SIZE = { width: 412, height: 860 };
 const DEFAULT_DESKTOP = { width: 1200, height: 800 };
 
-// Un seul Grimoire ouvert à la fois.
+// Une seule fenêtre Dream Map ouverte à la fois.
 if (!app.requestSingleInstanceLock()) {
   app.quit();
   process.exit(0);
@@ -101,7 +101,7 @@ function createWindow() {
     minWidth: state.phoneMode ? 320 : 720,
     minHeight: state.phoneMode ? 480 : 500,
     backgroundColor: '#0f0d1a',
-    title: 'Grimoire',
+    title: 'Grimoire - Dream Map',
     icon: path.join(__dirname, 'icon.png'),
     show: false,
     autoHideMenuBar: true,
@@ -178,7 +178,7 @@ app.on('second-instance', () => {
 app.whenReady().then(() => {
   Menu.setApplicationMenu(null);
 
-  // Sert les fichiers de l'app web depuis app://grimoire/...
+  // Sert les fichiers de l'app web depuis app://dreammap/...
   protocol.handle(SCHEME, (req) => {
     const { pathname } = new URL(req.url);
     let file = path.normalize(path.join(webRoot, decodeURIComponent(pathname)));

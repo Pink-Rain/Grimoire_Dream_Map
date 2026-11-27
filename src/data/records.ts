@@ -54,7 +54,7 @@ export function makeShardDoc(collection: CollectionName, shard: string, records:
   return { app: APP_ID, schemaVersion: SCHEMA_VERSION, collection, shard, records };
 }
 
-/** Lit un morceau depuis du texte JSON. Renvoie null si ce n'est pas un fichier Grimoire valide. */
+/** Lit un morceau depuis du texte JSON. Renvoie null si ce n'est pas un fichier Dream Map valide. */
 export function parseShardDoc(text: string): ShardDoc | null {
   let data: unknown;
   try {
@@ -91,11 +91,11 @@ export function parseExportBundle(text: string): ParseBundleResult {
   try {
     data = JSON.parse(text);
   } catch {
-    return { ok: false, reason: "Ce fichier n'est pas lisible (ce n'est pas un export Grimoire)." };
+    return { ok: false, reason: "Ce fichier n'est pas lisible (ce n'est pas un export Dream Map)." };
   }
   const d = data as Record<string, unknown> | null;
   if (!d || d.app !== APP_ID || d.kind !== 'export' || !Array.isArray(d.shards)) {
-    return { ok: false, reason: "Ce fichier n'est pas un export Grimoire." };
+    return { ok: false, reason: "Ce fichier n'est pas un export Dream Map." };
   }
   const shards = d.shards.map(toShardDoc).filter((s): s is ShardDoc => s !== null);
   return {

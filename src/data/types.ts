@@ -1,5 +1,5 @@
 /**
- * Format des données de Grimoire.
+ * Format des données de Grimoire - Dream Map.
  *
  * RÈGLES (voir AGENTS.md) :
  * - On n'ajoute que des champs. On ne renomme ni ne supprime jamais un champ.
@@ -12,7 +12,7 @@
 export const SCHEMA_VERSION = 1;
 
 /** Identifiant écrit dans chaque fichier pour reconnaître nos fichiers. */
-export const APP_ID = 'grimoire-dream-journal';
+export const APP_ID = 'grimoire-dream-map';
 
 /** Champs communs à tous les éléments synchronisables. */
 export interface BaseRecord {

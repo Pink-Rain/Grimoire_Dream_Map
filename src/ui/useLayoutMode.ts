@@ -3,7 +3,7 @@ import { Platform, useWindowDimensions } from 'react-native';
 import { desktop } from '../platform/desktop';
 import { PHONE_BREAKPOINT } from './theme';
 
-const KEY = 'grimoire.phoneMode';
+const KEY = 'grimoire-dream-map.phoneMode';
 
 function readSaved(): boolean {
   if (desktop) return desktop.initialPhoneMode;

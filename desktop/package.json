@@ -1,8 +1,8 @@
 {
-  "name": "grimoire-desktop",
-  "productName": "Grimoire",
-  "version": "0.1.0",
-  "description": "Grimoire — journal de rêves (application PC)",
+  "name": "grimoire-dream-map-desktop",
+  "productName": "Grimoire - Dream Map",
+  "version": "0.1.1",
+  "description": "Grimoire - Dream Map (application PC)",
   "author": "Grimoire",
   "main": "main.js",
   "private": true,
@@ -11,8 +11,8 @@
     "dist:win": "electron-builder --win nsis --x64 --publish never"
   },
   "build": {
-    "appId": "com.pinkrain.grimoire",
-    "productName": "Grimoire",
+    "appId": "com.pinkrain.grimoire.dreammap",
+    "productName": "Grimoire - Dream Map",
     "directories": {
       "output": "release"
     },
@@ -31,7 +31,7 @@
     "win": {
       "target": "nsis",
       "icon": "../assets/icon.png",
-      "artifactName": "Grimoire-Setup-${version}.${ext}"
+      "artifactName": "Grimoire-Dream-Map-Setup-${version}.${ext}"
     },
     "nsis": {
       "oneClick": false,
@@ -39,7 +39,7 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "Grimoire",
+      "shortcutName": "Grimoire - Dream Map",
       "language": "1036"
     },
     "linux": {

@@ -14,7 +14,7 @@ export function SettingsScreen(props: { bottomInset: number }) {
     try {
       await appStore.flush();
       const json = JSON.stringify(appStore.exportBundle(), null, 1);
-      await saveTextFile(`grimoire-export-${localDateString()}.json`, json);
+      await saveTextFile(`dream-map-export-${localDateString()}.json`, json);
     } catch (e) {
       notify('Export impossible', String(e));
     }
@@ -59,7 +59,7 @@ export function SettingsScreen(props: { bottomInset: number }) {
         <Button label="Importer des données" icon="push-outline" onPress={onImport} testID="import" />
       </Section>
       <Section title="À propos">
-        <Text style={styles.p}>Grimoire — version {APP_VERSION}</Text>
+        <Text style={styles.p}>Grimoire - Dream Map — version {APP_VERSION}</Text>
       </Section>
     </ScrollView>
   );

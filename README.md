@@ -1,7 +1,8 @@
-# Grimoire — journal de rêves
+# Grimoire - Dream Map
 
-Application de journal de rêves pour Android et PC. Les données restent sur ton appareil.
+**Dream Map** est une application de la suite **Grimoire** : un journal de rêves pour Android et PC.
+Les données restent sur ton appareil.
 
-- **Télécharger** : onglet [Releases](../../releases) — `Grimoire-Setup-….exe` pour Windows, `.apk` pour tester sur Android.
-- **Configuration Google** (pour la synchro, plus tard) : [docs/GOOGLE.md](docs/GOOGLE.md).
+- **Télécharger** : onglet [Releases](../../releases) — `Grimoire-Dream-Map-Setup-….exe` pour Windows, `.apk` pour tester sur Android.
+- **Comptes Google, Play Store, etc.** : [docs/GOOGLE.md](docs/GOOGLE.md).
 - **Pour l'agent qui code l'app** : [AGENTS.md](AGENTS.md).

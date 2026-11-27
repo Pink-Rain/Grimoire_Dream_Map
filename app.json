@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Grimoire",
-    "slug": "grimoire-dream-journal",
-    "version": "0.1.0",
+    "name": "Dream Map",
+    "slug": "grimoire-dream-map",
+    "version": "0.1.1",
     "orientation": "default",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
@@ -11,8 +11,8 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.pinkrain.grimoire",
-      "versionCode": 1,
+      "package": "com.pinkrain.grimoire.dreammap",
+      "versionCode": 2,
       "allowBackup": true,
       "softwareKeyboardLayoutMode": "resize",
       "backgroundColor": "#0f0d1a",
@@ -26,8 +26,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png",
-      "name": "Grimoire",
-      "shortName": "Grimoire",
+      "name": "Grimoire - Dream Map",
+      "shortName": "Dream Map",
       "backgroundColor": "#0f0d1a",
       "themeColor": "#0f0d1a",
       "lang": "fr"

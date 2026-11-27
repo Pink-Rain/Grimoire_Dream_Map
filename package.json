@@ -1,6 +1,6 @@
 {
-  "name": "grimoire-dream-journal",
-  "version": "0.1.0",
+  "name": "grimoire-dream-map",
+  "version": "0.1.1",
   "main": "index.ts",
   "dependencies": {
     "@expo/vector-icons": "^15.0.2",

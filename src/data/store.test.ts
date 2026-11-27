@@ -79,7 +79,7 @@ describe('DataStore', () => {
     storage.items.set(
       'dreams.2026-11',
       JSON.stringify({
-        app: 'grimoire-dream-journal',
+        app: 'grimoire-dream-map',
         schemaVersion: 9,
         collection: 'dreams',
         shard: '2026-11',
@@ -119,7 +119,7 @@ describe('DataStore', () => {
     expect(a.store.get('dreams', id1)!.title).toBe('v2');
   });
 
-  it('refuse un fichier qui n’est pas un export Grimoire', () => {
+  it('refuse un fichier qui n’est pas un export Dream Map', () => {
     expect(parseExportBundle('pas du json').ok).toBe(false);
     expect(parseExportBundle('{"foo":1}').ok).toBe(false);
   });

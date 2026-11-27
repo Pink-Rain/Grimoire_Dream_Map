@@ -102,7 +102,7 @@ function Main() {
 
   let body;
   if (layout.isPhoneLayout) {
-    const title = screen.kind === 'dream' ? 'Rêve' : screen.kind === 'settings' ? 'Réglages' : 'Grimoire';
+    const title = screen.kind === 'dream' ? 'Rêve' : screen.kind === 'settings' ? 'Réglages' : 'Dream Map';
     body = (
       <>
         <TopBar
@@ -120,7 +120,7 @@ function Main() {
   } else {
     body = (
       <>
-        <TopBar title="Grimoire" layout={layout} topInset={insets.top} onSettings={openSettings} />
+        <TopBar title="Dream Map" layout={layout} topInset={insets.top} onSettings={openSettings} />
         <View style={[styles.fill, styles.columns]}>
           <View style={styles.sidebar}>
             <DreamList selectedId={screen.kind === 'dream' ? screen.id : null} onOpen={openDream} onNew={newDream} bottomInset={insets.bottom} />
@@ -146,7 +146,8 @@ function Welcome() {
   return (
     <View style={[styles.fill, styles.center, { gap: 8, padding: 24 }]}>
       <Text style={{ color: colors.accent, fontSize: 56 }}>☾</Text>
-      <Text style={{ color: colors.text, fontSize: 26, fontFamily: fonts.title }}>Grimoire</Text>
+      <Text style={{ color: colors.faint, fontSize: 13, letterSpacing: 3 }}>GRIMOIRE</Text>
+      <Text style={{ color: colors.text, fontSize: 26, fontFamily: fonts.title }}>Dream Map</Text>
       <Text style={{ color: colors.muted, fontSize: 16, textAlign: 'center' }}>
         Choisis un rêve dans la liste, ou note-en un nouveau.
       </Text>

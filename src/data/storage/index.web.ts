@@ -3,7 +3,7 @@ import { createStore, del, get, keys, set } from 'idb-keyval';
 import type { TextStorage } from './types';
 
 class IdbTextStorage implements TextStorage {
-  private store = createStore('grimoire', 'data');
+  private store = createStore('grimoire-dream-map', 'data');
 
   async list() {
     return (await keys(this.store)).map(String);

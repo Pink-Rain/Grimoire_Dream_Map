@@ -5,7 +5,7 @@ import type { TextStorage } from './types';
 const SUFFIX = '.json';
 
 class FileTextStorage implements TextStorage {
-  private dir = new Directory(Paths.document, 'grimoire-data');
+  private dir = new Directory(Paths.document, 'dreammap-data');
 
   private ensureDir() {
     if (!this.dir.exists) this.dir.create({ intermediates: true, idempotent: true });
