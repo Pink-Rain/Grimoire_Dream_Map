@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { parseExportBundle, parseShardDoc, pickWinner, shardKeyFor } from './records';
 import { DataStore } from './store';
 import { MemoryStorage } from './storage/types';
-import type { Dream } from './types';
+import { normalizeDream, SCHEMA_VERSION, type Dream } from './types';
 
 function makeStore(storage = new MemoryStorage(), start = '2026-11-27T10:00:00.000Z') {
   let t = new Date(start).getTime();
@@ -51,7 +51,7 @@ describe('DataStore', () => {
 
     await store.flush();
     const doc = parseShardDoc(storage.items.get('dreams.2026-11')!)!;
-    expect(doc.schemaVersion).toBe(1);
+    expect(doc.schemaVersion).toBe(SCHEMA_VERSION);
     expect(doc.records[0]).toMatchObject({ id, deleted: true, text: 'Je volais' });
   });
 
@@ -122,5 +122,25 @@ describe('DataStore', () => {
   it('refuse un fichier qui n’est pas un export Dream Map', () => {
     expect(parseExportBundle('pas du json').ok).toBe(false);
     expect(parseExportBundle('{"foo":1}').ok).toBe(false);
+  });
+
+  it('range personnes et lieux dans leurs propres fichiers, et les relit', async () => {
+    const { store, storage } = makeStore();
+    const p = store.save('people', store.newId(), { name: 'Maman', real: true });
+    const pl = store.save('places', store.newId(), { name: 'Montpellier', kind: 'place', real: true, icon: 'village', size: 5, lat: 43.61, lon: 3.88 });
+    store.save('dreams', store.newId(), { title: 'R', text: '', dreamDate: '2026-11-27', peopleIds: [p.id], placeIds: [pl.id] });
+    await store.flush();
+    expect([...storage.items.keys()].sort()).toEqual(['dreams.2026-11', 'people.2026-11', 'places.2026-11']);
+    const { store: again } = makeStore(storage);
+    await again.load();
+    expect(again.list('people')[0].name).toBe('Maman');
+    expect(again.list('places')[0]).toMatchObject({ name: 'Montpellier', lat: 43.61 });
+  });
+});
+
+describe('compatibilité', () => {
+  it('un rêve de la version 1 reçoit des valeurs par défaut', () => {
+    const old = { id: 'a', createdAt: 'x', updatedAt: 'x', deleted: false, dreamDate: '2026-11-01', title: 't', text: '' } as Dream;
+    expect(normalizeDream(old)).toMatchObject({ kind: 'full', lucidity: null, mood: null, tags: [], colors: [], media: [], peopleIds: [], placeIds: [] });
   });
 });

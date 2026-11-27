@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { IconButton } from './components';
 import { colors, fonts } from './theme';
@@ -7,8 +8,12 @@ export function TopBar(props: {
   title: string;
   onBack?: () => void;
   onSettings?: () => void;
+  settingsActive?: boolean;
   layout: LayoutMode;
   topInset: number;
+  /** Éléments au milieu (onglets) et à droite (actions). */
+  center?: ReactNode;
+  actions?: ReactNode;
 }) {
   const { layout } = props;
   return (
@@ -21,9 +26,15 @@ export function TopBar(props: {
             <Text style={styles.logoGlyph}>☾</Text>
           </View>
         )}
-        <Text style={styles.title} numberOfLines={1}>
-          {props.title}
-        </Text>
+        <View style={styles.titleBox}>
+          {!props.onBack && <Text style={styles.suite}>GRIMOIRE</Text>}
+          <Text style={styles.title} numberOfLines={1}>
+            {props.title}
+          </Text>
+        </View>
+        {props.center}
+        <View style={{ flex: 1 }} />
+        {props.actions}
         {layout.showToggle && (
           <IconButton
             icon={layout.phoneMode ? 'desktop-outline' : 'phone-portrait-outline'}
@@ -32,34 +43,18 @@ export function TopBar(props: {
             testID="toggle-format"
           />
         )}
-        {props.onSettings && (
-          <IconButton icon="settings-outline" label="Réglages" onPress={props.onSettings} testID="open-settings" />
-        )}
+        {props.onSettings && <IconButton icon="settings-outline" label="Réglages" onPress={props.onSettings} active={props.settingsActive} testID="open-settings" />}
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  bar: {
-    backgroundColor: colors.bg,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
-  },
-  row: {
-    height: 60,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 8,
-    gap: 4,
-  },
-  logo: { width: 48, height: 48, alignItems: 'center', justifyContent: 'center' },
+  bar: { backgroundColor: colors.bgDeep, borderBottomWidth: 1, borderBottomColor: colors.border },
+  row: { height: 60, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 8, gap: 4 },
+  logo: { width: 44, height: 48, alignItems: 'center', justifyContent: 'center' },
   logoGlyph: { color: colors.accent, fontSize: 26 },
-  title: {
-    flex: 1,
-    color: colors.text,
-    fontSize: 22,
-    fontFamily: fonts.title,
-    paddingHorizontal: 4,
-  },
+  titleBox: { paddingHorizontal: 4, flexShrink: 1, marginRight: 8 },
+  suite: { color: colors.faint, fontFamily: fonts.body, fontSize: 10, letterSpacing: 3, lineHeight: 12 },
+  title: { color: colors.text, fontSize: 22, fontFamily: fonts.display, lineHeight: 26 },
 });

@@ -2,7 +2,7 @@
   "expo": {
     "name": "Dream Map",
     "slug": "grimoire-dream-map",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "orientation": "default",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
@@ -12,7 +12,7 @@
     },
     "android": {
       "package": "com.pinkrain.grimoire.dreammap",
-      "versionCode": 3,
+      "versionCode": 4,
       "allowBackup": true,
       "softwareKeyboardLayoutMode": "resize",
       "backgroundColor": "#0f0d1a",
@@ -33,7 +33,15 @@
       "lang": "fr"
     },
     "plugins": [
-      "expo-sharing"
+      "expo-sharing",
+      [
+        "expo-audio",
+        {
+          "microphonePermission": "Dream Map utilise le micro pour enregistrer tes notes vocales de rêves."
+        }
+      ],
+      "expo-font",
+      "./plugins/withBackupRules.js"
     ]
   }
 }

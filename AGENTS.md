@@ -61,6 +61,10 @@ Code : `src/data/types.ts`, `src/data/records.ts`, `src/data/store.ts`.
 
 ### Historique du format
 - v1 : collection `dreams` — `dreamDate` (AAAA-MM-JJ), `title`, `text`.
+- v2 : `dreams` + `kind` (quick/full), `lucidity` (0-5|null), `mood` (1-5|null), `ambiances`, `tags`, `colors`
+  (#rrggbb, taches d'aquarelle), `peopleIds`, `placeIds`, `media` (MediaItem[]). Nouvelles collections `people`
+  (`name`, `real`) et `places` (`name`, `kind` place|vehicle, `real`, `icon`, `size` 1-7, `lat`/`lon`, `address`,
+  `relation` {dir, placeId}, `layer`, `route` {fromId, toId}). Les anciens rêves passent par `normalizeDream`.
 
 ## Architecture
 
@@ -78,6 +82,8 @@ desktop/                  app PC Electron : main.js (fenêtre, schéma app://gri
                           preload.js (pont sécurisé). Sert le dossier dist/ (export web).
 .github/workflows/build.yml  fabrique le .exe (Windows) et un APK de test, publiés dans Releases
 docs/GOOGLE.md            guide pas à pas des comptes Google / Play (pour la personne)
+src/map/                  carte : géométrie (testée), recherche de lieux, dessins, composant DreamMap
+scripts/map/              page de la carte (runtime.js, style.css) ; scripts/build-generated.mjs l'assemble
 src/sync/                 synchro Drive : drive.ts (API Drive appDataFolder), engine.ts (algorithme, testé
                           avec un faux Drive dans engine.test.ts), syncManager.ts (connexion, quand synchroniser,
                           état affiché dans Réglages)
@@ -98,6 +104,36 @@ site/                     page de présentation (GitHub Pages) + politique de co
 - Enregistrement : en mémoire immédiatement, sur disque 400 ms après (par morceau modifié), et forcé quand
   l'app passe en arrière-plan / se cache / avant fermeture de l'app PC (`onBeforeClose`).
 - Éditeur : enregistrement automatique ; un nouveau rêve n'est créé qu'à la première saisie.
+
+## La carte des rêves (cœur de l'app)
+
+- **Pas de fond géographique** (demande explicite de la personne : ne jamais en proposer). Un parchemin vierge bleu
+  nuit qui se remplit avec les lieux rêvés. On utilise Leaflet **sans tuiles** (juste pour le zoom / déplacement /
+  glisser-déposer) ; les vrais lieux gardent leurs coordonnées réelles (recherche OpenStreetMap : Photon puis
+  Nominatim, `src/map/geocode.ts`), les lieux imaginaires ont des coordonnées choisies (« au nord de… » ou glissés).
+- Page de la carte = `scripts/map/runtime.js` + `scripts/map/style.css` + Leaflet + police IM Fell English, assemblés
+  par `scripts/build-generated.mjs` (lancé par `postinstall`) dans `src/map/mapHtml.generated.ts` (non versionné).
+  Affichée dans une iframe (web/PC, `DreamMap.web.tsx`) ou une WebView (Android, `DreamMap.tsx`).
+  Messages : app → carte `{type:'state', places, selectedId, view}`, `{type:'focus', id}`, `{type:'fit'}` ;
+  carte → app `ready`, `select`, `move`, `view`.
+- Taille des dessins : échelle « d'illustrateur » `iconPixels` (même formule dans runtime.js) — la taille 1-7 fixe
+  les proportions, le zoom agrandit doucement. Labels visibles à partir de 28 px.
+- Taches d'aquarelle sous chaque lieu = couleurs des rêves où il apparaît (`useMapPlaces`), filtre SVG `#wc`.
+- Superposition : `layer` (boutons Devant / Derrière de la fiche lieu) puis les petits au-dessus des grands.
+- Véhicules : trajet invisible entre deux lieux ; position tirée au hasard sur le trajet à chaque ouverture.
+- Dessins : 900 icônes game-icons.net (CC BY 3.0, crédit dans Réglages › À propos), triées dans
+  `scripts/icon-catalog.json` (label, catégorie, mots-clés FR). Mots-clés en plus : `EXTRA_KEYWORDS` du générateur.
+
+## Formulaires
+
+- Entrée rapide (`kind: 'quick'`) : titre, note(s) vocale(s), quelques détails → bouton « Compléter ce rêve ».
+- Rêve complet : récit, médias, lieux (réel / imaginaire / véhicule, réutilisables), personnes (réelles /
+  imaginaires, réutilisables, nom seulement), lucidité (phases de lune 0-5), humeur (météo 1-5), ambiance (liste +
+  libre), couleurs du rêve (aquarelle), étiquettes. Enregistrement automatique.
+- Médias (`src/platform/media*.ts`) : Android → fichiers dans `Paths.document/dreammap-media` (exclu de la
+  sauvegarde auto Android par `plugins/withBackupRules.js`, sinon les 25 Mo seraient dépassés) ; web/PC → IndexedDB
+  `grimoire-dream-map-media`. **Les fichiers médias ne sont pas encore synchronisés** (seules les infos le sont).
+- Statistiques et transcription voix → texte : plus tard (décision de la personne).
 
 ## Synchro Google Drive
 
@@ -166,7 +202,9 @@ Expo change à chaque version. Avant d'utiliser une API Expo/React Native, véri
 - [x] Étape 1 : base de l'app — journal de rêves minimal (date, titre, texte), stockage local, export/import,
   format téléphone/ordinateur, app PC .exe, APK de test.
 - [x] Étape 2 : synchro Google Drive sur l'app PC (v0.2.0) + page de présentation et politique de confidentialité.
-- [ ] Contenu de Dream Map : à définir avec la personne (question posée, pas encore de réponse).
+- [x] Étape 3 (v0.3.0) : carte parchemin, formulaires rapide/complet, médias, lieux/personnes/véhicules.
+- [ ] Synchro des fichiers médias (notes vocales, images…) dans le Drive.
+- [ ] Statistiques (simples et croisées). Transcription voix → texte (facultative).
 - [ ] Synchro Google Drive (appDataFolder) : PC (.exe → client OAuth « Application de bureau », redirection
   locale 127.0.0.1 + PKCE, ouverture du navigateur système) ; web (Google Identity Services, client « Web ») ;
   Android (client « Android » + empreinte SHA-1 de la clé de signature).

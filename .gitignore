@@ -45,3 +45,6 @@ desktop/release/
 
 # Code secret Google (ajouté au moment de fabriquer le .exe, jamais dans le dépôt)
 desktop/google-oauth.json
+
+# Fichiers générés (scripts/build-generated.mjs)
+src/map/*.generated.ts

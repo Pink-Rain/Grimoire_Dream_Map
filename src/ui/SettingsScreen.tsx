@@ -6,7 +6,7 @@ import { desktop } from '../platform/desktop';
 import { confirmAsync, notify } from '../platform/dialogs';
 import { syncManager, useSyncStatus } from '../sync/syncManager';
 import { Button, Section } from './components';
-import { colors } from './theme';
+import { colors, fonts } from './theme';
 
 const APP_VERSION: string = require('../../package.json').version;
 
@@ -62,6 +62,10 @@ export function SettingsScreen(props: { bottomInset: number }) {
       <SyncSection />
       <Section title="À propos">
         <Text style={styles.p}>Grimoire - Dream Map — version {APP_VERSION}</Text>
+        <Text style={styles.p}>
+          Dessins de la carte : game-icons.net, par Lorc, Delapouite et leurs contributeurs, sous licence Creative Commons
+          Attribution 3.0 (CC BY 3.0). Polices : IM Fell English et EB Garamond (SIL Open Font License).
+        </Text>
       </Section>
     </ScrollView>
   );
@@ -131,7 +135,7 @@ function SyncSection() {
 }
 
 const styles = StyleSheet.create({
-  error: { color: colors.danger, fontSize: 15, lineHeight: 22 },
+  error: { color: colors.danger, fontSize: 16, lineHeight: 23, fontFamily: fonts.body },
   content: { padding: 16, gap: 16, maxWidth: 720, width: '100%', alignSelf: 'center' },
-  p: { color: colors.muted, fontSize: 15, lineHeight: 22 },
+  p: { color: colors.muted, fontSize: 16, lineHeight: 23, fontFamily: fonts.body },
 });
