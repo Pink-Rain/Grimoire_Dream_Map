@@ -138,14 +138,23 @@ site/                     page de présentation (GitHub Pages) + politique de co
   dessinée pour un autre sens. Les « -encre » vont sur les boutons abricot.
 - Icône de l'app PC (desktop/icon.png) : logo **transparent** (dream-map-logo-512). Les versions à fond indigo
   (app-icon-*) sont réservées à Android / écrans d'accueil.
-- Usages : carte/journal (+ -encre actifs), micro (note rapide), micro-encre (bouton rond abricot note rapide),
-  micro-bouton (enregistreur), lune-crepuscule (nouveau rêve), telephone, reglages, boussole (« voir tous les
-  lieux » sur la carte), chevrons (date), fermer, supprimer, eclair(-encre) (note rapide), personne, imaginaire,
-  lieu-reel, vehicule, image/musique/video/fichier, meteo-1..5 (orage, pluie, nuageux, éclaircies, soleil),
-  barre-reglette + barre-curseur (curseur 5 crans `EmojiScale` : humeur, clarté, atmosphère).
-- Icônes encore standard (à dessiner par la personne) : sommeil (lit), retour, rêve complet (livre), ajouter (+),
-  arrêter/lire/pause un son, format ordinateur, centrer, modifier, devant/derrière, lien/YouTube, ouvrir/partager,
-  télécharger, se connecter Google, synchroniser, se déconnecter, exporter/importer, mot-clé, case cochée.
+- Usages (LISEZMOI de la personne, zip n° 3) :
+  - En-tête : logo (titre), carte/journal (+ -encre actifs), sommeil, micro (note rapide) / micro-encre (bouton
+    abricot), nouveau-reve-b / nouveau-reve-b-encre (nouveau rêve), telephone (passer en vue mobile) / vue-pc
+    (revenir en vue PC), reglages-sans-fond, retour.
+  - lune-crepuscule = rêve complet (badge de l'éditeur, lune à gauche dans le journal) ; lune-contour = note
+    rapide pas encore complétée (lune à gauche dans le journal).
+  - Carte : zoom-plus-fin, zoom-moins-fin, recentrer-fin (voir tous les lieux, « Centrer » de la fiche lieu),
+    boussole-sans-fond (rose des vents décorative, coin bas gauche).
+  - Sommeil : sommeil (lit), coucher, endormissement, reveil, lever.
+  - Fiche du rêve : chevrons (date), fermer, supprimer, eclair / eclair-encre (note rapide), micro-bouton
+    (enregistreur), personne, imaginaire, lieu-reel, vehicule.
+  - Médias : image, musique, video, fichier, lien-b. Lucidité : lucidite-b-0 … -5. Météo : meteo-1 … -5.
+  - barre-reglette + barre-curseur : curseur 5 crans `EmojiScale` (humeur, clarté, atmosphère).
+- Icônes encore standard (à dessiner par la personne) : rêve complet dans le bouton « Compléter ce rêve »,
+  ajouter (+ réveil), lire / pause / arrêter un son, modifier, devant / derrière, ouvrir / partager, télécharger,
+  Google (connexion, synchro, déconnexion), exporter / importer, rechercher / journal des mises à jour,
+  mot-clé, case cochée, sparkles du bandeau de mise à jour.
 
 ## Formulaires
 
@@ -241,6 +250,7 @@ Expo change à chaque version. Avant d'utiliser une API Expo/React Native, véri
 - [x] v0.5.0 : sélecteurs à emojis (humeur, clarté, atmosphère sur la réglette ; météo, jour/nuit, type, émotions),
   sommeil (3e type d'entrée), journal groupé par jour, logo et icônes de la personne.
 - [x] v0.6.0 : correctif du redémarrage pour mise à jour, journal des mises à jour, bouton « Rechercher ».
+- [x] v0.6.1 : icône PC transparente. v0.6.2 : 22 nouvelles icônes de la personne (zip n° 3).
 - [ ] Synchro des fichiers médias (notes vocales, images…) dans le Drive.
 - [ ] Statistiques (simples et croisées). Transcription voix → texte (facultative).
 - [ ] Synchro Google Drive (appDataFolder) : PC (.exe → client OAuth « Application de bureau », redirection

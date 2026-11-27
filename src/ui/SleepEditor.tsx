@@ -5,7 +5,7 @@ import { appStore } from '../data/appStore';
 import { defaultSleepDate, formatDuration, normalizeTime, summarizeSleep, type SleepSummary } from '../data/sleep';
 import type { Sleep } from '../data/types';
 import { confirmAsync } from '../platform/dialogs';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import { AppIcon, type AppIconName } from './AppIcon';
 import { Button, IconButton, Section, Txt } from './components';
 import { addDays, formatLongDate } from './dates';
 import { colors, fonts } from './theme';
@@ -18,7 +18,7 @@ function nowHHMM() {
 }
 
 /** Champ d'heure « HH:MM » : on peut taper « 2330 » ou « 7h05 », ou toucher « Maintenant ». */
-function TimeField(props: { label: string; emoji: string; value: string | null; onChange: (v: string | null) => void; testID: string; compact?: boolean }) {
+function TimeField(props: { label: string; emoji: string; image?: AppIconName; value: string | null; onChange: (v: string | null) => void; testID: string; compact?: boolean }) {
   const [text, setText] = useState(props.value ?? '');
   const [bad, setBad] = useState(false);
   useEffect(() => setText(props.value ?? ''), [props.value]);
@@ -37,7 +37,7 @@ function TimeField(props: { label: string; emoji: string; value: string | null; 
   };
   return (
     <View style={[styles.timeRow, props.compact && { gap: 6 }]}>
-      {!props.compact && <Text style={styles.timeEmoji}>{props.emoji}</Text>}
+      {!props.compact && (props.image ? <AppIcon name={props.image} size={32} /> : <Text style={styles.timeEmoji}>{props.emoji}</Text>)}
       {!props.compact && (
         <Txt style={{ flex: 1 }} weight="semi">
           {props.label}
@@ -157,7 +157,7 @@ export function SleepEditor(props: { sleepId: string; onDeleted: () => void; bot
       <ScrollView contentContainerStyle={[styles.content, { paddingBottom: 32 + props.bottomInset }]} keyboardShouldPersistTaps="handled">
         <View style={styles.topRow}>
           <View style={styles.badge}>
-            <Ionicons name="bed-outline" size={16} color={colors.ochre} />
+            <AppIcon name="sommeil" size={20} />
             <Txt size={14} weight="semi" style={{ color: colors.ochre }}>
               {s.isNap ? 'Sieste' : 'Sommeil'}
             </Txt>
@@ -172,10 +172,10 @@ export function SleepEditor(props: { sleepId: string; onDeleted: () => void; bot
         </View>
 
         <Section title="Heures" hint="Tape l’heure (ex. 2330) ou touche « Maintenant ». Le passage de minuit est compris tout seul.">
-          <TimeField label="Coucher" emoji="🛏️" value={d.bedTime} onChange={(v) => commit({ bedTime: v })} testID="bed-time" />
-          <TimeField label="Endormissement" emoji="😴" value={d.asleepTime} onChange={(v) => commit({ asleepTime: v })} testID="asleep-time" />
-          <TimeField label="Réveil" emoji="⏰" value={d.wakeTime} onChange={(v) => commit({ wakeTime: v })} testID="wake-time" />
-          <TimeField label="Lever" emoji="🚶" value={d.upTime} onChange={(v) => commit({ upTime: v })} testID="up-time" />
+          <TimeField label="Coucher" emoji="🛏️" image="coucher" value={d.bedTime} onChange={(v) => commit({ bedTime: v })} testID="bed-time" />
+          <TimeField label="Endormissement" emoji="😴" image="endormissement" value={d.asleepTime} onChange={(v) => commit({ asleepTime: v })} testID="asleep-time" />
+          <TimeField label="Réveil" emoji="⏰" image="reveil" value={d.wakeTime} onChange={(v) => commit({ wakeTime: v })} testID="wake-time" />
+          <TimeField label="Lever" emoji="🚶" image="lever" value={d.upTime} onChange={(v) => commit({ upTime: v })} testID="up-time" />
         </Section>
 
         <Section title="Réveils pendant le sommeil">

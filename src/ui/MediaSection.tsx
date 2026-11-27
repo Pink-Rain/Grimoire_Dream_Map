@@ -154,7 +154,7 @@ function AudioRow(props: { item: MediaItem; onRemove: () => void }) {
 
 // ---------------------------------------------------------------- Autres médias
 
-const DRAWN: Partial<Record<MediaType, 'image' | 'musique' | 'video' | 'fichier'>> = { image: 'image', music: 'musique', video: 'video', file: 'fichier' };
+const DRAWN: Partial<Record<MediaType, 'image' | 'musique' | 'video' | 'fichier' | 'lien-b'>> = { image: 'image', music: 'musique', video: 'video', file: 'fichier', link: 'lien-b' };
 
 function MediaTypeIcon({ type }: { type: MediaType }) {
   const drawn = DRAWN[type];
@@ -315,7 +315,7 @@ export function MediaSection(props: { value: MediaItem[]; onChange: (v: MediaIte
             <Button small label="Musique" image="musique" onPress={() => pick('audio')} testID="add-music" />
             <Button small label="Vidéo" image="video" onPress={() => pick('video')} testID="add-video" />
             <Button small label="Fichier" image="fichier" onPress={() => pick('any')} testID="add-file" />
-            <Button small label="Lien / YouTube" icon="link-outline" onPress={() => setLinkOpen((o) => !o)} testID="add-link" />
+            <Button small label="Lien / YouTube" image="lien-b" onPress={() => setLinkOpen((o) => !o)} testID="add-link" />
           </View>
           {linkOpen && (
             <View style={styles.linkForm}>

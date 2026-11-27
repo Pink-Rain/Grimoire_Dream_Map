@@ -2,7 +2,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { useMemo, useRef, useState } from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import Svg, { Circle, Defs, Path, RadialGradient, Stop } from 'react-native-svg';
-import { AppIcon, CURSEUR, REGLETTE } from './AppIcon';
+import { AppIcon, CURSEUR, REGLETTE, type AppIconName } from './AppIcon';
 import { Chip, Field, type PressState } from './components';
 import { colors, DREAM_COLORS, fonts, LUCIDITY_LABELS } from './theme';
 
@@ -42,7 +42,7 @@ export function LucidityScale(props: { value: number | null; onChange: (v: numbe
               testID={`lucidity-${i}`}
               style={({ hovered }: PressState) => [styles.scaleItem, on && styles.scaleItemOn, hovered && !on && { backgroundColor: colors.surfaceHover }]}
             >
-              <Moon fraction={i / 5} size={38} lit={reached ? colors.ochre : colors.faint} />
+              <AppIcon name={`lucidite-b-${i}` as AppIconName} size={42} dim={props.value !== null && !reached} />
               <Text style={[styles.scaleNum, reached && { color: colors.ochre }]}>{i}</Text>
             </Pressable>
           );

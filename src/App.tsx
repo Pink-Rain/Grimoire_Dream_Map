@@ -187,9 +187,9 @@ function Main() {
   } else {
     const actions = (
       <>
-        <Button small label="Sommeil" icon="bed-outline" onPress={newSleep} testID="new-sleep" />
+        <Button small label="Sommeil" image="sommeil" onPress={newSleep} testID="new-sleep" />
         <Button small label="Note rapide" image="micro" onPress={() => newDream('quick')} testID="new-quick" />
-        <Button small label="Nouveau rêve" image="lune-crepuscule" variant="primary" onPress={() => newDream('full')} testID="new-dream" />
+        <Button small label="Nouveau rêve" image="nouveau-reve-b-encre" variant="primary" onPress={() => newDream('full')} testID="new-dream" />
       </>
     );
     const side = editor && (
@@ -270,13 +270,13 @@ function BottomBar(props: { tab: Tab; onTab: (t: Tab) => void; onQuick: () => vo
       </Pressable>
       <Pressable onPress={props.onNew} accessibilityRole="button" accessibilityLabel="Nouveau rêve" style={styles.fabWrap} testID="new-dream">
         <View style={styles.fab}>
-          <AppIcon name="lune-crepuscule" size={32} />
+          <AppIcon name="nouveau-reve-b" size={32} />
         </View>
         <Text style={styles.tabLabel}>Rêve</Text>
       </Pressable>
       <Pressable onPress={props.onSleep} accessibilityRole="button" accessibilityLabel="Nouveau sommeil" style={styles.fabWrap} testID="new-sleep">
         <View style={styles.fab}>
-          <Ionicons name="bed-outline" size={26} color={colors.text} />
+          <AppIcon name="sommeil" size={34} />
         </View>
         <Text style={styles.tabLabel}>Sommeil</Text>
       </Pressable>
@@ -297,8 +297,8 @@ function Welcome(props: { onQuick: () => void; onNew: () => void; onSleep: () =>
       </Txt>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 10, marginTop: 8 }}>
         <Button label="Note rapide" image="micro" onPress={props.onQuick} />
-        <Button label="Nouveau rêve" image="lune-crepuscule" variant="primary" onPress={props.onNew} />
-        <Button label="Sommeil" icon="bed-outline" onPress={props.onSleep} />
+        <Button label="Nouveau rêve" image="nouveau-reve-b-encre" variant="primary" onPress={props.onNew} />
+        <Button label="Sommeil" image="sommeil" onPress={props.onSleep} />
       </View>
     </View>
   );
