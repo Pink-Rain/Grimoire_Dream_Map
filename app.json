@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "Grimoire",
+    "slug": "grimoire-dream-journal",
+    "version": "0.1.0",
+    "orientation": "default",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#0f0d1a",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.pinkrain.grimoire",
+      "versionCode": 1,
+      "allowBackup": true,
+      "softwareKeyboardLayoutMode": "resize",
+      "backgroundColor": "#0f0d1a",
+      "adaptiveIcon": {
+        "backgroundColor": "#0f0d1a",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "name": "Grimoire",
+      "shortName": "Grimoire",
+      "backgroundColor": "#0f0d1a",
+      "themeColor": "#0f0d1a",
+      "lang": "fr"
+    },
+    "plugins": [
+      "expo-sharing"
+    ]
+  }
+}

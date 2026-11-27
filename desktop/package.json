@@ -1,0 +1,53 @@
+{
+  "name": "grimoire-desktop",
+  "productName": "Grimoire",
+  "version": "0.1.0",
+  "description": "Grimoire — journal de rêves (application PC)",
+  "author": "Grimoire",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist:win": "electron-builder --win nsis --x64 --publish never"
+  },
+  "build": {
+    "appId": "com.pinkrain.grimoire",
+    "productName": "Grimoire",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "package.json",
+      "icon.png"
+    ],
+    "extraResources": [
+      {
+        "from": "../dist",
+        "to": "web"
+      }
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "../assets/icon.png",
+      "artifactName": "Grimoire-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Grimoire",
+      "language": "1036"
+    },
+    "linux": {
+      "target": "dir"
+    }
+  },
+  "devDependencies": {
+    "electron": "^45.5.0",
+    "electron-builder": "^26.18.0"
+  }
+}
