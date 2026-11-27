@@ -1,6 +1,6 @@
 {
   "name": "grimoire-dream-map",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "main": "index.ts",
   "dependencies": {
     "@expo-google-fonts/eb-garamond": "^0.4.3",

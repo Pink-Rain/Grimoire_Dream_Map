@@ -212,8 +212,9 @@ Si l'Electron n'est pas téléchargé : `ELECTRON_GET_USE_PROXY=1 node desktop/n
 ## Publier une version (.exe + APK)
 
 1. Augmenter `version` dans `package.json`, `desktop/package.json` ET `app.json` (`expo.version`),
-   et `android.versionCode` (+1). **Ajouter l'entrée de la version en haut de `src/data/changelog.ts`**
-   (phrases simples, sans jargon ; affiché dans Réglages › Journal des mises à jour ; un test le vérifie).
+   et `android.versionCode` (+1). **Ajouter l'entrée de la version en haut de `src/data/changelog.json`**
+   (phrases simples, sans jargon ; un test le vérifie). L'app n'affiche QUE les 3 dernières (demande de la
+   personne) ; l'historique complet est sur la page GitHub `nouveautes.html` (scripts/build-site.mjs).
 2. Fusionner dans `main` (PR) → GitHub Actions fabrique `Grimoire-Dream-Map-Setup-<version>.exe` et
    `Grimoire-Dream-Map-<version>-test.apk`, les publie dans Releases (tag `v<version>`), puis met à jour la page
    https://pink-rain.github.io/Grimoire_Dream_Map/ (liens de téléchargement vers cette version).
@@ -257,6 +258,7 @@ Expo change à chaque version. Avant d'utiliser une API Expo/React Native, véri
   l'étiquette, propositions seulement pendant la frappe, tirées des étiquettes déjà utilisées + liste de départ ;
   les anciens identifiants comme « peur » s'affichent avec leur libellé) ; clarté sous la lucidité.
 - [x] v0.6.4 : journal des mises à jour dans les Réglages (3 dernières versions, les autres à la demande).
+- [x] v0.6.5 : app = 3 dernières versions seulement ; historique complet sur la page « Toutes les nouveautés ».
 - [ ] Synchro des fichiers médias (notes vocales, images…) dans le Drive.
 - [ ] Statistiques (simples et croisées). Transcription voix → texte (facultative).
 - [ ] Synchro Google Drive (appDataFolder) : PC (.exe → client OAuth « Application de bureau », redirection
