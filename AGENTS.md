@@ -170,14 +170,17 @@ site/                     page de présentation (GitHub Pages) + politique de co
     meteo-1 … -5 ne servent plus.
   - Barres à curseur (barre-reglette / barre-curseur) : **retirées à la demande de la personne** (v0.6.3).
     Humeur, clarté, atmosphère = rangées d'emojis à toucher (`EmojiScale`).
-- Icônes encore standard ou emojis (liste donnée à la personne en v0.8.0, par priorité) :
-  1. ajouter (+), onglet Statistiques, qualité du sommeil 1-5 (qualite-1…5), énergie au réveil 1-5
-     (energie-1…5), retirer (croix des étiquettes), coché, « Compléter ce rêve », modifier ;
-  2. carte : place (dessin de carte), devant / derrière, voir sur la carte, épingle des résultats, main
-     « glisser », chevron « voir plus » ;
-  3. médias : lecture / pause / stop, ouvrir le lien, partager / télécharger, YouTube, image vide ;
-  4. réglages : exporter / importer, Google, synchroniser, se déconnecter, rechercher / télécharger les mises
-     à jour, redémarrer, rapport technique, étincelles du bandeau.
+- Zip n° 5 (v0.8.1, LISEZMOI de la personne) : ajouter (gros bouton + du téléphone), ajouter-petit (boutons
+  « Ajouter… »), retirer (croix des étiquettes / lieux / réveils / médias), coche, completer, modifier, fermer,
+  supprimer, voir-plus (chevron des lignes), statistiques (onglet), epingle (résultats de recherche de lieu),
+  devant, derriere, glisser, lecture, pause, stop, ouvrir-lien, partager (téléphone), telecharger (PC),
+  video-lien (YouTube), image-vide, qualite-1…5, energie-1…5 (dans SLEEP_QUALITY / WAKE_ENERGY), exporter,
+  importer, deconnexion, synchroniser, maj-rechercher, maj-telecharger, redemarrer, rapport, nouvelle-version
+  (bandeau). « Se connecter avec Google » = logo G officiel (`GoogleG` dans SettingsScreen), pas « connexion »
+  (dessinée mais pas encore utilisée).
+- Icônes au trait cuivré (`LINE_ICONS` dans AppIcon.tsx) : teintées à l'encre sombre sur les boutons abricot.
+- Encore standard : « voir sur la carte » (fiche du rêve), mot-clé proposé (pricetag), petits compteurs du
+  journal (lieux, personnes, notes vocales), dessin de carte « place » (game-icons n'en a pas).
 
 ## Navigation (v0.7.0)
 
@@ -294,6 +297,9 @@ Expo change à chaque version. Avant d'utiliser une API Expo/React Native, véri
 - [x] v0.6.4 : journal des mises à jour dans les Réglages (3 dernières versions, les autres à la demande).
 - [x] v0.6.5 : app = 3 dernières versions seulement ; historique complet sur la page « Toutes les nouveautés ».
 - [x] v0.7.0 : tracker de sommeil, lien rêves ↔ sommeil, qualité/énergie, formulaire compact, 4 onglets + menu +.
+- [x] v0.8.1 : icônes zip n° 5 partout, tracker redessiné (src/ui/SleepRibbon.tsx : ruban dégradé nuit → aube
+  pour le sommeil ; **éveillé au lit = même ruban vide partout**, avant, pendant et après — demande de la
+  personne), date du coucher auto après minuit (`autoSleepDate`).
 - [x] v0.8.0 : icônes zip n° 4, 4 moments, horloge (src/ui/TimePicker.tsx), réveils ±5 min auto
   (`completeInterruption`), facteurs / lieu / humeur au réveil, regroupement des lieux au dézoom.
 - [ ] Synchro des fichiers médias (notes vocales, images…) dans le Drive.

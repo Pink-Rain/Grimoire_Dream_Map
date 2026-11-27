@@ -1,5 +1,15 @@
 [
   {
+    "version": "0.8.1",
+    "date": "2026-11-27",
+    "changes": [
+      "Tracker de sommeil redessiné : le sommeil est un ruban dont la couleur passe de la nuit à l’aube. Le temps éveillé au lit (avant de dormir, pendant les réveils de la nuit, après le réveil) a partout le même dessin : le même ruban, mais vide.",
+      "Toutes les nouvelles icônes dessinées sont à leur place : ajouter, retirer, coché, compléter, modifier, devant, derrière, glisser, lecture, pause, stop, ouvrir le lien, partager, télécharger, YouTube, qualité du sommeil, énergie au réveil, statistiques, exporter, importer, synchroniser, mises à jour…",
+      "Connexion Google avec le vrai logo « G » de Google.",
+      "Si tu notes ta nuit le matin et que tu t’es couché·e après minuit, la date du coucher se met toute seule au bon jour."
+    ]
+  },
+  {
     "version": "0.8.0",
     "date": "2026-11-27",
     "changes": [

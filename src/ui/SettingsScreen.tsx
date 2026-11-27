@@ -1,3 +1,5 @@
+import { AppIcon } from './AppIcon';
+import Svg, { Path } from 'react-native-svg';
 import { Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { appStore } from '../data/appStore';
 import { RECENT_CHANGES } from '../data/changelog';
@@ -59,8 +61,8 @@ export function SettingsScreen(props: { bottomInset: number }) {
           Pour changer d’appareil ou garder une copie de secours, exporte tes données dans un fichier, puis importe ce
           fichier sur l’autre appareil.
         </Text>
-        <Button label="Exporter mes données" icon="download-outline" onPress={onExport} testID="export" />
-        <Button label="Importer des données" icon="push-outline" onPress={onImport} testID="import" />
+        <Button label="Exporter mes données" image="exporter" onPress={onExport} testID="export" />
+        <Button label="Importer des données" image="importer" onPress={onImport} testID="import" />
       </Section>
       <SyncSection />
       {updatesSupported && <UpdatesSection />}
@@ -104,10 +106,10 @@ function UpdatesSection() {
       <Text style={[styles.p, s.status === 'error' && { color: colors.danger }]} testID="update-status">
         {line}
       </Text>
-      {s.status === 'ready' && <Button label="Redémarrer pour installer" icon="refresh" variant="primary" onPress={installUpdate} testID="update-install" />}
-      {s.status === 'available' && <Button label="Télécharger la nouvelle version" icon="download-outline" variant="primary" onPress={installUpdate} testID="update-install" />}
-      <Button label="Rechercher les mises à jour" icon="search-outline" onPress={() => void checkForUpdates()} disabled={busy} testID="update-check" />
-      {desktopBridge && <Button label="Rapport technique (en cas de souci)" icon="bug-outline" variant="ghost" onPress={openUpdateLog} testID="update-log" />}
+      {s.status === 'ready' && <Button label="Redémarrer pour installer" image="redemarrer" variant="primary" onPress={installUpdate} testID="update-install" />}
+      {s.status === 'available' && <Button label="Télécharger la nouvelle version" image="maj-telecharger" variant="primary" onPress={installUpdate} testID="update-install" />}
+      <Button label="Rechercher les mises à jour" image="maj-rechercher" onPress={() => void checkForUpdates()} disabled={busy} testID="update-check" />
+      {desktopBridge && <Button label="Rapport technique (en cas de souci)" image="rapport" variant="ghost" onPress={openUpdateLog} testID="update-log" />}
     </Section>
   );
 }
@@ -165,7 +167,7 @@ function SyncSection() {
         {!!s.error && <Text style={styles.error}>{s.error}</Text>}
         <Button
           label={s.signingIn ? 'Connexion en cours…' : 'Se connecter avec Google'}
-          icon="logo-google"
+          leading={<GoogleG />}
           variant="primary"
           onPress={() => void syncManager.signIn()}
           testID="google-sign-in"
@@ -183,10 +185,10 @@ function SyncSection() {
       </Text>
       <Text style={styles.p}>{s.syncing ? 'Synchronisation en cours…' : `Dernière synchronisation : ${last}`}</Text>
       {!!s.error && <Text style={styles.error}>{s.error}</Text>}
-      <Button label="Synchroniser maintenant" icon="sync-outline" onPress={() => void syncManager.syncNow()} testID="sync-now" />
+      <Button label="Synchroniser maintenant" image="synchroniser" onPress={() => void syncManager.syncNow()} testID="sync-now" />
       <Button
         label="Se déconnecter"
-        icon="log-out-outline"
+        image="deconnexion"
         onPress={async () => {
           const ok = await confirmAsync(
             'Se déconnecter de Google ?',
@@ -222,3 +224,17 @@ const styles = StyleSheet.create({
   content: { padding: 16, gap: 16, maxWidth: 720, width: '100%', alignSelf: 'center' },
   p: { color: colors.muted, fontSize: 16, lineHeight: 23, fontFamily: fonts.body },
 });
+
+/** Logo « G » officiel de Google (bouton de connexion, comme le demandent les règles de Google). */
+function GoogleG() {
+  return (
+    <View style={{ width: 24, height: 24, borderRadius: 12, backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center' }}>
+      <Svg width={16} height={16} viewBox="0 0 48 48">
+        <Path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+        <Path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+        <Path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+        <Path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+      </Svg>
+    </View>
+  );
+}

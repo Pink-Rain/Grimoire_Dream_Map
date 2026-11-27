@@ -78,6 +78,47 @@ const ICONS = {
   'vue-pc': require('../../assets/ui/vue-pc.png'),
   'reglages-sans-fond': require('../../assets/ui/reglages-sans-fond.png'),
   'lien-b': require('../../assets/ui/lien-b.png'),
+  // zip n° 5
+  'ajouter': require('../../assets/ui/ajouter.png'),
+  'ajouter-petit': require('../../assets/ui/ajouter-petit.png'),
+  'retirer': require('../../assets/ui/retirer.png'),
+  'coche': require('../../assets/ui/coche.png'),
+  'completer': require('../../assets/ui/completer.png'),
+  'modifier': require('../../assets/ui/modifier.png'),
+  'voir-plus': require('../../assets/ui/voir-plus.png'),
+  'statistiques': require('../../assets/ui/statistiques.png'),
+  'epingle': require('../../assets/ui/epingle.png'),
+  'devant': require('../../assets/ui/devant.png'),
+  'derriere': require('../../assets/ui/derriere.png'),
+  'glisser': require('../../assets/ui/glisser.png'),
+  'lecture': require('../../assets/ui/lecture.png'),
+  'pause': require('../../assets/ui/pause.png'),
+  'stop': require('../../assets/ui/stop.png'),
+  'ouvrir-lien': require('../../assets/ui/ouvrir-lien.png'),
+  'partager': require('../../assets/ui/partager.png'),
+  'telecharger': require('../../assets/ui/telecharger.png'),
+  'video-lien': require('../../assets/ui/video-lien.png'),
+  'image-vide': require('../../assets/ui/image-vide.png'),
+  'qualite-1': require('../../assets/ui/qualite-1.png'),
+  'qualite-2': require('../../assets/ui/qualite-2.png'),
+  'qualite-3': require('../../assets/ui/qualite-3.png'),
+  'qualite-4': require('../../assets/ui/qualite-4.png'),
+  'qualite-5': require('../../assets/ui/qualite-5.png'),
+  'energie-1': require('../../assets/ui/energie-1.png'),
+  'energie-2': require('../../assets/ui/energie-2.png'),
+  'energie-3': require('../../assets/ui/energie-3.png'),
+  'energie-4': require('../../assets/ui/energie-4.png'),
+  'energie-5': require('../../assets/ui/energie-5.png'),
+  'exporter': require('../../assets/ui/exporter.png'),
+  'importer': require('../../assets/ui/importer.png'),
+  'connexion': require('../../assets/ui/connexion.png'),
+  'deconnexion': require('../../assets/ui/deconnexion.png'),
+  'synchroniser': require('../../assets/ui/synchroniser.png'),
+  'maj-rechercher': require('../../assets/ui/maj-rechercher.png'),
+  'maj-telecharger': require('../../assets/ui/maj-telecharger.png'),
+  'redemarrer': require('../../assets/ui/redemarrer.png'),
+  'rapport': require('../../assets/ui/rapport.png'),
+  'nouvelle-version': require('../../assets/ui/nouvelle-version.png'),
   'lucidite-b-0': require('../../assets/ui/lucidite-b-0.png'),
   'lucidite-b-1': require('../../assets/ui/lucidite-b-1.png'),
   'lucidite-b-2': require('../../assets/ui/lucidite-b-2.png'),
@@ -89,11 +130,19 @@ const ICONS = {
 export type AppIconName = keyof typeof ICONS;
 
 
-export function AppIcon(props: { name: AppIconName; size: number; style?: StyleProp<ImageStyle>; dim?: boolean }) {
+/**
+ * Icônes « au trait » cuivré : sur un bouton abricot on les teinte à l'encre sombre (sinon elles disparaissent).
+ * Les icônes en couleur (émail, papier…) gardent leurs couleurs.
+ */
+export const LINE_ICONS: ReadonlySet<AppIconName> = new Set<AppIconName>([
+  'ajouter-petit', 'coche', 'voir-plus', 'lecture', 'pause', 'stop', 'ouvrir-lien', 'partager', 'telecharger', 'synchroniser', 'redemarrer', 'retour', 'fermer',
+]);
+
+export function AppIcon(props: { name: AppIconName; size: number; style?: StyleProp<ImageStyle>; dim?: boolean; tint?: string }) {
   return (
     <Image
       source={ICONS[props.name]}
-      style={[{ width: props.size, height: props.size, opacity: props.dim ? 0.55 : 1 }, props.style]}
+      style={[{ width: props.size, height: props.size, opacity: props.dim ? 0.55 : 1 }, props.tint ? { tintColor: props.tint } : null, props.style]}
       resizeMode="contain"
       accessibilityIgnoresInvertColors
     />

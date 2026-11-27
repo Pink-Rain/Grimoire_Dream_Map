@@ -132,6 +132,17 @@ export function defaultSleepDate(now: Date = new Date()): string {
   return now.getHours() < 14 ? shiftDate(today, -1) : today;
 }
 
+/**
+ * Date du coucher quand on n'a pas choisi la date soi-même : le matin, l'app propose « hier » ; mais si on
+ * s'est couché après minuit (avant 9 h), le coucher a eu lieu aujourd'hui.
+ */
+export function autoSleepDate(bedTime: string | null | undefined, now: Date = new Date()): string {
+  const proposed = defaultSleepDate(now);
+  const bed = parseTime(bedTime ?? null);
+  if (now.getHours() < 14 && bed !== null && bed < 9 * 60) return shiftDate(proposed, 1);
+  return proposed;
+}
+
 /** Libellé court d'un sommeil : « Nuit du 26 au 27 nov. » ou « Sieste du 27 nov. ». */
 export function sleepTitle(s: Pick<Sleep, 'date' | 'bedTime' | 'asleepTime' | 'wakeTime' | 'upTime' | 'interruptions'>): string {
   const sum = summarizeSleep(s);

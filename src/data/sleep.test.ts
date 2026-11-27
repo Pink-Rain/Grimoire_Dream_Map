@@ -105,7 +105,18 @@ describe('tracker de sommeil', () => {
   });
 });
 
-import { addMinutes, completeInterruption } from './sleep';
+import { addMinutes, autoSleepDate, completeInterruption } from './sleep';
+describe('date du coucher proposée', () => {
+  const morning = new Date(2026, 10, 27, 8, 0);
+  it('le matin : hier, sauf si on s’est couché après minuit', () => {
+    expect(autoSleepDate(null, morning)).toBe('2026-11-26');
+    expect(autoSleepDate('23:40', morning)).toBe('2026-11-26');
+    expect(autoSleepDate('00:30', morning)).toBe('2026-11-27');
+  });
+  it('l’après-midi : aujourd’hui (sieste ou nuit à venir)', () => {
+    expect(autoSleepDate('00:30', new Date(2026, 10, 27, 15, 0))).toBe('2026-11-27');
+  });
+});
 describe('réveils pendant la nuit', () => {
   it('remplit l’autre heure 5 minutes plus tard ou plus tôt', () => {
     expect(completeInterruption({ from: '03:00', to: '' }, 'from')).toEqual({ from: '03:00', to: '03:05' });
