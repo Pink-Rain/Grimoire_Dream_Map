@@ -129,5 +129,9 @@ Expo change à chaque version. Avant d'utiliser une API Expo/React Native, véri
 - [ ] Synchro Google Drive (appDataFolder) : PC (.exe → client OAuth « Application de bureau », redirection
   locale 127.0.0.1 + PKCE, ouverture du navigateur système) ; web (Google Identity Services, client « Web ») ;
   Android (client « Android » + empreinte SHA-1 de la clé de signature).
+- [ ] Google Cloud : projet « Grimoire Dream Map » créé, Drive API activée, écran de consentement en mode **Test**
+  (la personne s'est ajoutée comme testeur). « Publier l'application » exige dans Branding une page d'accueil +
+  une politique de confidentialité → à publier sur GitHub Pages, puis passer en production.
+- [ ] Le dépôt doit être renommé `Grimoire_Dream_Map` par la personne (Settings → Repository name).
 - [ ] Version web hébergée (GitHub Pages, gratuit car dépôt public) + installable (PWA).
 - [ ] Publication Play Store (AAB signé, politique de confidentialité).

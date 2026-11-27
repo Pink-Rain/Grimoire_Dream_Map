@@ -58,13 +58,16 @@ avec **son** compte et ses rêves iront dans **son** Drive.
 > C'est aussi ce qui évite la longue vérification de Google.
 > Chaque app de la suite Grimoire aura son propre projet Google Cloud, donc son propre dossier caché.
 
-### Étape 5 : passer l'app « en production »
+### Étape 5 : t'ajouter comme « utilisateur test »
+On laisse l'app en mode **« Test »** pendant qu'on construit la synchro. (Le bouton « Publier l'application »
+est grisé tant que la page Branding n'a pas de page d'accueil ni de politique de confidentialité : c'est normal,
+voir « Plus tard » ci-dessous.)
 1. Menu de gauche : **« Audience »**.
-2. Sous « État de publication », clique **« Publier l'application »** et confirme.
-   - Sans ça, Google déconnecte tout le monde au bout de 7 jours et seules des personnes ajoutées à la main
-     peuvent se connecter.
-   - Comme l'app ne demande que le dossier caché, Google ne devrait pas exiger de vérification.
-     S'il affiche « Vérification requise », envoie-moi une capture.
+2. Descends jusqu'à **« Utilisateurs tests »** → **« + Add users »**.
+3. Tape **ton adresse Gmail** (celle avec laquelle tu utiliseras l'app) → **« Enregistrer »**.
+
+En mode Test : seules les personnes ajoutées ici (100 max) peuvent se connecter, et il faut se reconnecter
+à Google environ une fois par semaine.
 
 ### Étape 6 : créer l'identifiant de l'app PC (.exe)
 1. Menu de gauche : **« Clients »**, puis **« Créer un client »**.
@@ -82,6 +85,10 @@ avec **son** compte et ses rêves iront dans **son** Drive.
 > se connecte elle-même. Il sera intégré au .exe. Ne m'envoie en revanche **jamais** ton mot de passe Google.
 
 ### Plus tard dans Google Cloud (je te dirai quand)
+- **Passer « en production »** : je mets en ligne (gratuitement, GitHub Pages) une page d'accueil et une
+  politique de confidentialité. Tu colles leurs adresses dans **Branding** (« Page d'accueil de l'application »,
+  « Lien vers les règles de confidentialité », et `pink-rain.github.io` dans « Domaines autorisés »), sans logo.
+  Puis **Audience → « Publier l'application »**. Fini la reconnexion hebdomadaire et la liste de testeurs.
 - **Client « Web »** (version navigateur) : il faut d'abord que la version web soit en ligne (je la mets
   gratuitement sur GitHub Pages), car Google demande son adresse.
 - **Client « Android »** : il faut l'« empreinte SHA-1 » de la clé de signature de l'app, qu'on récupère
