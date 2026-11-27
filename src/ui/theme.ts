@@ -205,20 +205,20 @@ export const SLEEP_PLACES = ['Chez moi', 'Chez quelqu’un', 'En voyage', 'Hôte
 
 /** Sommeil : qualité 1 → 5. */
 export const SLEEP_QUALITY = [
-  { value: 1, emoji: '😫', label: 'Très mauvaise' },
-  { value: 2, emoji: '😕', label: 'Mauvaise' },
-  { value: 3, emoji: '😐', label: 'Moyenne' },
-  { value: 4, emoji: '😌', label: 'Bonne' },
-  { value: 5, emoji: '🤩', label: 'Excellente' },
+  { value: 1, emoji: '😫', label: 'Très mauvaise', image: 'qualite-1' },
+  { value: 2, emoji: '😕', label: 'Mauvaise', image: 'qualite-2' },
+  { value: 3, emoji: '😐', label: 'Moyenne', image: 'qualite-3' },
+  { value: 4, emoji: '😌', label: 'Bonne', image: 'qualite-4' },
+  { value: 5, emoji: '🤩', label: 'Excellente', image: 'qualite-5' },
 ] as const;
 
 /** Sommeil : énergie au réveil 1 → 5. */
 export const WAKE_ENERGY = [
-  { value: 1, emoji: '🪫', label: 'À plat' },
-  { value: 2, emoji: '🥱', label: 'Fatigue' },
-  { value: 3, emoji: '😐', label: 'Moyenne' },
-  { value: 4, emoji: '🙂', label: 'En forme' },
-  { value: 5, emoji: '⚡', label: 'Pleine forme' },
+  { value: 1, emoji: '🪫', label: 'À plat', image: 'energie-1' },
+  { value: 2, emoji: '🥱', label: 'Fatigue', image: 'energie-2' },
+  { value: 3, emoji: '😐', label: 'Moyenne', image: 'energie-3' },
+  { value: 4, emoji: '🙂', label: 'En forme', image: 'energie-4' },
+  { value: 5, emoji: '⚡', label: 'Pleine forme', image: 'energie-5' },
 ] as const;
 
 /** Moment du jour dans le rêve. */

@@ -1,3 +1,4 @@
+import { AppIcon } from './AppIcon';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { ActivityIndicator, KeyboardAvoidingView, Modal, Platform, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
@@ -254,7 +255,7 @@ export function PlaceEditor(props: {
                 <Label>OÙ EST-CE, POUR DE VRAI ?</Label>
                 {geo ? (
                   <View style={styles.chosen}>
-                    <Ionicons name="location" size={22} color={colors.ochre} />
+                    <AppIcon name="epingle" size={26} />
                     <View style={{ flex: 1 }}>
                       <Txt weight="semi">{geo.name}</Txt>
                       {!!geo.address && (
@@ -282,7 +283,7 @@ export function PlaceEditor(props: {
                         testID="geo-result"
                         style={({ hovered, pressed }: PressState) => [styles.result, (hovered || pressed) && { backgroundColor: colors.surfaceHover }]}
                       >
-                        <Ionicons name="location-outline" size={20} color={colors.accent} />
+                        <AppIcon name="epingle" size={24} />
                         <View style={{ flex: 1 }}>
                           <Txt>{r.name}</Txt>
                           {!!r.address && (
@@ -374,7 +375,7 @@ export function PlaceEditor(props: {
                     >
                       <PlaceIcon name={icon} size={44} />
                       <Txt style={{ flex: 1 }}>Choisir un autre dessin</Txt>
-                      <Ionicons name="chevron-forward" size={20} color={colors.faint} />
+                      <AppIcon name="voir-plus" size={20} />
                     </Pressable>
                   )}
                 </View>
@@ -389,7 +390,7 @@ export function PlaceEditor(props: {
             {existing && <Button label="Supprimer" image="supprimer" variant="danger" onPress={remove} testID="place-delete" />}
             <View style={{ flex: 1 }} />
             <Button label="Annuler" variant="ghost" onPress={props.onClose} />
-            <Button label={existing ? 'Enregistrer' : 'Ajouter'} icon="checkmark" variant="primary" onPress={save} disabled={!canSave} testID="place-save" />
+            <Button label={existing ? 'Enregistrer' : 'Ajouter'} image="coche" variant="primary" onPress={save} disabled={!canSave} testID="place-save" />
           </View>
         </KeyboardAvoidingView>
       </View>

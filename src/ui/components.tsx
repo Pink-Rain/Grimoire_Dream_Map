@@ -13,7 +13,7 @@ import {
   type TextStyle,
   type ViewStyle,
 } from 'react-native';
-import { AppIcon, type AppIconName } from './AppIcon';
+import { AppIcon, LINE_ICONS, type AppIconName } from './AppIcon';
 import { colors, fonts, TOUCH } from './theme';
 
 export type IconName = ComponentProps<typeof Ionicons>['name'];
@@ -88,6 +88,8 @@ export function Button(props: {
   icon?: IconName;
   /** Icône dessinée (prioritaire sur `icon`). */
   image?: AppIconName;
+  /** Élément affiché à la place de l'icône (ex. logo Google). */
+  leading?: ReactNode;
   variant?: 'primary' | 'secondary' | 'danger' | 'ghost';
   small?: boolean;
   disabled?: boolean;
@@ -113,8 +115,10 @@ export function Button(props: {
         props.style,
       ]}
     >
-      {props.image ? (
-        <AppIcon name={props.image} size={props.small ? 22 : 26} />
+      {props.leading ? (
+        props.leading
+      ) : props.image ? (
+        <AppIcon name={props.image} size={props.small ? 22 : 26} tint={variant === 'primary' && LINE_ICONS.has(props.image) ? colors.accentText : undefined} />
       ) : (
         props.icon && <Ionicons name={props.icon} size={props.small ? 17 : 20} color={fg} />
       )}
@@ -163,7 +167,7 @@ export function Chip(props: {
       </Text>
       {props.onRemove && (
         <Pressable onPress={props.onRemove} hitSlop={10} accessibilityLabel={`Retirer ${props.label}`} accessibilityRole="button">
-          <Ionicons name="close" size={16} color={props.selected ? colors.accentText : colors.faint} />
+          <AppIcon name="retirer" size={18} />
         </Pressable>
       )}
     </>

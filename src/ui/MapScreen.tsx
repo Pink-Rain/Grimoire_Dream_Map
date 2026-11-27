@@ -1,3 +1,4 @@
+import { AppIcon } from './AppIcon';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useEffect, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
@@ -79,13 +80,13 @@ export function MapScreen(props: {
         )}
         {place.kind === 'place' && !place.real && (
           <Txt faint size={14}>
-            <Ionicons name="hand-left-outline" size={13} color={colors.faint} /> Fais-le glisser sur la carte pour le déplacer.
+            <AppIcon name="glisser" size={18} style={{ marginBottom: -4 }} /> Fais-le glisser sur la carte pour le déplacer.
           </Txt>
         )}
         <View style={styles.actions}>
-          <Button small label="Modifier" icon="create-outline" onPress={() => setEditing(place.id)} testID="place-edit" />
-          <Button small label="Devant" icon="arrow-up-outline" onPress={() => relayer(1)} testID="place-front" />
-          <Button small label="Derrière" icon="arrow-down-outline" onPress={() => relayer(-1)} testID="place-back" />
+          <Button small label="Modifier" image="modifier" onPress={() => setEditing(place.id)} testID="place-edit" />
+          <Button small label="Devant" image="devant" onPress={() => relayer(1)} testID="place-front" />
+          <Button small label="Derrière" image="derriere" onPress={() => relayer(-1)} testID="place-back" />
           <Button small label="Centrer" image="recentrer-fin" onPress={() => setLocalFocus({ id: place.id, n: Date.now() })} />
         </View>
         <Txt weight="semi">{dreamsHere.length ? `Rêvé ${dreamsHere.length} fois ici` : 'Dans aucun rêve pour l’instant'}</Txt>
@@ -103,7 +104,7 @@ export function MapScreen(props: {
             <Txt numberOfLines={1} style={{ flex: 1 }}>
               {d.title.trim() || 'Sans titre'}
             </Txt>
-            <Ionicons name="chevron-forward" size={18} color={colors.faint} />
+            <AppIcon name="voir-plus" size={18} />
           </Pressable>
         ))}
       </ScrollView>

@@ -4,7 +4,8 @@ import { appStore, useStoreVersion } from '../data/appStore';
 import { formatDuration, shiftDate, summarizeSleep, trackerSegments, type TrackerSegment } from '../data/sleep';
 import { localDateString } from '../data/records';
 import type { Sleep } from '../data/types';
-import { AppIcon } from './AppIcon';
+import { AppIcon, type AppIconName } from './AppIcon';
+import { LegendSample, SleepRibbonRow } from './SleepRibbon';
 import { Button, IconButton, Segmented, Title, Txt } from './components';
 import { colors, fonts, SLEEP_QUALITY, WAKE_ENERGY } from './theme';
 
@@ -109,8 +110,8 @@ export function SleepTracker(props: { phone: boolean; bottomInset: number; onOpe
         </View>
         <View style={styles.stats}>
           <Stat label="Sommeil moyen" value={formatDuration(data.avgSleep)} testID="tracker-avg" />
-          <Stat label="Qualité" value={q ? `${q.emoji} ${q.label}` : '—'} />
-          <Stat label="Énergie au réveil" value={e ? `${e.emoji} ${e.label}` : '—'} />
+          <Stat label="Qualité" value={q ? q.label : '—'} image={q?.image} />
+          <Stat label="Énergie au réveil" value={e ? e.label : '—'} image={e?.image} />
           <Stat label="Rêves notés" value={`${data.dreamCount} / ${data.nightCount} nuit${data.nightCount > 1 ? 's' : ''}`} />
         </View>
       </View>
@@ -140,20 +141,29 @@ export function SleepTracker(props: { phone: boolean; bottomInset: number; onOpe
                       accessibilityLabel={night ? `Ouvrir le sommeil du ${weekdayLabel(date)}` : `Noter le sommeil du ${weekdayLabel(date)}`}
                       style={{ width: gridW, height: ROW_H }}
                     >
-                      {/* Grille de points, comme une page de bullet journal */}
-                      {Array.from({ length: 25 }, (_, h) => (
-                        <View key={h} style={[styles.dot, { left: x(h * 60) - 1.5 }, h % 3 === 0 && styles.dotStrong]} />
-                      ))}
-                      {r.segs.map((g, i) => (
-                        <Pressable
-                          key={i}
-                          onPress={() => props.onOpenSleep(g.id)}
-                          accessibilityRole="button"
-                          accessibilityLabel="Ouvrir ce sommeil"
-                          style={[styles.seg, styles[g.kind], { left: x(g.start), width: Math.max(2, x(g.end) - x(g.start)) }]}
-                          testID={`seg-${g.kind}`}
-                        />
-                      ))}
+                      <SleepRibbonRow width={gridW} height={ROW_H} segs={r.segs} id={`rb-${date}`} />
+                      {/* Une zone à toucher (invisible) par sommeil, du coucher au lever */}
+                      {r.sleeps.map((sl) => {
+                        const mine = r.segs.filter((g) => g.id === sl.id);
+                        if (!mine.length) return null;
+                        const a = Math.min(...mine.map((g) => g.start));
+                        const b = Math.max(...mine.map((g) => g.end));
+                        return (
+                          <Pressable
+                            key={sl.id}
+                            onPress={() => props.onOpenSleep(sl.id)}
+                            accessibilityRole="button"
+                            accessibilityLabel={`Ouvrir ce sommeil (${formatDuration(summarizeSleep(sl).sleep)})`}
+                            style={[styles.hit, { left: x(a) - 4, width: Math.max(12, x(b) - x(a) + 8) }]}
+                            testID="seg-sleep"
+                          />
+                        );
+                      })}
+                      {r.segs
+                        .filter((g) => g.kind === 'awake')
+                        .map((g, i) => (
+                          <View key={i} pointerEvents="none" style={[styles.hit, { left: x(g.start), width: 1, opacity: 0 }]} testID="seg-awake" />
+                        ))}
                     </Pressable>
                     <View style={[styles.tail, { width: tailW }]}>
                       {moons > 0 && (
@@ -169,9 +179,8 @@ export function SleepTracker(props: { phone: boolean; bottomInset: number; onOpe
               })}
             </ScrollView>
             <View style={styles.legend}>
-              <Legend style={styles.sleep} label="Sommeil" />
-              <Legend style={styles.bed} label="Au lit éveillé" />
-              <Legend style={styles.awake} label="Réveil" />
+              <Legend kind="sleep" label="Sommeil" />
+              <Legend kind="awake" label="Éveillé au lit" />
               <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
                 <AppIcon name="lune-crepuscule" size={14} />
                 <Txt faint size={13}>
@@ -186,23 +195,26 @@ export function SleepTracker(props: { phone: boolean; bottomInset: number; onOpe
   );
 }
 
-function Stat(props: { label: string; value: string; testID?: string }) {
+function Stat(props: { label: string; value: string; image?: AppIconName; testID?: string }) {
   return (
     <View style={styles.stat}>
       <Txt faint size={12}>
         {props.label}
       </Txt>
-      <Text style={styles.statValue} numberOfLines={1} testID={props.testID}>
-        {props.value}
-      </Text>
+      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+        {props.image && <AppIcon name={props.image} size={24} />}
+        <Text style={styles.statValue} numberOfLines={1} testID={props.testID}>
+          {props.value}
+        </Text>
+      </View>
     </View>
   );
 }
 
-function Legend(props: { style: object; label: string }) {
+function Legend(props: { kind: 'sleep' | 'awake'; label: string }) {
   return (
-    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
-      <View style={[{ width: 18, borderRadius: 4 }, props.style, { position: 'relative', top: 0 }]} />
+    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+      <LegendSample kind={props.kind} />
       <Txt faint size={13}>
         {props.label}
       </Txt>
@@ -244,13 +256,7 @@ const styles = StyleSheet.create({
   hour: { position: 'absolute', width: 28, textAlign: 'center', color: colors.faint, fontFamily: fonts.body, fontSize: 12 },
   row: { flexDirection: 'row', alignItems: 'center', height: ROW_H },
   dayLabel: { color: colors.muted, fontFamily: fonts.body, fontSize: 13 },
-  dot: { position: 'absolute', top: ROW_H / 2 - 1.5, width: 3, height: 3, borderRadius: 1.5, backgroundColor: '#3a335f' },
-  dotStrong: { backgroundColor: '#5c5088' },
-  seg: { position: 'absolute' },
-  sleep: { top: 7, height: 16, borderRadius: 8, backgroundColor: '#6c55c4', borderWidth: 1, borderColor: '#a993ee' },
-  bed: { top: 12, height: 6, borderRadius: 3, backgroundColor: '#8c7a5c' },
-  up: { top: 12, height: 6, borderRadius: 3, backgroundColor: '#8c7a5c' },
-  awake: { top: 9, height: 12, borderRadius: 3, backgroundColor: colors.accent },
+  hit: { position: 'absolute', top: 4, height: ROW_H - 8, borderRadius: 8 },
   tail: { flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', gap: 6, paddingLeft: 6 },
   moons: { flexDirection: 'row', alignItems: 'center', gap: 2 },
   moonCount: { color: colors.ochre, fontFamily: fonts.bodySemi, fontSize: 12 },

@@ -183,7 +183,7 @@ function Main() {
           { value: 'map', label: 'Carte', image: 'carte', imageOn: 'carte-encre' },
           { value: 'journal', label: 'Journal', image: 'journal', imageOn: 'journal-encre' },
           { value: 'sleep', label: 'Sommeil', image: 'sommeil' },
-          { value: 'stats', label: 'Statistiques', icon: 'stats-chart-outline' },
+          { value: 'stats', label: 'Statistiques', image: 'statistiques' },
         ]}
         testID="tab"
       />
@@ -245,7 +245,7 @@ function Main() {
             <Title size={18} style={{ flex: 1 }}>
               {overlay.kind === 'sleep' ? 'Sommeil' : 'Rêve'}
             </Title>
-            <Button small variant="ghost" label="Fermer" icon="close" onPress={close} testID="close-panel" />
+            <Button small variant="ghost" label="Fermer" image="fermer" onPress={close} testID="close-panel" />
           </View>
         )}
         {editor}
@@ -301,13 +301,11 @@ function BottomBar(props: { tab: Tab; onTab: (t: Tab) => void; onAdd: () => void
       {item('map', 'Carte', 'carte')}
       {item('journal', 'Journal', 'journal')}
       <Pressable onPress={props.onAdd} accessibilityRole="button" accessibilityLabel="Ajouter" style={styles.fabWrap} testID="add">
-        <View style={[styles.fab, styles.fabQuick]}>
-          <AppIcon name="nouveau-reve-b-encre" size={34} />
-        </View>
+        <AppIcon name="ajouter" size={56} />
         <Text style={styles.tabLabel}>Ajouter</Text>
       </Pressable>
       {item('sleep', 'Sommeil', 'sommeil')}
-      {item('stats', 'Statistiques', undefined, 'stats-chart-outline')}
+      {item('stats', 'Statistiques', 'statistiques')}
     </View>
   );
 }

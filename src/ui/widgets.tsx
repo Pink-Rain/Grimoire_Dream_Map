@@ -311,7 +311,7 @@ export function ColorPicker(props: { value: string[]; onChange: (v: string[]) =>
               <WatercolorDot color={c.hex} size={34} seed={i + 3} />
               {on && (
                 <View style={styles.colorCheck}>
-                  <Ionicons name="checkmark" size={14} color={colors.accentText} />
+                  <AppIcon name="coche" size={16} tint={colors.accentText} />
                 </View>
               )}
             </Pressable>
@@ -393,7 +393,7 @@ export function WordPicker(props: {
           {q && !has(draft) && !props.suggestions.some((s) => s.toLowerCase() === q) && (
             <Chip
               label={`Ajouter « ${draft.trim()} »`}
-              icon="add"
+              image="ajouter-petit"
               onPress={() => {
                 add(draft);
                 setDraft('');

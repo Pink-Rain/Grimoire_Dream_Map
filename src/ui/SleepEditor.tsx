@@ -2,7 +2,7 @@ import { randomUUID } from 'expo-crypto';
 import { useEffect, useRef, useState } from 'react';
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { appStore } from '../data/appStore';
-import { completeInterruption, defaultSleepDate, formatDuration, sleepEndDate, summarizeSleep, type SleepSummary } from '../data/sleep';
+import { completeInterruption, defaultSleepDate, formatDuration, sleepEndDate, summarizeSleep, type SleepSummary, autoSleepDate } from '../data/sleep';
 import { useStoreVersion } from '../data/appStore';
 import type { Sleep } from '../data/types';
 import { confirmAsync } from '../platform/dialogs';
@@ -134,6 +134,12 @@ export function SleepEditor(props: {
     wakeEmotions: existing?.wakeEmotions ?? [],
   }));
   const exists = useRef(!!existing);
+  // Tant qu'on n'a pas choisi la date soi-même, elle suit l'heure du coucher (après minuit → aujourd'hui).
+  const autoDate = useRef(!existing && !props.initialDate);
+  const setBed = (k: 'bedTime' | 'asleepTime', v: string | null) => {
+    const next = { ...d, [k]: v };
+    commit(autoDate.current ? { [k]: v, date: autoSleepDate(next.bedTime ?? next.asleepTime) } : { [k]: v });
+  };
 
   function commit(fields: Partial<Draft>) {
     const next = { ...d, ...fields };
@@ -192,17 +198,17 @@ export function SleepEditor(props: {
             </Txt>
           </View>
           <View style={styles.dateRow}>
-            <IconButton image="chevron-gauche" size={16} label="Jour précédent" onPress={() => commit({ date: addDays(d.date, -1) })} />
+            <IconButton image="chevron-gauche" size={16} label="Jour précédent" onPress={() => ((autoDate.current = false), commit({ date: addDays(d.date, -1) }))} />
             <Txt muted size={15} style={{ textAlign: 'center', flexShrink: 1 }} testID="sleep-date">
               Coucher le {formatLongDate(d.date)}
             </Txt>
-            <IconButton image="chevron-droit" size={16} label="Jour suivant" onPress={() => commit({ date: addDays(d.date, 1) })} />
+            <IconButton image="chevron-droit" size={16} label="Jour suivant" onPress={() => ((autoDate.current = false), commit({ date: addDays(d.date, 1) }))} />
           </View>
         </View>
 
         <Section title="Heures">
-          <TimeField label="Coucher" emoji="🛏️" image="coucher" value={d.bedTime} onChange={(v) => commit({ bedTime: v })} testID="bed-time" />
-          <TimeField label="Endormissement" emoji="😴" image="endormissement" value={d.asleepTime} onChange={(v) => commit({ asleepTime: v })} testID="asleep-time" />
+          <TimeField label="Coucher" emoji="🛏️" image="coucher" value={d.bedTime} onChange={(v) => setBed('bedTime', v)} testID="bed-time" />
+          <TimeField label="Endormissement" emoji="😴" image="endormissement" value={d.asleepTime} onChange={(v) => setBed('asleepTime', v)} testID="asleep-time" />
           <TimeField label="Réveil" emoji="⏰" image="reveil" value={d.wakeTime} onChange={(v) => commit({ wakeTime: v })} testID="wake-time" />
           <TimeField label="Lever" emoji="🚶" image="lever" value={d.upTime} onChange={(v) => commit({ upTime: v })} testID="up-time" />
         </Section>
@@ -223,10 +229,10 @@ export function SleepEditor(props: {
               <Txt muted>à</Txt>
               <TimeField compact label={`Réveil ${n + 1}, fin`} emoji="" value={i.to || null} onChange={(v) => setInt(i.id, 'to', v)} testID={`int-${n}-to`} />
               <View style={{ flex: 1 }} />
-              <IconButton icon="close" size={20} color={colors.faint} label={`Retirer le réveil ${n + 1}`} onPress={() => commit({ interruptions: d.interruptions.filter((x) => x.id !== i.id) })} />
+              <IconButton image="retirer" size={18} label={`Retirer le réveil ${n + 1}`} onPress={() => commit({ interruptions: d.interruptions.filter((x) => x.id !== i.id) })} />
             </View>
           ))}
-          <Button small label="Ajouter un réveil" icon="add" onPress={() => commit({ interruptions: [...d.interruptions, { id: randomUUID(), from: '', to: '' }] })} testID="add-interruption" />
+          <Button small label="Ajouter un réveil" image="ajouter-petit" onPress={() => commit({ interruptions: [...d.interruptions, { id: randomUUID(), from: '', to: '' }] })} testID="add-interruption" />
         </Section>
 
         <Section title="Ressenti">

@@ -98,7 +98,7 @@ function PlaceRow(props: { place: Place; onEdit: () => void; onRemove: () => voi
         </View>
       </Pressable>
       {props.onShow && <IconButton icon="map-outline" label={`Voir ${p.name} sur la carte`} color={colors.faint} onPress={props.onShow} />}
-      <IconButton icon="close" label={`Retirer ${p.name} du rêve`} color={colors.faint} onPress={props.onRemove} />
+      <IconButton image="retirer" size={18} label={`Retirer ${p.name} du rêve`} onPress={props.onRemove} />
     </View>
   );
 }

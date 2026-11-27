@@ -166,7 +166,7 @@ export function DreamEditor(props: {
               style={{ minHeight: 110 }}
               testID="dream-text"
             />
-            <Button label="Compléter ce rêve" icon="book-outline" variant="primary" onPress={() => commit({ kind: 'full' })} testID="make-full" />
+            <Button label="Compléter ce rêve" image="completer" variant="primary" onPress={() => commit({ kind: 'full' })} testID="make-full" />
           </>
         ) : (
           <>
@@ -247,7 +247,7 @@ function SleepLink(props: { sleepId: string | null; dreamDate: string; onChange:
             </Txt>
           )}
         </Pressable>
-        <IconButton icon="close" size={18} color={colors.faint} label="Détacher ce rêve de ce sommeil" onPress={() => props.onChange(null)} />
+        <IconButton image="retirer" size={16} label="Détacher ce rêve de ce sommeil" onPress={() => props.onChange(null)} />
       </View>
     );
   }

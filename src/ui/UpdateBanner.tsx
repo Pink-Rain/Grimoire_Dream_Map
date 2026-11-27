@@ -1,3 +1,4 @@
+import { AppIcon } from './AppIcon';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
@@ -32,12 +33,12 @@ export function UpdateBanner() {
 
   return (
     <View style={styles.bar} testID="update-banner">
-      <Ionicons name="sparkles" size={18} color={colors.ochre} />
+      <AppIcon name="nouvelle-version" size={24} />
       <Txt size={15} style={{ flex: 1 }}>
         {text}
       </Txt>
       {action && <Button small variant="primary" label={action.label} onPress={action.onPress} testID="update-action" />}
-      {s.status !== 'installing' && <IconButton icon="close" label="Masquer" size={18} onPress={() => setHidden(key)} />}
+      {s.status !== 'installing' && <IconButton image="fermer" label="Masquer" size={16} onPress={() => setHidden(key)} />}
     </View>
   );
 }

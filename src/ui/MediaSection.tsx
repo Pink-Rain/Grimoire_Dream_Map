@@ -99,7 +99,7 @@ export function VoiceRecorder(props: { onRecorded: (item: MediaItem) => void; bi
         testID={rec ? 'record-stop' : 'record-start'}
         style={({ pressed }) => [rec ? [styles.recButton, props.big && styles.recButtonBig, styles.recButtonOn] : null, pressed && { opacity: 0.85 }]}
       >
-        {rec ? <Ionicons name="stop" size={props.big ? 36 : 26} color={colors.text} /> : <AppIcon name="micro-bouton" size={props.big ? 84 : 62} />}
+        {rec ? <AppIcon name="stop" size={props.big ? 44 : 32} /> : <AppIcon name="micro-bouton" size={props.big ? 84 : 62} />}
       </Pressable>
       <View style={{ flex: 1, gap: 2 }}>
         <Txt weight="semi">{rec ? 'Enregistrement…' : busy ? 'Enregistrement du son…' : 'Note vocale'}</Txt>
@@ -126,7 +126,7 @@ function AudioRow(props: { item: MediaItem; onRemove: () => void }) {
   return (
     <View style={styles.row} testID="media-audio">
       <IconButton
-        icon={status.playing ? 'pause' : 'play'}
+        image={status.playing ? 'pause' : 'lecture'}
         label={status.playing ? 'Pause' : 'Écouter'}
         color={colors.accent}
         onPress={() => {
@@ -147,14 +147,14 @@ function AudioRow(props: { item: MediaItem; onRemove: () => void }) {
           {missing ? 'Fichier sur un autre appareil' : `${formatDuration(pos)} / ${formatDuration(duration)}`}
         </Txt>
       </View>
-      <IconButton icon="trash-outline" label="Supprimer ce son" color={colors.faint} onPress={props.onRemove} />
+      <IconButton image="supprimer" size={20} label="Supprimer ce son" onPress={props.onRemove} />
     </View>
   );
 }
 
 // ---------------------------------------------------------------- Autres médias
 
-const DRAWN: Partial<Record<MediaType, 'image' | 'musique' | 'video' | 'fichier' | 'lien-b'>> = { image: 'image', music: 'musique', video: 'video', file: 'fichier', link: 'lien-b' };
+const DRAWN: Partial<Record<MediaType, 'image' | 'musique' | 'video' | 'fichier' | 'lien-b' | 'video-lien'>> = { image: 'image', music: 'musique', video: 'video', file: 'fichier', link: 'lien-b', youtube: 'video-lien' };
 
 function MediaTypeIcon({ type }: { type: MediaType }) {
   const drawn = DRAWN[type];
@@ -180,12 +180,12 @@ function ImageThumb(props: { item: MediaItem; onOpen: (uri: string) => void; onR
           <Image source={{ uri }} style={styles.thumb} resizeMode="cover" />
         ) : (
           <View style={[styles.thumb, styles.thumbMissing]}>
-            <Ionicons name="image-outline" size={28} color={colors.faint} />
+            <AppIcon name="image-vide" size={40} />
           </View>
         )}
       </Pressable>
       <Pressable onPress={props.onRemove} style={styles.thumbRemove} accessibilityRole="button" accessibilityLabel={`Retirer ${props.item.name}`} hitSlop={6}>
-        <Ionicons name="close" size={16} color={colors.text} />
+        <AppIcon name="retirer" size={20} />
       </Pressable>
     </View>
   );
@@ -213,9 +213,9 @@ function LinkRow(props: { item: MediaItem; onRemove: () => void }) {
             {props.item.url}
           </Txt>
         </View>
-        <Ionicons name="open-outline" size={18} color={colors.faint} />
+        <AppIcon name="ouvrir-lien" size={22} />
       </Pressable>
-      <IconButton icon="trash-outline" label="Retirer ce lien" color={colors.faint} onPress={props.onRemove} />
+      <IconButton image="retirer" size={18} label="Retirer ce lien" onPress={props.onRemove} />
     </View>
   );
 }
@@ -234,9 +234,9 @@ function FileRow(props: { item: MediaItem; onRemove: () => void }) {
         <Txt numberOfLines={1} style={{ flex: 1 }}>
           {props.item.name}
         </Txt>
-        <Ionicons name={Platform.OS === 'web' ? 'download-outline' : 'share-outline'} size={18} color={colors.faint} />
+        <AppIcon name={Platform.OS === 'web' ? 'telecharger' : 'partager'} size={22} />
       </Pressable>
-      <IconButton icon="trash-outline" label="Retirer ce fichier" color={colors.faint} onPress={props.onRemove} />
+      <IconButton image="retirer" size={18} label="Retirer ce fichier" onPress={props.onRemove} />
     </View>
   );
 }
@@ -321,7 +321,7 @@ export function MediaSection(props: { value: MediaItem[]; onChange: (v: MediaIte
             <View style={styles.linkForm}>
               <Field value={linkUrl} onChangeText={setLinkUrl} placeholder="Adresse (https://…)" autoCapitalize="none" keyboardType="url" testID="link-url" />
               <Field value={linkName} onChangeText={setLinkName} placeholder="Nom (facultatif)" testID="link-name" />
-              <Button label="Ajouter le lien" icon="add" variant="primary" onPress={addLink} disabled={!linkUrl.trim()} testID="link-add" />
+              <Button label="Ajouter le lien" image="ajouter-petit" variant="primary" onPress={addLink} disabled={!linkUrl.trim()} testID="link-add" />
             </View>
           )}
         </>
