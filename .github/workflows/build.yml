@@ -113,6 +113,7 @@ jobs:
       - name: Préparer la page (numéro de version et liens de téléchargement)
         run: |
           cp -r site _site
+          node scripts/build-site.mjs _site
           sed -i "s/__VERSION__/${{ needs.check.outputs.version }}/g; s#__REPO__#${{ github.repository }}#g" _site/*.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

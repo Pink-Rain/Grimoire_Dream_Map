@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import { Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { appStore } from '../data/appStore';
-import { CHANGELOG } from '../data/changelog';
+import { RECENT_CHANGES } from '../data/changelog';
 import { localDateString, parseExportBundle } from '../data/records';
 import { pickTextFile, saveTextFile } from '../platform/backup';
 import { desktop } from '../platform/desktop';
@@ -112,13 +111,11 @@ function UpdatesSection() {
   );
 }
 
-/** Journal des mises à jour : les trois dernières versions, et les précédentes à la demande. */
+/** Journal des mises à jour : les trois dernières versions (l'historique complet est sur la page GitHub). */
 function ChangelogSection() {
-  const [all, setAll] = useState(false);
-  const list = all ? CHANGELOG : CHANGELOG.slice(0, 3);
   return (
     <Section title="Journal des mises à jour">
-      {list.map((e) => (
+      {RECENT_CHANGES.map((e) => (
         <View key={e.version} style={styles.release} testID="changelog-entry">
           <View style={styles.releaseHead}>
             <Text style={styles.releaseVersion}>Version {e.version}</Text>
@@ -136,14 +133,6 @@ function ChangelogSection() {
           ))}
         </View>
       ))}
-      {CHANGELOG.length > 3 && (
-        <Button
-          label={all ? 'Afficher seulement les dernières' : `Voir les ${CHANGELOG.length - 3} versions précédentes`}
-          variant="ghost"
-          onPress={() => setAll((v) => !v)}
-          testID="changelog-more"
-        />
-      )}
     </Section>
   );
 }
