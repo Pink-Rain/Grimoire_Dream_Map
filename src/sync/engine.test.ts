@@ -1,5 +1,5 @@
-import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
+import { hashText } from '../data/records';
 import { DataStore } from '../data/store';
 import { MemoryStorage } from '../data/storage/types';
 import type { DriveApi, RemoteFile } from './drive';
@@ -16,7 +16,7 @@ class FakeDrive implements DriveApi {
     return rest;
   }
   private md5(s: string) {
-    return createHash('md5').update(s).digest('hex');
+    return hashText(s);
   }
   async list() {
     this.ops.list++;

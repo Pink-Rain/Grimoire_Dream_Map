@@ -129,6 +129,10 @@ EXPO_OFFLINE=1 npx expo export -p web --output-dir dist   # version web dans dis
 cd desktop && npm install && npx electron .                # app PC (après l'export web)
 ```
 
+Avant de fusionner dans `main` : refaire les vérifications dans une copie propre (`git ls-files | tar` vers un
+dossier du scratchpad, puis `npm ci`, `npx tsc --noEmit`, `npm test`) — le `node_modules` local peut contenir des
+paquets en trop (ex. `@types/node`) qui cachent des erreurs. Ne pas utiliser de modules `node:` dans `src/`.
+
 Avant d'envoyer une modification de `.github/workflows/*.yml` : `npx -y @action-validator/cli <fichier>`
 (une erreur de syntaxe fait échouer toute la fabrication sans rien lancer).
 
