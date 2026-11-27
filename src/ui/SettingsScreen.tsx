@@ -1,5 +1,7 @@
-import { Platform, ScrollView, StyleSheet, Text } from 'react-native';
+import { useState } from 'react';
+import { Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { appStore } from '../data/appStore';
+import { CHANGELOG } from '../data/changelog';
 import { localDateString, parseExportBundle } from '../data/records';
 import { pickTextFile, saveTextFile } from '../platform/backup';
 import { desktop } from '../platform/desktop';
@@ -63,6 +65,7 @@ export function SettingsScreen(props: { bottomInset: number }) {
       </Section>
       <SyncSection />
       {updatesSupported && <UpdatesSection />}
+      <ChangelogSection />
       <Section title="À propos">
         <Text style={styles.p}>Grimoire - Dream Map — version {APP_VERSION}</Text>
         <Text style={styles.p}>
@@ -104,7 +107,43 @@ function UpdatesSection() {
       {s.status === 'ready' && <Button label="Redémarrer pour installer" icon="refresh" variant="primary" onPress={installUpdate} testID="update-install" />}
       {s.status === 'available' && <Button label="Télécharger la nouvelle version" icon="download-outline" variant="primary" onPress={installUpdate} testID="update-install" />}
       <Button label="Rechercher les mises à jour" icon="search-outline" onPress={() => void checkForUpdates()} disabled={busy} testID="update-check" />
-      {desktopBridge && <Button label="Journal des mises à jour" icon="document-text-outline" variant="ghost" onPress={openUpdateLog} testID="update-log" />}
+      {desktopBridge && <Button label="Rapport technique (en cas de souci)" icon="bug-outline" variant="ghost" onPress={openUpdateLog} testID="update-log" />}
+    </Section>
+  );
+}
+
+/** Journal des mises à jour : les trois dernières versions, et les précédentes à la demande. */
+function ChangelogSection() {
+  const [all, setAll] = useState(false);
+  const list = all ? CHANGELOG : CHANGELOG.slice(0, 3);
+  return (
+    <Section title="Journal des mises à jour">
+      {list.map((e) => (
+        <View key={e.version} style={styles.release} testID="changelog-entry">
+          <View style={styles.releaseHead}>
+            <Text style={styles.releaseVersion}>Version {e.version}</Text>
+            {e.version === CURRENT_VERSION && <Text style={styles.releaseBadge}>installée</Text>}
+            <View style={{ flex: 1 }} />
+            <Text style={styles.releaseDate}>
+              {new Date(e.date + 'T12:00:00').toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
+            </Text>
+          </View>
+          {e.changes.map((c, i) => (
+            <View key={i} style={styles.changeRow}>
+              <Text style={styles.bullet}>✦</Text>
+              <Text style={[styles.p, { flex: 1 }]}>{c}</Text>
+            </View>
+          ))}
+        </View>
+      ))}
+      {CHANGELOG.length > 3 && (
+        <Button
+          label={all ? 'Afficher seulement les dernières' : `Voir les ${CHANGELOG.length - 3} versions précédentes`}
+          variant="ghost"
+          onPress={() => setAll((v) => !v)}
+          testID="changelog-more"
+        />
+      )}
     </Section>
   );
 }
@@ -173,6 +212,22 @@ function SyncSection() {
 }
 
 const styles = StyleSheet.create({
+  release: { gap: 6, paddingBottom: 10, borderBottomWidth: 1, borderBottomColor: colors.borderSoft },
+  releaseHead: { flexDirection: 'row', alignItems: 'center', gap: 8, flexWrap: 'wrap' },
+  releaseVersion: { color: colors.text, fontFamily: fonts.display, fontSize: 19 },
+  releaseBadge: {
+    color: colors.accentText,
+    backgroundColor: colors.accent,
+    fontFamily: fonts.bodySemi,
+    fontSize: 12,
+    paddingHorizontal: 8,
+    paddingVertical: 1,
+    borderRadius: 8,
+    overflow: 'hidden',
+  },
+  releaseDate: { color: colors.faint, fontFamily: fonts.body, fontSize: 14 },
+  changeRow: { flexDirection: 'row', gap: 8, alignItems: 'flex-start' },
+  bullet: { color: colors.ochre, fontSize: 12, lineHeight: 23 },
   error: { color: colors.danger, fontSize: 16, lineHeight: 23, fontFamily: fonts.body },
   content: { padding: 16, gap: 16, maxWidth: 720, width: '100%', alignSelf: 'center' },
   p: { color: colors.muted, fontSize: 16, lineHeight: 23, fontFamily: fonts.body },
