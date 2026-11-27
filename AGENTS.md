@@ -136,6 +136,8 @@ site/                     page de présentation (GitHub Pages) + politique de co
 - **Règle : chaque icône dessinée ne sert QU'À son usage prévu** (voir LISEZMOI de la personne). S'il manque une
   icône, utiliser une icône standard Ionicons (la personne dessinera la vraie) — ne jamais réutiliser une icône
   dessinée pour un autre sens. Les « -encre » vont sur les boutons abricot.
+- Icône de l'app PC (desktop/icon.png) : logo **transparent** (dream-map-logo-512). Les versions à fond indigo
+  (app-icon-*) sont réservées à Android / écrans d'accueil.
 - Usages : carte/journal (+ -encre actifs), micro (note rapide), micro-encre (bouton rond abricot note rapide),
   micro-bouton (enregistreur), lune-crepuscule (nouveau rêve), telephone, reglages, boussole (« voir tous les
   lieux » sur la carte), chevrons (date), fermer, supprimer, eclair(-encre) (note rapide), personne, imaginaire,
