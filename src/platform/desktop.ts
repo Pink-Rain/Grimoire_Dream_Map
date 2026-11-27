@@ -7,8 +7,12 @@ import type { HttpRequest, HttpResponse } from '../sync/drive';
 
 export type DesktopUpdateState =
   | { status: 'idle' }
+  | { status: 'checking' }
+  | { status: 'latest'; version: string; checkedAt: number }
   | { status: 'downloading'; version: string; percent: number }
-  | { status: 'ready'; version: string };
+  | { status: 'ready'; version: string }
+  | { status: 'installing'; version: string }
+  | { status: 'error'; message: string };
 
 export interface DesktopBridge {
   isDesktopApp: true;
@@ -24,6 +28,8 @@ export interface DesktopBridge {
     get(): DesktopUpdateState;
     onChange(cb: (s: DesktopUpdateState) => void): () => void;
     install(): void;
+    check(): Promise<DesktopUpdateState>;
+    openLog(): void;
   };
   /** Connexion Google (synchro). Voir desktop/google.js. */
   google?: {

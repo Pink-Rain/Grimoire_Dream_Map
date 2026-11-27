@@ -28,6 +28,8 @@ contextBridge.exposeInMainWorld('grimoireDesktop', {
       return () => ipcRenderer.removeListener('grimoire:update', h);
     },
     install: () => ipcRenderer.send('grimoire:install-update'),
+    check: () => ipcRenderer.invoke('grimoire:check-update'),
+    openLog: () => ipcRenderer.send('grimoire:open-update-log'),
   },
   google: {
     info: () => ipcRenderer.sendSync('grimoire:google-info'),

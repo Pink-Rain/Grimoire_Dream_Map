@@ -210,8 +210,10 @@ Si l'Electron n'est pas téléchargé : `ELECTRON_GET_USE_PROXY=1 node desktop/n
   - App PC : `electron-updater` (desktop/main.js) lit les Releases GitHub (dernière release non « préversion »,
     donc celles de `main`), télécharge en arrière-plan, bandeau « Redémarrer » (src/ui/UpdateBanner.tsx), sinon
     installation à la fermeture. Il faut publier `latest.yml` et le `.blockmap` avec l'exe (fait par build.yml).
-    Le numéro de version doit augmenter à chaque publication. Disponible à partir de la 0.4.0 (installer celle-ci
-    une fois à la main).
+    Le numéro de version doit augmenter à chaque publication. Fiable à partir de la 0.6.0 (la 0.4.0/0.5.0 avait un
+    conflit : la fenêtre retenait sa fermeture pendant que l'installateur démarrait). Ordre correct : enregistrer
+    (flushRenderer) → allowClose = true → quitAndInstall(true, true). Journal : userData/update.log (bouton dans
+    Réglages › Mises à jour, avec « Rechercher les mises à jour » ; logique partagée dans src/platform/updates.ts).
   - Android hors Play Store : impossible de se mettre à jour en silence ; l'app consulte l'API GitHub
     (`releases/latest`) et propose de télécharger le nouvel APK (Android demande une confirmation).
     Sur le Play Store, les mises à jour seront automatiques.
@@ -236,6 +238,7 @@ Expo change à chaque version. Avant d'utiliser une API Expo/React Native, véri
 - [x] v0.4.0 : mises à jour automatiques (PC) et détection de nouvelle version (Android).
 - [x] v0.5.0 : sélecteurs à emojis (humeur, clarté, atmosphère sur la réglette ; météo, jour/nuit, type, émotions),
   sommeil (3e type d'entrée), journal groupé par jour, logo et icônes de la personne.
+- [x] v0.6.0 : correctif du redémarrage pour mise à jour, journal des mises à jour, bouton « Rechercher ».
 - [ ] Synchro des fichiers médias (notes vocales, images…) dans le Drive.
 - [ ] Statistiques (simples et croisées). Transcription voix → texte (facultative).
 - [ ] Synchro Google Drive (appDataFolder) : PC (.exe → client OAuth « Application de bureau », redirection
