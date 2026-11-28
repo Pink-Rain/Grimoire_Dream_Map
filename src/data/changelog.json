@@ -1,5 +1,17 @@
 [
   {
+    "version": "0.9.0",
+    "date": "2026-11-28",
+    "changes": [
+      "Nouveau journal : recherche, petit calendrier (une marque pour les jours avec un rêve ou une nuit), filtres Tout, Rêves, Notes rapides, Sommeils et Lucides. Sur téléphone, la semaine en haut, qu’on peut déplier en mois.",
+      "Les rêves, notes rapides et nuits s’ouvrent en page de lecture. Sur PC, c’est une double page de grimoire, avec une petite lettrine sur le récit. On tourne les pages avec « Page précédente » et « Page suivante ».",
+      "Sur la page, toucher un détail (humeur, lucidité, météo, étiquettes, couleurs…) ouvre seulement son sélecteur. Le titre et le récit se modifient sur place. « + Ajouter un détail » pour ce qui manque, et « Modifier » pour tout le formulaire.",
+      "Formulaires : un gros bouton « Enregistrer » en bas, et l’heure du dernier enregistrement en haut.",
+      "Mises à jour sans réinstaller : sur PC, l’app se recharge en 2 secondes (à partir de la prochaine version). Sur téléphone, « Mettre à jour » télécharge la nouvelle version dans l’app et ouvre l’installation, sans laisser de fichiers dans les Téléchargements.",
+      "Nouvelles icônes dessinées pour le journal, le formulaire et la page de lecture."
+    ]
+  },
+  {
     "version": "0.8.3",
     "date": "2026-11-28",
     "changes": [

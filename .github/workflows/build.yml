@@ -49,6 +49,9 @@ jobs:
         run: |
           npm ci
           npx electron-builder --win nsis --x64 --publish never "-c.extraMetadata.version=${{ needs.check.outputs.version }}"
+      # Mise à jour légère de l'app PC (sans réinstaller) : web-<version>.gz + web-update.json, à côté de l'installateur
+      # (tous les fichiers dans le même dossier, sinon la publication les range dans des sous-dossiers).
+      - run: node scripts/pack-web.mjs dist desktop/release
       - uses: actions/upload-artifact@v4
         with:
           name: windows
@@ -57,6 +60,8 @@ jobs:
             desktop/release/*.exe
             desktop/release/*.exe.blockmap
             desktop/release/latest.yml
+            desktop/release/web-*.gz
+            desktop/release/web-update.json
 
   android:
     needs: check

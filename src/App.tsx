@@ -15,7 +15,10 @@ import { desktop } from './platform/desktop';
 import { syncManager } from './sync/syncManager';
 import { DreamEditor } from './ui/DreamEditor';
 import { Button, Segmented, Title, Txt } from './ui/components';
-import { DreamList } from './ui/DreamList';
+import { DreamPage } from './ui/DreamPage';
+import { Journal } from './ui/Journal';
+import { neighbour } from './ui/journalState';
+import { SleepPage } from './ui/SleepPage';
 import { MapScreen } from './ui/MapScreen';
 import { SettingsScreen } from './ui/SettingsScreen';
 import { SleepEditor } from './ui/SleepEditor';
@@ -27,9 +30,10 @@ import { UpdateBanner } from './ui/UpdateBanner';
 import { useLayoutMode } from './ui/useLayoutMode';
 
 type Tab = 'map' | 'journal' | 'sleep' | 'stats';
+/** Une entrée s'ouvre en page de lecture (« read ») ; « Modifier » ou un nouvel ajout ouvre le formulaire (« edit »). */
 type Overlay =
-  | { kind: 'dream'; id: string; initialKind?: 'quick' | 'full'; initialSleepId?: string; initialDate?: string }
-  | { kind: 'sleep'; id: string; initialDate?: string }
+  | { kind: 'dream'; id: string; mode: 'read' | 'edit'; initialKind?: 'quick' | 'full'; initialSleepId?: string; initialDate?: string }
+  | { kind: 'sleep'; id: string; mode: 'read' | 'edit'; initialDate?: string }
   | { kind: 'settings' }
   | null;
 
@@ -117,11 +121,25 @@ function Main() {
   const phone = layout.isPhoneLayout;
 
   const close = () => setOverlay(null);
-  const openDream = (id: string) => setOverlay({ kind: 'dream', id });
+  const openDream = (id: string) => setOverlay({ kind: 'dream', id, mode: 'read' });
   const newDream = (initialKind: 'quick' | 'full', sleepId?: string, date?: string) =>
-    setOverlay({ kind: 'dream', id: appStore.newId(), initialKind, initialSleepId: sleepId, initialDate: date });
-  const openSleep = (id: string) => setOverlay({ kind: 'sleep', id });
-  const newSleep = (date?: string) => setOverlay({ kind: 'sleep', id: appStore.newId(), initialDate: date });
+    setOverlay({ kind: 'dream', id: appStore.newId(), mode: 'edit', initialKind, initialSleepId: sleepId, initialDate: date });
+  const openSleep = (id: string) => setOverlay({ kind: 'sleep', id, mode: 'read' });
+  const newSleep = (date?: string) => setOverlay({ kind: 'sleep', id: appStore.newId(), mode: 'edit', initialDate: date });
+  const editEntry = () => setOverlay((o) => (o && o.kind !== 'settings' ? { ...o, mode: 'edit' } : o));
+  /** « Enregistrer » : retour à la page de lecture (ou fermeture si rien n'a été noté). */
+  const doneEditing = () =>
+    setOverlay((o) => {
+      if (!o || o.kind === 'settings') return o;
+      const exists = o.kind === 'dream' ? !!appStore.get('dreams', o.id) : !!appStore.get('sleeps', o.id);
+      return exists ? { kind: o.kind, id: o.id, mode: 'read' } : null;
+    });
+  const turn = (dir: -1 | 1) => {
+    if (!overlay || overlay.kind === 'settings') return undefined;
+    const n = neighbour(overlay.kind, overlay.id, dir);
+    if (!n) return undefined;
+    return () => setOverlay({ kind: n.kind, id: n.id, mode: 'read' });
+  };
   const toggleSettings = () => setOverlay((o) => (o?.kind === 'settings' ? null : { kind: 'settings' }));
   const showOnMap = (placeId: string) => {
     setTab('map');
@@ -138,7 +156,8 @@ function Main() {
         return true;
       }
       if (overlay) {
-        setOverlay(null);
+        if (overlay.kind !== 'settings' && overlay.mode === 'edit') doneEditing();
+        else setOverlay(null);
         return true;
       }
       return false;
@@ -146,29 +165,65 @@ function Main() {
     return () => sub.remove();
   }, [overlay, addMenu]);
 
+  // Sur PC, dans le journal, la page s'affiche en double page de grimoire.
+  const wideBook = !phone && tab === 'journal';
   const editor =
     overlay?.kind === 'dream' ? (
-      <DreamEditor
-        key={overlay.id}
-        dreamId={overlay.id}
-        initialKind={overlay.initialKind}
-        initialSleepId={overlay.initialSleepId}
-        initialDate={overlay.initialDate}
-        onDeleted={close}
-        onShowOnMap={showOnMap}
-        onOpenSleep={openSleep}
-        bottomInset={insets.bottom}
-      />
+      overlay.mode === 'read' ? (
+        <DreamPage
+          key={overlay.id}
+          dreamId={overlay.id}
+          wide={wideBook}
+          phone={phone}
+          onEdit={editEntry}
+          onPrev={turn(-1)}
+          onNext={turn(1)}
+          onShowOnMap={showOnMap}
+          onOpenSleep={openSleep}
+          onDeleted={close}
+          bottomInset={insets.bottom}
+        />
+      ) : (
+        <DreamEditor
+          key={overlay.id}
+          dreamId={overlay.id}
+          initialKind={overlay.initialKind}
+          initialSleepId={overlay.initialSleepId}
+          initialDate={overlay.initialDate}
+          onDeleted={close}
+          onDone={doneEditing}
+          onShowOnMap={showOnMap}
+          onOpenSleep={openSleep}
+          bottomInset={insets.bottom}
+        />
+      )
     ) : overlay?.kind === 'sleep' ? (
-      <SleepEditor
-        key={overlay.id}
-        sleepId={overlay.id}
-        initialDate={overlay.initialDate}
-        onDeleted={close}
-        onOpenDream={openDream}
-        onNewDream={(sleepId, date) => newDream('full', sleepId, date)}
-        bottomInset={insets.bottom}
-      />
+      overlay.mode === 'read' ? (
+        <SleepPage
+          key={overlay.id}
+          sleepId={overlay.id}
+          wide={wideBook}
+          phone={phone}
+          onEdit={editEntry}
+          onPrev={turn(-1)}
+          onNext={turn(1)}
+          onOpenDream={openDream}
+          onNewDream={(sleepId, date) => newDream('full', sleepId, date)}
+          onDeleted={close}
+          bottomInset={insets.bottom}
+        />
+      ) : (
+        <SleepEditor
+          key={overlay.id}
+          sleepId={overlay.id}
+          initialDate={overlay.initialDate}
+          onDeleted={close}
+          onDone={doneEditing}
+          onOpenDream={openDream}
+          onNewDream={(sleepId, date) => newDream('full', sleepId, date)}
+          bottomInset={insets.bottom}
+        />
+      )
     ) : overlay?.kind === 'settings' ? (
       <SettingsScreen bottomInset={insets.bottom} />
     ) : null;
@@ -194,7 +249,13 @@ function Main() {
     tab === 'map' ? (
       <MapScreen phone={forPhone} bottomInset={forPhone ? 0 : insets.bottom} onOpenDream={openDream} focus={focus} />
     ) : tab === 'journal' ? (
-      <DreamList selectedId={!forPhone && overlay?.kind === 'dream' ? overlay.id : null} onOpen={openDream} bottomInset={forPhone ? 0 : insets.bottom} />
+      <Journal
+        phone={forPhone}
+        selected={!forPhone && overlay && overlay.kind !== 'settings' ? { kind: overlay.kind, id: overlay.id } : null}
+        onOpenDream={openDream}
+        onOpenSleep={openSleep}
+        bottomInset={forPhone ? 0 : insets.bottom}
+      />
     ) : tab === 'sleep' ? (
       <SleepTracker phone={forPhone} bottomInset={forPhone ? 0 : insets.bottom} onOpenSleep={openSleep} onNewSleep={newSleep} />
     ) : (
@@ -204,10 +265,11 @@ function Main() {
   let body;
   if (phone) {
     if (overlay) {
-      const title = overlay.kind === 'settings' ? 'Réglages' : overlay.kind === 'sleep' ? 'Sommeil' : 'Rêve';
+      const what = overlay.kind === 'sleep' ? 'Sommeil' : 'Rêve';
+      const title = overlay.kind === 'settings' ? 'Réglages' : overlay.mode === 'edit' ? (overlay.kind === 'sleep' ? 'Modifier le sommeil' : 'Modifier le rêve') : what;
       body = (
         <>
-          <TopBar title={title} layout={layout} topInset={insets.top} onBack={close} />
+          <TopBar title={title} layout={layout} topInset={insets.top} onBack={overlay.kind !== 'settings' && overlay.mode === 'edit' ? doneEditing : close} />
           <View style={styles.fill}>{editor}</View>
         </>
       );
@@ -365,9 +427,9 @@ const styles = StyleSheet.create({
   fill: { flex: 1, backgroundColor: colors.bg },
   center: { alignItems: 'center', justifyContent: 'center' },
   columns: { flexDirection: 'row' },
-  sidebar: { width: 360, borderRightWidth: 1, borderRightColor: colors.border },
+  sidebar: { width: 380, borderRightWidth: 1, borderRightColor: colors.border },
   sidePanel: { width: 520, borderLeftWidth: 1, borderLeftColor: colors.border, backgroundColor: colors.bg },
-  sidePanelJournal: { width: undefined, flex: 1, borderLeftWidth: 0 },
+  sidePanelJournal: { width: 'auto', flex: 1, borderLeftWidth: 0 },
   sideHead: { flexDirection: 'row', alignItems: 'center', paddingLeft: 16, paddingRight: 6, paddingVertical: 4, borderBottomWidth: 1, borderBottomColor: colors.borderSoft },
   bottomBar: {
     flexDirection: 'row',

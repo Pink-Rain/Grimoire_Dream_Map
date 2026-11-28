@@ -20,10 +20,10 @@ export const RIBBON_STOPS: [number, string][] = [
 
 const BAND = 10;
 
-export function RibbonDefs(props: { width: number; id: string }) {
+export function RibbonDefs(props: { width: number; id: string; x0?: number; x1?: number }) {
   return (
     <Defs>
-      <LinearGradient id={`${props.id}-sky`} x1="0" y1="0" x2={String(props.width)} y2="0" gradientUnits="userSpaceOnUse">
+      <LinearGradient id={`${props.id}-sky`} x1={String(props.x0 ?? 0)} y1="0" x2={String(props.x1 ?? props.width)} y2="0" gradientUnits="userSpaceOnUse">
         {RIBBON_STOPS.map(([m, c]) => (
           <Stop key={m} offset={m / 1440} stopColor={c} />
         ))}
@@ -37,10 +37,20 @@ export function RibbonDefs(props: { width: number; id: string }) {
   );
 }
 
-export function SleepRibbonRow(props: { width: number; height: number; segs: (TrackerSegment & { id: string })[]; id: string }) {
+export function SleepRibbonRow(props: {
+  width: number;
+  height: number;
+  segs: (TrackerSegment & { id: string })[];
+  id: string;
+  /** Page d'un sommeil : on zoome sur cette plage (minutes depuis midi), sans grille. */
+  range?: [number, number];
+  band?: number;
+}) {
   const { width: w, height: h } = props;
-  const x = (min: number) => (min / 1440) * w;
+  const [r0, r1] = props.range ?? [0, 1440];
+  const x = (min: number) => ((min - r0) / (r1 - r0)) * w;
   const cy = h / 2;
+  const BAND = props.band ?? 10;
   // Un ruban par sommeil (une ligne peut avoir une nuit et une sieste).
   const spans: { id: string; start: number; end: number; sleep: TrackerSegment[] }[] = [];
   for (const g of props.segs) {
@@ -53,12 +63,13 @@ export function SleepRibbonRow(props: { width: number; height: number; segs: (Tr
 
   return (
     <Svg width={w} height={h}>
-      <RibbonDefs width={w} id={props.id} />
+      <RibbonDefs width={w} id={props.id} x0={x(0)} x1={x(1440)} />
       {/* Grille de points + repère de minuit */}
-      <Line x1={x(720)} y1={0} x2={x(720)} y2={h} stroke="#3b3466" strokeWidth={1} strokeDasharray="2 4" />
-      {Array.from({ length: 25 }, (_, i) => (
-        <Circle key={i} cx={Math.min(w - 1.5, Math.max(1.5, x(i * 60)))} cy={cy} r={i % 3 === 0 ? 1.4 : 0.9} fill={i % 3 === 0 ? '#5a4f86' : '#3a335f'} />
-      ))}
+      {!props.range && <Line x1={x(720)} y1={0} x2={x(720)} y2={h} stroke="#3b3466" strokeWidth={1} strokeDasharray="2 4" />}
+      {!props.range &&
+        Array.from({ length: 25 }, (_, i) => (
+          <Circle key={i} cx={Math.min(w - 1.5, Math.max(1.5, x(i * 60)))} cy={cy} r={i % 3 === 0 ? 1.4 : 0.9} fill={i % 3 === 0 ? '#5a4f86' : '#3a335f'} />
+        ))}
       {spans.map((sp, k) => {
         const a = x(sp.start);
         const bw = Math.max(BAND, x(sp.end) - a);

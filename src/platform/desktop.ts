@@ -10,8 +10,9 @@ export type DesktopUpdateState =
   | { status: 'checking' }
   | { status: 'latest'; version: string; checkedAt: number }
   | { status: 'downloading'; version: string; percent: number }
-  | { status: 'ready'; version: string }
-  | { status: 'installing'; version: string }
+  /** light : mise à jour légère (l'app se recharge, sans installateur). */
+  | { status: 'ready'; version: string; light?: boolean }
+  | { status: 'installing'; version: string; light?: boolean }
   | { status: 'error'; message: string };
 
 export interface DesktopBridge {

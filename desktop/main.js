@@ -4,8 +4,10 @@
 // - la taille de la fenêtre et le format sont mémorisés ;
 // - avant de fermer, on laisse l'app finir d'enregistrer.
 const { app, BrowserWindow, ipcMain, net, protocol, screen, shell, Menu } = require('electron');
+const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
+const zlib = require('zlib');
 const { pathToFileURL } = require('url');
 const google = require('./google');
 const { autoUpdater } = require('electron-updater');
@@ -26,7 +28,46 @@ protocol.registerSchemesAsPrivileged([
   { scheme: SCHEME, privileges: { standard: true, secure: true, supportFetchAPI: true, corsEnabled: true } },
 ]);
 
-const webRoot = app.isPackaged ? path.join(process.resourcesPath, 'web') : path.join(__dirname, '..', 'dist');
+// ---------- L'« intérieur » de l'app (la version web) ----------
+// Il vient de l'installateur (resources/web), ou d'une mise à jour légère téléchargée dans userData/web-live/<version>
+// (sans réinstaller : l'app se recharge simplement). La « coque » PC (ce fichier, preload.js, google.js) porte le numéro
+// SHELL : si une nouvelle version demande une coque plus récente, on repasse par l'installateur complet.
+const SHELL = require('./package.json').dreamMapShell || 1;
+const bundledRoot = app.isPackaged ? path.join(process.resourcesPath, 'web') : path.join(__dirname, '..', 'dist');
+const liveDir = () => path.join(app.getPath('userData'), 'web-live');
+let webRoot = bundledRoot;
+let webVersion = app.getVersion();
+
+function cmpVersions(a, b) {
+  const pa = String(a).split('.').map(Number);
+  const pb = String(b).split('.').map(Number);
+  for (let i = 0; i < 3; i++) if ((pa[i] || 0) !== (pb[i] || 0)) return (pa[i] || 0) - (pb[i] || 0);
+  return 0;
+}
+function readLive() {
+  try {
+    const m = JSON.parse(fs.readFileSync(path.join(liveDir(), 'version.json'), 'utf8'));
+    if (m && m.version && (m.shell || 1) <= SHELL && fs.existsSync(path.join(liveDir(), m.version, 'index.html'))) return m;
+  } catch {}
+  return null;
+}
+/** Choisit la version web la plus récente disponible ; efface les anciennes. */
+function pickWebRoot() {
+  const live = readLive();
+  if (live && cmpVersions(live.version, app.getVersion()) > 0) {
+    webRoot = path.join(liveDir(), live.version);
+    webVersion = live.version;
+  } else {
+    webRoot = bundledRoot;
+    webVersion = app.getVersion();
+  }
+  try {
+    for (const name of fs.readdirSync(liveDir())) {
+      if (name === 'version.json' || path.join(liveDir(), name) === webRoot) continue;
+      fs.rmSync(path.join(liveDir(), name), { recursive: true, force: true });
+    }
+  } catch {}
+}
 
 // ---------- État de la fenêtre (mémorisé entre deux lancements) ----------
 const statePath = () => path.join(app.getPath('userData'), 'window-state.json');
@@ -180,17 +221,17 @@ function sendUpdate(s) {
 }
 let updatesReady = false;
 function setupUpdates() {
-  if (!app.isPackaged) return;
+  if (!app.isPackaged && !process.env.DREAMMAP_TEST_UPDATES) return;
   updatesReady = true;
   autoUpdater.logger = { info: (...a) => ulog('info', ...a), warn: (...a) => ulog('warn', ...a), error: (...a) => ulog('error', ...a), debug: () => {} };
   autoUpdater.setFeedURL({ provider: 'github', owner: 'Pink-Rain', repo: 'Grimoire_Dream_Map', releaseType: 'release' });
   autoUpdater.autoDownload = true;
   autoUpdater.autoInstallOnAppQuit = true;
-  ulog('info', `Démarrage, version ${app.getVersion()}`);
+  ulog('info', `Démarrage, coque ${app.getVersion()} (n° ${SHELL}), version ${webVersion}`);
   autoUpdater.on('checking-for-update', () => {
     if (updateState.status !== 'downloading' && updateState.status !== 'ready') sendUpdate({ status: 'checking' });
   });
-  autoUpdater.on('update-not-available', () => sendUpdate({ status: 'latest', version: app.getVersion(), checkedAt: Date.now() }));
+  autoUpdater.on('update-not-available', () => sendUpdate({ status: 'latest', version: webVersion, checkedAt: Date.now() }));
   autoUpdater.on('update-available', (i) => sendUpdate({ status: 'downloading', version: i.version, percent: 0 }));
   autoUpdater.on('download-progress', (p) => sendUpdate({ ...updateState, status: 'downloading', percent: Math.round(p.percent || 0) }));
   autoUpdater.on('update-downloaded', (i) => sendUpdate({ status: 'ready', version: i.version }));
@@ -198,9 +239,63 @@ function setupUpdates() {
     ulog('error', e);
     if (updateState.status !== 'ready') sendUpdate({ status: 'error', message: (e && e.message) || String(e) });
   });
-  const check = () => autoUpdater.checkForUpdates().catch((e) => ulog('error', e));
+  const check = () => checkAll().catch((e) => ulog('error', e));
   setTimeout(check, 8000);
   setInterval(check, 4 * 3600 * 1000);
+}
+
+// Mise à jour légère : seulement l'intérieur de l'app, publié avec chaque version (web-update.json + web-<v>.gz).
+// DREAMMAP_TEST_UPDATES : adresse locale, seulement pour les tests automatiques.
+const RELEASE_FILES = process.env.DREAMMAP_TEST_UPDATES || 'https://github.com/Pink-Rain/Grimoire_Dream_Map/releases/latest/download/';
+async function checkLight() {
+  const res = await net.fetch(RELEASE_FILES + 'web-update.json', { cache: 'no-store' });
+  if (!res.ok) return 'none';
+  const m = await res.json();
+  if (!m || !m.version || !m.file) return 'none';
+  if (cmpVersions(m.version, webVersion) <= 0) return 'latest';
+  if ((m.shell || 1) > SHELL) {
+    ulog('info', `La version ${m.version} demande une nouvelle coque (${m.shell}) : installateur complet.`);
+    return 'shell';
+  }
+  ulog('info', `Mise à jour légère vers ${m.version}`);
+  sendUpdate({ status: 'downloading', version: m.version, percent: 0 });
+  const r = await net.fetch(RELEASE_FILES + m.file);
+  if (!r.ok) throw new Error(`Téléchargement impossible (${r.status})`);
+  const buf = Buffer.from(await r.arrayBuffer());
+  if (m.sha256 && crypto.createHash('sha256').update(buf).digest('hex') !== m.sha256) throw new Error('Le fichier de mise à jour est abîmé.');
+  sendUpdate({ status: 'downloading', version: m.version, percent: 90 });
+  const bundle = JSON.parse(zlib.gunzipSync(buf).toString('utf8'));
+  const tmp = path.join(liveDir(), `${m.version}.tmp`);
+  fs.rmSync(tmp, { recursive: true, force: true });
+  for (const [rel, b64] of Object.entries(bundle.files || {})) {
+    const f = path.normalize(path.join(tmp, rel));
+    if (!f.startsWith(tmp + path.sep)) continue;
+    fs.mkdirSync(path.dirname(f), { recursive: true });
+    fs.writeFileSync(f, Buffer.from(b64, 'base64'));
+  }
+  if (!fs.existsSync(path.join(tmp, 'index.html'))) throw new Error('Mise à jour incomplète.');
+  const final = path.join(liveDir(), m.version);
+  fs.rmSync(final, { recursive: true, force: true });
+  fs.renameSync(tmp, final);
+  pendingLight = { version: m.version, shell: m.shell || 1 };
+  sendUpdate({ status: 'ready', version: m.version, light: true });
+  return 'ready';
+}
+let pendingLight = null;
+/** Recherche : d'abord la mise à jour légère ; l'installateur complet seulement si la coque doit changer. */
+async function checkAll() {
+  if (!updatesReady) return;
+  if (updateState.status === 'downloading' || updateState.status === 'ready' || updateState.status === 'installing') return;
+  sendUpdate({ status: 'checking' });
+  let r = 'none';
+  try {
+    r = await checkLight();
+  } catch (e) {
+    ulog('error', e);
+  }
+  if (r === 'latest') return sendUpdate({ status: 'latest', version: webVersion, checkedAt: Date.now() });
+  if (r === 'ready') return;
+  await autoUpdater.checkForUpdates();
 }
 
 /** Demande à l'app de finir d'enregistrer (au plus `ms` millisecondes). */
@@ -229,9 +324,8 @@ ipcMain.handle('grimoire:check-update', async () => {
     return updateState;
   }
   if (updateState.status === 'downloading' || updateState.status === 'ready' || updateState.status === 'installing') return updateState;
-  sendUpdate({ status: 'checking' });
   try {
-    await autoUpdater.checkForUpdates();
+    await checkAll();
   } catch (e) {
     ulog('error', e);
     sendUpdate({ status: 'error', message: (e && e.message) || String(e) });
@@ -240,6 +334,19 @@ ipcMain.handle('grimoire:check-update', async () => {
 });
 ipcMain.on('grimoire:install-update', async () => {
   if (updateState.status !== 'ready') return;
+  if (updateState.light && pendingLight) {
+    // Mise à jour légère : on enregistre, on bascule sur la nouvelle version et on recharge la fenêtre.
+    const v = pendingLight;
+    ulog('info', `Rechargement sur la version ${v.version}`);
+    sendUpdate({ status: 'installing', version: v.version, light: true });
+    await flushRenderer(3000);
+    fs.writeFileSync(path.join(liveDir(), 'version.json'), JSON.stringify(v));
+    pickWebRoot();
+    pendingLight = null;
+    updateState = { status: 'latest', version: webVersion, checkedAt: Date.now() };
+    if (win && !win.isDestroyed()) win.webContents.reloadIgnoringCache();
+    return;
+  }
   ulog('info', `Redémarrage demandé pour installer ${updateState.version}`);
   sendUpdate({ status: 'installing', version: updateState.version });
   // 1) on finit d'enregistrer, 2) on laisse la fenêtre se fermer sans la retenir, 3) on installe et on relance.
@@ -261,7 +368,7 @@ ipcMain.on('grimoire:open-update-log', () => {
 });
 
 ipcMain.on('grimoire:get-initial', (e) => {
-  e.returnValue = { phoneMode: !!state.phoneMode, appVersion: app.getVersion() };
+  e.returnValue = { phoneMode: !!state.phoneMode, appVersion: webVersion };
 });
 // Connexion Google et accès au Drive (voir google.js).
 ipcMain.on('grimoire:google-info', (e) => {
@@ -296,6 +403,7 @@ app.on('second-instance', () => {
 
 app.whenReady().then(() => {
   Menu.setApplicationMenu(null);
+  pickWebRoot();
 
   // Sert les fichiers de l'app web depuis app://dreammap/...
   protocol.handle(SCHEME, (req) => {

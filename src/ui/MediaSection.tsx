@@ -114,7 +114,7 @@ export function VoiceRecorder(props: { onRecorded: (item: MediaItem) => void; bi
 
 // ---------------------------------------------------------------- Lecteur
 
-function AudioRow(props: { item: MediaItem; onRemove: () => void }) {
+function AudioRow(props: { item: MediaItem; onRemove?: () => void }) {
   const uri = useMediaUri(props.item.localId);
   const player = useAudioPlayer(uri ? { uri } : null);
   const status = useAudioPlayerStatus(player);
@@ -147,7 +147,7 @@ function AudioRow(props: { item: MediaItem; onRemove: () => void }) {
           {missing ? 'Fichier sur un autre appareil' : `${formatDuration(pos)} / ${formatDuration(duration)}`}
         </Txt>
       </View>
-      <IconButton image="supprimer" size={20} label="Supprimer ce son" onPress={props.onRemove} />
+      {props.onRemove && <IconButton image="supprimer" size={20} label="Supprimer ce son" onPress={props.onRemove} />}
     </View>
   );
 }
@@ -171,7 +171,7 @@ const TYPE_ICON: Record<MediaType, keyof typeof Ionicons.glyphMap> = {
   youtube: 'logo-youtube',
 };
 
-function ImageThumb(props: { item: MediaItem; onOpen: (uri: string) => void; onRemove: () => void }) {
+function ImageThumb(props: { item: MediaItem; onOpen: (uri: string) => void; onRemove?: () => void }) {
   const uri = useMediaUri(props.item.localId);
   return (
     <View style={styles.thumbWrap} testID="media-image">
@@ -184,14 +184,16 @@ function ImageThumb(props: { item: MediaItem; onOpen: (uri: string) => void; onR
           </View>
         )}
       </Pressable>
-      <Pressable onPress={props.onRemove} style={styles.thumbRemove} accessibilityRole="button" accessibilityLabel={`Retirer ${props.item.name}`} hitSlop={6}>
-        <AppIcon name="retirer" size={20} />
-      </Pressable>
+      {props.onRemove && (
+        <Pressable onPress={props.onRemove} style={styles.thumbRemove} accessibilityRole="button" accessibilityLabel={`Retirer ${props.item.name}`} hitSlop={6}>
+          <AppIcon name="retirer" size={20} />
+        </Pressable>
+      )}
     </View>
   );
 }
 
-function LinkRow(props: { item: MediaItem; onRemove: () => void }) {
+function LinkRow(props: { item: MediaItem; onRemove?: () => void }) {
   const yt = props.item.type === 'youtube' && props.item.url ? youtubeId(props.item.url) : null;
   return (
     <View style={styles.row} testID={`media-${props.item.type}`}>
@@ -215,12 +217,12 @@ function LinkRow(props: { item: MediaItem; onRemove: () => void }) {
         </View>
         <AppIcon name="ouvrir-lien" size={22} />
       </Pressable>
-      <IconButton image="retirer" size={18} label="Retirer ce lien" onPress={props.onRemove} />
+      {props.onRemove && <IconButton image="retirer" size={18} label="Retirer ce lien" onPress={props.onRemove} />}
     </View>
   );
 }
 
-function FileRow(props: { item: MediaItem; onRemove: () => void }) {
+function FileRow(props: { item: MediaItem; onRemove?: () => void }) {
   return (
     <View style={styles.row} testID={`media-${props.item.type}`}>
       <Pressable
@@ -236,14 +238,14 @@ function FileRow(props: { item: MediaItem; onRemove: () => void }) {
         </Txt>
         <AppIcon name={Platform.OS === 'web' ? 'telecharger' : 'partager'} size={22} />
       </Pressable>
-      <IconButton image="retirer" size={18} label="Retirer ce fichier" onPress={props.onRemove} />
+      {props.onRemove && <IconButton image="retirer" size={18} label="Retirer ce fichier" onPress={props.onRemove} />}
     </View>
   );
 }
 
 // ---------------------------------------------------------------- Section complète
 
-export function MediaSection(props: { value: MediaItem[]; onChange: (v: MediaItem[]) => void; voiceOnly?: boolean }) {
+export function MediaSection(props: { value: MediaItem[]; onChange: (v: MediaItem[]) => void; voiceOnly?: boolean; /** Page de lecture : on écoute et on regarde, sans ajouter ni retirer. */ readOnly?: boolean }) {
   const [viewer, setViewer] = useState<string | null>(null);
   const [linkOpen, setLinkOpen] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
@@ -291,32 +293,32 @@ export function MediaSection(props: { value: MediaItem[]; onChange: (v: MediaIte
 
   return (
     <View style={{ gap: 12 }}>
-      <VoiceRecorder onRecorded={add} big={props.voiceOnly} />
+      {!props.readOnly && <VoiceRecorder onRecorded={add} big={props.voiceOnly} />}
       {audios.map((m) => (
-        <AudioRow key={m.id} item={m} onRemove={() => remove(m)} />
+        <AudioRow key={m.id} item={m} onRemove={props.readOnly ? undefined : () => remove(m)} />
       ))}
       {!props.voiceOnly && (
         <>
           {images.length > 0 && (
             <View style={styles.thumbs}>
               {images.map((m) => (
-                <ImageThumb key={m.id} item={m} onOpen={setViewer} onRemove={() => remove(m)} />
+                <ImageThumb key={m.id} item={m} onOpen={setViewer} onRemove={props.readOnly ? undefined : () => remove(m)} />
               ))}
             </View>
           )}
           {links.map((m) => (
-            <LinkRow key={m.id} item={m} onRemove={() => remove(m)} />
+            <LinkRow key={m.id} item={m} onRemove={props.readOnly ? undefined : () => remove(m)} />
           ))}
           {files.map((m) => (
-            <FileRow key={m.id} item={m} onRemove={() => remove(m)} />
+            <FileRow key={m.id} item={m} onRemove={props.readOnly ? undefined : () => remove(m)} />
           ))}
-          <View style={styles.addRow}>
+          {!props.readOnly && <View style={styles.addRow}>
             <Button small label="Image" image="image" onPress={() => pick('image')} testID="add-image" />
             <Button small label="Musique" image="musique" onPress={() => pick('audio')} testID="add-music" />
             <Button small label="Vidéo" image="video" onPress={() => pick('video')} testID="add-video" />
             <Button small label="Fichier" image="fichier" onPress={() => pick('any')} testID="add-file" />
             <Button small label="Lien / YouTube" image="lien-b" onPress={() => setLinkOpen((o) => !o)} testID="add-link" />
-          </View>
+          </View>}
           {linkOpen && (
             <View style={styles.linkForm}>
               <Field value={linkUrl} onChangeText={setLinkUrl} placeholder="Adresse (https://…)" autoCapitalize="none" keyboardType="url" testID="link-url" />
