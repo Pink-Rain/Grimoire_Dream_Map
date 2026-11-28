@@ -7,6 +7,8 @@ import { useStoreVersion } from '../data/appStore';
 import type { Sleep } from '../data/types';
 import { confirmAsync } from '../platform/dialogs';
 import { AppIcon, type AppIconName } from './AppIcon';
+import { SaveBar, SavedAt } from './SaveBar';
+import { SLEEP_FIELD_TITLES, SLEEP_FIELDS, SleepFieldEditor } from './sleepFields';
 import { Button, Chip, IconButton, Section, Txt } from './components';
 import { EmojiScale, MoodPicker, WordPicker } from './widgets';
 import { TimePicker } from './TimePicker';
@@ -114,6 +116,8 @@ export function SleepEditor(props: {
   onDeleted: () => void;
   onOpenDream?: (id: string) => void;
   onNewDream?: (sleepId: string, date: string) => void;
+  /** Bouton « Enregistrer » : referme le formulaire. */
+  onDone?: () => void;
   bottomInset: number;
 }) {
   useStoreVersion();
@@ -175,21 +179,9 @@ export function SleepEditor(props: {
   const loose = appStore.list('dreams').filter((x) => !x.sleepId && x.dreamDate === endDate);
   const setInt = (id: string, k: 'from' | 'to', v: string | null) =>
     commit({ interruptions: d.interruptions.map((i) => (i.id === id ? { ...i, ...completeInterruption({ ...i, [k]: v ?? '' }, k) } : i)) });
-  const emotionSuggestions = Array.from(
-    new Map(
-      [
-        ...appStore.list('sleeps').flatMap((x) => x.wakeEmotions ?? []),
-        ...appStore.list('dreams').flatMap((x) => (x.emotions ?? []).map((v) => optionFor(EMOTIONS, v).label)),
-        ...EMOTIONS.map((o) => o.label),
-      ].map((w) => [w.toLowerCase(), w]),
-    ).values(),
-  );
-  const suggest = (pick: (x: Sleep) => string[] | undefined, base: string[]) =>
-    Array.from(new Map([...appStore.list('sleeps').flatMap((x) => pick(x) ?? []), ...base].map((w) => [w.toLowerCase(), w])).values());
-
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'web' ? undefined : 'padding'}>
-      <ScrollView contentContainerStyle={[styles.content, { paddingBottom: 32 + props.bottomInset }]} keyboardShouldPersistTaps="handled">
+      <ScrollView style={{ flex: 1 }} contentContainerStyle={[styles.content, { paddingBottom: 24 }]} keyboardShouldPersistTaps="handled">
         <View style={styles.topRow}>
           <View style={styles.badge}>
             <AppIcon name="sommeil" size={20} />
@@ -206,6 +198,7 @@ export function SleepEditor(props: {
           </View>
         </View>
 
+        {exists.current && <SavedAt at={appStore.get('sleeps', props.sleepId)?.updatedAt} />}
         <Section title="Heures">
           <TimeField label="Coucher" emoji="🛏️" image="coucher" value={d.bedTime} onChange={(v) => setBed('bedTime', v)} testID="bed-time" />
           <TimeField label="Endormissement" emoji="😴" image="endormissement" value={d.asleepTime} onChange={(v) => setBed('asleepTime', v)} testID="asleep-time" />
@@ -235,20 +228,11 @@ export function SleepEditor(props: {
           <Button small label="Ajouter un réveil" image="ajouter-petit" onPress={() => commit({ interruptions: [...d.interruptions, { id: randomUUID(), from: '', to: '' }] })} testID="add-interruption" />
         </Section>
 
-        <Section title="Ressenti">
-          <EmojiScale levels={SLEEP_QUALITY} value={d.quality} onChange={(quality) => commit({ quality })} name="Qualité du sommeil" placeholder="Qualité du sommeil" testID="quality" />
-          <EmojiScale levels={WAKE_ENERGY} value={d.energy} onChange={(energy) => commit({ energy })} name="Énergie au réveil" placeholder="Énergie au réveil" testID="energy" />
-        </Section>
-
-        <Section title="Humeur au réveil">
-          <MoodPicker grid={MOOD_GRID} level={d.wakeMood} emoji={d.wakeMoodEmoji} onChange={(wakeMood, wakeMoodEmoji) => commit({ wakeMood, wakeMoodEmoji })} />
-          <WordPicker value={d.wakeEmotions} onChange={(wakeEmotions) => commit({ wakeEmotions })} suggestions={emotionSuggestions} placeholder="Émotions au réveil… puis Entrée" testID="wake-emotion" />
-        </Section>
-
-        <Section title="La veille et le lieu">
-          <WordPicker value={d.factors} onChange={(factors) => commit({ factors })} suggestions={suggest((x) => x.factors, SLEEP_FACTORS)} placeholder="Facteurs : café, écrans, stress… puis Entrée" testID="factor" />
-          <WordPicker value={d.sleepPlaces} onChange={(sleepPlaces) => commit({ sleepPlaces })} suggestions={suggest((x) => x.sleepPlaces, SLEEP_PLACES)} placeholder="Lieu : chez moi, en voyage… puis Entrée" testID="sleep-place" />
-        </Section>
+        {SLEEP_FIELDS.map((f) => (
+          <Section key={f} title={SLEEP_FIELD_TITLES[f]}>
+            <SleepFieldEditor field={f} draft={d} commit={commit} />
+          </Section>
+        ))}
 
         <Section title="Rêves de cette nuit">
           {dreams.map((dr) => (
@@ -292,13 +276,8 @@ export function SleepEditor(props: {
           <Timeline s={s} />
         </Section>
 
-        <View style={styles.footer}>
-          <Txt faint size={14}>
-            {exists.current ? 'Enregistré automatiquement' : 'Note une heure pour créer ce sommeil'}
-          </Txt>
-          <Button label="Supprimer" image="supprimer" variant="danger" small onPress={onDelete} testID="delete-sleep" />
-        </View>
       </ScrollView>
+      <SaveBar onSave={props.onDone} onDelete={onDelete} bottomInset={props.bottomInset} deleteTestID="delete-sleep" />
     </KeyboardAvoidingView>
   );
 }

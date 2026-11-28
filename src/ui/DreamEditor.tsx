@@ -10,23 +10,13 @@ import { autoSleepFor, candidateSleepsFor, formatDuration as formatSleep, sleepT
 import { AppIcon } from './AppIcon';
 import { Button, Chip, Field, IconButton, Section, Txt } from './components';
 import { addDays, formatLongDate } from './dates';
-import { PeopleSection, PlacesSection } from './DreamSections';
+import { DREAM_FIELD_TITLES, DREAM_FIELDS, DreamFieldEditor, type DreamDraft, type DreamEditable } from './dreamFields';
+import { SaveBar, SavedAt } from './SaveBar';
 import { MediaSection } from './MediaSection';
-import { AMBIANCES, CLARITY_LEVELS, colors, DREAM_TYPES, EMOTIONS, fonts, GENRES, MOOD_GRID, optionFor, TIME_CHOICES, TIMES_OF_DAY, WEATHER_CHOICES, WEATHERS } from './theme';
-import { ColorPicker, CompactEmojiPicker, EmojiScale, LucidityScale, MoodPicker, WordPicker } from './widgets';
+import { colors, fonts } from './theme';
 
-type Draft = ReturnType<typeof normalizeDream>;
-
-function uniqueCi(list: string[]): string[] {
-  const seen = new Set<string>();
-  return list.filter((w) => {
-    const k = w.trim().toLowerCase();
-    if (!k || seen.has(k)) return false;
-    seen.add(k);
-    return true;
-  });
-}
-type Editable = Partial<Omit<Dream, 'id' | 'createdAt' | 'updatedAt' | 'deleted'>>;
+type Draft = DreamDraft;
+type Editable = DreamEditable;
 
 function emptyDraft(id: string, kind: 'quick' | 'full'): Draft {
   return normalizeDream({
@@ -79,6 +69,8 @@ export function DreamEditor(props: {
   onOpenSleep?: (sleepId: string) => void;
   onDeleted: () => void;
   onShowOnMap?: (placeId: string) => void;
+  /** Bouton « Enregistrer » : tout est déjà enregistré, on referme le formulaire. */
+  onDone?: () => void;
   bottomInset: number;
 }) {
   useStoreVersion();
@@ -117,16 +109,7 @@ export function DreamEditor(props: {
     props.onDeleted();
   }
 
-  const allTags = Array.from(new Set(appStore.list('dreams').flatMap((d) => d.tags ?? []))).sort((a, b) => a.localeCompare(b));
-
   const quick = draft.kind === 'quick';
-  // Étiquettes réutilisables : celles déjà utilisées dans le journal + une liste de départ.
-  const labelsOf = (list: typeof EMOTIONS, pick: (d: Dream) => string[] | undefined) =>
-    uniqueCi([...appStore.list('dreams').flatMap((d) => (pick(d) ?? []).map((v) => optionFor(list, v).label)), ...list.map((o) => o.label)]);
-  const emotionSuggestions = labelsOf(EMOTIONS, (d) => d.emotions);
-  const typeSuggestions = labelsOf(DREAM_TYPES, (d) => d.dreamTypes);
-  const ambianceSuggestions = uniqueCi([...appStore.list('dreams').flatMap((d) => d.ambiances ?? []), ...AMBIANCES]);
-  const genreSuggestions = uniqueCi([...appStore.list('dreams').flatMap((d) => d.genres ?? []), ...GENRES]);
 
   const header = (
     <View style={{ gap: 10 }}>
@@ -145,6 +128,7 @@ export function DreamEditor(props: {
           <IconButton image="chevron-droit" label="Jour suivant" size={16} onPress={() => commit({ dreamDate: addDays(draft.dreamDate, 1) })} />
         </View>
       </View>
+      {saved && <SavedAt at={appStore.get('dreams', props.dreamId)?.updatedAt} />}
       <SleepLink sleepId={draft.sleepId} dreamDate={draft.dreamDate} onChange={(sleepId) => commit({ sleepId })} onOpen={props.onOpenSleep} />
       <Field big value={draft.title} onChangeText={(v) => commit({ title: v })} placeholder="Titre du rêve" maxLength={200} testID="dream-title" />
     </View>
@@ -152,7 +136,7 @@ export function DreamEditor(props: {
 
   return (
     <KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === 'web' ? undefined : 'padding'}>
-      <ScrollView style={styles.flex} contentContainerStyle={[styles.content, { paddingBottom: 32 + props.bottomInset }]} keyboardShouldPersistTaps="handled">
+      <ScrollView style={styles.flex} contentContainerStyle={[styles.content, { paddingBottom: 24 }]} keyboardShouldPersistTaps="handled">
         {header}
 
         {quick ? (
@@ -171,60 +155,16 @@ export function DreamEditor(props: {
         ) : (
           <>
             <Field multiline value={draft.text} onChangeText={(v) => commit({ text: v })} placeholder="Raconte ton rêve…" testID="dream-text" style={{ minHeight: 160 }} />
-            <Section title="Notes vocales et médias">
-              <MediaSection value={draft.media} onChange={(media) => commit({ media })} />
-            </Section>
-            <Section title="Lieux">
-              <PlacesSection value={draft.placeIds} onChange={(placeIds) => commit({ placeIds })} onShowOnMap={props.onShowOnMap} />
-            </Section>
-            <Section title="Personnes">
-              <PeopleSection value={draft.peopleIds} onChange={(peopleIds) => commit({ peopleIds })} />
-            </Section>
-            <Section title="Humeur et émotions">
-              <MoodPicker grid={MOOD_GRID} level={draft.mood} emoji={draft.moodEmoji} onChange={(mood, moodEmoji) => commit({ mood, moodEmoji })} />
-              <WordPicker
-                value={draft.emotions.map((v) => optionFor(EMOTIONS, v).label)}
-                onChange={(emotions) => commit({ emotions })}
-                suggestions={emotionSuggestions}
-                placeholder="Émotions : peur, joie, nostalgie… puis Entrée"
-                testID="emotion"
-              />
-            </Section>
-            <Section title="Lucidité et clarté">
-              <LucidityScale value={draft.lucidity} onChange={(lucidity) => commit({ lucidity })} />
-              <EmojiScale levels={CLARITY_LEVELS} value={draft.clarity} onChange={(clarity) => commit({ clarity })} name="Clarté" placeholder="Clarté : de très flou à très net" testID="clarity" />
-            </Section>
-            <Section title="Météo et moment">
-              <CompactEmojiPicker options={WEATHER_CHOICES} legacy={WEATHERS} value={draft.weather} onChange={(weather) => commit({ weather })} testID="weather" />
-              <CompactEmojiPicker options={TIME_CHOICES} legacy={TIMES_OF_DAY} value={draft.timeOfDay} onChange={(timeOfDay) => commit({ timeOfDay })} testID="time" />
-            </Section>
-            <Section title="Étiquettes et mots-clés">
-              <WordPicker value={draft.tags} onChange={(tags) => commit({ tags })} suggestions={allTags} placeholder="Mot-clé puis Entrée" testID="tag" />
-            </Section>
-            <Section title="Genre, type et ambiance">
-              <WordPicker value={draft.genres} onChange={(genres) => commit({ genres })} suggestions={genreSuggestions} placeholder="Genre : aventure, horreur… puis Entrée" testID="genre" />
-              <WordPicker
-                value={draft.dreamTypes.map((v) => optionFor(DREAM_TYPES, v).label)}
-                onChange={(dreamTypes) => commit({ dreamTypes })}
-                suggestions={typeSuggestions}
-                placeholder="Type : cauchemar, récurrent… puis Entrée"
-                testID="type"
-              />
-              <WordPicker value={draft.ambiances} onChange={(ambiances) => commit({ ambiances })} suggestions={ambianceSuggestions} placeholder="Ambiance : paisible, étrange… puis Entrée" testID="ambiance" />
-            </Section>
-            <Section title="Couleurs du rêve">
-              <ColorPicker value={draft.colors} onChange={(c) => commit({ colors: c })} />
-            </Section>
+            {DREAM_FIELDS.map((f) => (
+              <Section key={f} title={DREAM_FIELD_TITLES[f]}>
+                <DreamFieldEditor field={f} draft={draft} commit={commit} onShowOnMap={props.onShowOnMap} />
+              </Section>
+            ))}
           </>
         )}
 
-        <View style={styles.footer}>
-          <Txt faint size={14}>
-            {saved ? 'Enregistré automatiquement' : quick ? 'Parle ou écris pour créer la note' : 'Commence à écrire pour créer le rêve'}
-          </Txt>
-          <Button label="Supprimer" image="supprimer" variant="danger" small onPress={onDelete} testID="delete-dream" />
-        </View>
       </ScrollView>
+      <SaveBar onSave={props.onDone} onDelete={onDelete} bottomInset={props.bottomInset} deleteTestID="delete-dream" />
     </KeyboardAvoidingView>
   );
 }

@@ -90,9 +90,13 @@ function UpdatesSection() {
         : s.status === 'downloading'
           ? `Téléchargement de la version ${s.version}… ${s.percent} %`
           : s.status === 'ready'
-            ? `La version ${s.version} est prête à être installée.`
+            ? s.light
+              ? `La version ${s.version} est prête : l’app se recharge en 2 secondes, sans réinstaller.`
+              : `La version ${s.version} est prête à être installée.`
+            : s.status === 'apk-ready'
+              ? `La version ${s.version} est téléchargée : il reste à confirmer l’installation.`
             : s.status === 'installing'
-              ? `Installation de la version ${s.version}… l’app va se fermer puis se rouvrir.`
+              ? s.light ? `Mise à jour vers la version ${s.version}…` : `Installation de la version ${s.version}… l’app va se fermer puis se rouvrir.`
               : s.status === 'available'
                 ? `La version ${s.version} est disponible.`
                 : s.status === 'error'
@@ -106,8 +110,11 @@ function UpdatesSection() {
       <Text style={[styles.p, s.status === 'error' && { color: colors.danger }]} testID="update-status">
         {line}
       </Text>
-      {s.status === 'ready' && <Button label="Redémarrer pour installer" image="redemarrer" variant="primary" onPress={installUpdate} testID="update-install" />}
-      {s.status === 'available' && <Button label="Télécharger la nouvelle version" image="maj-telecharger" variant="primary" onPress={installUpdate} testID="update-install" />}
+      {s.status === 'ready' && (
+        <Button label={s.light ? 'Mettre à jour maintenant' : 'Redémarrer pour installer'} image="redemarrer" variant="primary" onPress={installUpdate} testID="update-install" />
+      )}
+      {s.status === 'available' && <Button label="Mettre à jour" image="maj-telecharger" variant="primary" onPress={installUpdate} testID="update-install" />}
+      {s.status === 'apk-ready' && <Button label="Installer la nouvelle version" image="maj-telecharger" variant="primary" onPress={installUpdate} testID="update-install" />}
       <Button label="Rechercher les mises à jour" image="maj-rechercher" onPress={() => void checkForUpdates()} disabled={busy} testID="update-check" />
       {desktopBridge && <Button label="Rapport technique (en cas de souci)" image="rapport" variant="ghost" onPress={openUpdateLog} testID="update-log" />}
     </Section>

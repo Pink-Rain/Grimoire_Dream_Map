@@ -182,9 +182,31 @@ site/                     page de présentation (GitHub Pages) + politique de co
 - Encore standard : « voir sur la carte » (fiche du rêve), mot-clé proposé (pricetag), petits compteurs du
   journal (lieux, personnes, notes vocales), dessin de carte « place » (game-icons n'en a pas).
 
+## Journal et pages de lecture (v0.9.0, maquette validée par la personne)
+
+- Journal (`src/ui/Journal.tsx`) : recherche, calendrier (`Calendar.tsx` : mois sur PC, semaine dépliable sur
+  téléphone, marques `marque-reve` / `marque-sommeil`, bouton `aujourdhui`), filtres Tout · Rêves · Notes rapides ·
+  Sommeils · Lucides, liste groupée par jour (une nuit est rangée au jour du réveil). Le journal montre TOUT
+  (rêves, notes rapides, nuits). Filtre et recherche partagés : `journalState.ts` (sert aussi aux flèches).
+- PC : 2 zones (gauche 380 px : recherche + calendrier + filtres + liste ; droite : la page, qui remplit la place
+  — **pas de trou**). Téléphone : liste plein écran, la page s'ouvre en plein écran.
+- Une entrée s'ouvre en **page de lecture** (`DreamPage.tsx`, `SleepPage.tsx`, éléments communs `reading.tsx`) :
+  overlay `mode: 'read'`. « Modifier » → formulaire (`mode: 'edit'`) ; « Enregistrer » (SaveBar) → retour à la page.
+  Nouvel ajout → formulaire directement.
+- Page d'un rêve, **dans l'ordre du formulaire** : date, lune, nuit liée, titre en grand, récit avec une petite
+  lettrine cuivrée (pas trop grande), notes vocales et médias (MediaSection `readOnly`), lieux (+ voir-carte),
+  personnes, humeur / lucidité / clarté (cases), émotions, météo et moment, étiquettes, genre/type/ambiance,
+  couleurs (ColorStain). Sur PC dans le journal : **double page de grimoire** (`Book wide`).
+- Toucher un détail ouvre seulement son sélecteur (`DetailSheet` : volet du bas sur téléphone, carte au centre sur
+  PC) ; les sélecteurs sont partagés avec le formulaire (`dreamFields.tsx`, `sleepFields.tsx`). Titre et récit :
+  modifiables sur place (`InlineText`). Détails vides : invisibles, « + Ajouter un détail ».
+- Page d'un sommeil : ruban en grand (`SleepRibbonRow` avec `range`), 4 heures à toucher (horloge), durées, ressenti,
+  humeur au réveil, veille et lieu, rêves de cette nuit.
+- Pages précédente / suivante : dans l'ordre du temps (`neighbour`), en suivant le filtre du journal.
+
 ## Navigation (v0.7.0)
 
-- 4 endroits : Carte, Journal (rêves seulement), Sommeil (tracker façon bullet journal, src/ui/SleepTracker.tsx :
+- 4 endroits : Carte, Journal (voir ci-dessus), Sommeil (tracker façon bullet journal, src/ui/SleepTracker.tsx :
   une ligne par jour de midi à midi, barres calculées par `trackerSegments` dans src/data/sleep.ts),
   Statistiques (page prête, vide : `StatsScreen`).
 - Téléphone : barre du bas Carte · Journal · [+] · Sommeil · Statistiques ; le + ouvre `AddMenu`
@@ -248,6 +270,19 @@ Si l'Electron n'est pas téléchargé : `ELECTRON_GET_USE_PROXY=1 node desktop/n
 
 ## Publier une version (.exe + APK)
 
+- **Mises à jour sans réinstaller (v0.9.0)** :
+  - PC : chaque version publie aussi `web-<version>.gz` + `web-update.json` (`scripts/pack-web.mjs`). L'app PC
+    (desktop/main.js, `checkAll`) cherche d'abord cette mise à jour légère, la télécharge dans
+    `userData/web-live/<version>`, vérifie l'empreinte, puis « Mettre à jour » recharge simplement la fenêtre
+    (même origine app://dreammap → données intactes). L'installateur complet (electron-updater) ne sert que si
+    la version demande une coque plus récente : **augmenter `dreamMapShell` dans desktop/package.json à chaque
+    changement de main.js / preload.js / google.js dont l'app a besoin.** Test local : variable
+    `DREAMMAP_TEST_UPDATES=<adresse>`.
+  - Android : « Mettre à jour » télécharge l'APK dans le cache de l'app (`src/platform/apk.android.ts`,
+    expo-file-system/legacy) puis ouvre l'installation Android (expo-intent-launcher, permission
+    REQUEST_INSTALL_PACKAGES) ; les APK sont effacés au lancement suivant. Plus tard : mises à jour « éclair »
+    via EAS Update (demande de la personne, à faire un jour).
+
 - `make_latest` : seule la version de `main` est marquée « dernière » (l'app Android lit `releases/latest`).
   Une fabrication de test sur une branche (commit avec `[build]` ou lancement manuel) crée une pré-version.
 
@@ -300,6 +335,9 @@ Expo change à chaque version. Avant d'utiliser une API Expo/React Native, véri
 - [x] v0.6.4 : journal des mises à jour dans les Réglages (3 dernières versions, les autres à la demande).
 - [x] v0.6.5 : app = 3 dernières versions seulement ; historique complet sur la page « Toutes les nouveautés ».
 - [x] v0.7.0 : tracker de sommeil, lien rêves ↔ sommeil, qualité/énergie, formulaire compact, 4 onglets + menu +.
+- [x] v0.9.0 : nouveau journal (calendrier, filtres, tout), pages de lecture (double page PC, sélecteurs sur
+  place), barre Enregistrer, mises à jour sans réinstaller (PC léger, Android dans l'app), icônes série 2.
+- [ ] Mises à jour « éclair » Android (EAS Update) — la personne le veut à terme.
 - [x] v0.8.3 : synchro Android. Connexion Google native (`@react-native-google-signin/google-signin`, API
   « originale », sans Firebase : **pas de plugin dans app.json**, l'autolinking suffit), fichiers
   `src/sync/nativeAuth.android.ts` (connexion, jeton, 401 → nouveau jeton) / `nativeAuth.ts` (web, PC : rien).
