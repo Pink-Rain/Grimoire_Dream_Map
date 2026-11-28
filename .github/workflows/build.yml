@@ -37,8 +37,6 @@ jobs:
         with: { node-version: 22, cache: npm }
       - run: npm ci
       - run: npx expo export -p web --output-dir dist
-      # Mise à jour légère de l'app PC (sans réinstaller) : web-<version>.gz + web-update.json.
-      - run: node scripts/pack-web.mjs dist desktop
       - name: Code secret Google (depuis les secrets GitHub, jamais dans le dépôt)
         working-directory: desktop
         shell: bash
@@ -51,6 +49,9 @@ jobs:
         run: |
           npm ci
           npx electron-builder --win nsis --x64 --publish never "-c.extraMetadata.version=${{ needs.check.outputs.version }}"
+      # Mise à jour légère de l'app PC (sans réinstaller) : web-<version>.gz + web-update.json, à côté de l'installateur
+      # (tous les fichiers dans le même dossier, sinon la publication les range dans des sous-dossiers).
+      - run: node scripts/pack-web.mjs dist desktop/release
       - uses: actions/upload-artifact@v4
         with:
           name: windows
@@ -59,8 +60,8 @@ jobs:
             desktop/release/*.exe
             desktop/release/*.exe.blockmap
             desktop/release/latest.yml
-            desktop/web-*.gz
-            desktop/web-update.json
+            desktop/release/web-*.gz
+            desktop/release/web-update.json
 
   android:
     needs: check
