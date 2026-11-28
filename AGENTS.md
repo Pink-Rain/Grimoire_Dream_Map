@@ -248,6 +248,9 @@ Si l'Electron n'est pas téléchargé : `ELECTRON_GET_USE_PROXY=1 node desktop/n
 
 ## Publier une version (.exe + APK)
 
+- `make_latest` : seule la version de `main` est marquée « dernière » (l'app Android lit `releases/latest`).
+  Une fabrication de test sur une branche (commit avec `[build]` ou lancement manuel) crée une pré-version.
+
 1. Augmenter `version` dans `package.json`, `desktop/package.json` ET `app.json` (`expo.version`),
    et `android.versionCode` (+1). **Ajouter l'entrée de la version en haut de `src/data/changelog.json`**
    (phrases simples, sans jargon ; un test le vérifie). L'app n'affiche QUE les 3 dernières (demande de la
