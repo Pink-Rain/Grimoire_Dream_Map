@@ -5,7 +5,6 @@ import { ActivityIndicator, KeyboardAvoidingView, Modal, Platform, Pressable, Sc
 import { appStore, useStoreVersion } from '../data/appStore';
 import { PLACE_SIZES, type Place, type PlaceRelationDir } from '../data/types';
 import { DEFAULT_CENTER, defaultImaginaryPosition, relativePosition, suggestedIcon, suggestedSize } from '../map/geometry';
-import { placeUsage } from '../data/placeUsage';
 import { searchPlaces, type GeoResult } from '../map/geocode';
 import { getLastMapView } from '../map/mapState';
 import { confirmAsync } from '../platform/dialogs';
@@ -212,10 +211,9 @@ export function PlaceEditor(props: {
     props.onClose();
   }
 
-  const usage = existing ? placeUsage(existing.id) : null;
   async function remove() {
-    if (!existing || !usage?.deletable) return;
-    const ok = await confirmAsync(existing.kind === 'vehicle' ? 'Supprimer ce véhicule ?' : 'Supprimer ce lieu ?', `« ${existing.name} » disparaîtra de la carte.`, 'Supprimer');
+    if (!existing) return;
+    const ok = await confirmAsync('Supprimer ce lieu ?', `« ${existing.name} » disparaîtra de la carte et de tous les rêves.`, 'Supprimer');
     if (!ok) return;
     appStore.remove('places', existing.id);
     props.onDeleted?.(existing.id);
@@ -389,7 +387,7 @@ export function PlaceEditor(props: {
             )}
           </ScrollView>
           <View style={styles.foot}>
-            {existing && usage?.deletable && <Button label="Supprimer" image="supprimer" variant="danger" onPress={remove} testID="place-delete" />}
+            {existing && <Button label="Supprimer" image="supprimer" variant="danger" onPress={remove} testID="place-delete" />}
             <View style={{ flex: 1 }} />
             <Button label="Annuler" variant="ghost" onPress={props.onClose} />
             <Button label={existing ? 'Enregistrer' : 'Ajouter'} image="coche" variant="primary" onPress={save} disabled={!canSave} testID="place-save" />

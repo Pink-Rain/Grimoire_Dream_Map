@@ -345,9 +345,6 @@ Expo change à chaque version. Avant d'utiliser une API Expo/React Native, véri
 - [x] v0.7.0 : tracker de sommeil, lien rêves ↔ sommeil, qualité/énergie, formulaire compact, 4 onglets + menu +.
 - [x] v0.9.1 : recherche de lieux sur téléphone (User-Agent), trajets dessinés (format v6), boutons icône seule,
   bouton « glisser ». Première mise à jour légère PC (coque inchangée : dreamMapShell 1).
-- [ ] **Prêt, pas encore publié (à mettre dans la prochaine version + changelog)** : supprimer un lieu seulement s'il
-  n'est dans aucun rêve ni sur le trajet d'un véhicule (`src/data/placeUsage.ts`, bouton dans la fiche du lieu
-  sur la carte et dans « Modifier le lieu », sinon explication).
 - [ ] Statistiques : en réflexion avec la personne (Rêves, Sommeil, Croisées, Lieux, Personnes ; atlas de graphes).
 - [x] v0.9.0 : nouveau journal (calendrier, filtres, tout), pages de lecture (double page PC, sélecteurs sur
   place), barre Enregistrer, mises à jour sans réinstaller (PC léger, Android dans l'app), icônes série 2.

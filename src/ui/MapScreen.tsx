@@ -3,8 +3,6 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { useEffect, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { appStore, useStoreVersion } from '../data/appStore';
-import { placeUsage, placeUsageReason } from '../data/placeUsage';
-import { confirmAsync } from '../platform/dialogs';
 import { PLACE_SIZES } from '../data/types';
 import { DreamMap } from '../map/DreamMap';
 import { useMapPlaces } from '../map/useMapPlaces';
@@ -49,15 +47,6 @@ export function MapScreen(props: {
         .filter((d) => d.placeIds?.includes(place.id))
         .sort((a, b) => b.dreamDate.localeCompare(a.dreamDate))
     : [];
-
-  const usage = place ? placeUsage(place.id) : null;
-  async function removePlace() {
-    if (!place || !usage?.deletable) return;
-    const ok = await confirmAsync(place.kind === 'vehicle' ? 'Supprimer ce véhicule ?' : 'Supprimer ce lieu ?', `« ${place.name} » disparaîtra de la carte.`, 'Supprimer');
-    if (!ok) return;
-    appStore.remove('places', place.id);
-    setSelectedRaw(null);
-  }
 
   function relayer(dir: 1 | -1) {
     if (!place) return;
@@ -138,13 +127,7 @@ export function MapScreen(props: {
             {place.kind === 'vehicle' && (
               <Tool icon="brush-outline" label="Dessiner le trajet" onPress={() => setDraw({ id: place.id, points: place.route?.points ?? [] })} testID="route-draw-start" />
             )}
-            {usage?.deletable && <Tool image="supprimer" label={place.kind === 'vehicle' ? 'Supprimer ce véhicule' : 'Supprimer ce lieu'} onPress={removePlace} testID="place-remove" />}
           </View>
-        )}
-        {usage && !usage.deletable && (
-          <Txt faint size={13} testID="place-in-use">
-            {placeUsageReason(usage)}
-          </Txt>
         )}
         <Txt weight="semi">{dreamsHere.length ? `Rêvé ${dreamsHere.length} fois ici` : 'Dans aucun rêve pour l’instant'}</Txt>
         {dreamsHere.map((d) => (
