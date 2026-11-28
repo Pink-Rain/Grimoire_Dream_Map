@@ -1,7 +1,7 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useMemo, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import Svg, { Circle, Defs, Path, RadialGradient, Stop } from 'react-native-svg';
+import Svg, { Circle, Defs, G, Path, RadialGradient, Stop } from 'react-native-svg';
 import { AppIcon, type AppIconName } from './AppIcon';
 import { Chip, Field, type PressState } from './components';
 import { colors, DREAM_COLORS, fonts, LUCIDITY_LABELS } from './theme';
@@ -270,6 +270,35 @@ function blobPath(size: number, seed: number) {
     d += ` Q ${p[0]} ${p[1]} ${(p[0] + q[0]) / 2} ${(p[1] + q[1]) / 2}`;
   }
   return d + ' Z';
+}
+
+/**
+ * Tache d'aquarelle des couleurs d'un rêve (comme sous les lieux de la carte) : une tache par couleur,
+ * qui se chevauchent un peu.
+ */
+export function ColorStain(props: { colors: string[]; height: number; seed?: number }) {
+  const list = props.colors.slice(0, 4);
+  const h = props.height;
+  const blob = h;
+  const step = h * 0.55; // les taches se chevauchent
+  const w = blob + step * (list.length - 1);
+  let k = (props.seed ?? 7) * 7919 + 13;
+  const rnd = () => ((k = (k * 9301 + 49297) % 233280) / 233280);
+  return (
+    <Svg width={w} height={h} viewBox={`0 0 ${w} ${h}`}>
+      {list.map((c, i) => {
+        const dy = (rnd() - 0.5) * h * 0.12;
+        const sc = 0.9 + rnd() * 0.1;
+        const bs = blob * sc;
+        return (
+          <G key={c + i} transform={`translate(${i * step + (blob - bs) / 2} ${(h - bs) / 2 + dy})`}>
+            <Path d={blobPath(bs, i + 2 + (props.seed ?? 0))} fill={c} fillOpacity={0.6} />
+            <Path d={blobPath(bs * 0.62, i + 5 + (props.seed ?? 0))} transform={`translate(${bs * 0.16} ${bs * 0.14})`} fill={c} fillOpacity={0.4} />
+          </G>
+        );
+      })}
+    </Svg>
+  );
 }
 
 export function WatercolorDot(props: { color: string; size: number; seed?: number }) {

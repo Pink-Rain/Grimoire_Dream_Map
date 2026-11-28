@@ -48,10 +48,10 @@ body {
 }
 .stainWrap {
   position: absolute;
-  left: -90%;
-  top: -80%;
-  width: 280%;
-  height: 280%;
+  left: -150%;
+  top: -140%;
+  width: 400%;
+  height: 400%;
   pointer-events: none;
 }
 .stain {

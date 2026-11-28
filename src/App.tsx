@@ -182,8 +182,8 @@ function Main() {
         options={[
           { value: 'map', label: 'Carte', image: 'carte', imageOn: 'carte-encre' },
           { value: 'journal', label: 'Journal', image: 'journal', imageOn: 'journal-encre' },
-          { value: 'sleep', label: 'Sommeil', image: 'sommeil' },
-          { value: 'stats', label: 'Statistiques', image: 'statistiques' },
+          { value: 'sleep', label: 'Sommeil', image: 'sommeil', imageOn: 'sommeil-encre' },
+          { value: 'stats', label: 'Statistiques', image: 'statistiques', imageOn: 'statistiques-encre' },
         ]}
         testID="tab"
       />

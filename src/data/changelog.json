@@ -1,5 +1,15 @@
 [
   {
+    "version": "0.8.2",
+    "date": "2026-11-28",
+    "changes": [
+      "Les taches d’aquarelle sous les lieux de la carte sont plus grandes.",
+      "Journal : chaque rêve se résume en couleurs (en tache), humeur, lucidité et clarté.",
+      "Humeurs du rêve et du réveil : Horrible, Mauvaise, Mitigé, Okay, Bien, Excellente.",
+      "Nouveaux émojis d’humeur, et icônes Sommeil et Statistiques en version encre sur l’onglet actif."
+    ]
+  },
+  {
     "version": "0.8.1",
     "date": "2026-11-27",
     "changes": [

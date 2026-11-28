@@ -297,6 +297,9 @@ Expo change à chaque version. Avant d'utiliser une API Expo/React Native, véri
 - [x] v0.6.4 : journal des mises à jour dans les Réglages (3 dernières versions, les autres à la demande).
 - [x] v0.6.5 : app = 3 dernières versions seulement ; historique complet sur la page « Toutes les nouveautés ».
 - [x] v0.7.0 : tracker de sommeil, lien rêves ↔ sommeil, qualité/énergie, formulaire compact, 4 onglets + menu +.
+- [x] v0.8.2 : zip n° 6 (humeurs désaturées, sommeil-encre, statistiques-encre = onglet actif), taches de la
+  carte plus grandes, résumé du journal = ColorStain + humeur + lucidité + clarté (dans cet ordre, demande de
+  la personne), libellés MOOD_GRID : Horrible, Mauvaise, Mitigé, Okay, Bien, Excellente.
 - [x] v0.8.1 : icônes zip n° 5 partout, tracker redessiné (src/ui/SleepRibbon.tsx : ruban dégradé nuit → aube
   pour le sommeil ; **un seul ruban continu du coucher au lever, vide quand on est éveillé** (avant, pendant, après) — demande de la
   personne), date du coucher auto après minuit (`autoSleepDate`).

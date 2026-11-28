@@ -7,8 +7,8 @@ import { normalizeDream, type Dream, type Sleep } from '../data/types';
 import { AppIcon, type AppIconName } from './AppIcon';
 import { Field, Title, Txt, type PressState } from './components';
 import { formatLongDate, formatShortDate } from './dates';
-import { colors, fonts, moodImageFor, optionFor, TIMES_OF_DAY, WEATHERS } from './theme';
-import { Moon, WatercolorDot } from './widgets';
+import { colors, fonts, moodImageFor } from './theme';
+import { ColorStain, Moon } from './widgets';
 
 const capitalize = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
 
@@ -150,20 +150,11 @@ function DreamRow({ dream, selected, onPress }: { dream: Dream; selected: boolea
           </View>
         )}
         <View style={{ flex: 1 }} />
-        {d.colors.slice(0, 4).map((c, i) => (
-          <WatercolorDot key={c} color={c} size={16} seed={i + 2} />
-        ))}
-        {d.lucidity !== null && <AppIcon name={`lucidite-b-${d.lucidity}` as AppIconName} size={18} />}
-        {moodImg && <AppIcon name={moodImg as AppIconName} size={20} />}
-        {d.weather.slice(0, 2).map((w) => {
-          const o = optionFor(WEATHERS, w);
-          return o.image ? <AppIcon key={w} name={o.image as AppIconName} size={20} /> : <Txt key={w} size={14}>{o.emoji}</Txt>;
-        })}
-        {d.timeOfDay[0] &&
-          (() => {
-            const o = optionFor(TIMES_OF_DAY, d.timeOfDay[0]);
-            return o.image ? <AppIcon name={o.image as AppIconName} size={20} /> : <Txt size={14}>{o.emoji}</Txt>;
-          })()}
+        {/* Résumé : couleurs (en tache), humeur, lucidité, clarté — dans cet ordre. */}
+        {d.colors.length > 0 && <ColorStain colors={d.colors} height={26} seed={d.id.charCodeAt(d.id.length - 1)} />}
+        {moodImg && <AppIcon name={moodImg as AppIconName} size={22} />}
+        {d.lucidity !== null && <AppIcon name={`lucidite-b-${d.lucidity}` as AppIconName} size={22} />}
+        {d.clarity !== null && d.clarity >= 1 && d.clarity <= 5 && <AppIcon name={`clarte-${d.clarity}` as AppIconName} size={22} />}
       </View>
       <Title size={19} numberOfLines={1} style={!d.title.trim() && { color: colors.faint, fontStyle: 'italic' }}>
         {d.title.trim() || 'Sans titre'}
