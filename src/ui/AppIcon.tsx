@@ -79,6 +79,8 @@ const ICONS = {
   'reglages-sans-fond': require('../../assets/ui/reglages-sans-fond.png'),
   'lien-b': require('../../assets/ui/lien-b.png'),
   // zip n° 5
+  'sommeil-encre': require('../../assets/ui/sommeil-encre.png'),
+  'statistiques-encre': require('../../assets/ui/statistiques-encre.png'),
   'ajouter': require('../../assets/ui/ajouter.png'),
   'ajouter-petit': require('../../assets/ui/ajouter-petit.png'),
   'retirer': require('../../assets/ui/retirer.png'),

@@ -168,10 +168,10 @@ export const WEATHER_CHOICES: EmojiOption[] = ['soleil', 'eclaircies', 'partiel'
 /** Humeur : niveau de 0 à 5, et un emoji au choix dans chaque niveau. */
 export const MOOD_GRID: { level: number; label: string; emojis: string[]; images: string[] }[] = [
   { level: 0, label: 'Horrible', emojis: ['😡', '🤮', '😭'], images: ['humeur-colere', 'humeur-degout', 'humeur-pleurs'] },
-  { level: 1, label: 'Très mauvaise', emojis: ['😱', '😤', '😔'], images: ['humeur-peur', 'humeur-soupir', 'humeur-tristesse'] },
-  { level: 2, label: 'Mauvaise', emojis: ['🫩', '🙄', '🫠'], images: ['humeur-ennui', 'humeur-agacement', 'humeur-gene'] },
-  { level: 3, label: 'Mitigée', emojis: ['🙃', '🤭', '🙂'], images: ['humeur-ironie', 'humeur-gloussement', 'humeur-sourire'] },
-  { level: 4, label: 'Bonne', emojis: ['🤗', '🥰', '😎'], images: ['humeur-tendresse', 'humeur-amour', 'humeur-cool'] },
+  { level: 1, label: 'Mauvaise', emojis: ['😱', '😤', '😔'], images: ['humeur-peur', 'humeur-soupir', 'humeur-tristesse'] },
+  { level: 2, label: 'Mitigé', emojis: ['🫩', '🙄', '🫠'], images: ['humeur-ennui', 'humeur-agacement', 'humeur-gene'] },
+  { level: 3, label: 'Okay', emojis: ['🙃', '🤭', '🙂'], images: ['humeur-ironie', 'humeur-gloussement', 'humeur-sourire'] },
+  { level: 4, label: 'Bien', emojis: ['🤗', '🥰', '😎'], images: ['humeur-tendresse', 'humeur-amour', 'humeur-cool'] },
   { level: 5, label: 'Excellente', emojis: ['😍', '😁', '🤣'], images: ['humeur-emerveille', 'humeur-joie', 'humeur-fou-rire'] },
 ];
 

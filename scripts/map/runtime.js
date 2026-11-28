@@ -139,8 +139,8 @@
     var out = '<svg class="stain" viewBox="0 0 200 200" aria-hidden="true">';
     var list = cols || ['#b8955c'];
     for (var i = 0; i < list.length; i++) {
-      var cx = 100 + (r() - 0.5) * 50, cy = 100 + (r() - 0.5) * 50;
-      var rad = 40 + r() * 20;
+      var cx = 100 + (r() - 0.5) * 44, cy = 100 + (r() - 0.5) * 44;
+      var rad = 50 + r() * 18;
       var pts = [], n = 10;
       for (var k = 0; k < n; k++) {
         var a = (k / n) * Math.PI * 2, rr = rad * (0.7 + r() * 0.35);
