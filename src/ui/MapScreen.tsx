@@ -1,4 +1,4 @@
-import { AppIcon } from './AppIcon';
+import { AppIcon, type AppIconName } from './AppIcon';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useEffect, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
@@ -22,13 +22,22 @@ export function MapScreen(props: {
   focus: { id: string; n: number } | null;
 }) {
   useStoreVersion();
-  const places = useMapPlaces();
-  const [selected, setSelected] = useState<string | null>(null);
+  const [selected, setSelectedRaw] = useState<string | null>(null);
+  // « Glisser » : le lieu imaginaire ne se déplace qu'après avoir touché ce bouton (évite les erreurs).
+  const [dragId, setDragId] = useState<string | null>(null);
+  // Dessin du trajet d'un véhicule : chaque touche sur la carte ajoute un point.
+  const [draw, setDraw] = useState<{ id: string; points: [number, number][] } | null>(null);
+  const places = useMapPlaces(null, dragId);
+  const setSelected = (id: string | null) => {
+    if (draw) return; // pendant le dessin, la carte sert à poser les points
+    setSelectedRaw(id);
+    if (id !== dragId) setDragId(null);
+  };
   const [editing, setEditing] = useState<string | null>(null);
   const [localFocus, setLocalFocus] = useState<{ id: string; n: number } | null>(null);
   const place = selected ? appStore.get('places', selected) : undefined;
   useEffect(() => {
-    if (props.focus) setSelected(props.focus.id);
+    if (props.focus) setSelectedRaw(props.focus.id);
   }, [props.focus]);
   const focus = localFocus && (!props.focus || localFocus.n > props.focus.n) ? localFocus : props.focus;
 
@@ -78,17 +87,48 @@ export function MapScreen(props: {
             Circule entre {appStore.get('places', place.route.fromId)?.name ?? '?'} et {appStore.get('places', place.route.toId)?.name ?? '?'}
           </Txt>
         )}
-        {place.kind === 'place' && !place.real && (
-          <Txt faint size={14}>
-            <AppIcon name="glisser" size={18} style={{ marginBottom: -4 }} /> Fais-le glisser sur la carte pour le déplacer.
+        {dragId === place.id && (
+          <Txt size={14} style={{ color: colors.ochre }} testID="drag-hint">
+            Fais-le glisser sur la carte, puis retouche le bouton pour terminer.
           </Txt>
         )}
-        <View style={styles.actions}>
-          <Button small label="Modifier" image="modifier" onPress={() => setEditing(place.id)} testID="place-edit" />
-          <Button small label="Devant" image="devant" onPress={() => relayer(1)} testID="place-front" />
-          <Button small label="Derrière" image="derriere" onPress={() => relayer(-1)} testID="place-back" />
-          <Button small label="Centrer" image="recentrer-fin" onPress={() => setLocalFocus({ id: place.id, n: Date.now() })} />
-        </View>
+        {draw?.id === place.id ? (
+          <View style={{ gap: 8 }} testID="route-draw">
+            <Txt size={14} style={{ color: colors.ochre }}>
+              Touche la carte pour poser les points du trajet ({draw.points.length} point{draw.points.length > 1 ? 's' : ''}).
+            </Txt>
+            <View style={styles.actions}>
+              <Tool icon="arrow-undo-outline" label="Retirer le dernier point" onPress={() => setDraw({ ...draw, points: draw.points.slice(0, -1) })} testID="route-undo" />
+              <Tool image="supprimer" label="Tout effacer" onPress={() => setDraw({ ...draw, points: [] })} testID="route-clear" />
+              <Tool image="fermer" label="Annuler" onPress={() => setDraw(null)} testID="route-cancel" />
+              <Button
+                small
+                variant="primary"
+                label="Enregistrer"
+                image="enregistrer-encre"
+                onPress={() => {
+                  const route = place.route ?? { fromId: '', toId: '' };
+                  appStore.save('places', place.id, { route: { ...route, points: draw.points.length >= 2 ? draw.points : undefined } });
+                  setDraw(null);
+                }}
+                testID="route-save"
+              />
+            </View>
+          </View>
+        ) : (
+          <View style={styles.actions}>
+            <Tool image="modifier" label="Modifier" onPress={() => setEditing(place.id)} testID="place-edit" />
+            <Tool image="devant" label="Devant" onPress={() => relayer(1)} testID="place-front" />
+            <Tool image="derriere" label="Derrière" onPress={() => relayer(-1)} testID="place-back" />
+            <Tool image="recentrer-fin" label="Centrer" onPress={() => setLocalFocus({ id: place.id, n: Date.now() })} testID="place-center" />
+            {place.kind === 'place' && !place.real && (
+              <Tool image="glisser" label={dragId === place.id ? 'Terminer le déplacement' : 'Déplacer (glisser sur la carte)'} active={dragId === place.id} onPress={() => setDragId(dragId === place.id ? null : place.id)} testID="place-drag" />
+            )}
+            {place.kind === 'vehicle' && (
+              <Tool icon="brush-outline" label="Dessiner le trajet" onPress={() => setDraw({ id: place.id, points: place.route?.points ?? [] })} testID="route-draw-start" />
+            )}
+          </View>
+        )}
         <Txt weight="semi">{dreamsHere.length ? `Rêvé ${dreamsHere.length} fois ici` : 'Dans aucun rêve pour l’instant'}</Txt>
         {dreamsHere.map((d) => (
           <Pressable
@@ -119,6 +159,9 @@ export function MapScreen(props: {
         focus={focus}
         onSelect={setSelected}
         onMove={(id, lat, lon) => appStore.save('places', id, { lat, lon })}
+        route={draw ? draw.points : place?.kind === 'vehicle' ? vehicleLine(place) : null}
+        drawing={!!draw}
+        onTap={(lat, lon) => draw && setDraw({ ...draw, points: [...draw.points, [lat, lon]] })}
       />
       {panel}
       <PlaceEditor visible={!!editing} placeId={editing} onClose={() => setEditing(null)} onDeleted={() => setSelected(null)} />
@@ -126,7 +169,38 @@ export function MapScreen(props: {
   );
 }
 
+/** Trajet d'un véhicule à montrer : celui dessiné, sinon la ligne entre ses deux lieux. */
+function vehicleLine(p: { route?: { fromId: string; toId: string; points?: [number, number][] } }): [number, number][] | null {
+  if (p.route?.points && p.route.points.length >= 2) return p.route.points;
+  const a = p.route ? appStore.get('places', p.route.fromId) : undefined;
+  const b = p.route ? appStore.get('places', p.route.toId) : undefined;
+  if (a?.lat === undefined || a.lon === undefined || b?.lat === undefined || b.lon === undefined) return null;
+  return [
+    [a.lat, a.lon],
+    [b.lat, b.lon],
+  ];
+}
+
+/** Bouton de la fiche lieu : juste l'icône (le nom s'affiche au survol et est lu par les lecteurs d'écran). */
+function Tool(props: { image?: AppIconName; icon?: keyof typeof Ionicons.glyphMap; label: string; onPress: () => void; active?: boolean; testID?: string }) {
+  return (
+    <Pressable
+      onPress={props.onPress}
+      accessibilityRole="button"
+      accessibilityLabel={props.label}
+      accessibilityState={{ selected: !!props.active }}
+      {...({ title: props.label } as object)}
+      testID={props.testID}
+      style={({ hovered, pressed }: PressState) => [styles.tool, props.active && styles.toolOn, (hovered || pressed) && !props.active && { backgroundColor: colors.surfaceHover }]}
+    >
+      {props.image ? <AppIcon name={props.image} size={26} /> : <Ionicons name={props.icon ?? 'ellipse'} size={22} color={colors.accent} />}
+    </Pressable>
+  );
+}
+
 const styles = StyleSheet.create({
+  tool: { width: 48, height: 44, borderRadius: 12, borderWidth: 1, borderColor: colors.border, backgroundColor: colors.surface, alignItems: 'center', justifyContent: 'center' },
+  toolOn: { borderColor: colors.accent, backgroundColor: colors.surfaceActive },
   fill: { flex: 1, backgroundColor: colors.paper },
   panel: { position: 'absolute', backgroundColor: 'rgba(16,14,34,0.96)', borderColor: colors.border, gap: 12, padding: 14 },
   panelWide: { top: 12, left: 12, width: 360, maxHeight: '92%', borderRadius: 16, borderWidth: 1 },

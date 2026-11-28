@@ -1,5 +1,15 @@
 [
   {
+    "version": "0.9.1",
+    "date": "2026-11-28",
+    "changes": [
+      "La recherche de vrais lieux devrait marcher sur téléphone. Si elle échoue encore, le message dit maintenant pourquoi.",
+      "Véhicules : bouton « Dessiner le trajet ». Touche la carte point par point, puis Enregistrer. Le véhicule apparaît n’importe où sur son trajet, à une place différente à chaque ouverture de la carte.",
+      "Fiche d’un lieu : les boutons n’ont plus que leur icône, pour gagner de la place (le nom s’affiche au survol).",
+      "Lieux imaginaires : on ne peut les déplacer qu’après avoir touché le bouton « glisser » (fini les déplacements par erreur). Retouche-le pour terminer."
+    ]
+  },
+  {
     "version": "0.9.0",
     "date": "2026-11-28",
     "changes": [

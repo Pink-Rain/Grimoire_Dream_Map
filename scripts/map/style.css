@@ -219,3 +219,9 @@ body {
   display: none;
   background: transparent;
 }
+
+/* Dessin du trajet d'un véhicule : curseur en croix. */
+#map.drawing,
+#map.drawing .leaflet-interactive {
+  cursor: crosshair !important;
+}
