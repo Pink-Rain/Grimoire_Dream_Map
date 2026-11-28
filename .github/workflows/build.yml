@@ -7,6 +7,8 @@ name: Build
 on:
   push:
     branches: [main, 'claude/**']
+    # Un changement de la page seule ne refabrique pas l'app (voir site.yml).
+    paths-ignore: ['site/**', 'scripts/build-site.mjs', '.github/workflows/site.yml']
   workflow_dispatch:
 
 permissions:

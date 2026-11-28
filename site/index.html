@@ -4,81 +4,167 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Grimoire - Dream Map</title>
-    <meta name="description" content="Dream Map, de la suite Grimoire : ton journal de rêves sur téléphone Android et sur PC. Tes rêves restent à toi." />
-    <meta name="theme-color" content="#0f0d1a" />
+    <meta name="description" content="Dream Map, de la suite Grimoire : un journal de rêves et la carte de tes nuits, sur Android et sur PC. Gratuit, sans publicité, tes rêves restent à toi." />
+    <meta name="theme-color" content="#100e22" />
+    <meta property="og:title" content="Grimoire - Dream Map" />
+    <meta property="og:description" content="Un journal de rêves et la carte de tes nuits, qui se dessine rêve après rêve." />
+    <meta property="og:image" content="img/carte.webp" />
     <link rel="icon" href="favicon.png" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <link rel="preload" href="fonts/IMFellEnglish_400Regular.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <main class="wrap">
-      <header class="hero">
+    <div class="sky" aria-hidden="true"></div>
+    <main>
+      <!-- En-tête -->
+      <header class="hero wrap">
         <img class="logo" src="logo.png" alt="" width="148" height="148" />
         <div class="suite">GRIMOIRE</div>
         <h1>Dream Map</h1>
         <p class="tagline">Ton journal de rêves, et la carte de tes nuits qui se dessine rêve après rêve.</p>
-        <span class="badge">Version de test __VERSION__</span>
-        <div class="links"><a href="nouveautes.html">Toutes les nouveautés</a></div>
+        <div class="cta">
+          <a class="btn" href="#telecharger">Télécharger</a>
+          <a class="btn ghost" href="#decouvrir">Découvrir</a>
+        </div>
+        <p class="meta">Gratuit · sans publicité · Android et Windows · version de test __VERSION__ · <a href="nouveautes.html">toutes les nouveautés</a></p>
       </header>
 
-      <section class="downloads" aria-label="Télécharger">
-        <article class="card">
-          <h2>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.1 10.4 4v7.1H3V5.1Zm0 13.8 7.4 1.1v-7H3v5.9Zm8.2 1.2L21 21.5V12.9h-9.8v7.2Zm0-16.2v7.2H21V2.5l-9.8 1.4Z"/></svg>
-            Ordinateur (Windows)
-          </h2>
-          <p>Télécharge l’installateur, puis ouvre-le.</p>
-          <a class="btn" href="https://github.com/__REPO__/releases/download/v__VERSION__/Grimoire-Dream-Map-Setup-__VERSION__.exe">Télécharger pour Windows</a>
-          <details>
-            <summary>Windows affiche un avertissement ?</summary>
-            <ol>
-              <li>C’est normal pour une application de test : elle n’a pas de « signature » payante.</li>
-              <li>Clique sur <strong>« Informations complémentaires »</strong>.</li>
-              <li>Puis sur <strong>« Exécuter quand même »</strong>.</li>
-            </ol>
-          </details>
-        </article>
-
-        <article class="card">
-          <h2>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.6 9.48l1.84-3.18a.38.38 0 0 0-.66-.38l-1.86 3.22A11.4 11.4 0 0 0 12 8.13c-1.78 0-3.46.39-4.92 1.01L5.22 5.92a.38.38 0 0 0-.66.38L6.4 9.48A10.6 10.6 0 0 0 1 18h22a10.6 10.6 0 0 0-5.4-8.52ZM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Z"/></svg>
-            Téléphone (Android)
-          </h2>
-          <p>Ouvre cette page sur ton téléphone, télécharge le fichier, puis ouvre-le.</p>
-          <a class="btn" href="https://github.com/__REPO__/releases/download/v__VERSION__/Grimoire-Dream-Map-__VERSION__-test.apk">Télécharger pour Android</a>
-          <details>
-            <summary>Le téléphone bloque l’installation ?</summary>
-            <ol>
-              <li>Android demande d’autoriser l’installation depuis ton navigateur : appuie sur <strong>« Paramètres »</strong>.</li>
-              <li>Active <strong>« Autoriser cette source »</strong>, puis reviens en arrière et appuie sur <strong>« Installer »</strong>.</li>
-              <li>Si Play Protect s’affiche : <strong>« Plus de détails »</strong> → <strong>« Installer quand même »</strong>.</li>
-            </ol>
-          </details>
-        </article>
-      </section>
-
-      <section class="features" aria-label="En bref">
-        <div class="feature">
-          <h3>La carte de tes rêves</h3>
-          <p>Un parchemin vierge qui se remplit : les vrais lieux à leur place, les lieux rêvés où tu veux, en aquarelle aux couleurs de tes nuits.</p>
-        </div>
-        <div class="feature">
-          <h3>Note rapide au réveil</h3>
-          <p>Un titre, une note vocale, quelques mots. Tu complètes le rêve plus tard : lieux, personnes, lucidité, humeur, ambiance…</p>
-        </div>
-        <div class="feature">
-          <h3>Sur PC et téléphone</h3>
-          <p>Sur ordinateur, connecte ton compte Google pour garder tes rêves dans ton Drive. Le téléphone suit très bientôt.</p>
-        </div>
-        <div class="feature">
-          <h3>Tes rêves restent à toi</h3>
-          <p>Pas de publicité, pas de serveur : tout reste sur ton appareil et, si tu le choisis, dans ton propre Google Drive.</p>
+      <!-- La carte -->
+      <section id="decouvrir" class="showcase wrap">
+        <figure class="frame">
+          <img src="img/carte.webp" alt="La carte des rêves : des lieux réels et imaginaires sur un parchemin nuit, entourés de taches d’aquarelle." width="1600" height="1000" loading="lazy" />
+        </figure>
+        <div class="text">
+          <img class="glyph" src="img/carte.png" alt="" width="48" height="48" />
+          <h2>La carte de tes rêves</h2>
+          <p>Pas de fond de carte : un parchemin nuit, vierge, qui se remplit au fil de tes rêves.</p>
+          <ul>
+            <li><b>Les vrais lieux</b> se placent tout seuls (une ville, une plage, la maison de tes parents…), les <b>lieux imaginaires</b> où tu veux : « au nord de… », ou glissés à la main.</li>
+            <li>900 dessins, et des <b>taches d’aquarelle aux couleurs de tes rêves</b> sous chaque lieu.</li>
+            <li>Quand tu dézoomes, les lieux se regroupent par quartier, ville, région, pays.</li>
+            <li>Des <b>véhicules</b> (train, bateau…) qui circulent sur un trajet que tu dessines.</li>
+          </ul>
         </div>
       </section>
 
-      <footer>
+      <!-- Le journal -->
+      <section class="showcase reverse wrap">
+        <figure class="frame">
+          <img src="img/journal.webp" alt="Le journal : à gauche le calendrier et la liste des rêves, à droite un rêve en double page de grimoire." width="1600" height="1000" loading="lazy" />
+        </figure>
+        <div class="text">
+          <img class="glyph" src="img/journal.png" alt="" width="48" height="48" />
+          <h2>Un grimoire à feuilleter</h2>
+          <p>Chaque rêve devient une page : le récit avec sa lettrine, puis les lieux, les personnes, l’humeur, la lucidité, la météo, les couleurs…</p>
+          <ul>
+            <li>Un calendrier, une recherche, et des filtres : rêves, notes rapides, nuits, rêves lucides.</li>
+            <li>On tourne les pages d’un rêve à l’autre, comme dans un carnet.</li>
+            <li>Toucher un détail suffit pour le changer, sans rouvrir tout le formulaire.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Le sommeil -->
+      <section class="showcase wrap">
+        <figure class="frame">
+          <img src="img/sommeil.webp" alt="Le tracker de sommeil : une ligne par jour, un ruban qui passe du violet de la nuit au rose de l’aube." width="1600" height="1000" loading="lazy" />
+        </figure>
+        <div class="text">
+          <img class="glyph" src="img/sommeil.png" alt="" width="48" height="48" />
+          <h2>Tes nuits en un coup d’œil</h2>
+          <p>Un tracker façon bullet journal : chaque nuit est un ruban qui passe de la nuit à l’aube, vide quand tu es éveillé·e.</p>
+          <ul>
+            <li>Coucher, endormissement, réveils pendant la nuit, réveil, lever, avec une petite horloge.</li>
+            <li>Qualité du sommeil, énergie et humeur au réveil, ce que tu as fait la veille.</li>
+            <li>Les rêves de la nuit sont reliés à elle, et inversement.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Téléphone -->
+      <section class="phones wrap">
+        <div class="text center">
+          <img class="glyph" src="img/micro-bouton.png" alt="" width="56" height="56" />
+          <h2>Au réveil, sur ton téléphone</h2>
+          <p>Le bouton « + » propose une note rapide (ta voix, un titre, quelques mots), un rêve complet ou ta nuit. Tu complètes plus tard, quand tu as le temps.</p>
+        </div>
+        <div class="phone-row">
+          <figure class="phone"><img src="img/tel-journal.webp" alt="Le journal sur téléphone, avec la semaine en haut." width="600" height="1290" loading="lazy" /></figure>
+          <figure class="phone"><img src="img/tel-page.webp" alt="La page d’un rêve sur téléphone." width="600" height="1290" loading="lazy" /></figure>
+          <figure class="phone"><img src="img/tel-ajouter.webp" alt="Le menu « Ajouter » : note rapide, rêve, sommeil." width="600" height="1290" loading="lazy" /></figure>
+        </div>
+      </section>
+
+      <!-- Tout le reste -->
+      <section class="grid wrap" aria-label="Fonctionnalités">
+        <h2 class="center">Tout ce que tu peux noter</h2>
+        <div class="cards">
+          <article class="card"><img src="img/humeur-amour.png" alt="" width="44" height="44" /><h3>Humeur et émotions</h3><p>Six niveaux d’humeur en émojis, et tes propres émotions en étiquettes.</p></article>
+          <article class="card"><img src="img/lucidite-b-3.png" alt="" width="44" height="44" /><h3>Lucidité et clarté</h3><p>De « pas lucide » à « contrôle total », en phases de lune ; du rêve flou au rêve net.</p></article>
+          <article class="card"><img src="img/meteo-arc-en-ciel.png" alt="" width="44" height="44" /><h3>Météo, moment, ambiance</h3><p>La météo et le moment du rêve, son genre, son type (cauchemar, faux réveil…), son ambiance, ses couleurs.</p></article>
+          <article class="card"><img src="img/personne.png" alt="" width="44" height="44" /><h3>Lieux et personnes</h3><p>Réels ou imaginaires, réutilisables d’un rêve à l’autre : tu vois où et avec qui tu rêves.</p></article>
+          <article class="card"><img src="img/lune-crepuscule.png" alt="" width="44" height="44" /><h3>Notes vocales et médias</h3><p>Ta voix au réveil, des images, de la musique, des liens et vidéos YouTube.</p></article>
+          <article class="card"><img src="img/coucher.png" alt="" width="44" height="44" /><h3>Siestes comprises</h3><p>Une nuit coupée en deux, une sieste l’après-midi : tout se range au bon jour.</p></article>
+          <article class="card"><img src="img/synchroniser.png" alt="" width="44" height="44" /><h3>PC et téléphone</h3><p>Les mêmes rêves sur tes appareils, grâce à un dossier caché de ton propre Google Drive. Facultatif.</p></article>
+          <article class="card"><img src="img/nouvelle-version.png" alt="" width="44" height="44" /><h3>Mises à jour en douceur</h3><p>Sur PC, l’app se met à jour en 2 secondes, sans réinstaller. Sur téléphone, un bouton dans l’app.</p></article>
+          <article class="card soon"><img src="img/statistiques.png" alt="" width="44" height="44" /><h3>Bientôt : les statistiques</h3><p>Tes humeurs, tes couleurs, tes lieux et tes nuits en graphiques, à croiser comme tu veux.</p></article>
+        </div>
+      </section>
+
+      <!-- Vie privée -->
+      <section class="privacy wrap">
+        <img class="compass" src="img/boussole.png" alt="" width="120" height="120" />
+        <div>
+          <h2>Tes rêves restent à toi</h2>
+          <p>Pas de compte à créer, pas de publicité, pas de serveur : tout est enregistré sur ton appareil et l’app marche sans internet. Si tu actives la synchronisation, la copie va dans <b>ton</b> Google Drive, dans un dossier que Dream Map est seul à voir. <a href="confidentialite.html">Politique de confidentialité</a></p>
+        </div>
+      </section>
+
+      <!-- Téléchargements -->
+      <section id="telecharger" class="downloads wrap" aria-label="Télécharger">
+        <h2 class="center">Télécharger</h2>
+        <p class="center muted">Version de test __VERSION__ · gratuite</p>
+        <div class="dl">
+          <article class="dl-card">
+            <h3>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.1 10.4 4v7.1H3V5.1Zm0 13.8 7.4 1.1v-7H3v5.9Zm8.2 1.2L21 21.5V12.9h-9.8v7.2Zm0-16.2v7.2H21V2.5l-9.8 1.4Z"/></svg>
+              Ordinateur (Windows)
+            </h3>
+            <p>Télécharge l’installateur, puis ouvre-le. Ensuite, l’app se met à jour toute seule.</p>
+            <a class="btn" href="https://github.com/__REPO__/releases/download/v__VERSION__/Grimoire-Dream-Map-Setup-__VERSION__.exe">Télécharger pour Windows</a>
+            <details>
+              <summary>Windows affiche un avertissement ?</summary>
+              <ol>
+                <li>C’est normal pour une application de test : elle n’a pas de « signature » payante.</li>
+                <li>Clique sur <strong>« Informations complémentaires »</strong>.</li>
+                <li>Puis sur <strong>« Exécuter quand même »</strong>.</li>
+              </ol>
+            </details>
+          </article>
+          <article class="dl-card">
+            <h3>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.6 9.48l1.84-3.18a.38.38 0 0 0-.66-.38l-1.86 3.22A11.4 11.4 0 0 0 12 8.13c-1.78 0-3.46.39-4.92 1.01L5.22 5.92a.38.38 0 0 0-.66.38L6.4 9.48A10.6 10.6 0 0 0 1 18h22a10.6 10.6 0 0 0-5.4-8.52ZM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Z"/></svg>
+              Téléphone (Android)
+            </h3>
+            <p>Ouvre cette page sur ton téléphone, télécharge le fichier, puis ouvre-le. Les mises à jour suivantes se font depuis l’app.</p>
+            <a class="btn" href="https://github.com/__REPO__/releases/download/v__VERSION__/Grimoire-Dream-Map-__VERSION__-test.apk">Télécharger pour Android</a>
+            <details>
+              <summary>Le téléphone bloque l’installation ?</summary>
+              <ol>
+                <li>Android demande d’autoriser l’installation depuis ton navigateur : appuie sur <strong>« Paramètres »</strong>.</li>
+                <li>Active <strong>« Autoriser cette source »</strong>, puis reviens en arrière et appuie sur <strong>« Installer »</strong>.</li>
+                <li>Si Play Protect s’affiche : <strong>« Plus de détails »</strong> → <strong>« Installer quand même »</strong>.</li>
+              </ol>
+            </details>
+          </article>
+        </div>
+      </section>
+
+      <footer class="wrap">
         <span>Grimoire - Dream Map · version de test __VERSION__</span>
-        <span><a href="nouveautes.html">Nouveautés</a> · <a href="confidentialite.html">Politique de confidentialité</a></span>
+        <span><a href="nouveautes.html">Nouveautés</a> · <a href="confidentialite.html">Confidentialité</a></span>
+        <span class="credits">Dessins de la carte : <a href="https://game-icons.net">game-icons.net</a> (CC BY 3.0) · émojis : Fluent Emoji de Microsoft (MIT) · polices IM Fell English et EB Garamond (OFL)</span>
       </footer>
     </main>
   </body>

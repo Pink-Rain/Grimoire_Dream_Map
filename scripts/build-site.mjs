@@ -32,11 +32,12 @@ const html = `<!doctype html>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Nouveautés — Grimoire - Dream Map</title>
-    <meta name="theme-color" content="#0f0d1a" />
+    <meta name="theme-color" content="#100e22" />
     <link rel="icon" href="favicon.png" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="sky" aria-hidden="true"></div>
     <main class="wrap doc">
       <a class="back" href="./">← Grimoire - Dream Map</a>
       <h1>Toutes les nouveautés</h1>

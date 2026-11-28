@@ -278,6 +278,11 @@ Si l'Electron n'est pas téléchargé : `ELECTRON_GET_USE_PROXY=1 node desktop/n
 
 ## Publier une version (.exe + APK)
 
+- **Page de présentation** (`site/`, GitHub Pages) : même direction artistique que l'app (polices de l'app en woff2
+  allégées dans `site/fonts/`, captures en webp dans `site/img/` faites avec un journal de démonstration). Un
+  changement de la page seule est mis en ligne par `.github/workflows/site.yml` (build.yml l'ignore) ; chaque
+  version de l'app la remet aussi en ligne (job `pages` de build.yml).
+
 - **Mises à jour sans réinstaller (v0.9.0)** :
   - PC : chaque version publie aussi `web-<version>.gz` + `web-update.json` (`scripts/pack-web.mjs`). L'app PC
     (desktop/main.js, `checkAll`) cherche d'abord cette mise à jour légère, la télécharge dans
