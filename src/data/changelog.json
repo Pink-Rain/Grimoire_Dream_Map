@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.8.3",
+    "date": "2026-11-28",
+    "changes": [
+      "Synchronisation sur le téléphone : connecte-toi avec Google dans les Réglages pour retrouver les mêmes rêves, nuits et lieux sur ton téléphone et ton ordinateur. Les notes vocales et les images restent pour l’instant sur l’appareil où elles ont été ajoutées."
+    ]
+  },
+  {
     "version": "0.8.2",
     "date": "2026-11-28",
     "changes": [

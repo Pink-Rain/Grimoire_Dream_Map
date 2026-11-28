@@ -1,7 +1,7 @@
 {
   "name": "grimoire-dream-map-desktop",
   "productName": "Grimoire - Dream Map",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "description": "Grimoire - Dream Map (application PC)",
   "author": "Grimoire",
   "main": "main.js",

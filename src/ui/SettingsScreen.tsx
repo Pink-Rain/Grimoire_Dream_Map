@@ -163,7 +163,9 @@ function SyncSection() {
           Connecte-toi avec Google pour retrouver tes rêves sur ton téléphone et ton ordinateur. Ils sont rangés dans
           un dossier caché de ton Google Drive, réservé à Dream Map : l’app ne voit aucun de tes autres fichiers.
         </Text>
-        {s.signingIn && <Text style={styles.p}>Ton navigateur s’est ouvert : connecte-toi, puis reviens ici.</Text>}
+        {s.signingIn && (
+          <Text style={styles.p}>{Platform.OS === 'android' ? 'Choisis ton compte Google dans la fenêtre qui s’ouvre.' : 'Ton navigateur s’est ouvert : connecte-toi, puis reviens ici.'}</Text>
+        )}
         {!!s.error && <Text style={styles.error}>{s.error}</Text>}
         <Button
           label={s.signingIn ? 'Connexion en cours…' : 'Se connecter avec Google'}
