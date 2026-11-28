@@ -58,3 +58,27 @@ describe('recherche de dessins', () => {
     expect(searchIcons('foret').some((i) => i.label.toLowerCase().includes('forêt'))).toBe(true);
   });
 });
+
+import { pointOnPath } from './geometry';
+describe('trajet dessiné à la main', () => {
+  const path: [number, number][] = [
+    [0, 0],
+    [0, 1],
+    [1, 1],
+  ];
+  it('suit la longueur des segments', () => {
+    expect(pointOnPath(path, 0)).toEqual({ lat: 0, lon: 0 });
+    expect(pointOnPath(path, 1)).toEqual({ lat: 1, lon: 1 });
+    const mid = pointOnPath(path, 0.5);
+    expect(mid.lat).toBeCloseTo(0, 2);
+    expect(mid.lon).toBeCloseTo(1, 2);
+    const q = pointOnPath(path, 0.25);
+    expect(q.lon).toBeCloseTo(0.5, 2);
+    expect(pointOnPath(path, 0.75).lat).toBeCloseTo(0.5, 2);
+  });
+  it('n’importe où sur le trajet', () => {
+    const seen = new Set<string>();
+    for (let t = 0; t <= 1; t += 0.05) seen.add(JSON.stringify(pointOnPath(path, t)));
+    expect(seen.size).toBeGreaterThan(15);
+  });
+});

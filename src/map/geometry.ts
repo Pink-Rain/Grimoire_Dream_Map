@@ -63,6 +63,35 @@ export function pointOnRoute(from: { lat: number; lon: number }, to: { lat: numb
   return { lat: from.lat + (to.lat - from.lat) * k, lon: from.lon + (to.lon - from.lon) * k };
 }
 
+/**
+ * Point à la fraction t (0 → 1) du trajet dessiné, en suivant la longueur réelle des segments
+ * (le véhicule peut donc se trouver n'importe où sur le trajet, pas seulement aux points dessinés).
+ */
+export function pointOnPath(points: [number, number][], t: number): { lat: number; lon: number } {
+  if (points.length === 1) return { lat: points[0][0], lon: points[0][1] };
+  const k = Math.min(1, Math.max(0, t));
+  // Longueurs en « degrés de latitude » (la longitude rétrécit vers les pôles).
+  const seg = points.slice(1).map((p, i) => {
+    const a = points[i];
+    const c = Math.cos((((a[0] + p[0]) / 2) * Math.PI) / 180);
+    return Math.hypot(p[0] - a[0], (p[1] - a[1]) * c);
+  });
+  const total = seg.reduce((s, x) => s + x, 0);
+  if (total === 0) return { lat: points[0][0], lon: points[0][1] };
+  let target = k * total;
+  for (let i = 0; i < seg.length; i++) {
+    if (target <= seg[i] || i === seg.length - 1) {
+      const f = seg[i] ? Math.min(1, target / seg[i]) : 0;
+      const a = points[i];
+      const b = points[i + 1];
+      return { lat: a[0] + (b[0] - a[0]) * f, lon: a[1] + (b[1] - a[1]) * f };
+    }
+    target -= seg[i];
+  }
+  const last = points[points.length - 1];
+  return { lat: last[0], lon: last[1] };
+}
+
 /** Taille proposée pour un lieu réel selon son type OpenStreetMap. */
 export function suggestedSize(osmType: string | undefined): number {
   const t = (osmType ?? '').toLowerCase();

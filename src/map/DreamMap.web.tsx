@@ -18,7 +18,7 @@ export function DreamMap(props: DreamMapProps) {
   const pushState = useCallback(
     (extra: object = {}) => {
       const p = propsRef.current;
-      post({ type: 'state', places: p.places, selectedId: p.selectedId, view: getViewToRestore(p.places.length), ...extra });
+      post({ type: 'state', places: p.places, selectedId: p.selectedId, view: getViewToRestore(p.places.length), route: p.route ?? null, drawing: !!p.drawing, ...extra });
     },
     [post],
   );
@@ -39,6 +39,7 @@ export function DreamMap(props: DreamMapProps) {
         if (p.focus) setTimeout(() => post({ type: 'focus', id: p.focus!.id }), 350);
       } else if (msg.type === 'select') p.onSelect(msg.id ?? null);
       else if (msg.type === 'move') p.onMove(msg.id, msg.lat, msg.lon);
+      else if (msg.type === 'tap') p.onTap?.(msg.lat, msg.lon);
       else if (msg.type === 'view') setLastMapView({ lat: msg.lat, lon: msg.lon, zoom: msg.zoom }, propsRef.current.places.length);
     }
     window.addEventListener('message', onMessage);
@@ -47,7 +48,7 @@ export function DreamMap(props: DreamMapProps) {
 
   useEffect(() => {
     if (ready.current) pushState();
-  }, [props.places, props.selectedId, pushState]);
+  }, [props.places, props.selectedId, props.route, props.drawing, pushState]);
 
   useEffect(() => {
     if (ready.current && props.focus) post({ type: 'focus', id: props.focus.id });

@@ -9,7 +9,7 @@
  */
 
 /** Version du format de données. À augmenter quand on ajoute des champs ou des collections. */
-export const SCHEMA_VERSION = 5;
+export const SCHEMA_VERSION = 6;
 
 /** Identifiant écrit dans chaque fichier pour reconnaître nos fichiers. */
 export const APP_ID = 'grimoire-dream-map';
@@ -127,8 +127,8 @@ export interface Place extends BaseRecord {
   relation?: { dir: PlaceRelationDir; placeId: string };
   /** Ordre de superposition : plus grand = dessiné par-dessus. */
   layer?: number;
-  /** Véhicule : trajet entre deux lieux. */
-  route?: { fromId: string; toId: string };
+  /** Véhicule : trajet entre deux lieux ; (v6) `points` = trajet dessiné à la main [lat, lon][]. */
+  route?: { fromId: string; toId: string; points?: [number, number][] };
   /** (v5) Lieux réels : quartier, ville, département, région, pays (pour regrouper sur la carte au dézoom). */
   admin?: PlaceAdmin;
 }

@@ -191,7 +191,13 @@
     var cur = markers[place.id];
     if (!cur) {
       var m = L.marker([place.lat, place.lon], { icon: iconFor(place), draggable: !!place.draggable, keyboard: true, title: place.name, riseOnHover: false, autoPanOnFocus: false });
-      m.on('click', function () {
+      m.on('click', function (e) {
+        if (drawing) {
+          // En dessinant un trajet, toucher un lieu ajoute un point sur ce lieu.
+          var ll = m.getLatLng();
+          send({ type: 'tap', lat: ll.lat, lon: ll.lng });
+          return;
+        }
         var c = markers[place.id];
         if (c && c.group && c.group.count > 1 && zoomInto(c.group)) return;
         send({ type: 'select', id: place.id });
@@ -302,9 +308,26 @@
   }
   map.on('zoomend', declutter);
 
+  // Trajet d'un véhicule : invisible d'habitude, montré en pointillés quand le véhicule est choisi ou qu'on le dessine.
+  var drawing = false;
+  var routeLayer = L.layerGroup().addTo(map);
+  function showRoute(points, editing) {
+    routeLayer.clearLayers();
+    if (!points || !points.length) return;
+    var ll = points.map(function (p) { return [p[0], p[1]]; });
+    if (ll.length > 1) L.polyline(ll, { color: '#d48f52', weight: 3, opacity: 0.85, dashArray: '6 7', interactive: false }).addTo(routeLayer);
+    if (editing)
+      ll.forEach(function (p, i) {
+        L.circleMarker(p, { radius: i === ll.length - 1 ? 6 : 4, color: '#fbe3bd', weight: 1.5, fillColor: '#d48f52', fillOpacity: 1, interactive: false }).addTo(routeLayer);
+      });
+  }
+
   function applyState(s) {
     places = s.places || [];
     selectedId = s.selectedId || null;
+    drawing = !!s.drawing;
+    document.getElementById('map').classList.toggle('drawing', drawing);
+    showRoute(s.route, drawing);
     var seen = {};
     var added = [];
     for (var i = 0; i < places.length; i++) {
@@ -362,8 +385,9 @@
     map.flyTo(c.marker.getLatLng(), targetZoom, { duration: 0.8 });
   }
 
-  map.on('click', function () {
-    send({ type: 'select', id: null });
+  map.on('click', function (e) {
+    if (drawing) send({ type: 'tap', lat: e.latlng.lat, lon: e.latlng.lng });
+    else send({ type: 'select', id: null });
   });
   var viewTimer = null;
   map.on('moveend', function () {

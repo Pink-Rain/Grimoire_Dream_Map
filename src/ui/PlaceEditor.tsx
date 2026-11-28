@@ -162,7 +162,7 @@ export function PlaceEditor(props: {
           setResults(r);
           setSearchError(r.length ? null : 'Aucun lieu trouvé.');
         })
-        .catch(() => seq === searchSeq.current && setSearchError('Recherche impossible : vérifie ta connexion internet.'))
+        .catch((e) => seq === searchSeq.current && setSearchError(`Recherche impossible : vérifie ta connexion internet. (${e instanceof Error ? e.message : e})`))
         .finally(() => seq === searchSeq.current && setSearching(false));
     }, 450);
     return () => clearTimeout(t);
@@ -188,7 +188,7 @@ export function PlaceEditor(props: {
     if (mode === 'real' && geo) {
       appStore.save('places', id, { ...base, kind: 'place', real: true, lat: geo.lat, lon: geo.lon, address: geo.address, ...(geo.admin ? { admin: geo.admin } : {}) });
     } else if (mode === 'vehicle') {
-      appStore.save('places', id, { ...base, kind: 'vehicle', real: false, route: { fromId: fromId!, toId: toId! } });
+      appStore.save('places', id, { ...base, kind: 'vehicle', real: false, route: { ...existing?.route, fromId: fromId!, toId: toId! } });
     } else {
       let pos: { lat: number; lon: number };
       let relation: Place['relation'] | undefined;

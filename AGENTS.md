@@ -77,6 +77,9 @@ Code : `src/data/types.ts`, `src/data/records.ts`, `src/data/store.ts`.
 - v5 : `sleeps` + `factors`, `sleepPlaces` (étiquettes), `wakeMood` (0-5), `wakeMoodEmoji`, `wakeEmotions`
   (étiquettes). `places` + `admin` {district, city, county, state, country} pour les vrais lieux (rempli par
   la recherche ; pour les anciens lieux, deviné depuis `address` par `adminFromAddress`).
+- v6 : `places.route.points` ([lat, lon][]) = trajet d'un véhicule dessiné à la main (bouton « Dessiner le trajet »
+  de la fiche) ; sans points, la ligne droite entre `fromId` et `toId`. Position : `pointOnPath` (n'importe où sur
+  la longueur du trajet, tirée au hasard à chaque ouverture de la carte).
 
 ## Architecture
 
@@ -132,7 +135,12 @@ site/                     page de présentation (GitHub Pages) + politique de co
   les proportions, le zoom agrandit doucement. Labels visibles à partir de 28 px.
 - Taches d'aquarelle sous chaque lieu = couleurs des rêves où il apparaît (`useMapPlaces`), filtre SVG `#wc`.
 - Superposition : `layer` (boutons Devant / Derrière de la fiche lieu) puis les petits au-dessus des grands.
-- Véhicules : trajet invisible entre deux lieux ; position tirée au hasard sur le trajet à chaque ouverture.
+- Véhicules : trajet invisible, sauf quand le véhicule est choisi (pointillés cuivre) ou qu'on le dessine (la carte
+  envoie `tap` à chaque touche ; `drawing` / `route` dans le message `state`).
+- Fiche d'un lieu : boutons icône seule (`Tool` dans MapScreen, nom en info-bulle). Lieux imaginaires : **déplaçables
+  seulement après avoir touché « glisser »** (`dragId`, demande de la personne).
+- Recherche de lieux : sur téléphone, en-tête `User-Agent` « GrimoireDreamMap » (sinon Photon/Nominatim répondent
+  403) ; le message d'erreur donne la raison.
 - Regroupement au dézoom (v0.8.0, `declutter` dans runtime.js) : quand des lieux (nom compris) se chevauchent à
   l'écran, on garde le plus gros (lieu choisi d'abord, puis taille, puis `layer`) avec une pastille « ×N » ; les
   autres sont retirés de la carte. Si tous sont réels, le nom devient leur zone commune la plus précise
@@ -179,8 +187,8 @@ site/                     page de présentation (GitHub Pages) + politique de co
   (bandeau). « Se connecter avec Google » = logo G officiel (`GoogleG` dans SettingsScreen), pas « connexion »
   (dessinée mais pas encore utilisée).
 - Icônes au trait cuivré (`LINE_ICONS` dans AppIcon.tsx) : teintées à l'encre sombre sur les boutons abricot.
-- Encore standard : « voir sur la carte » (fiche du rêve), mot-clé proposé (pricetag), petits compteurs du
-  journal (lieux, personnes, notes vocales), dessin de carte « place » (game-icons n'en a pas).
+- Encore standard : « Dessiner le trajet » (brush), « Retirer le dernier point » (undo), dessin de carte
+  « place » (game-icons n'en a pas).
 
 ## Journal et pages de lecture (v0.9.0, maquette validée par la personne)
 
@@ -335,6 +343,9 @@ Expo change à chaque version. Avant d'utiliser une API Expo/React Native, véri
 - [x] v0.6.4 : journal des mises à jour dans les Réglages (3 dernières versions, les autres à la demande).
 - [x] v0.6.5 : app = 3 dernières versions seulement ; historique complet sur la page « Toutes les nouveautés ».
 - [x] v0.7.0 : tracker de sommeil, lien rêves ↔ sommeil, qualité/énergie, formulaire compact, 4 onglets + menu +.
+- [x] v0.9.1 : recherche de lieux sur téléphone (User-Agent), trajets dessinés (format v6), boutons icône seule,
+  bouton « glisser ». Première mise à jour légère PC (coque inchangée : dreamMapShell 1).
+- [ ] Statistiques : en réflexion avec la personne (Rêves, Sommeil, Croisées, Lieux, Personnes ; atlas de graphes).
 - [x] v0.9.0 : nouveau journal (calendrier, filtres, tout), pages de lecture (double page PC, sélecteurs sur
   place), barre Enregistrer, mises à jour sans réinstaller (PC léger, Android dans l'app), icônes série 2.
 - [ ] Mises à jour « éclair » Android (EAS Update) — la personne le veut à terme.

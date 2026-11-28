@@ -26,14 +26,33 @@ function clean(a: PlaceAdmin): PlaceAdmin {
 
 type Fetch = typeof fetch;
 
+/**
+ * Sur téléphone, les services de cartes gratuits demandent que l'app se présente (sinon ils refusent : erreur 403).
+ * Dans un navigateur, c'est le navigateur qui s'en charge. Rien de personnel : juste le nom de l'app et son site.
+ */
+const isNative = typeof navigator !== 'undefined' && (navigator as { product?: string }).product === 'ReactNative';
+function geoHeaders(): Record<string, string> {
+  const h: Record<string, string> = { Accept: 'application/json' };
+  if (isNative) h['User-Agent'] = 'GrimoireDreamMap/1.0 (https://pink-rain.github.io/Grimoire_Dream_Map/)';
+  return h;
+}
+
 export async function searchPlaces(query: string, fetchImpl: Fetch = fetch): Promise<GeoResult[]> {
   const q = query.trim();
   if (q.length < 2) return [];
+  let photonError = '';
   try {
     const r = await searchPhoton(q, fetchImpl);
     if (r.length) return r;
-  } catch {}
-  return searchNominatim(q, fetchImpl);
+  } catch (e) {
+    photonError = e instanceof Error ? e.message : String(e);
+  }
+  try {
+    return await searchNominatim(q, fetchImpl);
+  } catch (e) {
+    // Les deux services ont échoué : on garde les deux raisons, pour pouvoir comprendre.
+    throw new Error([photonError, e instanceof Error ? e.message : String(e)].filter(Boolean).join(' · '));
+  }
 }
 
 function uniqueJoin(parts: (string | undefined)[]): string {
@@ -44,7 +63,7 @@ function uniqueJoin(parts: (string | undefined)[]): string {
 
 export async function searchPhoton(q: string, fetchImpl: Fetch = fetch): Promise<GeoResult[]> {
   const url = `https://photon.komoot.io/api/?q=${encodeURIComponent(q)}&lang=fr&limit=8`;
-  const res = await fetchImpl(url);
+  const res = await fetchImpl(url, { headers: geoHeaders() });
   if (!res.ok) throw new Error(`Photon ${res.status}`);
   const data = await res.json();
   const out: GeoResult[] = [];
@@ -69,7 +88,7 @@ export async function searchPhoton(q: string, fetchImpl: Fetch = fetch): Promise
 
 export async function searchNominatim(q: string, fetchImpl: Fetch = fetch): Promise<GeoResult[]> {
   const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=jsonv2&limit=8&accept-language=fr&addressdetails=1`;
-  const res = await fetchImpl(url, { headers: { Accept: 'application/json' } });
+  const res = await fetchImpl(url, { headers: geoHeaders() });
   if (!res.ok) throw new Error(`Nominatim ${res.status}`);
   const data = await res.json();
   return dedupe(
