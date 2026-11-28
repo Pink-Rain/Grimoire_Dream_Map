@@ -297,6 +297,15 @@ Expo change à chaque version. Avant d'utiliser une API Expo/React Native, véri
 - [x] v0.6.4 : journal des mises à jour dans les Réglages (3 dernières versions, les autres à la demande).
 - [x] v0.6.5 : app = 3 dernières versions seulement ; historique complet sur la page « Toutes les nouveautés ».
 - [x] v0.7.0 : tracker de sommeil, lien rêves ↔ sommeil, qualité/énergie, formulaire compact, 4 onglets + menu +.
+- [x] v0.8.3 : synchro Android. Connexion Google native (`@react-native-google-signin/google-signin`, API
+  « originale », sans Firebase : **pas de plugin dans app.json**, l'autolinking suffit), fichiers
+  `src/sync/nativeAuth.android.ts` (connexion, jeton, 401 → nouveau jeton) / `nativeAuth.ts` (web, PC : rien).
+  Google reconnaît l'app par un client OAuth **Android** dans Google Cloud : paquet
+  `com.pinkrain.grimoire.dreammap` + SHA-1 de la clé qui signe l'APK. L'APK de test est signé par la clé de
+  debug du modèle Expo (SHA-1 5E:8F:16:06:2E:A3:CD:2C:4A:0D:54:78:76:BA:A6:F3:8C:AB:F6:25) : **ne pas la
+  changer** (les téléphones ne pourraient plus mettre à jour sans désinstaller). Pour le Play Store, ajouter un
+  2e client Android avec le SHA-1 de la clé « Play App Signing ». Erreur 10 / DEVELOPER_ERROR = client Android
+  absent ou mauvaise empreinte.
 - [x] v0.8.2 : zip n° 6 (humeurs désaturées, sommeil-encre, statistiques-encre = onglet actif), taches de la
   carte plus grandes, résumé du journal = ColorStain + humeur + lucidité + clarté (dans cet ordre, demande de
   la personne), libellés MOOD_GRID : Horrible, Mauvaise, Mitigé, Okay, Bien, Excellente.

@@ -3,30 +3,24 @@
  *
  * Quand : au démarrage, quelques secondes après une modification, quand on revient sur l'app,
  * toutes les 5 minutes, et sur demande (« Synchroniser maintenant »).
- * Pour l'instant disponible dans l'app PC ; Android et navigateur viendront ensuite.
+ * Disponible dans l'app PC (Electron) et sur Android (connexion Google native) ; le navigateur viendra ensuite.
  */
 import { AppState, Platform } from 'react-native';
 import { useSyncExternalStore } from 'react';
 import { appStorage, appStore } from '../data/appStore';
 import { desktop } from '../platform/desktop';
-import { createDriveApi, DriveError, type AuthorizedRequest } from './drive';
+import type { SyncAuth } from './auth';
+import { createDriveApi, DriveError } from './drive';
+import { nativeAuth } from './nativeAuth';
 import { emptySyncState, syncOnce, type SyncState } from './engine';
 
 const STATE_KEY = 'local.sync';
 const AFTER_CHANGE_MS = 5_000;
 const PERIOD_MS = 5 * 60_000;
 
-interface SyncAuth {
-  configured: boolean;
-  account(): { email: string } | null;
-  signIn(): Promise<{ email: string }>;
-  signOut(): Promise<void>;
-  request: AuthorizedRequest;
-}
-
 function platformAuth(): SyncAuth | null {
   const g = desktop?.google;
-  if (!g) return null;
+  if (!g) return nativeAuth();
   return {
     configured: g.info().configured,
     account: () => g.info().account,
@@ -37,7 +31,7 @@ function platformAuth(): SyncAuth | null {
 }
 
 export interface SyncStatus {
-  /** La synchro existe-t-elle sur cet appareil (pour l'instant : app PC) ? */
+  /** La synchro existe-t-elle sur cet appareil (app PC, Android) ? */
   supported: boolean;
   configured: boolean;
   account: { email: string } | null;
@@ -90,6 +84,11 @@ class SyncManager {
       if (text) this.state = { ...this.state, ...JSON.parse(text) };
     } catch {}
     this.set({ lastSyncAt: this.state.lastSyncAt });
+    if (this.auth.restore) {
+      // Android : on retrouve la connexion Google d'avant, sans rien demander.
+      await this.auth.restore().catch(() => {});
+      this.set({ account: this.auth.account() });
+    }
 
     // Après une modification des rêves (pas celles faites par la synchro elle-même).
     appStore.subscribe(() => {
