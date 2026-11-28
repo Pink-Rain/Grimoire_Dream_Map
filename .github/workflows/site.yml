@@ -1,0 +1,45 @@
+# Met en ligne la page de présentation (GitHub Pages) quand seule la page change,
+# sans refabriquer l'app. Les versions de l'app mettent aussi la page à jour (voir build.yml).
+name: Page de présentation
+
+on:
+  push:
+    branches: [main]
+    paths: ['site/**', 'scripts/build-site.mjs']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  pages:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with: { node-version: 22 }
+      - name: Préparer la page (numéro de version et liens de téléchargement)
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          cp -r site _site
+          node scripts/build-site.mjs _site
+          sed -i "s/__VERSION__/$VERSION/g; s#__REPO__#${{ github.repository }}#g" _site/*.html
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+          name: github-pages-site-${{ github.run_id }}-${{ github.run_attempt }}
+      - run: sleep 20
+      - id: deploy
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages-site-${{ github.run_id }}-${{ github.run_attempt }}
